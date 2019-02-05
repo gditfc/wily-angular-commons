@@ -1,0 +1,247 @@
+<div class="row wrap">
+  <div class="col col_size_1 min250">
+      <div class="theme_viewer">
+        <div class="menu menu_color" style="flex:1; ">
+          <div class="menu_name font_color_1">LEFT SLIDEOUT</div>
+        </div>
+        <div style="flex:8;">
+          <div class="nav nav_color font_color_1">NAVIGATION BAR</div>
+          <div class="main_bg_color" style="padding:10px;">
+            <div class="header_color header font_color_1">PAGE HEADER</div>
+            <div class="center_me_block container_color border_color flex_wrap_center">
+              <div class="box bg_color_1 font_color_1">1</div>
+              <div class="box bg_color_2 font_color_1">2</div>
+              <div class="box bg_color_3 font_color_1">3</div>
+              <div class="box bg_color_4 font_color_1">4</div>
+              <div class="box bg_color_5 font_color_1">5</div>
+              <div class="font_color_2 text_box">
+                Sample example text<br>
+                Pasta chifferi trenette gramigna foglie d'ulivo maccheroncelli stringozzi spaghetti alla chitarra pennette
+                cavatelli.
+              </div>
+              <div class="flex_wrap_center" style="padding:5px;margin-bottom:5px;">
+                <div class="font_color_2" style="width:100%;font-size:9pt;text-align:center;font-weight:500;">
+                  <select (change)="changeTheme()" [(ngModel)]="selectedTheme">
+                    <option *ngFor="let th of themes" [value]="th.themeId">{{th.name}}</option>
+                    <option value="-1">Custom</option>
+                  </select>
+                </div>
+                <!--
+                <div class="btn theme_btn t_ok">OK</div>
+                <div class="btn theme_btn t_go">GO</div>
+                <div class="btn theme_btn t_cancel">CANCEL</div>
+                <div class="btn theme_btn t_alert">ALERT</div>
+                <div class="btn theme_btn t_progress">PROGRESS</div>
+                <div class="btn theme_btn t_info">INFO</div>
+                <div class="btn theme_btn t_warning">WARNING</div>
+                -->
+              </div>
+            </div>
+          </div>
+          <div class="footer footer_color font_color_1">FOOTER</div>
+        </div>
+
+        <div class="menu menu_color" style="flex:1; margin-left:5px;margin-right:0;">
+          <div class="menu_name font_color_1">RIGHT SLIDEOUT</div>
+        </div>
+
+      </div>
+
+  </div>
+  <div class="col col_size_2 min250 center">
+    <p-tabView>
+      <p-tabPanel header="Structure">
+        <div class="theme_block">
+          <div class="theme_row">
+            <div class="theme_title">Top Navigation Bar Color:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.navColor" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.navColor" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Footer Color:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.footerColor" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.footerColor" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Slidout Menu Color:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.menuColor" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.menuColor" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Page Header Color:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.headerColor" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.headerColor" (change)="changeColors()"/>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Primary Colors">
+        <div class="theme_block">
+          <div class="theme_row">
+            <div class="theme_title">Background Color 1:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.bgColor1" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.bgColor1" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Background Color 2:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.bgColor2" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.bgColor2" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Background Color 3:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.bgColor3" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.bgColor3" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Background Color 4:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.bgColor4" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.bgColor4" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Background Color 5:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.bgColor5" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.bgColor5" (change)="changeColors()"/>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Fonts">
+        <div class="theme_block">
+          <div class="theme_row">
+            <div class="theme_title">Light Font:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.fontColor1" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.fontColor1" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Dark Font:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.fontColor2" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.fontColor2" (change)="changeColors()"/>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Backgrounds/Borders">
+        <div class="theme_block">
+          <div class="theme_row">
+            <div class="theme_title">Main Site Background Color:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.mainBgColor" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.mainBgColor" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Site Content Container Color:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.containerColor" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.containerColor" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Site Content Border Color:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.borderColor" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.borderColor" (change)="changeColors()"/>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Buttons">
+        <div class="theme_block">
+          <div class="theme_row">
+            <div class="theme_title">OK:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.ok" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.ok" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Go:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.go" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.go" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Cancel:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.cancel" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.cancel" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Alert:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.alert" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.alert" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Progress:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.progress" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.progress" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Info:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.info" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.info" (change)="changeColors()"/>
+            </div>
+          </div>
+          <div class="theme_row">
+            <div class="theme_title">Warning:</div>
+            <div style="white-space: nowrap;">
+              <p-colorPicker [(ngModel)]="theme.warning" (onChange)="changeColors()"></p-colorPicker>
+              <input class="theme_input" type="text" [(ngModel)]="theme.warning" (change)="changeColors()"/>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+      <!--
+      <p-tabPanel header="Experiments" *ngIf="experimental">
+        <div class="theme_block center_me_block">
+          <div>
+            <div class="fun_lnk" (click)="randomizeColors()">Randomize Colors</div>
+            <div class="fun_lnk" (click)="discoMode()">Disco Mode On</div>
+          </div>
+        </div>
+      </p-tabPanel>
+      -->
+    </p-tabView>
+  </div>
+
+
+
+
+</div>
+<div class="row wrap">
+  <div class="col col_size_1 center_center">
+    <button class="btn md t_megaman" (click)="reset()">Reset to Default</button>
+    <button class="btn md t_go" (click)="saveColors()">Save Current Configuration</button>
+  </div>
+</div>
+
+<p-growl [value]="messages" [life]="2000"></p-growl>

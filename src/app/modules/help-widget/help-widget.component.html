@@ -1,0 +1,40 @@
+<div >
+  <wily-dialog [title]="help ? help.name : ''" [object]="help" #dialog>
+
+    <div *ngIf="help">
+      <div class="row space_between center_center">
+        <div *ngIf="status === EndpointStatus.SUCCESS">
+          <div *ngIf="help.description" style="font-size:9pt;padding:3px;">{{help.description}}</div>
+        </div>
+        <button class="btn sm t_ok" (click)="editHelpSystem()" aria-label="Edit" *ngIf="canEdit">
+          {{EndpointStatus.ERROR ? 'CREATE' : 'EDIT'}}
+        </button>
+      </div>
+
+
+      <!-- LOADER -->
+      <div *ngIf="status === EndpointStatus.LOADING" class="center_center">
+        <img src="https://styles.transcend.csra.io/v3.0.0-rc1/assets/loading.gif" />
+      </div>
+      <!-- END LOADER -->
+
+      <!-- HELP CONTENT -->
+      <div *ngIf="status === EndpointStatus.SUCCESS">
+        <div class="ql-editor" [innerHTML]="help.helpText"></div>
+      </div>
+      <!-- END HELP CONTENT -->
+
+      <!-- UNAVAILABLE -->
+      <div *ngIf="status === EndpointStatus.ERROR" class="center_center">
+        <div  style="font-size:16pt;font-color:#AAA;">This help topic is currently unavailable, please check back later.</div>
+      </div>
+      <!-- END UNAVAILABLE -->
+
+    </div>
+
+  </wily-dialog>
+</div>
+<div (click)="showHelp()">
+  <i class="fas fa-question-circle help_widget" [style.fontSize]="fontSize"></i>
+</div>
+

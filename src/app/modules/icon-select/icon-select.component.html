@@ -1,0 +1,22 @@
+<button class="btn large_btn t_info" (click)="doShowDialog()">Choose Icon</button>
+<wily-dialog [object]="showDialog" title="Choose an Icon" titleClass="bg_color_1" #faDialog>
+  <div style="display: flex;padding: 5px;justify-content: space-between">
+    <div style="width: 85%;">
+      <input type="text" [(ngModel)]="filter" placeholder="Filter Icons" style="width: 100%;"/>
+    </div>
+    <div style="width: 15%;display: flex;justify-content: space-evenly;">
+      <button class="btn large_btn t_ok" aria-label="Filter" (click)="filterClasses()">
+        Filter
+      </button>
+      <button class="btn large_btn t_cancel" aria-label="Clear" (click)="clear()">
+        Clear
+      </button>
+    </div>
+  </div>
+  <div style="justify-content: space-evenly;flex-wrap: wrap;display: flex;">
+    <div class="wac_icon_select_icon" (click)="choose(faClass.toString())" [title]="'fa-' + faClass"
+         *ngFor="let faClass of getValues()" [style.display]="icons[faClass.toString()] ? 'flex' : 'none'">
+      <i [ngClass]="'fas fa-' + faClass.toString()"></i>
+    </div>
+  </div>
+</wily-dialog>

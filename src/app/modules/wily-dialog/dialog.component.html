@@ -1,0 +1,13 @@
+<p-dialog [(visible)]="object" [modal]="true" [focusOnShow]="false" #dialog [resizable]="false" [responsive]="true"
+          appendTo="body" [breakpoint]="1000" [showHeader]="false" [blockScroll]="true"
+          [style]="{'overflow-y': 'auto', 'width': '1000px', 'height': '66vh'}">
+
+  <div class="wac_help_header font_color_1 space_between" [ngClass]="titleClass">
+    <div style="font-weight:500;margin-left:5px;">{{title}}</div>
+      <button class="btn_pulse xsm t_megaman" [pTooltip]="'Close'" tooltipPosition="left" (click)="close()">
+        <i class="fas fa-times"></i>
+      </button>
+  </div>
+
+  <ng-content></ng-content>
+</p-dialog>
