@@ -1,10 +1,7 @@
 {
   "name": "wily-angular-commons",
-  "version": "7.0.1",
+  "version": "7.0.0",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "http://nexus.emedny.org/repository/npm-private/"
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
