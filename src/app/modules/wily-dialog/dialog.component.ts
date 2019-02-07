@@ -16,6 +16,12 @@ export class DialogComponent {
   @Input()
   titleClass = 'bg_color_1';
 
+  @Input()
+  height = '66vh';
+
+  @Input()
+  width = '1000px';
+
   @ViewChild('dialog')
   dialog: Dialog;
 
@@ -36,6 +42,14 @@ export class DialogComponent {
         } // Ignore this error, nonsense.
       }, 100);
     }
+  }
+
+  getStyle(): any {
+    return {
+     'overflow-y': 'auto',
+     'width': this.width,
+     'height': this.height
+    };
   }
 
 }

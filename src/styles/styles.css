@@ -185,6 +185,20 @@
   border:1px solid rgba(0,0,0,0.1);
 }
 
+.ui-dialog.ui-widget .ui-dialog-content {
+  height: 100%;
+}
+
+.wac_dialog_container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.wac_dialog_content {
+  flex: 1 1 auto;
+}
+
 
 
 @media screen and (max-width: 728px) {

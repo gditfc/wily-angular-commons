@@ -10,6 +10,16 @@ export * from './src/app/modules/safe-pipes/safe-pipes.module';
 export * from './src/app/modules/theming/theming.module';
 export * from './src/app/modules/wily-dialog/wily-dialog.module';
 
+/** COMPONENTS */
+export * from './src/app/modules/help-widget/help-widget.component';
+export * from './src/app/modules/icon-select/icon-select.component';
+export * from './src/app/modules/paginator/paginator.component';
+export * from './src/app/modules/profile-pic/profile-pic.component';
+export * from './src/app/modules/push-container/push-container.component';
+export * from './src/app/modules/rich-text/rich-text.component';
+export * from './src/app/modules/theming/theming.component';
+export * from './src/app/modules/wily-dialog/dialog.component';
+
 /** INTERCEPTORS */
 export * from './src/app/shared/interceptors/json.interceptor';
 export * from './src/app/shared/interceptors/cognito-auth.interceptor';

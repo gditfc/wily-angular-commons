@@ -28,8 +28,12 @@ export class PushContainerComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     document.getElementById(this.mainContentId).style.transition = 'all 0.2s ease-in-out';
 
-    if (this.showSidePanel) {
+    if (window.innerWidth > 768 && this.showSidePanel) {
       this.setMargin('230px');
+    } else {
+      setTimeout(() => {
+        this.close();
+      }, 100);
     }
   }
 
