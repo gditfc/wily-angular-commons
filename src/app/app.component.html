@@ -96,3 +96,29 @@
   [pageSizeOptions]="[10,25,50]"
   [pageSize]="50"
 ></wily-paginator>
+
+<div style="display: flex;flex-wrap: wrap;justify-content: center;">
+  <div class="color_test" style="display:flex;" *ngFor="let cssClass of theme.getClasses()">
+    <div [ngClass]="cssClass + '_light_9'">light_9</div>
+    <div [ngClass]="cssClass + '_light_8'">light_8</div>
+    <div [ngClass]="cssClass + '_light_7'">light_7</div>
+    <div [ngClass]="cssClass + '_light_6'">light_6</div>
+    <div [ngClass]="cssClass + '_light_5'">light_5</div>
+    <div [ngClass]="cssClass + '_light_4'">light_4</div>
+    <div [ngClass]="cssClass + '_light_3'">light_3</div>
+    <div [ngClass]="cssClass + '_light_2'">light_2</div>
+    <div [ngClass]="cssClass + '_light_1'">light_1</div>
+
+    <div [ngClass]="cssClass" style="width:130px;text-align:center;"><strong>{{cssClass}}</strong></div>
+
+    <div [ngClass]="cssClass + '_dark_1'">dark_1</div>
+    <div [ngClass]="cssClass + '_dark_2'">dark_2</div>
+    <div [ngClass]="cssClass + '_dark_3'">dark_3</div>
+    <div [ngClass]="cssClass + '_dark_4'">dark_4</div>
+    <div [ngClass]="cssClass + '_dark_5'">dark_5</div>
+    <div [ngClass]="cssClass + '_dark_6'">dark_6</div>
+    <div [ngClass]="cssClass + '_dark_7'">dark_7</div>
+    <div [ngClass]="cssClass + '_dark_8'">dark_8</div>
+    <div [ngClass]="cssClass + '_dark_9'">dark_9</div>
+  </div>
+</div>

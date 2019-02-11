@@ -1,4 +1,4 @@
-<div >
+<div>
   <wily-dialog [title]="help ? help.name : ''" [object]="help" #dialog>
 
     <div *ngIf="help">
@@ -34,7 +34,7 @@
 
   </wily-dialog>
 </div>
-<div (click)="showHelp()">
+<div class="action" (click)="showHelp()">
   <i class="fas fa-question-circle help_widget" [style.fontSize]="fontSize"></i>
 </div>
 

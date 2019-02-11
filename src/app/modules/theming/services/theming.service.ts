@@ -24,11 +24,7 @@ export class ThemingService extends BaseDataService {
     super(http);
   }
 
-  private static getRandomColor(): string {
-    return '#' + Math.floor(Math.random() * 16777215).toString(16);
-  }
-
-  public static lightenDarkenColor(color: string, percent: number): string {
+  lightenDarkenColor(color: string, percent: number): string {
     let usePound = false;
     if (color[0] === '#') {
       color = color.slice(1);
@@ -58,8 +54,43 @@ export class ThemingService extends BaseDataService {
       g = 0;
     }
 
-    return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
+    let newColor = (g | (b << 8) | (r << 16)).toString(16);
+
+    while (newColor.length < 6) {
+      newColor = '0' + newColor;
+    }
+
+    return (usePound ? '#' : '') + newColor;
   }
+
+  private getRandomColor(): string {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
+  }
+
+  private luminance(r, g, b) {
+    const a = [r, g, b].map(function (v) {
+      v /= 255;
+      return v <= 0.03928
+        ? v / 12.92
+        : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+  }
+
+  private contrast(rgb1, rgb2) {
+    return (this.luminance(rgb1[0], rgb1[1], rgb1[2]) + 0.05)
+      / (this.luminance(rgb2[0], rgb2[1], rgb2[2]) + 0.05);
+  }
+
+  private hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+
 
   appInit(productKey: string, baseUrl: string): void {
     if (!this.overrideUrl) {
@@ -124,53 +155,28 @@ export class ThemingService extends BaseDataService {
 
   changeColors(theme: Theme): void {
     const style = document.createElement('style');
-    style.type = 'text/css';
+    // style.type = 'text/css';
 
     this.applyHash(theme);
 
-    if (theme.menuColor) {
-      style.appendChild(document.createTextNode(`.menu_color{background-color: ${theme.menuColor};}`));
-    }
-
-    if (theme.navColor) {
-      style.appendChild(document.createTextNode(`.nav_color{background-color: ${theme.navColor};}`));
-    }
-
-    if (theme.footerColor) {
-      style.appendChild(document.createTextNode(`.footer_color{background-color: ${theme.footerColor};}`));
-    }
-
-    if (theme.mainBgColor) {
-      style.appendChild(document.createTextNode(`.main_bg_color{background-color: ${theme.mainBgColor};}`));
-    }
-
-    if (theme.containerColor) {
-      style.appendChild(document.createTextNode(`.container_color{background-color: ${theme.containerColor};}`));
-    }
-
-    if (theme.headerColor) {
-      style.appendChild(document.createTextNode(`.header_color{background-color: ${theme.headerColor};}`));
-    }
-
-    if (theme.bgColor1) {
-      style.appendChild(document.createTextNode(`.bg_color_1{background-color: ${theme.bgColor1};}`));
-    }
-
-    if (theme.bgColor2) {
-      style.appendChild(document.createTextNode(`.bg_color_2{background-color: ${theme.bgColor2};}`));
-    }
-
-    if (theme.bgColor3) {
-      style.appendChild(document.createTextNode(`.bg_color_3{background-color: ${theme.bgColor3};}`));
-    }
-
-    if (theme.bgColor4) {
-      style.appendChild(document.createTextNode(`.bg_color_4{background-color: ${theme.bgColor4};}`));
-    }
-
-    if (theme.bgColor5) {
-      style.appendChild(document.createTextNode(`.bg_color_5{background-color: ${theme.bgColor5};}`));
-    }
+    this.generateColors(style, theme.menuColor, 'menu_color');
+    this.generateColors(style, theme.navColor, 'nav_color');
+    this.generateColors(style, theme.footerColor, 'footer_color');
+    this.generateColors(style, theme.mainBgColor, 'main_bg_color');
+    this.generateColors(style, theme.containerColor, 'container_color');
+    this.generateColors(style, theme.headerColor, 'header_color');
+    this.generateColors(style, theme.bgColor1, 'bg_color_1');
+    this.generateColors(style, theme.bgColor2, 'bg_color_2');
+    this.generateColors(style, theme.bgColor3, 'bg_color_3');
+    this.generateColors(style, theme.bgColor4, 'bg_color_4');
+    this.generateColors(style, theme.bgColor5, 'bg_color_5');
+    this.generateColors(style, theme.ok, 't_ok');
+    this.generateColors(style, theme.go, 't_go');
+    this.generateColors(style, theme.cancel, 't_cancel');
+    this.generateColors(style, theme.alert, 't_alert');
+    this.generateColors(style, theme.progress, 't_progress');
+    this.generateColors(style, theme.info, 't_info');
+    this.generateColors(style, theme.warning, 't_warning');
 
     if (theme.borderColor) {
       style.appendChild(document.createTextNode(`.border_color{border: 1px solid ${theme.borderColor};}`));
@@ -184,44 +190,56 @@ export class ThemingService extends BaseDataService {
       style.appendChild(document.createTextNode(`.font_color_2{color: ${theme.fontColor2};}`));
     }
 
-    if (theme.ok) {
-      style.appendChild(document.createTextNode(`.t_ok{background-color: ${theme.ok};}`));
-    }
-
-    if (theme.go) {
-      style.appendChild(document.createTextNode(`.t_go{background-color: ${theme.go};}`));
-    }
-
-    if (theme.cancel) {
-      style.appendChild(document.createTextNode(`.t_cancel{background-color: ${theme.cancel};}`));
-    }
-
-    if (theme.alert) {
-      style.appendChild(document.createTextNode(`.t_alert{background-color: ${theme.alert};}`));
-    }
-
-    if (theme.progress) {
-      style.appendChild(document.createTextNode(`.t_progress{background-color: ${theme.progress};}`));
-    }
-
-    if (theme.info) {
-      style.appendChild(document.createTextNode(`.t_info{background-color: ${theme.info};}`));
-    }
-
-    if (theme.warning) {
-      style.appendChild(document.createTextNode(`.t_warning{background-color: ${theme.warning};}`));
-    }
-
     const head = document.head || document.getElementsByTagName('head')[0];
 
-    for (const child of <any> head.childNodes) {
-      if ((<Element> child).innerHTML && (<Element> child).innerHTML.startsWith('.menu_color')) {
+    for (const child of <any>head.childNodes) {
+      if ((<Element>child).innerHTML && (<Element>child).innerHTML.startsWith('.menu_color')) {
         head.removeChild(child);
         break;
       }
     }
 
     head.appendChild(style);
+  }
+
+  private getTextColor(color: string): string {
+    const rgb = this.hexToRgb(color);
+    let textRgb = this.hexToRgb('#FFFFFF');
+    let contrast = this.contrast([textRgb.r, textRgb.g, textRgb.b], [rgb.r, rgb.g, rgb.b]);
+    const whiteContrast = contrast < 1 ? this.contrast([rgb.r, rgb.g, rgb.b], [textRgb.r, textRgb.g, textRgb.b]) : contrast;
+
+    textRgb = this.hexToRgb('#222222');
+    contrast = this.contrast([textRgb.r, textRgb.g, textRgb.b], [rgb.r, rgb.g, rgb.b]);
+    const blackContrast = contrast < 1 ? this.contrast([rgb.r, rgb.g, rgb.b], [textRgb.r, textRgb.g, textRgb.b]) : contrast;
+
+    // 7 is the contrast ratio for WCAG AAA, if we're less than that, go full black for max contrast
+    if (blackContrast > whiteContrast && blackContrast < 7) {
+      return '#000000';
+    }
+
+    return whiteContrast > blackContrast ? '#FFFFFF' : '#222222';
+  }
+
+  private generateColors(style: HTMLStyleElement, color: string, className: string): void {
+    if (!color) {
+      return;
+    }
+
+    let textColor = this.getTextColor(color);
+    style.appendChild(document.createTextNode(`.${className}{background-color: ${color};color: ${textColor};}`));
+    for (let i = 1; i < 10; i++) {
+      const newColor = this.lightenDarkenColor(color, i * 10);
+      textColor = this.getTextColor(newColor);
+
+      style.appendChild(document.createTextNode(`.${className}_light_${i}{background-color: ${newColor};color: ${textColor};}`));
+    }
+
+    for (let i = 1; i < 10; i++) {
+      const newColor = this.lightenDarkenColor(color, 0 - (i * 10));
+      textColor = this.getTextColor(newColor);
+
+      style.appendChild(document.createTextNode(`.${className}_dark_${i}{background-color: ${newColor};color: ${textColor};}`));
+    }
   }
 
   applySettings(): void {
@@ -241,7 +259,7 @@ export class ThemingService extends BaseDataService {
   randomizeColors(): Theme {
     const settings = new Theme();
     for (const property of Object.keys(settings)) {
-      settings[property] = ThemingService.getRandomColor();
+      settings[property] = this.getRandomColor();
     }
 
     settings.name = 'Custom';

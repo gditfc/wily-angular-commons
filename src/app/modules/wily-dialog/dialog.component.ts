@@ -14,7 +14,10 @@ export class DialogComponent {
   title: string;
 
   @Input()
-  titleClass = 'bg_color_1';
+  titleClass = 'dialog_header_color';
+
+  @Input()
+  bodyClass = 'dialog_body_color';
 
   @Input()
   height = '66vh';

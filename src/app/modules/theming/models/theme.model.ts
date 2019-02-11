@@ -141,4 +141,27 @@ export class Theme {
       this.info === theme.info &&
       this.warning === theme.warning;
   }
+
+  getClasses(): string[] {
+    return [
+      'bg_color_1',
+      'bg_color_2',
+      'bg_color_3',
+      'bg_color_4',
+      'bg_color_5',
+      'menu_color',
+      'nav_color',
+      'footer_color',
+      'main_bg_color',
+      'container_color',
+      'header_color',
+      't_ok',
+      't_go',
+      't_cancel',
+      't_alert',
+      't_progress',
+      't_info',
+      't_warning'
+    ];
+  }
 }

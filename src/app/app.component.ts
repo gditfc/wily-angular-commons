@@ -3,6 +3,7 @@ import {ThemingService} from './modules/theming/services/theming.service';
 import {HelpText} from './modules/help-widget/help-widget.component';
 import {DialogComponent} from './modules/wily-dialog/dialog.component';
 import {PushContainerComponent} from './modules/push-container/push-container.component';
+import {Theme} from './modules/theming/models/theme.model';
 
 @Component({
   selector: 'wily-app-root',
@@ -20,10 +21,13 @@ export class AppComponent{
   @ViewChild('pushContainerLeft')
   pushContainerLeft: PushContainerComponent;
 
+  theme: Theme;
+
   constructor(
     private themingService: ThemingService
   ) {
     this.themingService.appInit('pm', 'https://services.transcend.csra.io/help');
+    this.theme = this.themingService.getTheme();
   }
 
   showDialog(): void {

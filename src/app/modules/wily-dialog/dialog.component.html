@@ -3,13 +3,13 @@
           [style]="getStyle()">
 
   <div class="wac_dialog_container">
-    <div class="wac_help_header font_color_1 space_between" style="flex: 0 1 auto;" [ngClass]="titleClass">
+    <div class="wac_help_header space_between" style="flex: 0 1 auto;" [ngClass]="titleClass">
       <div style="font-weight:500;margin-left:5px;">{{title}}</div>
-      <button class="btn_pulse xsm t_megaman" [pTooltip]="'Close'" tooltipPosition="left" (click)="close()">
+      <button class="btn_pulse xsm" [pTooltip]="'Close'" tooltipPosition="left" (click)="close()">
         <i class="fas fa-times"></i>
       </button>
     </div>
-    <div class="wac_dialog_content">
+    <div class="wac_dialog_content" [ngClass]="bodyClass">
       <ng-content></ng-content>
     </div>
   </div>
