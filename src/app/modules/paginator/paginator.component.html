@@ -3,17 +3,25 @@
   <div class="wac_paginator wrap" *ngIf="version === '1'">
     <div class="center_center wrap">
       <div class="center_center">
-        <div class="wac_page_text">Items per Page:</div>
-        <select [(ngModel)]="pageSize" (change)="pageSizeChange()" class="wac_page_size">
-          <option *ngFor="let option of pageSizeOptions" [value]="option" >{{option}}</option>
+        <div class="wac_page_text">
+          <label for="pageSizeV1">Items per Page:</label>
+        </div>
+        <select [(ngModel)]="pageSize" (change)="pageSizeChange()" class="wac_page_size" title="Choose Page Size" id="pageSizeV1">
+          <optgroup label="Sizes">
+            <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize">{{option}}</option>
+          </optgroup>
         </select>
       </div>
       <div class="center_center">
         <div class="center_center">
           <div class="wac_item_count">{{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}}</div>
         </div>
-        <div class="wac_prev_next" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)"><i class="fas fa-chevron-left"></i></div>
-        <div class="wac_prev_next" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)"><i class="fas fa-chevron-right"></i></div>
+        <div class="wac_prev_next" role="button" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="wac_prev_next" role="button" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
+          <i class="fas fa-chevron-right"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -24,23 +32,37 @@
     <div style="padding-top:15px;">
 
       <div class="center_center">
-        <div class="wac_prev_next" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)"><i class="fas fa-chevron-left"></i></div>
+        <div class="wac_prev_next" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
+          <i class="fas fa-chevron-left"></i>
+        </div>
         <!-- ITEMS -->
         <div class="wac_page_link center">
-          <div *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2)">{{activePage - 1}}</div>
-          <div *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1)">{{activePage}}</div>
+          <div *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2)" [attr.aria-label]="'Page ' + (activePage - 1)">
+            {{activePage - 1}}
+          </div>
+          <div *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1)" [attr.aria-label]="'Page ' + activePage">
+            {{activePage}}
+          </div>
           <div class="active">{{activePage + 1}}</div>
-          <div *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1)">{{activePage + 2}}</div>
-          <div *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2)">{{activePage + 3}}</div>
+          <div *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1)" [attr.aria-label]="'Page ' + (activePage + 2)">
+            {{activePage + 2}}
+          </div>
+          <div *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2)" [attr.aria-label]="'Page ' + (activePage + 3)">
+            {{activePage + 3}}
+          </div>
         </div>
         <!-- END ITEMS -->
-        <div class="wac_prev_next" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)"><i class="fas fa-chevron-right"></i></div>
+        <div class="wac_prev_next" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
+          <i class="fas fa-chevron-right"></i>
+        </div>
       </div>
 
       <div class="center_center" style="margin:5px;">
         <div class="wac_first_last" aria-label="Start" (click)="goToFirst()">FIRST</div>
-        <select [(ngModel)]="pageSize" (change)="pageSizeChange()" class="wac_page_size">
-          <option *ngFor="let option of pageSizeOptions" [value]="option" >{{option}}</option>
+        <select [(ngModel)]="pageSize" (change)="pageSizeChange()" class="wac_page_size" title="Choose Page Size">
+          <optgroup label="Sizes">
+            <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize">{{option}}</option>
+          </optgroup>
         </select>
         <div class="wac_first_last" aria-label="End" (click)="goToLast()">LAST</div>
       </div>

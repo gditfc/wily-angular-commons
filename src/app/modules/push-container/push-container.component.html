@@ -1,6 +1,6 @@
 <div class="layout_sidebar container_color" [ngClass]="getSidePanelClass()" [style.top]="topOffset">
   <div style="display:inline-flex;padding-top:10px;align-items: center;" [style.float]="side.toLowerCase() === 'left' ? 'right' : 'left'">
-    <div (click)="close()" class="data_hide_button">
+    <div (click)="close()" class="data_hide_button" role="button" aria-label="Close">
       <i class="fas fa-times"></i>
     </div>
   </div>

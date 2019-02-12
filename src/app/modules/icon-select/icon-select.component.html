@@ -1,4 +1,4 @@
-<button class="btn large_btn t_info" (click)="doShowDialog()">Choose Icon</button>
+<button class="btn large_btn t_info" (click)="doShowDialog()" aria-label="Choose Icon">Choose Icon</button>
 <wily-dialog [object]="showDialog" title="Choose an Icon" titleClass="bg_color_1" #faDialog>
   <div style="display: flex;padding: 5px;justify-content: space-between">
     <div style="width: 85%;">
@@ -15,7 +15,8 @@
   </div>
   <div style="justify-content: space-evenly;flex-wrap: wrap;display: flex;">
     <div class="wac_icon_select_icon" (click)="choose(faClass.toString())" [title]="'fa-' + faClass"
-         *ngFor="let faClass of getValues()" [style.display]="icons[faClass.toString()] ? 'flex' : 'none'">
+         *ngFor="let faClass of getValues()" [style.display]="icons[faClass.toString()] ? 'flex' : 'none'"
+         role="button" [attr.aria-label]="'Choose fa-' + faClass">
       <i [ngClass]="'fas fa-' + faClass.toString()"></i>
     </div>
   </div>

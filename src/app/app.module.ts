@@ -9,6 +9,7 @@ import {ProfilePicModule} from './modules/profile-pic/profile-pic.module';
 import {TooltipModule} from 'primeng/primeng';
 import {PaginatorModule} from './modules/paginator/paginator.module';
 import {PushContainerModule} from './modules/push-container/push-container.module';
+import {RichTextModule} from './modules/rich-text/rich-text.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {PushContainerModule} from './modules/push-container/push-container.modul
     ProfilePicModule,
     TooltipModule,
     PaginatorModule,
-    PushContainerModule
+    PushContainerModule,
+    RichTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]
