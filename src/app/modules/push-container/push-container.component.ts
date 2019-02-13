@@ -22,6 +22,9 @@ export class PushContainerComponent implements AfterViewInit {
   @Input()
   closeOnResize = false;
 
+  @Input()
+  backgroundColorClass = 'push_container_color';
+
   constructor() {
   }
 
@@ -93,9 +96,9 @@ export class PushContainerComponent implements AfterViewInit {
 
   getSidePanelClass(): string {
     if (this.showSidePanel) {
-      return 'layout_sidebar_active_' + this.side.toLowerCase();
+      return this.backgroundColorClass + ' layout_sidebar_active_' + this.side.toLowerCase();
     } else {
-      return 'layout_sidebar_inactive_' + this.side.toLowerCase();
+      return this.backgroundColorClass + ' layout_sidebar_inactive_' + this.side.toLowerCase();
     }
   }
 

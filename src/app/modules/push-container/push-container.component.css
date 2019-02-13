@@ -1,6 +1,5 @@
 .layout_sidebar {
   width: 230px;
-  background-color: #ffffff;
   border-right: solid 1px #d6d7d9;
   position: fixed;
   z-index: 1;
