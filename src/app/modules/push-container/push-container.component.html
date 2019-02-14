@@ -1,11 +1,14 @@
-<div class="layout_sidebar" [ngClass]="getSidePanelClass()" [style.top]="topOffset">
-  <div style="display:inline-flex;padding-top:10px;align-items: center;" [style.float]="side.toLowerCase() === 'left' ? 'right' : 'left'">
-    <div (click)="close()" class="data_hide_button" role="button" aria-label="Close">
+<div class="layout_sidebar" [ngClass]="getSidePanelClass()" [style.top]="topOffset" [style.direction]="side.toLowerCase() === 'left' ? 'ltr' : 'rtl'">
+  <div class="push_close_bar" >
+    <div (click)="close()" class="data_hide_button" role="button" aria-label="Close"  [style.marginRight]="side.toLowerCase() === 'left' ? '19px' : '2px'">
       <i class="fas fa-times"></i>
     </div>
   </div>
+  <div style="height:30px;"></div>
 
-  <ng-content></ng-content>
+  <div  [style.direction]="side.toLowerCase() === 'right' ? 'ltr' : ''">
+    <ng-content></ng-content>
+  </div>
 
-  <div style="padding-bottom: 40px;">&nbsp;</div>
+  <div style="height:10px;"></div>
 </div>
