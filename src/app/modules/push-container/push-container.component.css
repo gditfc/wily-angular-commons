@@ -8,12 +8,14 @@
   user-select: none;
   box-sizing: border-box;
 }
+
 .push_close_bar {
   position: fixed;
-  min-width:230px;
-  height:30px;
+  min-width: 230px;
+  height: 30px;
   z-index: 999;
 }
+
 .layout_sidebar_inactive_left {
   left: -230px;
   transition: left 0.2s ease-in-out;
@@ -45,24 +47,25 @@
 }
 
 .data_hide_button {
-  float:right;
-  display:flex;
+  float: right;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size:10pt;
-  height:22px;
-  width:22px;
-  border-radius:50%;
+  font-size: 9pt;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
   cursor: pointer;
-  margin: 3px 0;
+  margin: 5px 0;
   outline: none;
   transition: all .2s ease-in-out;
-  background-color:rgba(255,255,255,0.9);
-  color:rgba(0,0,0,0.2);
-  border:1px solid rgba(0,0,0,0.1);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 .data_hide_button:hover {
-  background-color:rgba(0,0,0,0.3);
-  color:rgba(255,255,255,0.8);
-  border:1px solid rgba(0,0,0,0.1)
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1)
 }
