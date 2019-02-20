@@ -1,8 +1,16 @@
 # Wily Angular Commons
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.0.
+This package offers a small selection of reusable components that interoperate with the rest of GDIT's Wily offering. Some components are built from scratch, others wrap PrimeNG components to force them to work in a certain manner. If you're interested in contributing or find any bugs, feel free to catch us in GitHub.
 
-## Package the module
+## Usage
+
+`npm install wily-angular-commons`
+
+Component listing and usage coming soon.
+
+## Build and Release Instructions
+
+### Package
 
 Run the following:
 
@@ -14,13 +22,16 @@ Run the following:
 
 `cd ..`
 
-(Optional) To experiment using 'wily-angular-commons' components/services before publishing, run the below under the target angular app root folder (pointing to the locally wily commons build tar ball version) 
-*Our observation is that npm cache is not cleared easily, so its easier to keep upgrading local versions for testing before final release*
-npm install ../wily-angular-commons/dist/wily-angular-commons-1.1.1.tgz
+### Test
+
+After packaging, you can install a local build for testing with the following:
+
+`npm install ../wily-angular-commons/dist/wily-angular-commons-1.1.1.tgz`
+
+### Release
 
 `npm publish dist`
 
-## Further help
+## Further Help
 
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+For more help, please reach out to `nick.dimola@gdit.com`.

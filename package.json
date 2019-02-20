@@ -1,6 +1,6 @@
 {
   "name": "wily-angular-commons",
-  "version": "7.0.3",
+  "version": "7.0.4",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -24,7 +24,6 @@
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@angular/router": "^7.2.2",
     "@fortawesome/fontawesome-free": "^5.6.3",
-    "amazon-cognito-auth-js": "^1.2.4",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.6.3",
     "intl": "^1.2.5",
@@ -35,6 +34,9 @@
     "rxjs": "^6.3.3",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.29"
+  },
+  "optionalDependencies": {
+    "amazon-cognito-auth-js": "^1.2.4"
   },
   "devDependencies": {
     "@angular/cli": "^7.2.3",
