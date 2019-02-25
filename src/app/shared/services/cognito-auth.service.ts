@@ -1,19 +1,36 @@
 import {CognitoAuth, CognitoAuthSession} from 'amazon-cognito-auth-js';
 import {Router} from '@angular/router';
 
-export class CognitoAuthService {
+export abstract class CognitoAuthService {
 
   private retryCount = 0;
+  private initPromise: Promise<any>;
 
   protected auth: any;
   protected session: CognitoAuthSession;
 
-  protected constructor(
-    protected router: Router,
-    protected authData: any
-  ) {
-    this.auth = new CognitoAuth(authData);
+  protected constructor() {}
+
+  init(): Promise<any> {
+    this.initPromise = this.defer();
+    this.auth = new CognitoAuth(this.getAuthData());
     this.setupCognito();
+
+    return this.initPromise;
+  }
+
+  private defer(): Promise<any> {
+    let res, rej: any;
+
+    const promise = new Promise<any>((resolve, reject) => {
+      res = resolve;
+      rej = reject;
+    });
+
+    (<any> promise).resolve = res;
+    (<any> promise).reject = rej;
+
+    return promise;
   }
 
   private setupCognito(): void {
@@ -23,12 +40,14 @@ export class CognitoAuthService {
         this.retryCount = 0;
         this.session = result;
         this.scheduleTokenRefresh();
+        (<any> this.initPromise).resolve();
       },
       onFailure: (error) => {
         console.error(error);
 
         if (this.retryCount >= 3) {
           this.retryCount = 0;
+          (<any> this.initPromise).reject();
           this.logout();
         } else {
           this.retryCount++;
@@ -42,7 +61,7 @@ export class CognitoAuthService {
 
     if (window.location.href.includes('?code=')) {
       this.auth.parseCognitoWebResponse(window.location.href);
-      this.router.navigate(['']);
+      this.getRouter().navigate(['']);
     } else {
       this.login();
     }
@@ -76,7 +95,11 @@ export class CognitoAuthService {
   }
 
   public getIdToken(): string {
-    return this.session.getIdToken().getJwtToken();
+    if (this.session) {
+      return this.session.getIdToken().getJwtToken();
+    }
+
+    return null;
   }
 
   private scheduleTokenRefresh(): void {
@@ -86,5 +109,9 @@ export class CognitoAuthService {
       this.auth.refreshSession(this.session.getRefreshToken().getToken());
     }, expiryDate);
   }
+
+  abstract getRouter(): Router;
+
+  abstract getAuthData(): any;
 
 }

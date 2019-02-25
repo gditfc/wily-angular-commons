@@ -8,9 +8,8 @@ import {JsonInterceptor} from '../../shared/interceptors/json.interceptor';
 import {ThemingComponent} from './theming.component';
 import {ThemingService} from './services/theming.service';
 import {ColorPickerModule, TabViewModule} from 'primeng/primeng';
-import {LocalStorageService} from '../../shared/services/localStorage.service';
+import {LocalStorageService} from '../../shared/services/local-storage.service';
 import {GrowlModule} from 'primeng/growl';
-import {Theme} from './models/theme.model';
 
 @NgModule({
   imports: [

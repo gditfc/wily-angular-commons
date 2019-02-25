@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Theme} from '../models/theme.model';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs/index';
-import {BaseDataService} from '../../../shared/services/base.data.service';
-import {LocalStorageService} from '../../../shared/services/localStorage.service';
+import {BaseDataService} from '../../../shared/services/base-data.service';
+import {LocalStorageService} from '../../../shared/services/local-storage.service';
 
 @Injectable()
 export class ThemingService extends BaseDataService {

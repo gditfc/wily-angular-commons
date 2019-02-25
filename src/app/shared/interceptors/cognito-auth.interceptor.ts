@@ -23,8 +23,7 @@ export abstract class CognitoAuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.isWhitelistUrl(req)) {
-      const clone = req.clone({setHeaders: {'Authorization': 'Bearer ' + this.cognitoAuthService.getIdToken()}});
-      return next.handle(clone);
+      return next.handle(req.clone({setHeaders: {'Authorization': 'Bearer ' + this.cognitoAuthService.getIdToken()}}));
     }
 
     return next.handle(req);

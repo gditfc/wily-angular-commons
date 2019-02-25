@@ -1,5 +1,5 @@
 import {Component, Injectable, Input, OnInit, ViewChild} from '@angular/core';
-import {BaseDataService} from '../../shared/services/base.data.service';
+import {BaseDataService} from '../../shared/services/base-data.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/index';
 import {DialogComponent} from '../wily-dialog/dialog.component';

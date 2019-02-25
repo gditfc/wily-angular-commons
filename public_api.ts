@@ -25,8 +25,8 @@ export * from './src/app/shared/interceptors/json.interceptor';
 export * from './src/app/shared/interceptors/cognito-auth.interceptor';
 
 /** SERVICES */
-export * from './src/app/shared/services/base.data.service';
-export * from './src/app/shared/services/localStorage.service';
+export * from './src/app/shared/services/base-data.service';
+export * from './src/app/shared/services/local-storage.service';
 export * from './src/app/shared/services/cognito-auth.service';
 export * from './src/app/modules/theming/services/theming.service';
 
