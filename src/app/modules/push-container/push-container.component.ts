@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, HostListener, Input} from '@angular/core';
+import {AfterViewInit, Component, HostListener, Input, OnDestroy} from '@angular/core';
 
 @Component({
   selector: 'wily-push-container',
   templateUrl: './push-container.component.html',
   styleUrls: ['./push-container.component.css']
 })
-export class PushContainerComponent implements AfterViewInit {
+export class PushContainerComponent implements AfterViewInit, OnDestroy {
 
   @Input()
   showSidePanel = false;
@@ -38,6 +38,10 @@ export class PushContainerComponent implements AfterViewInit {
         this.close();
       }, 100);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.close();
   }
 
   @HostListener('window:resize', ['$event'])

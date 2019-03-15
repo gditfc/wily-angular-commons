@@ -32,7 +32,8 @@ export class DialogComponent {
   closed: EventEmitter<any> = new EventEmitter();
 
   close(): void {
-    this.dialog.close(new Event(''));
+    // this.dialog.close(new Event(''));
+    this.object = null;
     this.closed.emit({});
   }
 
