@@ -44,9 +44,6 @@ export class HelpWidgetComponent implements OnInit {
   baseServiceUrl: string;
 
   @Input()
-  appManagementUrl: string;
-
-  @Input()
   canEdit = false;
 
   @Input()
@@ -76,7 +73,6 @@ export class HelpWidgetComponent implements OnInit {
     this.help = new Help();
     this.help.name = 'Loading...';
     this.help.canEdit = this.canEdit;
-    this.help.helpSystemUrl = `${this.baseServiceUrl}/products/${this.productKey}/help/elements/${this.helpKey}`;
     this.dialog.open();
 
     this.helpDataService.getHelp(this.productKey, this.helpKey).subscribe(
