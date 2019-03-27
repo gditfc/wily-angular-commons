@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {DialogComponent} from '../wily-dialog/dialog.component';
 
 @Component({
@@ -108,6 +108,9 @@ export class IconSelectComponent {
 
   @ViewChild('faDialog')
   faDialog: DialogComponent;
+
+  @Input()
+  buttonColorClass = 'bg_blue_alt';
 
   @Output()
   selected: EventEmitter<any> = new EventEmitter();

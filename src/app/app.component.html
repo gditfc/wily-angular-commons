@@ -38,15 +38,16 @@
           </div>
         </div>
       </div>
-      <div class="action font_color_1">
+      <div class="action">
         <wily-help-widget
-          productKey="pe"
-          elementKey="provider-dashboard"
-          helpSystemUrl="https://help.transcend.csra.io"
-          serviceUrl="https://services.transcend.csra.io/help"
+          productKey="appmgmt"
+          helpKey="dashboard"
+          appManagementUrl="http://localhost:4200"
+          baseServiceUrl="http://localhost:8080/appmgmt"
           [canEdit]="true"
-          theme="light"
+          displayMode="custom"
           fontSize="24px">
+          <button>THING</button>
         </wily-help-widget>
       </div>
     </div>

@@ -42,6 +42,7 @@
 </wily-dialog>
 
 <div class="action" (click)="showHelp()" role="button" aria-label="Show Help">
-  <i class="fas fa-question-circle help_widget" [style.fontSize]="fontSize"></i>
+  <ng-content></ng-content>
+  <i class="fas fa-question-circle help_widget" [style.fontSize]="fontSize" *ngIf="displayMode === 'default'"></i>
 </div>
 

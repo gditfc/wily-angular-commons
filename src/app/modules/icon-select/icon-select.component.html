@@ -1,14 +1,14 @@
-<button class="btn large_btn t_info" (click)="doShowDialog()" aria-label="Choose Icon">Choose Icon</button>
-<wily-dialog [object]="showDialog" title="Choose an Icon" titleClass="bg_color_1" #faDialog>
+<button class="btn large_btn" [ngClass]="buttonColorClass" (click)="doShowDialog()" aria-label="Choose Icon">Choose Icon</button>
+<wily-dialog [object]="showDialog" title="Choose an Icon" #faDialog>
   <div style="display: flex;padding: 5px;justify-content: space-between">
     <div style="width: 85%;">
       <input type="text" [(ngModel)]="filter" placeholder="Filter Icons" style="width: 100%;"/>
     </div>
     <div style="width: 15%;display: flex;justify-content: space-evenly;">
-      <button class="btn large_btn t_ok" aria-label="Filter" (click)="filterClasses()">
+      <button class="btn large_btn bg_purple_alt" aria-label="Filter" (click)="filterClasses()">
         Filter
       </button>
-      <button class="btn large_btn t_cancel" aria-label="Clear" (click)="clear()">
+      <button class="btn large_btn bg_grey_alt" aria-label="Clear" (click)="clear()">
         Clear
       </button>
     </div>

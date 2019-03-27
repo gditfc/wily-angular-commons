@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ThemingService} from './modules/theming/services/theming.service';
 import {HelpText} from './modules/help-widget/help-widget.component';
 import {DialogComponent} from './modules/wily-dialog/dialog.component';
@@ -26,7 +26,7 @@ export class AppComponent{
   constructor(
     private themingService: ThemingService
   ) {
-    this.themingService.appInit('pm', 'https://services.transcend.csra.io/help');
+    this.themingService.appInit('app_management', 'http://localhost:8080/appmgmt');
     this.theme = this.themingService.getTheme();
   }
 

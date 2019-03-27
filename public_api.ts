@@ -17,7 +17,7 @@ export * from './src/app/modules/paginator/paginator.component';
 export * from './src/app/modules/profile-pic/profile-pic.component';
 export * from './src/app/modules/push-container/push-container.component';
 export * from './src/app/modules/rich-text/rich-text.component';
-export * from './src/app/modules/theming/theming.component';
+export * from './src/app/modules/theming/components/theming.component';
 export * from './src/app/modules/wily-dialog/dialog.component';
 
 /** INTERCEPTORS */

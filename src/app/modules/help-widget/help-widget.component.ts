@@ -22,8 +22,8 @@ export class HelpDataService extends BaseDataService {
     return this.overrideUrl ? this.overrideUrl : '';
   }
 
-  getHelp(productKey: string, elementKey: string): Observable<HelpText> {
-    return this.handleGet(`/api/public/products/${productKey}/elements/${elementKey}`);
+  getHelp(productKey: string, helpKey: string): Observable<Help> {
+    return this.handleGet(`/api/public/products/${productKey}/help/${helpKey}`);
   }
 
 }
@@ -38,13 +38,13 @@ export class HelpWidgetComponent implements OnInit {
   productKey: string;
 
   @Input()
-  elementKey: string;
+  helpKey: string;
 
   @Input()
-  serviceUrl: string;
+  baseServiceUrl: string;
 
   @Input()
-  helpSystemUrl: string;
+  appManagementUrl: string;
 
   @Input()
   canEdit = false;
@@ -52,10 +52,13 @@ export class HelpWidgetComponent implements OnInit {
   @Input()
   fontSize = '14px';
 
+  @Input()
+  displayMode = 'default';
+
   @ViewChild('dialog')
   dialog: DialogComponent;
 
-  help: HelpText;
+  help: Help;
 
   status: EndpointStatus;
   EndpointStatus = EndpointStatus;
@@ -65,23 +68,23 @@ export class HelpWidgetComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.helpDataService.overrideBaseUrl(this.serviceUrl);
+    this.helpDataService.overrideBaseUrl(this.baseServiceUrl);
   }
 
   showHelp(): void {
     this.status = EndpointStatus.LOADING;
-    this.help = new HelpText();
+    this.help = new Help();
     this.help.name = 'Loading...';
     this.help.canEdit = this.canEdit;
-    this.help.helpSystemUrl = this.helpSystemUrl + '/products/' + this.productKey + '/help/elements/' + this.elementKey;
+    this.help.helpSystemUrl = `${this.baseServiceUrl}/products/${this.productKey}/help/elements/${this.helpKey}`;
     this.dialog.open();
 
-    this.helpDataService.getHelp(this.productKey, this.elementKey).subscribe(
+    this.helpDataService.getHelp(this.productKey, this.helpKey).subscribe(
       result => {
         this.status = EndpointStatus.SUCCESS;
         this.help.name = result.name + ' Help';
         this.help.description = result.description;
-        this.help.helpText = result.helpText;
+        this.help.body = result.body;
       }, error => {
         this.status = EndpointStatus.ERROR;
         this.help.name = 'Help Topic Unavailable';
@@ -95,10 +98,12 @@ export class HelpWidgetComponent implements OnInit {
 
 }
 
-export class HelpText {
+export class Help {
+  helpKey: string;
+  productKey: string;
   name: string;
   description: string;
-  helpText: string;
+  body: string;
   canEdit: boolean;
   helpSystemUrl: string;
 }

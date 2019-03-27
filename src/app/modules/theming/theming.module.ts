@@ -5,11 +5,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {JsonInterceptor} from '../../shared/interceptors/json.interceptor';
-import {ThemingComponent} from './theming.component';
+import {ThemingComponent} from './components/theming.component';
 import {ThemingService} from './services/theming.service';
 import {ColorPickerModule, TabViewModule} from 'primeng/primeng';
 import {LocalStorageService} from '../../shared/services/local-storage.service';
-import {GrowlModule} from 'primeng/growl';
 
 @NgModule({
   imports: [
@@ -20,8 +19,7 @@ import {GrowlModule} from 'primeng/growl';
     HttpClientModule,
     BrowserAnimationsModule,
     ColorPickerModule,
-    TabViewModule,
-    GrowlModule
+    TabViewModule
   ],
   declarations: [
     ThemingComponent
