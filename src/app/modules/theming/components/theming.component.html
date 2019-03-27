@@ -1,3 +1,5 @@
-<select [ngClass]="selectClass" [(ngModel)]="theme" (change)="changeTheme($event)">
-  <option *ngFor="let optionTheme of themes" [value]="optionTheme.themeId" [selected]="optionTheme.themeId === theme.themeId">{{theme.name}}</option>
+<select [ngClass]="selectClass" [(ngModel)]="theme" (change)="changeTheme()">
+  <option *ngFor="let optionTheme of themes" [ngValue]="optionTheme" [selected]="optionTheme.themeId === theme.themeId">
+    {{optionTheme.name}}{{optionTheme.isDefault === 'Y' ? ' - Default' : ''}}
+  </option>
 </select>

@@ -27,8 +27,9 @@ export class ThemingComponent implements OnInit {
     );
   }
 
-  changeTheme(event: any): void {
-    
+  changeTheme(): void {
+    this.themingService.saveTheme(this.theme);
+    this.themingService.changeColors(this.theme);
   }
 
 }
