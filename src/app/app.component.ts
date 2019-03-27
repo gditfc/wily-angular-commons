@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ThemingService} from './modules/theming/services/theming.service';
-import {HelpText} from './modules/help-widget/help-widget.component';
+import {Help} from './modules/help-widget/help-widget.component';
 import {DialogComponent} from './modules/wily-dialog/dialog.component';
 import {PushContainerComponent} from './modules/push-container/push-container.component';
 import {Theme} from './modules/theming/models/theme.model';
@@ -13,7 +13,7 @@ import {Theme} from './modules/theming/models/theme.model';
 export class AppComponent{
   title = 'app';
 
-  obj: HelpText;
+  obj: Help;
 
   @ViewChild('dialog')
   dialog: DialogComponent;
@@ -31,7 +31,7 @@ export class AppComponent{
   }
 
   showDialog(): void {
-    this.obj = new HelpText();
+    this.obj = new Help();
     this.dialog.open();
   }
 
