@@ -1,4 +1,3 @@
-
 <wily-dialog [title]="help ? help.name : ''" [object]="help" #dialog>
 
   <div style="height:97%;" *ngIf="help">
@@ -16,13 +15,13 @@
         <div *ngIf="help.description">
           <div class="wac_help_description">{{help.description}}</div>
         </div>
-        <button class="btn sm t_ok" (click)="editHelpSystem()" aria-label="Edit" *ngIf="canEdit">
+        <button class="btn sm bg_blue_alt" (click)="editHelpSystem()" aria-label="Edit" *ngIf="canEdit">
           EDIT
         </button>
       </div>
 
 
-      <div class="ql-editor wac_help_text" [innerHTML]="help.helpText"></div>
+      <div class="ql-editor wac_help_text" [innerHTML]="help.body"></div>
     </div>
     <!-- END HELP CONTENT -->
 
@@ -31,7 +30,7 @@
       <div>
         <div class="wac_help_notavail">This help topic is currently unavailable, please check back later.</div>
         <div class="center_center">
-          <button class="btn md t_ok" *ngIf="canEdit" (click)="editHelpSystem()" aria-label="Edit">Click here to create this help topic</button>
+          <button class="btn md bg_green_alt" *ngIf="canEdit" (click)="editHelpSystem()" aria-label="Edit">Click here to create this help topic</button>
         </div>
       </div>
     </div>
@@ -45,4 +44,3 @@
   <ng-content></ng-content>
   <i class="fas fa-question-circle help_widget" [style.fontSize]="fontSize" *ngIf="displayMode === 'default'"></i>
 </div>
-
