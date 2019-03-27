@@ -1,20 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://styles.transcend.csra.io/v3.0.0-rc19/transcend.css';
+@import 'https://styles.transcend.csra.io/v3.0.0-rc20/transcend.css';
 
-.dialog_header_color {
-  color: #FFF;
-  background-color: #5aa2ff;
-}
 
-.dialog_body_color {
-  color: #333;
-  background-color: #FFF;
-}
+
+
+
 
 .color_test div {
   padding: 5px;
 }
 
-.push_container_color {
-  background-color: lightsteelblue;
-}

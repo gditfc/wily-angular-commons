@@ -12,7 +12,7 @@
     <!-- HELP CONTENT -->
     <div *ngIf="status === EndpointStatus.SUCCESS">
       <div class="row space_between v_center">
-        <div class="wac_help_description overlay" *ngIf="help.description">
+        <div class="wac_help_description overlay" *ngIf="help.description" style="border:unset">
           {{help.description}}
         </div>
       </div>
