@@ -50,7 +50,7 @@ export class HelpWidgetComponent implements OnInit {
   canEdit = false;
 
   @Input()
-  fontSize = '14px';
+  sizeClass = 'xsm';
 
   @Input()
   displayMode = 'default';
