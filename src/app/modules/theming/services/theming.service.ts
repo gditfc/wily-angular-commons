@@ -8,18 +8,18 @@ import {LocalStorageService} from '../../../shared/services/local-storage.servic
 @Injectable()
 export class ThemingService extends BaseDataService {
 
-  private static readonly THEME_KEY = 'theme';
+  private readonly THEME_KEY = 'theme';
 
   private themes = new BehaviorSubject<Theme[]>([]);
 
   protected overrideUrl: string;
   protected productKey: string;
 
-  private static toSnakeCase(prop: string): string {
+  private toSnakeCase(prop: string): string {
     return prop.split(/(?=[A-Z])/).join('_').toLowerCase();
   }
 
-  private static lightenDarkenColor(color: string, percent: number): string {
+  private lightenDarkenColor(color: string, percent: number): string {
     let usePound = false;
     if (color[0] === '#') {
       color = color.slice(1);
@@ -58,7 +58,7 @@ export class ThemingService extends BaseDataService {
     return (usePound ? '#' : '') + newColor;
   }
 
-  private static hexToRgb(hex): any {
+  private hexToRgb(hex): any {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
       r: parseInt(result[1], 16),
@@ -67,7 +67,7 @@ export class ThemingService extends BaseDataService {
     } : null;
   }
 
-  static getRandomColor(): string {
+  getRandomColor(): string {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
   }
 
@@ -106,11 +106,11 @@ export class ThemingService extends BaseDataService {
   }
 
   getTheme(): Theme {
-    return new Theme(this.localStorageService.getObject(this.productKey + ThemingService.THEME_KEY));
+    return new Theme(this.localStorageService.getObject(this.productKey + this.THEME_KEY));
   }
 
   saveTheme(settings: Theme): void {
-    this.localStorageService.putObject(this.productKey + ThemingService.THEME_KEY, settings);
+    this.localStorageService.putObject(this.productKey + this.THEME_KEY, settings);
   }
 
   changeColors(theme: Theme): void {
@@ -119,7 +119,7 @@ export class ThemingService extends BaseDataService {
     for (const prop of Object.keys(theme)) {
       if (prop.toLowerCase().includes('bg') || prop.toLowerCase().includes('color')) {
         const color = (<string>theme[prop]).startsWith('#') ? theme[prop] : '#' + theme[prop];
-        this.generateColors(style, color, ThemingService.toSnakeCase(prop));
+        this.generateColors(style, color, this.toSnakeCase(prop));
       }
     }
 
@@ -206,12 +206,12 @@ export class ThemingService extends BaseDataService {
   }
 
   private getTextColor(color: string): string {
-    const rgb = ThemingService.hexToRgb(color);
-    let textRgb = ThemingService.hexToRgb('#FFFFFF');
+    const rgb = this.hexToRgb(color);
+    let textRgb = this.hexToRgb('#FFFFFF');
     let contrast = this.contrast([textRgb.r, textRgb.g, textRgb.b], [rgb.r, rgb.g, rgb.b]);
     const whiteContrast = contrast < 1 ? this.contrast([rgb.r, rgb.g, rgb.b], [textRgb.r, textRgb.g, textRgb.b]) : contrast;
 
-    textRgb = ThemingService.hexToRgb('#222222');
+    textRgb = this.hexToRgb('#222222');
     contrast = this.contrast([textRgb.r, textRgb.g, textRgb.b], [rgb.r, rgb.g, rgb.b]);
     const blackContrast = contrast < 1 ? this.contrast([rgb.r, rgb.g, rgb.b], [textRgb.r, textRgb.g, textRgb.b]) : contrast;
 
@@ -231,7 +231,7 @@ export class ThemingService extends BaseDataService {
     let textColor = this.getTextColor(color);
     style.appendChild(document.createTextNode(`.${className}{background-color: ${color};color: ${textColor};fill: currentColor;}`));
     for (let i = 1; i < 10; i++) {
-      const newColor = ThemingService.lightenDarkenColor(color, i * 10);
+      const newColor = this.lightenDarkenColor(color, i * 10);
       textColor = this.getTextColor(newColor);
 
       style.appendChild(
@@ -239,7 +239,7 @@ export class ThemingService extends BaseDataService {
     }
 
     for (let i = 1; i < 10; i++) {
-      const newColor = ThemingService.lightenDarkenColor(color, 0 - (i * 10));
+      const newColor = this.lightenDarkenColor(color, 0 - (i * 10));
       textColor = this.getTextColor(newColor);
 
       style.appendChild(

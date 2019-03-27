@@ -1,6 +1,10 @@
 {
-  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
-  "lib": {
-    "entryFile": "public_api.ts"
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
+  "name": "wily-angular-commons",
+  "version": "7.0.8",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    }
   }
 }

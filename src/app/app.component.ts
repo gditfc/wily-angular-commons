@@ -10,7 +10,7 @@ import {Theme} from './modules/theming/models/theme.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
   title = 'app';
 
   obj: Help;
