@@ -1,4 +1,4 @@
-<p-editor #editor [style]="{width: '100%', height: height, fontFamily: 'Montserrat, sans-serif'}">
+<p-editor #editor [style]="{width: '100%', height: height, fontFamily: 'Montserrat, sans-serif'}" [readonly]="readonly">
   <p-header>
     <div *ngIf="doHideShow" style="float: right;cursor: pointer;color: #585858;" (click)="toolbarVisible = !toolbarVisible;" role="button" aria-label="Expand Menu">
       <div *ngIf="toolbarVisible" style="margin-top:4px;">

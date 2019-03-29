@@ -1,6 +1,6 @@
 {
   "name": "wily-angular-commons",
-  "version": "7.0.8",
+  "version": "7.0.9",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -25,7 +25,7 @@
     "@angular/router": "^7.2.11",
     "@fortawesome/fontawesome-free": "^5.8.1",
     "classlist.js": "^1.1.20150312",
-    "core-js": "^3.0.0",
+    "core-js": "^2.6.5",
     "intl": "^1.2.5",
     "moment": "^2.24.0",
     "primeng": "^7.1.0",

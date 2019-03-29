@@ -24,6 +24,9 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   @Input()
   height = '100px';
 
+  @Input()
+  readonly = false;
+
   @ViewChild('editor')
   editor: Editor;
 
