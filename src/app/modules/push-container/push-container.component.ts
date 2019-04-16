@@ -8,6 +8,9 @@ import {AfterViewInit, Component, HostListener, Input, OnDestroy} from '@angular
 export class PushContainerComponent implements AfterViewInit, OnDestroy {
 
   @Input()
+  width = 230;
+
+  @Input()
   showSidePanel = false;
 
   @Input()
@@ -32,7 +35,7 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
     document.getElementById(this.mainContentId).style.transition = 'all 0.2s ease-in-out';
 
     if (window.innerWidth > 768 && this.showSidePanel) {
-      this.setMargin('230px');
+      this.setMargin(this.width + 'px');
     } else {
       setTimeout(() => {
         this.close();
@@ -53,7 +56,7 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
 
       this.setMargin('0px');
     } else if (event.target.innerWidth > 768 && this.showSidePanel) {
-      this.setMargin('230px');
+      this.setMargin(this.width + 'px');
     }
   }
 
@@ -73,7 +76,7 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
     this.showSidePanel = true;
 
     if (window.innerWidth > 768) {
-      this.setMargin('230px');
+      this.setMargin(this.width + 'px');
     }
   }
 
@@ -85,7 +88,7 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
   private setMargin(size: string): void {
     if (this.side.toLowerCase() === 'left') {
       document.getElementById(this.mainContentId).style.marginLeft = size;
-
+      
       if (size === '0px') {
         document.getElementById(this.mainContentId).style.removeProperty('margin-left');
       }
@@ -103,6 +106,30 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
       return this.backgroundColorClass + ' layout_sidebar_active_' + this.side.toLowerCase();
     } else {
       return this.backgroundColorClass + ' layout_sidebar_inactive_' + this.side.toLowerCase();
+    }
+  }
+
+  getLeftProperty(): string {
+    if (this.side !== 'left') {
+      return '';
+    } else {
+      if (this.showSidePanel) {
+        return '0';
+      } else {
+        return '-' + this.width + 'px';
+      }
+    }
+  }
+
+  getRightProperty(): string {
+    if (this.side !== 'right') {
+      return '';
+    } else {
+      if (this.showSidePanel) {
+        return '0';
+      } else {
+        return '-' + (this.width + 20) + 'px';
+      }
     }
   }
 
