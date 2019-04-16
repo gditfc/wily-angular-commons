@@ -3,7 +3,7 @@
   side="left"
   topOffset="0px"
   [closeOnResize]="true"
-  [showSidePanel]="true"
+  [showSidePanel]="false"
   [width]=230
   #pushContainerLeft>
   <div>
@@ -15,8 +15,9 @@
   mainContentId="component-container"
   side="right"
   topOffset="0px"
-  [showSidePanel]='true'
-  [width]=500
+  [showSidePanel]='false'
+  [width]=600
+  [breakpoint]=980
   #pushContainerRight>
 
   <div>

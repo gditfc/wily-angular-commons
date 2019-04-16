@@ -28,6 +28,11 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
   @Input()
   backgroundColorClass = 'push_container_color';
 
+  @Input()
+  breakpoint: number;
+
+  private breakpointExceeded = false;
+
   constructor() {
   }
 
@@ -40,6 +45,10 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.close();
       }, 100);
+    }
+
+    if (this.breakpoint && (window.innerWidth < this.breakpoint)) {
+      this.breakpointExceeded = true;
     }
   }
 
@@ -57,6 +66,14 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
       this.setMargin('0px');
     } else if (event.target.innerWidth > 768 && this.showSidePanel) {
       this.setMargin(this.width + 'px');
+    }
+
+    if (this.breakpoint) {
+      if (event.target.innerWidth < this.breakpoint) {
+        this.breakpointExceeded = true;
+      } else {
+        this.breakpointExceeded = false;
+      }
     }
   }
 
@@ -98,6 +115,14 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
       if (size === '0px') {
         document.getElementById(this.mainContentId).style.removeProperty('margin-right');
       }
+    }
+  }
+
+  getWidth(): string {
+    if (this.breakpointExceeded && this.showSidePanel) {
+      return '100%';
+    } else {
+      return this.width + 'px';
     }
   }
 
