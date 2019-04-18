@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, Input, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, Output} from '@angular/core';
 
 @Component({
   selector: 'wily-push-container',
@@ -30,6 +30,12 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
 
   @Input()
   breakpoint: number;
+
+  @Output()
+  opened: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  closed: EventEmitter<any> = new EventEmitter();
 
   private breakpointExceeded = false;
 
@@ -91,6 +97,7 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
     }
 
     this.showSidePanel = true;
+    this.opened.emit({});
 
     if (window.innerWidth > 768) {
       this.setMargin(this.width + 'px');
@@ -99,13 +106,14 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
 
   close(): void {
     this.showSidePanel = false;
+    this.closed.emit({});
     this.setMargin('0px');
   }
 
   private setMargin(size: string): void {
     if (this.side.toLowerCase() === 'left') {
       document.getElementById(this.mainContentId).style.marginLeft = size;
-      
+
       if (size === '0px') {
         document.getElementById(this.mainContentId).style.removeProperty('margin-left');
       }
