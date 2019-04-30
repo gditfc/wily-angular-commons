@@ -125,3 +125,18 @@
   </div>
   <!-- END VERSION 3 -->
 
+  <!-- BEGIN VERSION 4 -->
+  <div *ngIf="version === '4'">
+    <div class="row">
+      <div class="col">
+        <div class="wac_item_count">{{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}}</div>
+      </div>
+      <div class="col wac_prev_next" role="button" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
+        <i class="fas fa-chevron-left"></i>
+      </div>
+      <div class="col wac_prev_next" role="button" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </div>
+  </div>
+  <!-- END VERSION 4 -->
