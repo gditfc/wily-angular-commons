@@ -9,6 +9,7 @@ export * from './app/modules/rich-text/rich-text.module';
 export * from './app/modules/safe-pipes/safe-pipes.module';
 export * from './app/modules/theming/theming.module';
 export * from './app/modules/wily-dialog/wily-dialog.module';
+export * from './app/modules/wily-icons/wily-icons.module';
 
 /** COMPONENTS */
 export * from './app/modules/help-widget/help-widget.component';
