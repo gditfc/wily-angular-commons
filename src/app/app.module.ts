@@ -10,6 +10,7 @@ import {TooltipModule} from 'primeng/primeng';
 import {PaginatorModule} from './modules/paginator/paginator.module';
 import {PushContainerModule} from './modules/push-container/push-container.module';
 import {RichTextModule} from './modules/rich-text/rich-text.module';
+import {WilyIconsModule} from './modules/wily-icons/wily-icons.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {RichTextModule} from './modules/rich-text/rich-text.module';
     TooltipModule,
     PaginatorModule,
     PushContainerModule,
-    RichTextModule
+    RichTextModule,
+    WilyIconsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
