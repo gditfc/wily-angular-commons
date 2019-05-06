@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {WilyIconsRegular} from './wily-icons-regular.model';
 import {WilyIconsLight} from './wily-icons-light.model';
+import {WilyIconsSolid} from './wily-icons-solid.model';
 
 const FontAwesome = window['FontAwesome'];
 
@@ -69,6 +70,39 @@ export class WilyIconsModule {
       WilyIconsLight.wilSSN,
       WilyIconsLight.wilTextArea,
       WilyIconsLight.wilTextBox
+    );
+
+    FontAwesome.library.add(
+      WilyIconsSolid.wisAddress,
+      WilyIconsSolid.wisAlphaText,
+      WilyIconsSolid.wisArchive,
+      WilyIconsSolid.wisCheckbox,
+      WilyIconsSolid.wisClock,
+      WilyIconsSolid.wisDate,
+      WilyIconsSolid.wisDateRange,
+      WilyIconsSolid.wisDocument,
+      WilyIconsSolid.wisDocumentUpload,
+      WilyIconsSolid.wisDropdown,
+      WilyIconsSolid.wisEmail,
+      WilyIconsSolid.wisEmployeeID,
+      WilyIconsSolid.wisFEIN,
+      WilyIconsSolid.wisHTML,
+      WilyIconsSolid.wisLicense,
+      WilyIconsSolid.wisMenu,
+      WilyIconsSolid.wisMMISNPI,
+      WilyIconsSolid.wisMoney,
+      WilyIconsSolid.wisMultiSelect,
+      WilyIconsSolid.wisNPI,
+      WilyIconsSolid.wisNumericText,
+      WilyIconsSolid.wisPersonName,
+      WilyIconsSolid.wisPhone,
+      WilyIconsSolid.wisPID,
+      WilyIconsSolid.wisRadioButtons,
+      WilyIconsSolid.wisReply,
+      WilyIconsSolid.wisSelectAll,
+      WilyIconsSolid.wisSSN,
+      WilyIconsSolid.wisTextArea,
+      WilyIconsSolid.wisTextBox
     );
   }
 
