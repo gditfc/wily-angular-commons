@@ -1,236 +1,203 @@
 <main>
-<wily-push-container
-  mainContentId="component-container"
-  side="left"
-  topOffset="0px"
-  [closeOnResize]="true"
-  [showSidePanel]="false"
-  [width]=230
-  #pushContainerLeft>
+  <wily-push-container
+    mainContentId="component-container"
+    side="left"
+    topOffset="0px"
+    [closeOnResize]="true"
+    [showSidePanel]="false"
+    [width]=230
+    #pushContainerLeft>
+    <div>
+      LEFT PUSH
+    </div>
+  </wily-push-container>
+
+  <wily-push-container
+    mainContentId="component-container"
+    side="right"
+    topOffset="0px"
+    [showSidePanel]='false'
+    [width]=600
+    [breakpoint]=980
+    #pushContainerRight>
+
+    <div>
+      RIGHT PUSH
+    </div>
+  </wily-push-container>
+
   <div>
-    LEFT PUSH
-  </div>
-</wily-push-container>
-
-<wily-push-container
-  mainContentId="component-container"
-  side="right"
-  topOffset="0px"
-  [showSidePanel]='false'
-  [width]=600
-  [breakpoint]=980
-  #pushContainerRight>
-
-  <div>
-    RIGHT PUSH
-  </div>
-</wily-push-container>
-
-<div>
-  <!-- PAGE HEADER -->
-  <div class="header_color">
-    <div class="header">
-      <div class="bar">
-        <div class="accent">
-          <div class="bar_1"></div>
-          <div class="bar_2"></div>
-          <div class="bar_3"></div>
-        </div>
-        <div class="title">
-          <div class="font_color_1 inline">
-            <div><i class="fa fa-search fa-lg"></i></div>
-            <div role="heading" aria-level="1" style="padding-left:5px;" (click)="showDialog()">Wily Angular Commons</div>
+    <!-- PAGE HEADER -->
+    <div class="header_color">
+      <div class="header">
+        <div class="bar">
+          <div class="accent">
+            <div class="bar_1"></div>
+            <div class="bar_2"></div>
+            <div class="bar_3"></div>
+          </div>
+          <div class="title">
+            <div class="font_color_1 inline">
+              <div><i class="fa fa-search fa-lg"></i></div>
+              <div role="heading" aria-level="1" style="padding-left:5px;" (click)="showDialog()">Wily Angular Commons
+              </div>
+            </div>
           </div>
         </div>
       </div>
-        <wily-help-widget
-          productKey="app_management"
-          helpKey="theme_home"
-          baseServiceUrl="http://ndimola-2:8080/appmgmt"
-          [canEdit]="true">
-        </wily-help-widget>
-    </div>
-    <div class="header_subtitle">
-      <div class="bg_purple">
-        <i class="wil fa-address fa-3x fa-fw"></i>
-        <i class="wir fa-address fa-3x fa-fw"></i> You can mess with components made for the module here to make sure they work before package and release.
-      </div>
-      <div>
-        <button (click)="pushContainerLeft.toggle()">Push Left</button>
-        <button (click)="pushContainerRight.toggle()">Push Right</button>
+      <div class="header_subtitle">
+        <div class="bg_purple">
+          <i class="wil fa-address fa-3x fa-fw"></i>
+          <i class="wir fa-address fa-3x fa-fw"></i> You can mess with components made for the module here to make sure
+          they work before package and release.
+        </div>
+        <div>
+          <button (click)="pushContainerLeft.toggle()">Push Left</button>
+          <button (click)="pushContainerRight.toggle()">Push Right</button>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- END PAGE HEADER -->
+    <!-- END PAGE HEADER -->
 
-  <div class="container_color">
-    <!--wily-theming [experimental]="true"></wily-theming-->
-  </div>
-</div>
-
-<wily-dialog title="This thing" [object]="obj" #dialog>
-  <div class="center_center" style="font-size: 24pt;height: 100%;text-align: center;">
-    <div>Here's some text dawg</div>
-  </div>
-</wily-dialog>
-
-<wily-icon-select></wily-icon-select>
-
-<wily-profile-pic
-  imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg"
-  toolTip="Crap for Brains">
-</wily-profile-pic>
-
-<wily-paginator
-  version="1"
-  [totalLength]="100"
-  [pageSizeOptions]="[10,25,50]"
-  [pageSize]="10"
-></wily-paginator>
-
-<wily-paginator
-  version="2"
-  [totalLength]="200"
-  [pageSizeOptions]="[10,25,50]"
-  [pageSize]="25"
-></wily-paginator>
-
-<wily-paginator
-  version="3"
-  [totalLength]="30000"
-  [pageSizeOptions]="[10,25,50]"
-  [pageSize]="50"
-></wily-paginator>
-
-<div style="display: flex;flex-wrap: wrap;justify-content: center;">
-  <div class="color_test" style="display:flex;" *ngFor="let cssClass of theme.getClasses()">
-    <div [ngClass]="cssClass + '_light_9'">light_9</div>
-    <div [ngClass]="cssClass + '_light_8'">light_8</div>
-    <div [ngClass]="cssClass + '_light_7'">light_7</div>
-    <div [ngClass]="cssClass + '_light_6'">light_6</div>
-    <div [ngClass]="cssClass + '_light_5'">light_5</div>
-    <div [ngClass]="cssClass + '_light_4'">light_4</div>
-    <div [ngClass]="cssClass + '_light_3'">light_3</div>
-    <div [ngClass]="cssClass + '_light_2'">light_2</div>
-    <div [ngClass]="cssClass + '_light_1'">light_1</div>
-
-    <div [ngClass]="cssClass" style="width:130px;text-align:center;"><strong>{{cssClass}}</strong></div>
-
-    <div [ngClass]="cssClass + '_dark_1'">dark_1</div>
-    <div [ngClass]="cssClass + '_dark_2'">dark_2</div>
-    <div [ngClass]="cssClass + '_dark_3'">dark_3</div>
-    <div [ngClass]="cssClass + '_dark_4'">dark_4</div>
-    <div [ngClass]="cssClass + '_dark_5'">dark_5</div>
-    <div [ngClass]="cssClass + '_dark_6'">dark_6</div>
-    <div [ngClass]="cssClass + '_dark_7'">dark_7</div>
-    <div [ngClass]="cssClass + '_dark_8'">dark_8</div>
-    <div [ngClass]="cssClass + '_dark_9'">dark_9</div>
-  </div>
-</div>
-
-<div>
-  <wily-rich-text>
-
-  </wily-rich-text>
-</div>
-
-<div>
-  <wily-theming></wily-theming>
-</div>
-
-<div class="row">
-  <!-- light icons -->
-  <div class="col size_1 pad_10">
-    <div class="row_block">
-      <div class="header md bg_blue round">Light Icons</div>
-
-      <div><i class="wil fa-address fa-2x fa-fw"></i> fa-address</div>
-      <div><i class="wil fa-alpha-text fa-2x fa-fw"></i> fa-alpha-text</div>
-      <div><i class="wil fa-checkbox fa-2x fa-fw"></i> fa-checkbox</div>
-      <div><i class="wil fa-date fa-2x fa-fw"></i> fa-date</div>
-      <div><i class="wil fa-date-range fa-2x fa-fw"></i> fa-date-range</div>
-      <div><i class="wil fa-document-upload fa-2x fa-fw"></i> fa-document-upload</div>
-      <div><i class="wil fa-dropdown fa-2x fa-fw"></i> fa-dropdown</div>
-      <div><i class="wil fa-email fa-2x fa-fw"></i> fa-email</div>
-      <div><i class="wil fa-fein fa-2x fa-fw"></i> fa-fein</div>
-      <div><i class="wil fa-html fa-2x fa-fw"></i> fa-html</div>
-      <div><i class="wil fa-license fa-2x fa-fw"></i> fa-license</div>
-      <div><i class="wil fa-mmis-npi fa-2x fa-fw"></i> fa-mmis-npi</div>
-      <div><i class="wil fa-money fa-2x fa-fw"></i> fa-money</div>
-      <div><i class="wil fa-multi-select fa-2x fa-fw"></i> fa-multi-select</div>
-      <div><i class="wil fa-npi fa-2x fa-fw"></i> fa-npi</div>
-      <div><i class="wil fa-numeric-text fa-2x fa-fw"></i> fa-numeric-text</div>
-      <div><i class="wil fa-person-name fa-2x fa-fw"></i> fa-person-name</div>
-      <div><i class="wil fa-phone fa-2x fa-fw"></i> fa-phone</div>
-      <div><i class="wil fa-pid fa-2x fa-fw"></i> fa-pid</div>
-      <div><i class="wil fa-radio-buttons fa-2x fa-fw"></i> fa-radio-buttons</div>
-      <div><i class="wil fa-ssn fa-2x fa-fw"></i> fa-ssn</div>
-      <div><i class="wil fa-text-area fa-2x fa-fw"></i> fa-text-area</div>
-      <div><i class="wil fa-text-box fa-2x fa-fw"></i> fa-text-box</div>
+    <div class="container_color">
+      <!--wily-theming [experimental]="true"></wily-theming-->
     </div>
   </div>
 
-  <!-- regular icons -->
-  <div class="col size_1 pad_10">
-    <div class="row_block">
-      <div class="header md bg_blue round">Regular Icons</div>
-
-      <div><i class="wir fa-address fa-2x fa-fw"></i> fa-address</div>
-      <div><i class="wir fa-alpha-text fa-2x fa-fw"></i> fa-alpha-text</div>
-      <div><i class="wir fa-checkbox fa-2x fa-fw"></i> fa-checkbox</div>
-      <div><i class="wir fa-date fa-2x fa-fw"></i> fa-date</div>
-      <div><i class="wir fa-date-range fa-2x fa-fw"></i> fa-date-range</div>
-      <div><i class="wir fa-document-upload fa-2x fa-fw"></i> fa-document-upload</div>
-      <div><i class="wir fa-dropdown fa-2x fa-fw"></i> fa-dropdown</div>
-      <div><i class="wir fa-email fa-2x fa-fw"></i> fa-email</div>
-      <div><i class="wir fa-fein fa-2x fa-fw"></i> fa-fein</div>
-      <div><i class="wir fa-html fa-2x fa-fw"></i> fa-html</div>
-      <div><i class="wir fa-license fa-2x fa-fw"></i> fa-license</div>
-      <div><i class="wir fa-mmis-npi fa-2x fa-fw"></i> fa-mmis-npi</div>
-      <div><i class="wir fa-money fa-2x fa-fw"></i> fa-money</div>
-      <div><i class="wir fa-multi-select fa-2x fa-fw"></i> fa-multi-select</div>
-      <div><i class="wir fa-npi fa-2x fa-fw"></i> fa-npi</div>
-      <div><i class="wir fa-numeric-text fa-2x fa-fw"></i> fa-numeric-text</div>
-      <div><i class="wir fa-person-name fa-2x fa-fw"></i> fa-person-name</div>
-      <div><i class="wir fa-phone fa-2x fa-fw"></i> fa-phone</div>
-      <div><i class="wir fa-pid fa-2x fa-fw"></i> fa-pid</div>
-      <div><i class="wir fa-radio-buttons fa-2x fa-fw"></i> fa-radio-buttons</div>
-      <div><i class="wir fa-ssn fa-2x fa-fw"></i> fa-ssn</div>
-      <div><i class="wir fa-text-area fa-2x fa-fw"></i> fa-text-area</div>
-      <div><i class="wir fa-text-box fa-2x fa-fw"></i> fa-text-box</div>
+  <wily-dialog title="This thing" [object]="obj" #dialog>
+    <div class="center_center" style="font-size: 24pt;height: 100%;text-align: center;">
+      <div>Here's some text dawg</div>
     </div>
+  </wily-dialog>
+
+  <wily-icon-select></wily-icon-select>
+
+  <wily-profile-pic
+    imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg"
+    toolTip="Crap for Brains">
+  </wily-profile-pic>
+
+  <wily-paginator
+    version="1"
+    [totalLength]="100"
+    [pageSizeOptions]="[10,25,50]"
+    [pageSize]="10"
+  ></wily-paginator>
+
+  <wily-paginator
+    version="2"
+    [totalLength]="200"
+    [pageSizeOptions]="[10,25,50]"
+    [pageSize]="25"
+  ></wily-paginator>
+
+  <wily-paginator
+    version="3"
+    [totalLength]="30000"
+    [pageSizeOptions]="[10,25,50]"
+    [pageSize]="50"
+  ></wily-paginator>
+
+
+  <div>
+    <wily-rich-text>
+
+    </wily-rich-text>
   </div>
 
-  <!-- solid icons -->
-  <div class="col size_1 pad_10">
-    <div class="row_block">
-      <div class="header md bg_blue round">Solid Icons</div>
+  <div class="row">
+    <!-- light icons -->
+    <div class="col size_1 pad_10">
+      <div class="row_block">
+        <div class="header md bg_blue round">Light Icons</div>
 
-      <div><i class="wis fa-address fa-2x fa-fw"></i> fa-address</div>
-      <div><i class="wis fa-alpha-text fa-2x fa-fw"></i> fa-alpha-text</div>
-      <div><i class="wis fa-checkbox fa-2x fa-fw"></i> fa-checkbox</div>
-      <div><i class="wis fa-date fa-2x fa-fw"></i> fa-date</div>
-      <div><i class="wis fa-date-range fa-2x fa-fw"></i> fa-date-range</div>
-      <div><i class="wis fa-document-upload fa-2x fa-fw"></i> fa-document-upload</div>
-      <div><i class="wis fa-dropdown fa-2x fa-fw"></i> fa-dropdown</div>
-      <div><i class="wis fa-email fa-2x fa-fw"></i> fa-email</div>
-      <div><i class="wis fa-fein fa-2x fa-fw"></i> fa-fein</div>
-      <div><i class="wis fa-html fa-2x fa-fw"></i> fa-html</div>
-      <div><i class="wis fa-license fa-2x fa-fw"></i> fa-license</div>
-      <div><i class="wis fa-mmis-npi fa-2x fa-fw"></i> fa-mmis-npi</div>
-      <div><i class="wis fa-money fa-2x fa-fw"></i> fa-money</div>
-      <div><i class="wis fa-multi-select fa-2x fa-fw"></i> fa-multi-select</div>
-      <div><i class="wis fa-npi fa-2x fa-fw"></i> fa-npi</div>
-      <div><i class="wis fa-numeric-text fa-2x fa-fw"></i> fa-numeric-text</div>
-      <div><i class="wis fa-person-name fa-2x fa-fw"></i> fa-person-name</div>
-      <div><i class="wis fa-phone fa-2x fa-fw"></i> fa-phone</div>
-      <div><i class="wis fa-pid fa-2x fa-fw"></i> fa-pid</div>
-      <div><i class="wis fa-radio-buttons fa-2x fa-fw"></i> fa-radio-buttons</div>
-      <div><i class="wis fa-ssn fa-2x fa-fw"></i> fa-ssn</div>
-      <div><i class="wis fa-text-area fa-2x fa-fw"></i> fa-text-area</div>
-      <div><i class="wis fa-text-box fa-2x fa-fw"></i> fa-text-box</div>
+        <div><i class="wil fa-address fa-2x fa-fw"></i> fa-address</div>
+        <div><i class="wil fa-alpha-text fa-2x fa-fw"></i> fa-alpha-text</div>
+        <div><i class="wil fa-checkbox fa-2x fa-fw"></i> fa-checkbox</div>
+        <div><i class="wil fa-date fa-2x fa-fw"></i> fa-date</div>
+        <div><i class="wil fa-date-range fa-2x fa-fw"></i> fa-date-range</div>
+        <div><i class="wil fa-document-upload fa-2x fa-fw"></i> fa-document-upload</div>
+        <div><i class="wil fa-dropdown fa-2x fa-fw"></i> fa-dropdown</div>
+        <div><i class="wil fa-email fa-2x fa-fw"></i> fa-email</div>
+        <div><i class="wil fa-fein fa-2x fa-fw"></i> fa-fein</div>
+        <div><i class="wil fa-html fa-2x fa-fw"></i> fa-html</div>
+        <div><i class="wil fa-license fa-2x fa-fw"></i> fa-license</div>
+        <div><i class="wil fa-mmis-npi fa-2x fa-fw"></i> fa-mmis-npi</div>
+        <div><i class="wil fa-money fa-2x fa-fw"></i> fa-money</div>
+        <div><i class="wil fa-multi-select fa-2x fa-fw"></i> fa-multi-select</div>
+        <div><i class="wil fa-npi fa-2x fa-fw"></i> fa-npi</div>
+        <div><i class="wil fa-numeric-text fa-2x fa-fw"></i> fa-numeric-text</div>
+        <div><i class="wil fa-person-name fa-2x fa-fw"></i> fa-person-name</div>
+        <div><i class="wil fa-phone fa-2x fa-fw"></i> fa-phone</div>
+        <div><i class="wil fa-pid fa-2x fa-fw"></i> fa-pid</div>
+        <div><i class="wil fa-radio-buttons fa-2x fa-fw"></i> fa-radio-buttons</div>
+        <div><i class="wil fa-ssn fa-2x fa-fw"></i> fa-ssn</div>
+        <div><i class="wil fa-text-area fa-2x fa-fw"></i> fa-text-area</div>
+        <div><i class="wil fa-text-box fa-2x fa-fw"></i> fa-text-box</div>
+      </div>
     </div>
-  </div>
 
-</div>
+    <!-- regular icons -->
+    <div class="col size_1 pad_10">
+      <div class="row_block">
+        <div class="header md bg_blue round">Regular Icons</div>
+
+        <div><i class="wir fa-address fa-2x fa-fw"></i> fa-address</div>
+        <div><i class="wir fa-alpha-text fa-2x fa-fw"></i> fa-alpha-text</div>
+        <div><i class="wir fa-checkbox fa-2x fa-fw"></i> fa-checkbox</div>
+        <div><i class="wir fa-date fa-2x fa-fw"></i> fa-date</div>
+        <div><i class="wir fa-date-range fa-2x fa-fw"></i> fa-date-range</div>
+        <div><i class="wir fa-document-upload fa-2x fa-fw"></i> fa-document-upload</div>
+        <div><i class="wir fa-dropdown fa-2x fa-fw"></i> fa-dropdown</div>
+        <div><i class="wir fa-email fa-2x fa-fw"></i> fa-email</div>
+        <div><i class="wir fa-fein fa-2x fa-fw"></i> fa-fein</div>
+        <div><i class="wir fa-html fa-2x fa-fw"></i> fa-html</div>
+        <div><i class="wir fa-license fa-2x fa-fw"></i> fa-license</div>
+        <div><i class="wir fa-mmis-npi fa-2x fa-fw"></i> fa-mmis-npi</div>
+        <div><i class="wir fa-money fa-2x fa-fw"></i> fa-money</div>
+        <div><i class="wir fa-multi-select fa-2x fa-fw"></i> fa-multi-select</div>
+        <div><i class="wir fa-npi fa-2x fa-fw"></i> fa-npi</div>
+        <div><i class="wir fa-numeric-text fa-2x fa-fw"></i> fa-numeric-text</div>
+        <div><i class="wir fa-person-name fa-2x fa-fw"></i> fa-person-name</div>
+        <div><i class="wir fa-phone fa-2x fa-fw"></i> fa-phone</div>
+        <div><i class="wir fa-pid fa-2x fa-fw"></i> fa-pid</div>
+        <div><i class="wir fa-radio-buttons fa-2x fa-fw"></i> fa-radio-buttons</div>
+        <div><i class="wir fa-ssn fa-2x fa-fw"></i> fa-ssn</div>
+        <div><i class="wir fa-text-area fa-2x fa-fw"></i> fa-text-area</div>
+        <div><i class="wir fa-text-box fa-2x fa-fw"></i> fa-text-box</div>
+      </div>
+    </div>
+
+    <!-- solid icons -->
+    <div class="col size_1 pad_10">
+      <div class="row_block">
+        <div class="header md bg_blue round">Solid Icons</div>
+
+        <div><i class="wis fa-address fa-2x fa-fw"></i> fa-address</div>
+        <div><i class="wis fa-alpha-text fa-2x fa-fw"></i> fa-alpha-text</div>
+        <div><i class="wis fa-checkbox fa-2x fa-fw"></i> fa-checkbox</div>
+        <div><i class="wis fa-date fa-2x fa-fw"></i> fa-date</div>
+        <div><i class="wis fa-date-range fa-2x fa-fw"></i> fa-date-range</div>
+        <div><i class="wis fa-document-upload fa-2x fa-fw"></i> fa-document-upload</div>
+        <div><i class="wis fa-dropdown fa-2x fa-fw"></i> fa-dropdown</div>
+        <div><i class="wis fa-email fa-2x fa-fw"></i> fa-email</div>
+        <div><i class="wis fa-fein fa-2x fa-fw"></i> fa-fein</div>
+        <div><i class="wis fa-html fa-2x fa-fw"></i> fa-html</div>
+        <div><i class="wis fa-license fa-2x fa-fw"></i> fa-license</div>
+        <div><i class="wis fa-mmis-npi fa-2x fa-fw"></i> fa-mmis-npi</div>
+        <div><i class="wis fa-money fa-2x fa-fw"></i> fa-money</div>
+        <div><i class="wis fa-multi-select fa-2x fa-fw"></i> fa-multi-select</div>
+        <div><i class="wis fa-npi fa-2x fa-fw"></i> fa-npi</div>
+        <div><i class="wis fa-numeric-text fa-2x fa-fw"></i> fa-numeric-text</div>
+        <div><i class="wis fa-person-name fa-2x fa-fw"></i> fa-person-name</div>
+        <div><i class="wis fa-phone fa-2x fa-fw"></i> fa-phone</div>
+        <div><i class="wis fa-pid fa-2x fa-fw"></i> fa-pid</div>
+        <div><i class="wis fa-radio-buttons fa-2x fa-fw"></i> fa-radio-buttons</div>
+        <div><i class="wis fa-ssn fa-2x fa-fw"></i> fa-ssn</div>
+        <div><i class="wis fa-text-area fa-2x fa-fw"></i> fa-text-area</div>
+        <div><i class="wis fa-text-box fa-2x fa-fw"></i> fa-text-box</div>
+      </div>
+    </div>
+
+  </div>
 </main>

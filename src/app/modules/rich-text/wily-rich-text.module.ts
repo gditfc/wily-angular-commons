@@ -15,4 +15,4 @@ import {RichTextComponent} from './rich-text.component';
     RichTextComponent
   ]
 })
-export class RichTextModule { }
+export class WilyRichTextModule { }

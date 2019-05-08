@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {DialogComponent} from '../wily-dialog/dialog.component';
+import {DialogComponent} from '../dialog/dialog.component';
 
 @Component({
   selector: 'wily-icon-select',

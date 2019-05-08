@@ -1,16 +1,14 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {HelpWidgetModule} from './modules/help-widget/help-widget.module';
-import {ThemingModule} from './modules/theming/theming.module';
-import {WilyDialogModule} from './modules/wily-dialog/wily-dialog.module';
-import {IconSelectModule} from './modules/icon-select/icon-select.module';
-import {ProfilePicModule} from './modules/profile-pic/profile-pic.module';
+import {WilyDialogModule} from './modules/dialog/wily-dialog.module';
+import {WilyIconSelectModule} from './modules/icon-select/wily-icon-select.module';
+import {WilyProfilePicModule} from './modules/profile-pic/wily-profile-pic.module';
 import {TooltipModule} from 'primeng/primeng';
-import {PaginatorModule} from './modules/paginator/paginator.module';
-import {PushContainerModule} from './modules/push-container/push-container.module';
-import {RichTextModule} from './modules/rich-text/rich-text.module';
-import {WilyIconsModule} from './modules/wily-icons/wily-icons.module';
+import {WilyPaginatorModule} from './modules/paginator/wily-paginator.module';
+import {WilyPushContainerModule} from './modules/push-container/wily-push-container.module';
+import {WilyRichTextModule} from './modules/rich-text/wily-rich-text.module';
+import {WilyIconsModule} from './modules/icons/wily-icons.module';
 
 
 @NgModule({
@@ -19,15 +17,13 @@ import {WilyIconsModule} from './modules/wily-icons/wily-icons.module';
   ],
   imports: [
     BrowserModule,
-    HelpWidgetModule,
-    IconSelectModule,
-    ThemingModule,
+    WilyIconSelectModule,
     WilyDialogModule,
-    ProfilePicModule,
+    WilyProfilePicModule,
     TooltipModule,
-    PaginatorModule,
-    PushContainerModule,
-    RichTextModule,
+    WilyPaginatorModule,
+    WilyPushContainerModule,
+    WilyRichTextModule,
     WilyIconsModule
   ],
   providers: [],

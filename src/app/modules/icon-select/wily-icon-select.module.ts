@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {IconSelectComponent} from './icon-select.component';
-import {WilyDialogModule} from '../wily-dialog/wily-dialog.module';
+import {WilyDialogModule} from '../dialog/wily-dialog.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TooltipModule} from 'primeng/primeng';
 
@@ -20,4 +20,5 @@ import {TooltipModule} from 'primeng/primeng';
     IconSelectComponent
   ]
 })
-export class IconSelectModule { }
+export class WilyIconSelectModule {
+}
