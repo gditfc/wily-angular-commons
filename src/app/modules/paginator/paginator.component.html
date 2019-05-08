@@ -60,7 +60,7 @@
         <div>
           <div class="wac_item_count">Jump to ({{getNumberOfPages()}} Pages):</div>
           <div class="center_center" style="margin:10px;">
-            <input type="text" name="pagejump" class="wac_page_jump" placeholder="" [(ngModel)]="pageJumpInput" />
+            <input type="text" aria-label="Page Jump" name="pagejump" class="wac_page_jump" placeholder="" [(ngModel)]="pageJumpInput" />
             <div class="wac_first_last" (click)="jumpPage();op.hide();">GO</div>
           </div>
         </div>
@@ -116,7 +116,7 @@
         <div>
           <div class="wac_item_count">Jump to ({{getNumberOfPages()}} Pages):</div>
           <div class="center_center" style="margin:10px;">
-            <input type="text" name="pagejump" class="wac_page_jump" placeholder="" [(ngModel)]="pageJumpInput" />
+            <input type="text" aria-label="Page Jump" name="pagejump" class="wac_page_jump" placeholder="" [(ngModel)]="pageJumpInput" />
             <div class="wac_first_last" (click)="jumpPage();opV3.hide();">GO</div>
           </div>
         </div>

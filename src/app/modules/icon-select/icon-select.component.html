@@ -2,7 +2,7 @@
 <wily-dialog [object]="showDialog" title="Choose an Icon" #faDialog>
   <div style="display: flex;padding: 5px;justify-content: space-between">
     <div style="width: 85%;">
-      <input type="text" [(ngModel)]="filter" placeholder="Filter Icons" style="width: 100%;"/>
+      <input type="text" aria-label="Filter Icons" [(ngModel)]="filter" placeholder="Filter Icons" style="width: 100%;"/>
     </div>
     <div style="width: 15%;display: flex;justify-content: space-evenly;">
       <button class="btn large_btn bg_purple_alt" aria-label="Filter" (click)="filterClasses()">

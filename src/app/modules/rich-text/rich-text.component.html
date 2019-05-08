@@ -10,7 +10,7 @@
     </div>
     <div [style.display]="!doHideShow || toolbarVisible ? 'block' : 'none'">
         <span class="ql-formats">
-          <select class="ql-header">
+          <select aria-label="Text Style" class="ql-header">
             <option value="1">Heading</option>
             <option value="2">Subheading</option>
             <option selected>Normal</option>
@@ -22,13 +22,13 @@
           <button class="ql-underline" aria-label="Underline"></button>
         </span>
       <span class="ql-formats">
-          <select class="ql-color"></select>
-          <select class="ql-background"></select>
+          <select aria-label="Color" class="ql-color"></select>
+          <select aria-label="Background" class="ql-background"></select>
         </span>
       <span class="ql-formats">
           <button class="ql-list" value="ordered" aria-label="Ordered List"></button>
           <button class="ql-list" value="bullet" aria-label="Unordered List"></button>
-          <select class="ql-align">
+          <select aria-label="Alignment" class="ql-align">
             <option selected></option>
             <option value="center"></option>
             <option value="right"></option>
