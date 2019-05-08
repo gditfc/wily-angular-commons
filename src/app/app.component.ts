@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {ThemingService} from './modules/theming/services/theming.service';
 import {Help} from './modules/help-widget/help-widget.component';
-import {DialogComponent} from './modules/wily-dialog/dialog.component';
+import {DialogComponent} from './modules/dialog/dialog.component';
 import {PushContainerComponent} from './modules/push-container/push-container.component';
 import {Theme} from './modules/theming/models/theme.model';
 

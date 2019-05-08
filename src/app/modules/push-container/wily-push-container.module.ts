@@ -11,5 +11,5 @@ import {PushContainerComponent} from './push-container.component';
     PushContainerComponent
   ]
 })
-export class PushContainerModule {
+export class WilyPushContainerModule {
 }

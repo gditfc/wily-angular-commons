@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SafePipesModule} from '../safe-pipes/safe-pipes.module';
+import {WilySafePipesModule} from '../safe-pipes/wily-safe-pipes.module';
 import {TooltipModule} from 'primeng/primeng';
 import {ProfilePicComponent} from './profile-pic.component';
 
@@ -10,12 +10,12 @@ import {ProfilePicComponent} from './profile-pic.component';
   ],
   imports: [
     CommonModule,
-    SafePipesModule,
+    WilySafePipesModule,
     TooltipModule
   ],
   exports: [
     ProfilePicComponent
   ]
 })
-export class ProfilePicModule {
+export class WilyProfilePicModule {
 }
