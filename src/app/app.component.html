@@ -52,7 +52,8 @@
     <div class="header_subtitle">
       <div class="bg_purple">
         <i class="wil fa-address fa-3x fa-fw"></i>
-        <i class="wir fa-address fa-3x fa-fw"></i> You can mess with components made for the module here to make sure they work before package and release.
+        <i class="wir fa-address fa-3x fa-fw"></i> You can mess with components made for the module here to make sure they work before package and release.<br/>
+        BG PURPLE CONTRAST: {{themingService.getContrast(theme.bgPurple) | number:'1.2-2'}} {{theme.bgPurple}}
       </div>
       <div>
         <button (click)="pushContainerLeft.toggle()">Push Left</button>

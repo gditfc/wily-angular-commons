@@ -172,7 +172,18 @@ export class ThemingService extends BaseDataService {
     head.appendChild(style);
   }
 
-  private luminance(r, g, b) {
+  getContrast(color: string): number {
+    const colorRgb = this.hexToRgb(color);
+    console.log(colorRgb);
+    const textColorRgb = this.hexToRgb(this.getTextColor(color));
+    console.log(textColorRgb);
+    const contrast = this.contrast(colorRgb, textColorRgb);
+    console.log(contrast);
+
+    return contrast;
+  }
+
+  private luminance(r, g, b): number {
     const a = [r, g, b].map(function (v) {
       v /= 255;
       return v <= 0.03928
@@ -182,9 +193,16 @@ export class ThemingService extends BaseDataService {
     return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
   }
 
-  private contrast(rgb1, rgb2) {
-    return (this.luminance(rgb1[0], rgb1[1], rgb1[2]) + 0.05)
-      / (this.luminance(rgb2[0], rgb2[1], rgb2[2]) + 0.05);
+  private contrast(rgb1: any, rgb2: any): number {
+    let contrast = (this.luminance(rgb1.r, rgb1.g, rgb1.b) + 0.05)
+      / (this.luminance(rgb2.r, rgb2.g, rgb2.b) + 0.05);
+
+    if (contrast < 1) {
+      contrast = (this.luminance(rgb2.r, rgb2.g, rgb2.b) + 0.05)
+        / (this.luminance(rgb1.r, rgb1.g, rgb1.b) + 0.05);
+    }
+
+    return contrast;
   }
 
   private loadThemes(productKey: string): void {
@@ -208,12 +226,10 @@ export class ThemingService extends BaseDataService {
   private getTextColor(color: string): string {
     const rgb = this.hexToRgb(color);
     let textRgb = this.hexToRgb('#FFFFFF');
-    let contrast = this.contrast([textRgb.r, textRgb.g, textRgb.b], [rgb.r, rgb.g, rgb.b]);
-    const whiteContrast = contrast < 1 ? this.contrast([rgb.r, rgb.g, rgb.b], [textRgb.r, textRgb.g, textRgb.b]) : contrast;
+    const whiteContrast = this.contrast(textRgb, rgb);
 
     textRgb = this.hexToRgb('#222222');
-    contrast = this.contrast([textRgb.r, textRgb.g, textRgb.b], [rgb.r, rgb.g, rgb.b]);
-    const blackContrast = contrast < 1 ? this.contrast([rgb.r, rgb.g, rgb.b], [textRgb.r, textRgb.g, textRgb.b]) : contrast;
+    const blackContrast = this.contrast(textRgb, rgb);
 
     // 7 is the contrast ratio for WCAG AAA, if we're less than that, go full black for max contrast
     if (blackContrast > whiteContrast && blackContrast < 7) {
