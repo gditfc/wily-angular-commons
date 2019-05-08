@@ -174,13 +174,8 @@ export class ThemingService extends BaseDataService {
 
   getContrast(color: string): number {
     const colorRgb = this.hexToRgb(color);
-    console.log(colorRgb);
     const textColorRgb = this.hexToRgb(this.getTextColor(color));
-    console.log(textColorRgb);
-    const contrast = this.contrast(colorRgb, textColorRgb);
-    console.log(contrast);
-
-    return contrast;
+    return this.contrast(colorRgb, textColorRgb);
   }
 
   private luminance(r, g, b): number {
