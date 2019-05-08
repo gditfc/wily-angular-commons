@@ -1,4 +1,4 @@
-<select [ngClass]="selectClass" [(ngModel)]="theme" (change)="changeTheme()">
+<select aria-label="Change Theme" [ngClass]="selectClass" [(ngModel)]="theme" (change)="changeTheme()">
   <option *ngFor="let optionTheme of themes" [ngValue]="optionTheme" [selected]="optionTheme.themeId === theme.themeId">
     {{optionTheme.name}}{{optionTheme.isDefault === 'Y' ? ' - Default' : ''}}
   </option>
