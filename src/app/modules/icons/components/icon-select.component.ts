@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {DialogComponent} from '../dialog/dialog.component';
+import {DialogComponent} from '../../dialog/dialog.component';
+import {WilyIconsLight} from '../models/wily-icons-light.model';
+import {WilyIconsRegular} from '../models/wily-icons-regular.model';
+import {WilyIconsSolid} from '../models/wily-icons-solid.model';
 
 @Component({
   selector: 'wily-icon-select',
@@ -120,9 +123,21 @@ export class IconSelectComponent {
   icons = {};
 
   constructor() {
-   for (const faClass of this.faClasses) {
-     this.icons[faClass] = true;
-   }
+    for (const icon of WilyIconsLight.icons) {
+      this.icons[`${icon.prefix} fa-${icon.iconName}`] = true;
+    }
+
+    for (const icon of WilyIconsRegular.icons) {
+      this.icons[`${icon.prefix} fa-${icon.iconName}`] = true;
+    }
+
+    for (const icon of WilyIconsSolid.icons) {
+      this.icons[`${icon.prefix} fa-${icon.iconName}`] = true;
+    }
+
+    for (const faClass of this.faClasses) {
+      this.icons['fas fa-' + faClass] = true;
+    }
   }
 
   getValues(): any {
@@ -136,7 +151,7 @@ export class IconSelectComponent {
 
   choose(faClass: string) {
     this.faDialog.close();
-    this.selected.emit({value: 'fa-' + faClass});
+    this.selected.emit({value: faClass});
   }
 
   filterClasses(): void {
@@ -148,7 +163,7 @@ export class IconSelectComponent {
       return;
     }
 
-    for (const faClass of this.faClasses) {
+    for (const faClass of this.getValues()) {
       if (faClass.toLowerCase().includes(this.filter.toLowerCase())) {
         this.icons[faClass.toString()] = true;
       } else {

@@ -1,6 +1,5 @@
 /** MODULES */
 export * from './app/modules/background-carousel/wily-background-carousel.module';
-export * from './app/modules/icon-select/wily-icon-select.module';
 export * from './app/modules/paginator/wily-paginator.module';
 export * from './app/modules/profile-pic/wily-profile-pic.module';
 export * from './app/modules/push-container/wily-push-container.module';
@@ -10,7 +9,7 @@ export * from './app/modules/dialog/wily-dialog.module';
 export * from './app/modules/icons/wily-icons.module';
 
 /** COMPONENTS */
-export * from './app/modules/icon-select/icon-select.component';
+export * from './app/modules/icons/components/icon-select.component';
 export * from './app/modules/paginator/paginator.component';
 export * from './app/modules/profile-pic/profile-pic.component';
 export * from './app/modules/push-container/push-container.component';

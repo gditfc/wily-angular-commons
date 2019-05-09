@@ -64,13 +64,13 @@
     </div>
   </div>
 
-  <wily-dialog title="This thing" [object]="obj" #dialog>
+  <wily-dialog title="This thing" [object]="obj" (closed)="obj = null;" #dialog>
     <div class="center_center" style="font-size: 24pt;height: 100%;text-align: center;">
       <div>Here's some text dawg</div>
     </div>
   </wily-dialog>
 
-  <wily-icon-select></wily-icon-select>
+  <wily-icon-select (selected)="iconSelected($event)"></wily-icon-select>
 
   <wily-profile-pic
     imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg"
