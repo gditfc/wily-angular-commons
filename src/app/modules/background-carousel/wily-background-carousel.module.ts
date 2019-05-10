@@ -13,5 +13,5 @@ import {BackgroundCarouselDirective} from './background-carousel.directive';
     BackgroundCarouselDirective
   ]
 })
-export class BackgroundCarouselModule {
+export class WilyBackgroundCarouselModule {
 }

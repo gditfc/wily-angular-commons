@@ -331,4 +331,30 @@ export class WilyIconsSolid {
     ]
   };
 
+  static icons = [
+    WilyIconsSolid.wisAddress,
+    WilyIconsSolid.wisAlphaText,
+    WilyIconsSolid.wisCheckbox,
+    WilyIconsSolid.wisDate,
+    WilyIconsSolid.wisDateRange,
+    WilyIconsSolid.wisDocumentUpload,
+    WilyIconsSolid.wisDropdown,
+    WilyIconsSolid.wisEmail,
+    WilyIconsSolid.wisFEIN,
+    WilyIconsSolid.wisHTML,
+    WilyIconsSolid.wisLicense,
+    WilyIconsSolid.wisMMISNPI,
+    WilyIconsSolid.wisMoney,
+    WilyIconsSolid.wisMultiSelect,
+    WilyIconsSolid.wisNPI,
+    WilyIconsSolid.wisNumericText,
+    WilyIconsSolid.wisPersonName,
+    WilyIconsSolid.wisPhone,
+    WilyIconsSolid.wisPID,
+    WilyIconsSolid.wisRadioButtons,
+    WilyIconsSolid.wisSSN,
+    WilyIconsSolid.wisTextArea,
+    WilyIconsSolid.wisTextBox
+  ];
+
 }

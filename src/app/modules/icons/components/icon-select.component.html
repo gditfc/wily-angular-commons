@@ -14,10 +14,10 @@
     </div>
   </div>
   <div style="justify-content: space-evenly;flex-wrap: wrap;display: flex;">
-    <div class="wac_icon_select_icon" (click)="choose(faClass.toString())" [title]="'fa-' + faClass"
+    <div class="wac_icon_select_icon" (click)="choose(faClass.toString())" [title]="faClass"
          *ngFor="let faClass of getValues()" [style.display]="icons[faClass.toString()] ? 'flex' : 'none'"
          role="button" [attr.aria-label]="'Choose fa-' + faClass">
-      <i [ngClass]="'fas fa-' + faClass.toString()"></i>
+      <i [ngClass]="faClass.toString()"></i>
     </div>
   </div>
 </wily-dialog>

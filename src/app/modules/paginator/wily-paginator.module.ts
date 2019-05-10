@@ -26,5 +26,5 @@ import {OverlayPanelModule} from 'primeng/primeng';
   PaginatorComponent
   ]
 })
-export class PaginatorModule {
+export class WilyPaginatorModule {
 }

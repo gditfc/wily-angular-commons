@@ -2,14 +2,14 @@ import {Directive, ElementRef, Input, OnDestroy} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/index';
 
 @Directive({
-  selector: '[bgCarouselImage]'
+  selector: '[wilyCarousel]'
 })
 export class BackgroundCarouselDirective implements OnDestroy {
 
   private _options = new BehaviorSubject<CarouselOptions>(new CarouselOptions([], 2 , 10, false));
   private _interval: any;
 
-  @Input('bgCarouselImage')
+  @Input('wilyCarouselImage')
   set options(value: any) {
     this._options.next(value);
   }

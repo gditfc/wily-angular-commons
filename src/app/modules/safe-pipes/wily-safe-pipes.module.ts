@@ -16,5 +16,5 @@ import {SafeHtmlPipe} from './safe-html.pipe';
     SafeStylePipe
   ]
 })
-export class SafePipesModule {
+export class WilySafePipesModule {
 }
