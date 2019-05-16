@@ -2,19 +2,43 @@ import {catchError, map} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs/index';
 
+/**
+ * This class provides some foundational REST endpoint call capabilities. It will do things like unpack lists into native objects and
+ * return Observables so that you don't have to deal with mapping each and every response. It'll also log errors to the console and pass
+ * along the error text for you.
+ */
 export class BaseDataService {
 
+  /**
+   * Extensions of this class can provide the Base URL so that they don't need to write out the full URL for every call made.
+   */
   protected getBaseUrl(): string {
     return '';
   }
 
+  /**
+   * Takes an HTTPClient object so that it can make REST calls.
+   *
+   * @param http
+   */
   constructor(protected http: HttpClient) {
   }
 
+  /**
+   * Gets a result from an endpoint. Executes an HTTP GET.
+   *
+   * @param url
+   * @param params
+   */
   handleGet(url: string, params?: HttpParams): Observable<any> {
     return this.handleGetDetailed(url, false, params);
   }
 
+  /**
+   * Will get a single result from an endpoint. Executes an HTTP GET.
+   *
+   * @param url
+   */
   handleGetOne(url: string): Observable<any> {
     return this.handleGet(url).pipe(
       map(d => d),
@@ -22,6 +46,10 @@ export class BaseDataService {
     );
   }
 
+  /**
+   * Gets a List of Values
+   * @param url
+   */
   handleGetList(url: string): Observable<any> {
     return this.handleGet(url).pipe(
       map(d => d.data),

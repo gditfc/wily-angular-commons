@@ -1,6 +1,11 @@
+/**
+ * Wily Solid Icons to be added to font awesome 5.
+ */
 export class WilyIconsSolid {
 
-// wis fa-address
+  /**
+   * wis fa-address
+   */
   static wisAddress = {
     prefix: 'wis',
     iconName: 'address',
@@ -11,7 +16,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-alpha-text
+  /**
+   * wis fa-alpha-text
+   */
   static wisAlphaText = {
     prefix: 'wis',
     iconName: 'alpha-text',
@@ -22,7 +29,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-archive
+  /**
+   * wis fa-archive
+   */
   static wisArchive = {
     prefix: 'wis',
     iconName: 'archive',
@@ -33,7 +42,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-checkbox
+  /**
+   * wis fa-checkbox
+   */
   static wisCheckbox = {
     prefix: 'wis',
     iconName: 'checkbox',
@@ -44,7 +55,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-clock
+  /**
+   * wis fa-clock
+   */
   static wisClock = {
     prefix: 'wis',
     iconName: 'clock',
@@ -55,7 +68,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-date
+  /**
+   * wis fa-date
+   */
   static wisDate = {
     prefix: 'wis',
     iconName: 'date',
@@ -66,7 +81,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-date-range
+  /**
+   * wis fa-date-range
+   */
   static wisDateRange = {
     prefix: 'wis',
     iconName: 'date-range',
@@ -77,7 +94,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-document
+  /**
+   * wis fa-document
+   */
   static wisDocument = {
     prefix: 'wis',
     iconName: 'document',
@@ -88,7 +107,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-document-upload
+  /**
+   * wis fa-document-upload
+   */
   static wisDocumentUpload = {
     prefix: 'wis',
     iconName: 'document-upload',
@@ -99,7 +120,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-dropdown
+  /**
+   * wis fa-dropdown
+   */
   static wisDropdown = {
     prefix: 'wis',
     iconName: 'dropdown',
@@ -110,7 +133,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-email
+  /**
+   * wis fa-email
+   */
   static wisEmail = {
     prefix: 'wis',
     iconName: 'email',
@@ -121,7 +146,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-employee-id
+  /**
+   * wis fa-employee-id
+   */
   static wisEmployeeID = {
     prefix: 'wis',
     iconName: 'employee-id',
@@ -132,7 +159,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-fein
+  /**
+   * wis fa-fein
+   */
   static wisFEIN = {
     prefix: 'wis',
     iconName: 'fein',
@@ -144,7 +173,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-html
+  /**
+   * wis fa-html
+   */
   static wisHTML = {
     prefix: 'wis',
     iconName: 'html',
@@ -155,7 +186,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-license
+  /**
+   * wis fa-license
+   */
   static wisLicense = {
     prefix: 'wis',
     iconName: 'license',
@@ -166,7 +199,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-menu
+  /**
+   * wis fa-menu
+   */
   static wisMenu = {
     prefix: 'wis',
     iconName: 'menu',
@@ -177,7 +212,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-mmis-npi
+  /**
+   * wis fa-mmis-npi
+   */
   static wisMMISNPI = {
     prefix: 'wis',
     iconName: 'mmis-npi',
@@ -188,7 +225,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-money
+  /**
+   * wis fa-money
+   */
   static wisMoney = {
     prefix: 'wis',
     iconName: 'money',
@@ -199,7 +238,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-multi-select
+  /**
+   * wis fa-multi-select
+   */
   static wisMultiSelect = {
     prefix: 'wis',
     iconName: 'multi-select',
@@ -210,7 +251,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-npi
+  /**
+   * wis fa-npi
+   */
   static wisNPI = {
     prefix: 'wis',
     iconName: 'npi',
@@ -221,7 +264,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-numeric-text
+  /**
+   * wis fa-numeric-text
+   */
   static wisNumericText = {
     prefix: 'wis',
     iconName: 'numeric-text',
@@ -232,7 +277,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-person-name
+  /**
+   * wis fa-person-name
+   */
   static wisPersonName = {
     prefix: 'wis',
     iconName: 'person-name',
@@ -243,7 +290,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-phone
+  /**
+   * wis fa-phone
+   */
   static wisPhone = {
     prefix: 'wis',
     iconName: 'phone',
@@ -254,7 +303,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-pid
+  /**
+   * wis fa-pid
+   */
   static wisPID = {
     prefix: 'wis',
     iconName: 'pid',
@@ -265,7 +316,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-radio-buttons
+  /**
+   * wis fa-radio-buttons
+   */
   static wisRadioButtons = {
     prefix: 'wis',
     iconName: 'radio-buttons',
@@ -276,7 +329,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-reply
+  /**
+   * wis fa-reply
+   */
   static wisReply = {
     prefix: 'wis',
     iconName: 'reply',
@@ -287,7 +342,9 @@ export class WilyIconsSolid {
     ]
   };
 
-  // wis fa-select-all
+  /**
+   * wis fa-select-all
+   */
   static wisSelectAll = {
     prefix: 'wis',
     iconName: 'select-all',
@@ -298,7 +355,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-ssn
+  /**
+   * wis fa-ssn
+   */
   static wisSSN = {
     prefix: 'wis',
     iconName: 'ssn',
@@ -309,7 +368,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-text-area
+  /**
+   * wis fa-text-area
+   */
   static wisTextArea = {
     prefix: 'wis',
     iconName: 'text-area',
@@ -320,7 +381,9 @@ export class WilyIconsSolid {
     ]
   };
 
-// wis fa-text-box
+  /**
+   * wis fa-text-box
+   */
   static wisTextBox = {
     prefix: 'wis',
     iconName: 'text-box',
@@ -331,6 +394,9 @@ export class WilyIconsSolid {
     ]
   };
 
+  /**
+   * The list of exported Solid icons
+   */
   static icons = [
     WilyIconsSolid.wisAddress,
     WilyIconsSolid.wisAlphaText,
