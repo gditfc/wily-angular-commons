@@ -124,6 +124,10 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     const buttons = toolBar.getElementsByTagName('button');
     for (let i = 0; i < buttons.length; i++) {
       const button = buttons[i];
+      if (!button.getAttribute('class')) {
+        continue;
+      }
+
       const className = button.getAttribute('class').toLowerCase();
 
       if (className.indexOf('bold') >= 0) {
