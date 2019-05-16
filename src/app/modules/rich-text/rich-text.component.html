@@ -1,12 +1,12 @@
 <p-editor #editor [style]="{width: '100%', height: height, fontFamily: 'Montserrat, sans-serif'}" [readonly]="readonly" [placeholder]="placeholder">
   <p-header>
     <div *ngIf="doHideShow" style="float: right;cursor: pointer;color: #585858;" (click)="toolbarVisible = !toolbarVisible;" role="button" aria-label="Expand Menu">
-      <div *ngIf="toolbarVisible" style="margin-top:4px;">
+      <button *ngIf="toolbarVisible" aria-label="Close Toolbar">
         <i class="fas fa-times"></i>
-      </div>
-      <div *ngIf="!toolbarVisible" style="height: 10px;margin-top: -5px;">
+      </button>
+      <button *ngIf="!toolbarVisible" aria-label="Reveal Toolbar" style="margin-top:-5px; margin-bottom:-5px;">
         <i class="fas fa-bars"></i>
-      </div>
+      </button>
     </div>
     <div [style.display]="!doHideShow || toolbarVisible ? 'block' : 'none'">
         <span class="ql-formats">

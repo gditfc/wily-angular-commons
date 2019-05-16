@@ -1,11 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://styles.transcend.csra.io/v3.0.0-rc22/transcend.css';
-
-.ui-dialog-titlebar {
-  display:none;
-}
+@import 'https://styles.transcend.csra.io/v3.0.0/transcend.css';
 
 .color_test div {
   padding: 5px;
 }
 
+.access{
+  outline:rgba(38,184,239,0.0) 1px solid;
+  transition:all 0.2s ease-in-out;
+  text-decoration: none;
+}
+.access:focus{
+  outline:rgba(38,184,239,1.0) 1px solid;
+  outline-offset: 5px;
+}
