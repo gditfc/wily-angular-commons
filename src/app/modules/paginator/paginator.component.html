@@ -6,7 +6,7 @@
         <div class="wac_page_text">
           <label for="pageSizeV1">Items per Page:</label>
         </div>
-        <select [(ngModel)]="pageSize" (change)="pageSizeChange()" class="wac_page_size" title="Choose Page Size" id="pageSizeV1">
+        <select [(ngModel)]="pageSize" (change)="pageSizeChange()" class="access wac_page_size" title="Choose Page Size" id="pageSizeV1">
           <optgroup label="Sizes">
             <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize">{{option}}</option>
           </optgroup>
@@ -16,12 +16,12 @@
         <div class="center_center">
           <div class="wac_item_count">{{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}}</div>
         </div>
-        <div class="wac_prev_next" role="button" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
+        <button class="access wac_prev_next" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
           <i class="fas fa-chevron-left"></i>
-        </div>
-        <div class="wac_prev_next" role="button" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
+        </button>
+        <button class="access wac_prev_next" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
           <i class="fas fa-chevron-right"></i>
-        </div>
+        </button>
       </div>
     </div>
   </div>
@@ -29,50 +29,51 @@
 
   <!-- BEGIN VERSION 2 -->
   <div class="space_between wrap" *ngIf="version === '2'">
+    <!-- paginator -->
     <div class="wac_paginator wrap">
       <div class="center_center wrap">
-        <div class="center_center">
-          <div class="wac_first_last hide_element" aria-label="Start" (click)="goToFirst()">FIRST</div>
-          <div class="wac_prev_next" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)"><i class="fas fa-chevron-left"></i></div>
+        <button class="access wac_first_last hide_element" aria-label="First" (click)="goToFirst()">FIRST</button>
+        <button class="access wac_prev_next" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)"><i class="fas fa-chevron-left"></i></button>
 
-          <div class="wac_page_link" style="text-align:center;width:20px;min-width:20px;">
-            <div *ngIf="activePage > 3" (click)="op.toggle($event)">...</div>
-          </div>
-          <!-- ITEMS -->
-          <div class="wac_page_link center">
-
-            <div *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2)">{{activePage - 1}}</div>
-            <div *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1)">{{activePage}}</div>
-            <div class="active">{{activePage + 1}}</div>
-            <div *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1)">{{activePage + 2}}</div>
-            <div *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2)">{{activePage + 3}}</div>
-
-          </div>
-          <!-- END ITEMS -->
-          <div class="wac_page_link" style="text-align:center;width:20px;min-width:20px;">
-            <div *ngIf="activePage < getNumberOfPages() - 4" (click)="op.toggle($event)" >...</div>
-          </div>
-          <div class="wac_prev_next" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)"><i class="fas fa-chevron-right"></i></div>
-          <div class="wac_first_last hide_element" aria-label="End" (click)="goToLast()">LAST</div>
+        <div class="wac_page_link" style="text-align:center;width:20px;min-width:20px;">
+          <button class="access" tabindex="0" *ngIf="activePage > 3" (click)="op.toggle($event)">...</button>
         </div>
+        <!-- ITEMS -->
+        <div class="wac_page_link center_center">
+
+          <button class="access" *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2)">{{activePage - 1}}</button>
+          <button class="access" *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1)">{{activePage}}</button>
+          <button class="access active">{{activePage + 1}}</button>
+          <button class="access" *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1)">{{activePage + 2}}</button>
+          <button class="access" *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2)">{{activePage + 3}}</button>
+
+        </div>
+        <!-- END ITEMS -->
+        <div class="wac_page_link" style="text-align:center;width:20px;min-width:20px;">
+          <button class="access" *ngIf="activePage < getNumberOfPages() - 4" (click)="op.toggle($event)" >...</button>
+        </div>
+        <button class="access wac_prev_next" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)"><i class="fas fa-chevron-right"></i></button>
+        <button class="access wac_first_last hide_element" aria-label="End" (click)="goToLast()">LAST</button>
       </div>
       <p-overlayPanel #op>
         <div>
           <div class="wac_item_count">Jump to ({{getNumberOfPages()}} Pages):</div>
           <div class="center_center" style="margin:10px;">
-            <input type="text" aria-label="Page Jump" name="pagejump" class="wac_page_jump" placeholder="" [(ngModel)]="pageJumpInput" />
-            <div class="wac_first_last" (click)="jumpPage();op.hide();">GO</div>
+            <input type="text" aria-label="Page Jump" name="pagejump" class="access wac_page_jump" placeholder="" [(ngModel)]="pageJumpInput" />
+            <button class="access wac_first_last" (click)="jumpPage();op.hide();">GO</button>
           </div>
         </div>
       </p-overlayPanel>
     </div>
+
+    <!-- items per page -->
     <div class="wac_paginator wrap">
       <div class="center_center wrap">
         <div class="center_center">
           <div class="wac_page_text">
             <label for="pageSizeV2">Items per Page:</label>
           </div>
-          <select [(ngModel)]="pageSize" (change)="pageSizeChange()" class="wac_page_size" title="Choose Page Size" id="pageSizeV2">
+          <select [(ngModel)]="pageSize" (change)="pageSizeChange()" class="access wac_page_size" title="Choose Page Size" id="pageSizeV2">
             <optgroup label="Sizes">
               <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize">{{option}}</option>
             </optgroup>
@@ -80,6 +81,7 @@
         </div>
       </div>
     </div>
+
   </div>
   <!-- END VERSION 2 -->
 
@@ -88,36 +90,36 @@
     <div>
       <div class="center_center wrap">
         <div class="center_center">
-          <div class="wac_first_last hide_element" aria-label="Start" (click)="goToFirst()">FIRST</div>
-          <div class="wac_prev_next" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)"><i class="fas fa-chevron-left"></i></div>
+          <button class="access wac_first_last hide_element" aria-label="Start" (click)="goToFirst()">FIRST</button>
+          <button class="access wac_prev_next" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)"><i class="fas fa-chevron-left"></i></button>
 
           <div class="wac_page_link" style="text-align:center;width:20px;min-width:20px;">
-            <div *ngIf="activePage > 3" (click)="opV3.toggle($event)">...</div>
+            <button class="access" *ngIf="activePage > 3" (click)="opV3.toggle($event)">...</button>
           </div>
           <!-- ITEMS -->
           <div class="wac_page_link center">
 
-            <div *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2)">{{activePage - 1}}</div>
-            <div *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1)">{{activePage}}</div>
-            <div class="active">{{activePage + 1}}</div>
-            <div *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1)">{{activePage + 2}}</div>
-            <div *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2)">{{activePage + 3}}</div>
+            <button class="access" *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2)">{{activePage - 1}}</button>
+            <button class="access" *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1)">{{activePage}}</button>
+            <button class="access active">{{activePage + 1}}</button>
+            <button class="access" *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1)">{{activePage + 2}}</button>
+            <button class="access" *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2)">{{activePage + 3}}</button>
 
           </div>
           <!-- END ITEMS -->
           <div class="wac_page_link" style="text-align:center;width:20px;min-width:20px;">
-            <div *ngIf="activePage < getNumberOfPages() - 4" (click)="opV3.toggle($event)" >...</div>
+            <button class="access" *ngIf="activePage < getNumberOfPages() - 4" (click)="opV3.toggle($event)" >...</button>
           </div>
-          <div class="wac_prev_next" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)"><i class="fas fa-chevron-right"></i></div>
-          <div class="wac_first_last hide_element" aria-label="End" (click)="goToLast()">LAST</div>
+          <button class="access wac_prev_next" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)"><i class="fas fa-chevron-right"></i></button>
+          <button class="access wac_first_last hide_element" aria-label="End" (click)="goToLast()">LAST</button>
         </div>
       </div>
       <p-overlayPanel #opV3>
         <div>
           <div class="wac_item_count">Jump to ({{getNumberOfPages()}} Pages):</div>
           <div class="center_center" style="margin:10px;">
-            <input type="text" aria-label="Page Jump" name="pagejump" class="wac_page_jump" placeholder="" [(ngModel)]="pageJumpInput" />
-            <div class="wac_first_last" (click)="jumpPage();opV3.hide();">GO</div>
+            <input type="text" aria-label="Page Jump" name="pagejump" class="access wac_page_jump" placeholder="" [(ngModel)]="pageJumpInput" />
+            <button class="access wac_first_last" (click)="jumpPage();opV3.hide();">GO</button>
           </div>
         </div>
       </p-overlayPanel>
@@ -131,12 +133,12 @@
       <div class="col">
         <div class="wac_item_count">{{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}}</div>
       </div>
-      <div class="col wac_prev_next" role="button" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
+      <button class="access col wac_prev_next" aria-label="Previous" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
         <i class="fas fa-chevron-left"></i>
-      </div>
-      <div class="col wac_prev_next" role="button" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
+      </button>
+      <button class="access col wac_prev_next" aria-label="Next" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
         <i class="fas fa-chevron-right"></i>
-      </div>
+      </button>
     </div>
   </div>
   <!-- END VERSION 4 -->

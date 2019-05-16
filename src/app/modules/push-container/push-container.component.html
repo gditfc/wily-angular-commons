@@ -7,9 +7,9 @@
   [style.right]="getRightProperty()"
   [style.transition]="breakpoint ? 'width .25s' : ''">
   <div class="push_close_bar">
-    <div (click)="close()" class="data_hide_button" role="button" aria-label="Close"  [style.marginRight]="side.toLowerCase() === 'left' ? '19px' : '2px'">
+    <button (click)="close()" class="data_hide_button access" tabindex="0" aria-label="Close"  [style.marginRight]="side.toLowerCase() === 'left' ? '19px' : '2px'">
       <i class="fas fa-times"></i>
-    </div>
+    </button>
   </div>
   <div style="height:30px;"></div>
 
