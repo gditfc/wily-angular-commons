@@ -1,10 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'https://styles.transcend.csra.io/v3.0.0-rc22/transcend.css';
 
-
-
-
-
+.ui-dialog-titlebar {
+  display:none;
+}
 
 .color_test div {
   padding: 5px;
