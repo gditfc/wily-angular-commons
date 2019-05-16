@@ -1,6 +1,11 @@
+/**
+ * Wily Icons - Light
+ */
 export class WilyIconsLight {
 
-  // wil fa-address
+  /**
+   * wil fa-address
+   */
   static wilAddress = {
     prefix: 'wil',
     iconName: 'address',
@@ -11,7 +16,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-alpha-text
+  /**
+   * wil fa-alpha-text
+   */
   static wilAlphaText = {
     prefix: 'wil',
     iconName: 'alpha-text',
@@ -22,7 +29,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-checkbox
+  /**
+   * wil fa-checkbox
+   */
   static wilCheckbox = {
     prefix: 'wil',
     iconName: 'checkbox',
@@ -33,7 +42,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-date
+  /**
+   * wil fa-date
+   */
   static wilDate = {
     prefix: 'wil',
     iconName: 'date',
@@ -44,7 +55,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-date-range
+  /**
+   * wil fa-date-range
+   */
   static wilDateRange = {
     prefix: 'wil',
     iconName: 'date-range',
@@ -55,7 +68,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-document-upload
+  /**
+   * wil fa-document-upload
+   */
   static wilDocumentUpload = {
     prefix: 'wil',
     iconName: 'document-upload',
@@ -66,7 +81,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-dropdown
+  /**
+   * wil fa-dropdown
+   */
   static wilDropdown = {
     prefix: 'wil',
     iconName: 'dropdown',
@@ -77,7 +94,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-email
+  /**
+   * wil fa-email
+   */
   static wilEmail = {
     prefix: 'wil',
     iconName: 'email',
@@ -88,7 +107,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-fein
+  /**
+   * wil fa-fein
+   */
   static wilFEIN = {
     prefix: 'wil',
     iconName: 'fein',
@@ -99,7 +120,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-html
+  /**
+   * wil fa-html
+   */
   static wilHTML = {
     prefix: 'wil',
     iconName: 'html',
@@ -110,7 +133,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-license
+  /**
+   * wil fa-license
+   */
   static wilLicense = {
     prefix: 'wil',
     iconName: 'license',
@@ -121,7 +146,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-mmis-npi
+  /**
+   * wil fa-mmis-npi
+   */
   static wilMMISNPI = {
     prefix: 'wil',
     iconName: 'mmis-npi',
@@ -132,7 +159,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-money
+  /**
+   * wil fa-money
+   */
   static wilMoney = {
     prefix: 'wil',
     iconName: 'money',
@@ -143,7 +172,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-multi-select
+  /**
+   * wil fa-multi-select
+   */
   static wilMultiSelect = {
     prefix: 'wil',
     iconName: 'multi-select',
@@ -154,7 +185,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-npi
+  /**
+   * wil fa-npi
+   */
   static wilNPI = {
     prefix: 'wil',
     iconName: 'npi',
@@ -165,7 +198,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-numeric-text
+  /**
+   * wil fa-numeric-text
+   */
   static wilNumericText = {
     prefix: 'wil',
     iconName: 'numeric-text',
@@ -176,7 +211,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-person-name
+  /**
+   * wil fa-person-name
+   */
   static wilPersonName = {
     prefix: 'wil',
     iconName: 'person-name',
@@ -187,7 +224,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-phone
+  /**
+   * wil fa-phone
+   */
   static wilPhone = {
     prefix: 'wil',
     iconName: 'phone',
@@ -198,7 +237,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-pid
+  /**
+   * wil fa-pid
+   */
   static wilPID = {
     prefix: 'wil',
     iconName: 'pid',
@@ -209,7 +250,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-radio-buttons
+  /**
+   * wil fa-radio-buttons
+   */
   static wilRadioButtons = {
     prefix: 'wil',
     iconName: 'radio-buttons',
@@ -220,7 +263,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-ssn
+  /**
+   * wil fa-ssn
+   */
   static wilSSN = {
     prefix: 'wil',
     iconName: 'ssn',
@@ -231,7 +276,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-text-area
+  /**
+   * wil fa-text-area
+   */
   static wilTextArea = {
     prefix: 'wil',
     iconName: 'text-area',
@@ -242,7 +289,9 @@ export class WilyIconsLight {
     ]
   };
 
-// wil fa-text-box
+  /**
+   * wil fa-text-box
+   */
   static wilTextBox = {
     prefix: 'wil',
     iconName: 'text-box',
@@ -253,6 +302,9 @@ export class WilyIconsLight {
     ]
   };
 
+  /**
+   * Full list of light icons
+   */
   static icons = [
     WilyIconsLight.wilAddress,
     WilyIconsLight.wilAlphaText,

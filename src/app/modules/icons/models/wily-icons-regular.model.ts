@@ -1,6 +1,11 @@
+/**
+ * Wily Icons - Regular
+ */
 export class WilyIconsRegular {
 
-// wir fa-address
+  /**
+   * wir fa-address
+   */
   static wirAddress = {
     prefix: 'wir',
     iconName: 'address',
@@ -11,7 +16,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-alpha-text
+  /**
+   * wir fa-alpha-text
+   */
   static wirAlphaText = {
     prefix: 'wir',
     iconName: 'alpha-text',
@@ -22,7 +29,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-checkbox
+  /**
+   * wir fa-checkbox
+   */
   static wirCheckbox = {
     prefix: 'wir',
     iconName: 'checkbox',
@@ -33,7 +42,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-date
+  /**
+   * wir fa-date
+   */
   static wirDate = {
     prefix: 'wir',
     iconName: 'date',
@@ -44,7 +55,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-date-range
+  /**
+   * wir fa-date-range
+   */
   static wirDateRange = {
     prefix: 'wir',
     iconName: 'date-range',
@@ -55,7 +68,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-document-upload
+  /**
+   * wir fa-document-upload
+   */
   static wirDocumentUpload = {
     prefix: 'wir',
     iconName: 'document-upload',
@@ -66,7 +81,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-dropdown
+  /**
+   * wir fa-dropdown
+   */
   static wirDropdown = {
     prefix: 'wir',
     iconName: 'dropdown',
@@ -77,7 +94,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-email
+  /**
+   * wir fa-email
+   */
   static wirEmail = {
     prefix: 'wir',
     iconName: 'email',
@@ -88,7 +107,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-fein
+  /**
+   * wir fa-fein
+   */
   static wirFEIN = {
     prefix: 'wir',
     iconName: 'fein',
@@ -100,7 +121,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-html
+  /**
+   * wir fa-html
+   */
   static wirHTML = {
     prefix: 'wir',
     iconName: 'html',
@@ -111,7 +134,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-license
+  /**
+   * wir fa-license
+   */
   static wirLicense = {
     prefix: 'wir',
     iconName: 'license',
@@ -122,7 +147,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-mmis-npi
+  /**
+   * wir fa-mmis-npi
+   */
   static wirMMISNPI = {
     prefix: 'wir',
     iconName: 'mmis-npi',
@@ -133,7 +160,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-money
+  /**
+   * wir fa-money
+   */
   static wirMoney = {
     prefix: 'wir',
     iconName: 'money',
@@ -144,7 +173,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-multi-select
+  /**
+   * wir fa-multi-select
+   */
   static wirMultiSelect = {
     prefix: 'wir',
     iconName: 'multi-select',
@@ -155,7 +186,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-npi
+  /**
+   * wir fa-npi
+   */
   static wirNPI = {
     prefix: 'wir',
     iconName: 'npi',
@@ -166,7 +199,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-numeric-text
+  /**
+   * wir fa-numeric-text
+   */
   static wirNumericText = {
     prefix: 'wir',
     iconName: 'numeric-text',
@@ -177,7 +212,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-person-name
+  /**
+   * wir fa-person-name
+   */
   static wirPersonName = {
     prefix: 'wir',
     iconName: 'person-name',
@@ -188,7 +225,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-phone
+  /**
+   * wir fa-phone
+   */
   static wirPhone = {
     prefix: 'wir',
     iconName: 'phone',
@@ -199,7 +238,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-pid
+  /**
+   * wir fa-pid
+   */
   static wirPID = {
     prefix: 'wir',
     iconName: 'pid',
@@ -210,7 +251,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-radio-buttons
+  /**
+   * wir fa-radio-buttons
+   */
   static wirRadioButtons = {
     prefix: 'wir',
     iconName: 'radio-buttons',
@@ -221,7 +264,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-ssn
+  /**
+   * wir fa-ssn
+   */
   static wirSSN = {
     prefix: 'wir',
     iconName: 'ssn',
@@ -232,7 +277,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-text-area
+  /**
+   * wir fa-text-area
+   */
   static wirTextArea = {
     prefix: 'wir',
     iconName: 'text-area',
@@ -243,7 +290,9 @@ export class WilyIconsRegular {
     ]
   };
 
-// wir fa-text-box
+  /**
+   * wir fa-text-box
+   */
   static wirTextBox = {
     prefix: 'wir',
     iconName: 'text-box',
@@ -254,6 +303,9 @@ export class WilyIconsRegular {
     ]
   };
 
+  /**
+   * Full list of regular icons.
+   */
   static icons = [
     WilyIconsRegular.wirAddress,
     WilyIconsRegular.wirAlphaText,

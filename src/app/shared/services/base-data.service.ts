@@ -47,7 +47,8 @@ export class BaseDataService {
   }
 
   /**
-   * Gets a List of Values
+   * Gets a List of Values. Will unpack the data object automatically. Executes an HTTP GET.
+   *
    * @param url
    */
   handleGetList(url: string): Observable<any> {
@@ -57,40 +58,94 @@ export class BaseDataService {
     );
   }
 
+  /**
+   * Gets a file from an ednpoint. Executes an HTTP GET.
+   *
+   * @param url
+   * @param params
+   */
   handleFileGet(url: string, params?: HttpParams): Observable<any> {
     return this.handleGetDetailed(url, true, params);
   }
 
+  /**
+   * The handleFileGet will use this to get a file.
+   *
+   * @param url
+   * @param isFileResponse
+   * @param params
+   */
   private handleGetDetailed(url: string, isFileResponse: boolean, params?: HttpParams): Observable<any> {
     const options = this.getOptions(isFileResponse);
     options.params = params;
 
     return this.http.get(this.getBaseUrl() + url, options)
-      .pipe(map(res => res), catchError(this.handleError));
+      .pipe(
+        map(res => res),
+        catchError(this.handleError)
+      );
   }
 
+  /**
+   * Posts data to an endpoint. HTTP POST.
+   *
+   * @param url
+   * @param payload
+   */
   handlePost(url: string, payload: any): Observable<any> {
     return this.handlePostDetailed(url, payload, true, false);
   }
 
+  /**
+   * Posts data to an endpoint with an expected return of a File.
+   *
+   * @param url
+   * @param payload
+   */
   handlePostWithFileResponse(url: string, payload: any): Observable<any> {
     return this.handlePostDetailed(url, payload, true, true);
   }
 
+  /**
+   * The handlePost methods will use this to make Post calls easier.
+   *
+   * @param url
+   * @param payload
+   * @param isJson
+   * @param isFileResponse
+   */
   private handlePostDetailed(url: string, payload: any, isJson: boolean, isFileResponse: boolean): Observable<any> {
     let payloadFinal = payload;
     if (isJson) {
       payloadFinal = JSON.stringify(payload);
     }
 
-    return this.http.post(this.getBaseUrl() + url, payloadFinal, this.getOptions(isFileResponse))
-      .pipe(map(res => res), catchError(this.handleError));
+    return this.http.post(
+      this.getBaseUrl() + url,
+      payloadFinal,
+      this.getOptions(isFileResponse)).pipe(
+        map(res => res),
+        catchError(this.handleError)
+      );
   }
 
+  /**
+   * Update data with a REST call. HTTP PUT.
+   *
+   * @param url
+   * @param payload
+   */
   handlePut(url: string, payload: any): Observable<any> {
     return this.handlePutDetailed(url, payload, true);
   }
 
+  /**
+   * Used by the handlePut method to make it simpler and the guts more reusable.
+   *
+   * @param url
+   * @param payload
+   * @param isJson
+   */
   private handlePutDetailed(url: string, payload: any, isJson: boolean): Observable<any> {
     let payloadFinal = payload;
     if (isJson) {
@@ -101,25 +156,50 @@ export class BaseDataService {
       .pipe(map(res => res), catchError(this.handleError));
   }
 
+  /**
+   * Executes an HTTP DELETE to remove data.
+   *
+   * @param url
+   */
   handleDelete(url: string): Observable<any> {
     return this.http.delete(this.getBaseUrl() + url)
       .pipe(map(res => res), catchError(this.handleError));
   }
 
+  /**
+   * Handles an Observable error
+   *
+   * @param error
+   */
   handleObservableError(error: HttpErrorResponse): Observable<any> {
     this.handleError(error);
     return of(null);
   }
 
+  /**
+   * Logs an error and rethrows it
+   *
+   * @param error
+   */
   handleError(error: HttpErrorResponse): Observable<any> {
     console.error(error);
     return throwError(error);
   }
 
+  /**
+   * Performs a deep copy of a JS object.
+   *
+   * @param o
+   */
   deepCopy<T>(o: T): T {
     return <T> JSON.parse(JSON.stringify(o));
   }
 
+  /**
+   * Gets the expected response type from an endpoint
+   *
+   * @param isFileResponse
+   */
   private getOptions(isFileResponse?: boolean): any {
     const options: any = {};
     options.responseType = 'json';

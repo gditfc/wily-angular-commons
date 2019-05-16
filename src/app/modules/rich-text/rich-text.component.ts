@@ -3,12 +3,18 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Editor} from 'primeng/editor';
 import {DomHandler} from 'primeng/api';
 
+/**
+ * Accessor information for the Rich Text Editor
+ */
 export const RICH_TEXT_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => RichTextComponent),
   multi: true
 };
 
+/**
+ * Rich Text Editor that wraps a PrimeNG Editor, which in turn wraps Quill. Allows us to customize.
+ */
 @Component({
   selector: 'wily-rich-text',
   templateUrl: 'rich-text.component.html',
@@ -16,23 +22,44 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
 })
 export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
+  /**
+   * Toolbar visible?
+   */
   toolbarVisible: boolean;
 
+  /**
+   * Enable hide/show of the Rich Text controls. If false, show them all the time.
+   */
   @Input()
   doHideShow = true;
 
+  /**
+   * Height of the input
+   */
   @Input()
   height = '100px';
 
+  /**
+   * Sets the input to readonly
+   */
   @Input()
   readonly = false;
 
+  /**
+   * Placeholder text
+   */
   @Input()
   placeholder = '';
 
+  /**
+   * Reference to the PrimeNG Editor
+   */
   @ViewChild('editor')
   editor: Editor;
 
+  /**
+   * Allow a user to point at an image on the internet so that it's not just embedded in the text.
+   */
   ngAfterViewInit(): void {
     this.editor.getQuill().getModule('toolbar').handlers.image = () => {
       const range = this.editor.getQuill().getSelection();
@@ -43,17 +70,36 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     this.applyAccessibilityHacks(this.editor.getQuill());
   }
 
+  /**
+   * Pass through function to PrimeNG Editor
+   *
+   * @param fn
+   */
   registerOnChange(fn: any): void {
     this.editor.registerOnChange(fn);
   }
 
+  /**
+   * Pass through function to PrimeNG Editor
+   *
+   * @param fn
+   */
   registerOnTouched(fn: any): void {
     this.editor.registerOnTouched(fn);
   }
 
+  /**
+   * Pass through function to PrimeNG Editor
+   *
+   * @param isDisabled
+   */
   setDisabledState(isDisabled: boolean): void {
   }
 
+  /**
+   * Write to the editor. Pass through function.
+   * @param value
+   */
   writeValue(value: any): void {
     this.editor.writeValue(value);
   }
@@ -63,7 +109,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
    * TODO: Deprecate this method once this issue is resolved (https://github.com/quilljs/quill/issues/1173)
    * @param {object}    editor    - A Quill editor instance
    */
-  applyAccessibilityHacks(editor): void {
+  applyAccessibilityHacks(editor: any): void {
 
     // Get ref to the toolbar, its not available through the quill api ughh
     const query = editor.container.parentElement.getElementsByClassName('ql-toolbar');
@@ -96,8 +142,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     }
 
     // Make pickers work with keyboard and apply aria labels
-    // TODO: When you open a submenu with the keyboard and close it with the mouse by click somewhere else,
-    // the menu aria-hidden value is incorrectly left to `false`
+    // TO FIX: When you open a submenu with a key and close it with a click, the menu aria-hidden val is incorrectly left to `false`
     const pickers = toolBar.getElementsByClassName('ql-picker');
     for (let i = 0; i < pickers.length; i++) {
       const picker = pickers[i];
@@ -110,10 +155,15 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
       label.setAttribute('aria-haspopup', 'true');
       label.setAttribute('tabindex', '0');
 
+      // HACK ALERT - Specifically does these labels based on our ordering
       if (i === 0) {
-        // HACK ALERT
-        // This is our size select box.. Works for us as we only have the one drop box
         label.setAttribute('aria-label', 'Font Size');
+      } else if (i === 1) {
+        label.setAttribute('aria-label', 'Font Color');
+      } else if (i === 2) {
+        label.setAttribute('aria-label', 'Background Color');
+      } else if (i === 3) {
+        label.setAttribute('aria-label', 'Text Alignment');
       }
 
       optionsContainer.setAttribute('aria-hidden', 'true');

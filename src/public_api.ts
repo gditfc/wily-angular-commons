@@ -27,6 +27,7 @@ export * from './app/shared/services/cognito-auth.service';
 
 /** MODELS */
 export * from './app/modules/paginator/pagination-event.model';
+export * from './app/modules/background-carousel/carousel-options.model';
 export * from './app/shared/models/auditable.model';
 export * from './app/shared/models/data-list.model';
 export * from './app/shared/models/id.model';

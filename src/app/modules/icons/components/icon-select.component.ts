@@ -4,12 +4,18 @@ import {WilyIconsLight} from '../models/wily-icons-light.model';
 import {WilyIconsRegular} from '../models/wily-icons-regular.model';
 import {WilyIconsSolid} from '../models/wily-icons-solid.model';
 
+/**
+ * Wily Icon Select component provides a button to click and an icon picker that includes all of the Wily Icons as well as the FAS icons.
+ */
 @Component({
   selector: 'wily-icon-select',
   templateUrl: 'icon-select.component.html'
 })
 export class IconSelectComponent {
 
+  /**
+   * Font Awesome Solid classes
+   */
   faClasses = [
     'ad', 'address-book', 'address-card', 'adjust', 'air-freshener', 'align-center', 'align-justify', 'align-left', 'align-right',
     'allergies', 'ambulance', 'american-sign-language-interpreting', 'anchor', 'angle-double-down', 'angle-double-left',
@@ -109,19 +115,42 @@ export class IconSelectComponent {
     'wine-glass', 'wine-glass-alt', 'won-sign', 'wrench', 'x-ray', 'yen-sign', 'yin-yang',
   ];
 
+  /**
+   * Reference to the dialog component
+   */
   @ViewChild('faDialog')
   faDialog: DialogComponent;
 
+  /**
+   * Color class of the button
+   */
   @Input()
   buttonColorClass = 'bg_blue_alt';
 
+  /**
+   * Icon selected event emitter
+   */
   @Output()
   selected: EventEmitter<any> = new EventEmitter();
 
+  /**
+   * Object that controls whether to show the dialog or not
+   */
   showDialog: any;
+
+  /**
+   * Filter input for the icon picker.
+   */
   filter = '';
+
+  /**
+   * List of icons as an object to make lookups easier.
+   */
   icons = {};
 
+  /**
+   * Constructor adds all of the icons to the icon object and sets them to be visible in the picked by default
+   */
   constructor() {
     for (const icon of WilyIconsLight.icons) {
       this.icons[`${icon.prefix} fa-${icon.iconName}`] = true;
@@ -140,20 +169,34 @@ export class IconSelectComponent {
     }
   }
 
+  /**
+   * Get the list of icon classes for display.
+   */
   getValues(): any {
     return Object.getOwnPropertyNames(this.icons);
   }
 
+  /**
+   * Pop the dialog
+   */
   doShowDialog(): void {
     this.showDialog = {};
     this.faDialog.open();
   }
 
+  /**
+   * When an icon is picked, close the dialog and emit the event
+   *
+   * @param faClass
+   */
   choose(faClass: string) {
     this.faDialog.close();
     this.selected.emit({value: faClass});
   }
 
+  /**
+   * Execute the filter on the icons object. If it's blank set everything to visible.
+   */
   filterClasses(): void {
     if (this.filter === '') {
       for (const iconClass of Object.getOwnPropertyNames(this.icons)) {
@@ -172,6 +215,9 @@ export class IconSelectComponent {
     }
   }
 
+  /**
+   * Clear the filter and then set everything to visible
+   */
   clear(): void {
     this.filter = '';
     this.filterClasses();

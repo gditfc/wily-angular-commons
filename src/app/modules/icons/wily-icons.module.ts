@@ -8,6 +8,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TooltipModule} from 'primeng/primeng';
 import {WilyDialogModule} from '../dialog/wily-dialog.module';
 
+/**
+ * Reference to the Font Awesome variable to add icons
+ */
 const FontAwesome = window['FontAwesome'];
 
 @NgModule({
