@@ -5,7 +5,7 @@
   [style.width]="getWidth()"
   [style.left]="getLeftProperty()"
   [style.right]="getRightProperty()"
-  [style.visibility]="showSidePanel ? '' : 'hidden'">
+  [style.visibility]="visibility ? 'visible' : 'hidden'">
   <div class="push_close_bar">
     <button (click)="close()" class="data_hide_button access" tabindex="0" aria-label="Close"  [style.marginRight]="side.toLowerCase() === 'left' ? '19px' : '2px'">
       <i class="fas fa-times"></i>
