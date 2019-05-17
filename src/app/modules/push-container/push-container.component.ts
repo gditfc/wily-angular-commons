@@ -76,9 +76,16 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
   private breakpointExceeded = false;
 
   /**
+   * Visibility variable for accessibility
+   */
+  private visibility: boolean;
+
+  /**
    * Show or close the push container on load depending on the state passed in.
    */
   ngAfterViewInit(): void {
+    this.visibility = this.showSidePanel;
+
     document.getElementById(this.mainContentId).style.transition = 'all 0.2s ease-in-out';
 
     if (window.innerWidth > 768 && this.showSidePanel) {
@@ -140,6 +147,8 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
    * @param init
    */
   open(init?: boolean): void {
+    this.visibility = true;
+
     if (init && window.innerWidth <= 768) {
       return;
     }
@@ -159,6 +168,8 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
     this.showSidePanel = false;
     this.closed.emit({});
     this.setMargin('0px');
+
+    setTimeout(() => this.visibility = false, 200);
   }
 
   /**
