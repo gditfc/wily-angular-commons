@@ -78,7 +78,7 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
   /**
    * Visibility variable for accessibility
    */
-  private visibility: boolean;
+  visibility: boolean;
 
   /**
    * Show or close the push container on load depending on the state passed in.
