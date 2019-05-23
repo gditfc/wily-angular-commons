@@ -1,6 +1,6 @@
 {
   "name": "wily-angular-commons",
-  "version": "7.1.3",
+  "version": "7.1.4",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -29,7 +29,7 @@
     "core-js": "^2.6.5",
     "intl": "^1.2.5",
     "moment": "^2.24.0",
-    "primeng": "^7.1.0",
+    "primeng": "^7.1.3",
     "primeicons": "^1.0.0",
     "quill": "^1.3.6",
     "rxjs": "^6.4.0",

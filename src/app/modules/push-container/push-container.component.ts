@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 
 /**
  * Push Container that'll either push the content or overlay the content based on screen width.
@@ -8,7 +8,7 @@ import {AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, 
   templateUrl: './push-container.component.html',
   styleUrls: ['./push-container.component.css']
 })
-export class PushContainerComponent implements AfterViewInit, OnDestroy {
+export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * Width of the container in pixels.
@@ -71,21 +71,26 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
   closed: EventEmitter<any> = new EventEmitter();
 
   /**
+   * Visibility variable for accessibility
+   */
+  visibility = false;
+
+  /**
    * Private variable to detect if the breakpoint is exceeded
    */
   private breakpointExceeded = false;
 
   /**
-   * Visibility variable for accessibility
+   * Constructor
    */
-  visibility: boolean;
+  ngOnInit(): void {
+    this.visibility = this.showSidePanel;
+  }
 
   /**
    * Show or close the push container on load depending on the state passed in.
    */
   ngAfterViewInit(): void {
-    this.visibility = this.showSidePanel;
-
     document.getElementById(this.mainContentId).style.transition = 'all 0.2s ease-in-out';
 
     if (window.innerWidth > 768 && this.showSidePanel) {
@@ -147,12 +152,11 @@ export class PushContainerComponent implements AfterViewInit, OnDestroy {
    * @param init
    */
   open(init?: boolean): void {
-    this.visibility = true;
-
     if (init && window.innerWidth <= 768) {
       return;
     }
 
+    this.visibility = true;
     this.showSidePanel = true;
     this.opened.emit({});
 
