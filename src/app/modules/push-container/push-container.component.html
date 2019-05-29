@@ -6,12 +6,12 @@
   [style.left]="getLeftProperty()"
   [style.right]="getRightProperty()"
   [style.visibility]="visibility ? 'visible' : 'hidden'">
-  <div class="push_close_bar">
+  <div class="push_close_bar" [style.minWidth]="getWidth()" *ngIf="showCloseButton">
     <button (click)="close()" class="data_hide_button access" tabindex="0" aria-label="Close"  [style.marginRight]="side.toLowerCase() === 'left' ? '19px' : '2px'">
       <i class="fas fa-times"></i>
     </button>
   </div>
-  <div style="height:30px;"></div>
+  <div style="height:30px;" *ngIf="showCloseButton"></div>
 
   <div [style.direction]="side.toLowerCase() === 'right' ? 'ltr' : ''">
     <ng-content></ng-content>

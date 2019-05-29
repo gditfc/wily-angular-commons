@@ -59,6 +59,12 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   breakpoint: number;
 
   /**
+   * Whether or not to show the close button, defaults to true.
+   */
+  @Input()
+  showCloseButton = true;
+
+  /**
    * Event emitter for open
    */
   @Output()
