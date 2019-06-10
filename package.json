@@ -1,6 +1,6 @@
 {
   "name": "wily-angular-commons",
-  "version": "7.1.6",
+  "version": "7.1.7",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -20,7 +20,6 @@
     "@angular/compiler": "^7.2.11",
     "@angular/core": "^7.2.11",
     "@angular/forms": "^7.2.11",
-    "@angular/http": "^7.2.11",
     "@angular/platform-browser": "^7.2.11",
     "@angular/platform-browser-dynamic": "^7.2.11",
     "@angular/router": "^7.2.11",
@@ -46,7 +45,6 @@
     "@angular/compiler-cli": "^7.2.11",
     "@angular/core": "^7.2.11",
     "@angular/forms": "^7.2.11",
-    "@angular/http": "^7.2.11",
     "@angular/language-service": "^7.2.11",
     "@angular/platform-browser": "^7.2.11",
     "@angular/platform-browser-dynamic": "^7.2.11",

@@ -97,7 +97,11 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Show or close the push container on load depending on the state passed in.
    */
   ngAfterViewInit(): void {
-    document.getElementById(this.mainContentId).style.transition = 'all 0.2s ease-in-out';
+    const element = document.getElementById(this.mainContentId);
+
+    if (element) {
+      element.style.transition = 'all 0.2s ease-in-out';
+    }
 
     if (window.innerWidth > 768 && this.showSidePanel) {
       this.setMargin(this.width + 'px');
@@ -188,17 +192,22 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * @param size
    */
   private setMargin(size: string): void {
+    const element = document.getElementById(this.mainContentId);
+    if (!element) {
+      return;
+    }
+
     if (this.side.toLowerCase() === 'left') {
-      document.getElementById(this.mainContentId).style.marginLeft = size;
+      element.style.marginLeft = size;
 
       if (size === '0px') {
-        document.getElementById(this.mainContentId).style.removeProperty('margin-left');
+        element.style.removeProperty('margin-left');
       }
     } else if (this.side.toLowerCase() === 'right') {
-      document.getElementById(this.mainContentId).style.marginRight = size;
+      element.style.marginRight = size;
 
       if (size === '0px') {
-        document.getElementById(this.mainContentId).style.removeProperty('margin-right');
+        element.style.removeProperty('margin-right');
       }
     }
   }
