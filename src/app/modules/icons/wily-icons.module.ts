@@ -5,7 +5,7 @@ import {WilyIconsLight} from './models/wily-icons-light.model';
 import {WilyIconsSolid} from './models/wily-icons-solid.model';
 import {IconSelectComponent} from './components/icon-select.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TooltipModule} from 'primeng/primeng';
+import {TooltipModule} from 'primeng/tooltip';
 import {WilyDialogModule} from '../dialog/wily-dialog.module';
 
 /**

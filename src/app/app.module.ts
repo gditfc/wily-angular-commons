@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {WilyDialogModule} from './modules/dialog/wily-dialog.module';
 import {WilyProfilePicModule} from './modules/profile-pic/wily-profile-pic.module';
-import {TooltipModule} from 'primeng/primeng';
+import {TooltipModule} from 'primeng/tooltip';
 import {WilyPaginatorModule} from './modules/paginator/wily-paginator.module';
 import {WilyPushContainerModule} from './modules/push-container/wily-push-container.module';
 import {WilyRichTextModule} from './modules/rich-text/wily-rich-text.module';
