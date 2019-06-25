@@ -5,7 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {OverlayPanelModule} from 'primeng/primeng';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 @NgModule({
   imports: [

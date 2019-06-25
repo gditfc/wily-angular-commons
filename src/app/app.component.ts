@@ -25,13 +25,13 @@ export class AppComponent {
   /**
    * Reference to the dialog component
    */
-  @ViewChild('dialog')
+  @ViewChild('dialog', {static: false})
   dialog: DialogComponent;
 
   /**
    * Push Container component.
    */
-  @ViewChild('pushContainerLeft')
+  @ViewChild('pushContainerLeft', {static: false})
   pushContainerLeft: PushContainerComponent;
 
   /**

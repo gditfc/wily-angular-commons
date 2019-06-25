@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DialogComponent} from './dialog.component';
 import {DialogModule} from 'primeng/dialog';
-import {TooltipModule} from 'primeng/primeng';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
