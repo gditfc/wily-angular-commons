@@ -8,6 +8,7 @@ import {WilyPaginatorModule} from './modules/paginator/wily-paginator.module';
 import {WilyPushContainerModule} from './modules/push-container/wily-push-container.module';
 import {WilyRichTextModule} from './modules/rich-text/wily-rich-text.module';
 import {WilyIconsModule} from './modules/icons/wily-icons.module';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {WilyIconsModule} from './modules/icons/wily-icons.module';
     WilyPaginatorModule,
     WilyPushContainerModule,
     WilyRichTextModule,
-    WilyIconsModule
+    WilyIconsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
