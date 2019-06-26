@@ -34,6 +34,8 @@ export class AppComponent {
   @ViewChild('pushContainerLeft', {static: false})
   pushContainerLeft: PushContainerComponent;
 
+  text: string;
+
   /**
    * Constructor
    */

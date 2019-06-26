@@ -54,7 +54,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   /**
    * Reference to the PrimeNG Editor
    */
-  @ViewChild('editor', {static: false})
+  @ViewChild('editor', {static: true})
   editor: Editor;
 
   /**
