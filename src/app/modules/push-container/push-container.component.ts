@@ -81,6 +81,8 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    */
   visibility = false;
 
+  private unclickable: boolean;
+
   /**
    * Private variable to detect if the breakpoint is exceeded
    */
@@ -149,10 +151,15 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Open or close based on current state.
    */
   toggle(): void {
-    if (this.showSidePanel) {
-      this.close();
-    } else {
-      this.open();
+    if (!this.unclickable) {
+      this.unclickable = true;
+      setTimeout(() => this.unclickable = false, 500);
+
+      if (this.showSidePanel) {
+        this.close();
+      } else {
+        this.open();
+      }
     }
   }
 
