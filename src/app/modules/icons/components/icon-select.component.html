@@ -1,20 +1,23 @@
-<button class="access btn large_btn" [ngClass]="buttonColorClass" (click)="doShowDialog()" aria-label="Choose Icon">Choose Icon</button>
+<!-- choose button -->
+<button class="access btn md" [ngClass]="buttonColorClass" (click)="doShowDialog()" aria-label="Choose Icon">Choose Icon</button>
+
+<!-- picker dialog -->
 <wily-dialog [object]="showDialog" title="Choose an Icon" #faDialog>
-  <div style="display: flex;padding: 5px;justify-content: space-between">
-    <div style="width: 85%;">
-      <input class="access" type="text" aria-label="Filter Icons" [(ngModel)]="filter" placeholder="Filter Icons" style="width: 100%;"/>
+  <div class="row pad_5">
+    <div class="col size_1">
+      <input class="access fullwidth_input mar_right5" type="text" aria-label="Filter Icons" [(ngModel)]="filter" placeholder="Filter Icons" />
     </div>
-    <div style="width: 15%;display: flex;justify-content: space-evenly;">
-      <button class="access btn large_btn bg_purple_alt" aria-label="Filter" (click)="filterClasses()">
+    <div class="col">
+      <button class="access btn md bg_purple_alt" aria-label="Filter" (click)="filterClasses()">
         Filter
       </button>
-      <button class="access btn large_btn bg_grey_alt" aria-label="Clear" (click)="clear()">
+      <button class="access btn md bg_grey_alt" aria-label="Clear" (click)="clear()">
         Clear
       </button>
     </div>
   </div>
-  <div style="justify-content: space-evenly;flex-wrap: wrap;display: flex;">
-    <button class="access wac_icon_select_icon" style="font-size:25pt;" (click)="choose(faClass.toString())" [title]="faClass"
+  <div class="row wrap space_evenly pad_5">
+    <button class="access wac_icon_select_icon" style="font-size:32px;" (click)="choose(faClass.toString())" [title]="faClass"
          *ngFor="let faClass of getValues()" [style.display]="icons[faClass.toString()] ? 'flex' : 'none'" [attr.aria-label]="'Choose fa-' + faClass">
       <i [ngClass]="faClass.toString()"></i>
     </button>
