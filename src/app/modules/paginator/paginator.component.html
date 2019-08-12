@@ -62,11 +62,11 @@
       </div>
       <!-- nav buttons -->
       <div class="center_center" style="min-width:180px;">
-        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2)">{{activePage - 1}}</button>
-        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1)">{{activePage}}</button>
-        <button class="access btn pag_btn active brad_3 overlay">{{activePage + 1}}</button>
-        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1)">{{activePage + 2}}</button>
-        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2)">{{activePage + 3}}</button>
+        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2, true)">{{activePage - 1}}</button>
+        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1, true)">{{activePage}}</button>
+        <button class="access btn pag_btn active brad_3 overlay" id="version2_activePage">{{activePage + 1}}</button>
+        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1, true)">{{activePage + 2}}</button>
+        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2, true)">{{activePage + 3}}</button>
       </div>
       <!-- jump button -->
       <div class="center_left" style="width:20px;min-width:20px;">
@@ -133,11 +133,11 @@
       </div>
       <!-- nav buttons -->
       <div class="center_center" style="min-width:180px;">
-        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2)">{{activePage - 1}}</button>
-        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1)">{{activePage}}</button>
-        <button class="access btn pag_btn active brad_3 overlay">{{activePage + 1}}</button>
-        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1)">{{activePage + 2}}</button>
-        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2)">{{activePage + 3}}</button>
+        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2, true)">{{activePage - 1}}</button>
+        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1, true)">{{activePage}}</button>
+        <button class="access btn pag_btn active brad_3 overlay" id="version3_activePage">{{activePage + 1}}</button>
+        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1, true)">{{activePage + 2}}</button>
+        <button class="access btn pag_btn clear" *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2, true)">{{activePage + 3}}</button>
       </div>
       <!-- jump button -->
       <div class="center_left" style="width:20px;min-width:20px;">
