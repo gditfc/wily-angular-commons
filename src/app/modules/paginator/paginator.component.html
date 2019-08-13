@@ -4,14 +4,14 @@
 <!---------------------------------------------------------------->
 
 <!-- VERSION 1 -->
-<div class="row_block" *ngIf="version === '1'">
-  <div class="center_center wrap">
+<div class="row_block" *ngIf="version === '1' || version === '4'">
+  <div class="center_center" style="flex-wrap: wrap-reverse;">
     <!-- items per page -->
-    <div class="center_center mar_3">
-      <div class="text sm center_right mar_right5" style="width:120px;">
+    <div class="center_center mar_3" *ngIf="version === '1'">
+      <div class="text xsm center_right mar_right5" style="width:120px;">
         <label for="pageSizeV1">Items per Page:</label>
       </div>
-      <select class="access fullwidth_input sm overlay_alt2 page_container_color" style="width:50px;"
+      <select class="access fullwidth_input overlay_alt2 page_container_color text sm" style="width:50px;"
               [(ngModel)]="pageSize" (change)="pageSizeChange()" title="Choose Page Size" id="pageSizeV1">
         <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize"
                 [attr.aria-label]="option">
@@ -19,10 +19,11 @@
         </option>
       </select>
     </div>
+    <!-- current page -->
     <div class="center_center mar_3">
-      <!-- current page -->
       <div class="center_center">
-        <div class="min_w100 pad_left15 pad_right15 text sm center">
+        <div class="text sm min_w150 center_center overlay_alt2 page_container_color"
+             style="padding: 1px 15px; height:20px; user-select:none; border-radius:20px;">
           {{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}}
         </div>
       </div>
@@ -40,8 +41,8 @@
   </div>
 </div>
 
-<!-- VERSION 2 -->
-<div class="row center_center" *ngIf="version === '2'">
+<!-- VERSION 2 & 3 -->
+<div class="row center_center" *ngIf="version === '2' || version === '3'">
   <div class="row_block">
     <!-- paginator -->
     <div class="col center_center mar_3">
@@ -80,7 +81,7 @@
           </button>
           <!-- active page -->
           <div class="row pag_btn active brad_3 page_container_color">
-            <button class="access col size_1 btn brad_3 overlay" id="version2_activePage"
+            <button class="access col size_1 btn brad_3 overlay" id="activePage"
                     [attr.aria-label]="'Page ' + (activePage + 1)" >
               {{activePage + 1}}
             </button>
@@ -131,95 +132,14 @@
       </p-overlayPanel>
     </div>
     <!-- items per page -->
-    <div class="col center_center mar_3">
+    <div class="col center_center mar_3" *ngIf="version === '2'">
       <div class="text xsm center_right mar_right5" style="width:120px;">
         <label for="pageSizeV2">Items per Page:</label>
       </div>
-      <select class="access fullwidth_input sm overlay_alt2 page_container_color text xsm" style="width:50px;"
+      <select class="access fullwidth_input overlay_alt2 page_container_color text sm" style="width:50px;"
               [(ngModel)]="pageSize" (change)="pageSizeChange()" title="Choose Page Size" id="pageSizeV2">
         <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize">{{option}}</option>
       </select>
     </div>
-  </div>
-</div>
-
-<!-- VERSION 3 -->
-<div class="center_center" *ngIf="version === '3'">
-  <!-- paginator -->
-  <div class="center_center">
-    <!-- first -->
-    <button class="access btn_pulse xsm hide_element" aria-label="First Page" (click)="goToFirst()" style="margin-right:0;">
-      <i class="fas fa-chevron-left" style="margin-right:-2px;"></i><i class="fas fa-chevron-left"></i>
-    </button>
-    <!-- previous -->
-    <button class="access btn_pulse xsm" aria-label="Previous Page"
-            (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-      <i class="fas fa-chevron-left"></i>
-    </button>
-    <!-- navigation -->
-    <div class="row v_center pad_left5 pad_right5 overlay_alt2 page_container_color"
-         style="border-radius:100px;">
-      <!-- jump button -->
-      <div class="center_right" style="width:20px;min-width:20px;">
-        <button class="access btn underline_md pag_btn clear" aria-label="Jump to page" tabindex="0" *ngIf="activePage > 3"
-                (click)="op.toggle($event)">...</button>
-      </div>
-      <!-- nav buttons -->
-      <div class="center_center" style="min-width:180px;">
-        <button class="access btn underline_md pag_btn clear" *ngIf="hasPage(activePage - 2)" (click)="goToPage(activePage - 2, true)">{{activePage - 1}}</button>
-        <button class="access btn underline_md pag_btn clear" *ngIf="hasPage(activePage - 1)" (click)="goToPage(activePage - 1, true)">{{activePage}}</button>
-        <div class="row pag_btn active brad_3 page_container_color">
-          <button class="access col size_1 btn brad_3 overlay" id="version3_activePage">{{activePage + 1}}</button>
-        </div>
-        <button class="access btn underline_md pag_btn clear" *ngIf="hasPage(activePage + 1)" (click)="goToPage(activePage + 1, true)">{{activePage + 2}}</button>
-        <button class="access btn underline_md pag_btn clear" *ngIf="hasPage(activePage + 2)" (click)="goToPage(activePage + 2, true)">{{activePage + 3}}</button>
-      </div>
-      <!-- jump button -->
-      <div class="center_left" style="width:20px;min-width:20px;">
-        <button class="access btn underline_md pag_btn clear" aria-label="Jump to page" *ngIf="activePage < getNumberOfPages() - 4"
-                (click)="op.toggle($event)" >...</button>
-      </div>
-    </div>
-    <!-- next -->
-    <button class="access btn_pulse xsm" aria-label="Next Page"
-            (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-      <i class="fas fa-chevron-right"></i>
-    </button>
-    <!-- last -->
-    <button class="access btn_pulse xsm hide_element" aria-label="Last Page" (click)="goToLast()" style="margin-left:0;">
-      <i class="fas fa-chevron-right" style="margin-right:-2px;"></i><i class="fas fa-chevron-right"></i>
-    </button>
-    <!-- jump to page -->
-    <p-overlayPanel styleClass="overlay_alt2 page_container_color brad_3" #op>
-      <div class="row_block">
-        <div class="text sm">Jump to Page (out of {{getNumberOfPages()}}):</div>
-        <div class="center_center mar_top10">
-          <input class="access fullwidth_input sm" style="width:50px;" maxlength="4"
-                 type="text" aria-label="Page to jump to" name="pagejump" placeholder="Page" [(ngModel)]="pageJumpInput" />
-          <button class="access btn_pulse xsm overlay_alt2" aria-label="Go to page"
-                  (click)="jumpPage();op.hide();">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-      </div>
-    </p-overlayPanel>
-  </div>
-</div>
-
-<!-- VERSION 4 -->
-<div class="row_block" *ngIf="version === '4'">
-  <div class="row v_center">
-    <div class="col">
-      <div class="text sm min_w150 center_center overlay_alt2 page_container_color"
-           style="padding: 1px 15px; height:20px; user-select:none; border-radius:20px;">
-        {{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}}
-      </div>
-    </div>
-    <button class="access btn_pulse xsm" aria-label="Previous Page" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-      <i class="fas fa-chevron-left"></i>
-    </button>
-    <button class="access btn_pulse xsm" aria-label="Next Page" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-      <i class="fas fa-chevron-right"></i>
-    </button>
   </div>
 </div>

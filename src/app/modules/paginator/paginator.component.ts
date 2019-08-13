@@ -81,7 +81,7 @@ export class PaginatorComponent {
     this.activePage = pageNumber;
 
     if (inputFocus) {
-      document.getElementById('version' + this.version + '_activePage').focus();
+      document.getElementById('activePage').focus();
     }
 
     this.emitEvent();
