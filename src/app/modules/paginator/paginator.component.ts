@@ -75,9 +75,15 @@ export class PaginatorComponent {
    * Goes to a given page and emits a pagination event
    *
    * @param pageNumber
+   * @param inputFocus
    */
-  goToPage(pageNumber: number): void {
+  goToPage(pageNumber: number, inputFocus?: boolean): void {
     this.activePage = pageNumber;
+
+    if (inputFocus) {
+      document.getElementById('activePage').focus();
+    }
+
     this.emitEvent();
   }
 
