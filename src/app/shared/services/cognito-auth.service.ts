@@ -122,17 +122,10 @@ export abstract class CognitoAuthService {
   }
 
   /**
-   * Get the User from the Cognito Session
+   * Overrideable function to get a user from a child class, will re
    */
   public getUser(): any {
-    if (this.session) {
-      const idToken = this.session.getIdToken().getJwtToken();
-      if (idToken) {
-        return JSON.parse(atob(idToken.split('.')[1]));
-      }
-    }
-
-    return null;
+    return this.getCognitoAuthUser();
   }
 
   /**
@@ -150,11 +143,25 @@ export abstract class CognitoAuthService {
    * Token Refresh setup so that the session stays active.
    */
   private scheduleTokenRefresh(): void {
-    const expiryDate = (this.getUser().exp * 1000) - new Date().getTime() - 1000;
+    const expiryDate = (this.getCognitoAuthUser().exp * 1000) - new Date().getTime() - 1000;
 
     setTimeout(() => {
       this.auth.refreshSession(this.session.getRefreshToken().getToken());
     }, expiryDate);
+  }
+
+  /**
+   * Get the User from the Cognito Session
+   */
+  private getCognitoAuthUser(): any {
+    if (this.session) {
+      const idToken = this.session.getIdToken().getJwtToken();
+      if (idToken) {
+        return JSON.parse(atob(idToken.split('.')[1]));
+      }
+    }
+
+    return null;
   }
 
   /**
