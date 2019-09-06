@@ -9,7 +9,7 @@
 }
 
 .push_close_bar {
-  position: fixed;
+  position: absolute;
   min-width: 230px;
   height: 30px;
   z-index: 999;
