@@ -1,10 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://styles.transcend.csra.io/v3.0.5/transcend.css';
+@import 'https://styles.transcend.csra.io/v3.0.8/transcend.css';
 @import 'theme.css';
-
-.color_test div {
-  padding: 5px;
-}
 
 .access{
   outline:rgba(38,184,239,0.0) 1px solid;
@@ -14,26 +10,4 @@
 .access:focus{
   outline:rgba(38,184,239,1.0) 1px solid;
   outline-offset: 5px;
-}
-
-.pag_btn {
-  flex:1;
-  margin:0 1px;
-  height:24px;
-  font-size:10pt;
-}
-
-.pag_btn.active {
-  height:30px;
-  margin-top:-3px;
-  margin-bottom:-3px;
-}
-
-/* space between on desktop, center on mobile */
-.center_wrap {justify-content:space-between;}
-@media (max-width:768px) {
-  .center_wrap {
-    justify-content:center;
-    align-items:center;
-  }
 }

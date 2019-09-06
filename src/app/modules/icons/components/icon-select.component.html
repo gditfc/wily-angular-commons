@@ -7,26 +7,39 @@
 </button>
 
 <!-- picker dialog -->
-<wily-dialog [object]="showDialog" title="Choose an Icon" #faDialog>
+<wily-dialog [object]="showDialog" title="Choose an Icon"
+             [width]="'600px'" [height]="'auto'" #faDialog>
   <div class="row_block">
     <!-- inputs -->
-    <div class="row pad_5 overlay" style="border-width:0 0 1px 0;">
-      <div class="col size_1">
-        <input class="access fullwidth_input mar_right5" type="text" aria-label="Filter Icons" [(ngModel)]="filter" placeholder="Filter Icons" />
+    <div class="row v_center pad_5 pad_left10 pad_right10 dialog_header_color_light_2">
+      <div class="col size_1 pad_right5">
+        <input class="access fullwidth_input overlay_alt2 page_container_color mar_right5"
+               type="text" aria-label="Filter Icons" [(ngModel)]="filter" placeholder="Filter Icons..." />
       </div>
       <div class="col">
-        <button class="access btn underline_md md bg_purple_alt" aria-label="Filter" (click)="filterClasses()">
-          <i class="fas fa-filter mar_right5"></i>Filter
+        <button class="access btn_pulse sm"
+                pTooltip="Filter"
+                aria-label="Filter" (click)="filterClasses()">
+          <i class="fas fa-search"></i>
         </button>
-        <button class="access btn underline_md md bg_grey_alt" aria-label="Clear" (click)="clear()">
-          <i class="fas fa-times mar_right5"></i>Clear
+        <button class="access btn_pulse sm"
+                pTooltip="Clear"
+                aria-label="Clear" (click)="clear()">
+          <i class="fas fa-trash"></i>
         </button>
       </div>
     </div>
     <!-- icons list -->
-    <div class="row wrap space_evenly pad_5">
-      <button class="access wac_icon_select_icon" style="font-size:32px;" (click)="choose(faClass.toString())" [title]="faClass"
-           *ngFor="let faClass of getValues()" [style.display]="icons[faClass.toString()] ? 'flex' : 'none'" [attr.aria-label]="'Choose fa-' + faClass">
+    <div class="row wrap pad_5 scroll_yauto wac_icon_select_list">
+      <button class="col size_1 access btn underline_md wac_icon_select_btn brad_3 mar_3"
+              [ngClass]="faClass === hoveredClass ? 'overlay_alt2 page_container_color' : 'overlay'"
+              (mouseover)="hoveredClass = faClass"
+              (mouseout)="hoveredClass = null"
+              *ngFor="let faClass of getValues()"
+              (click)="choose(faClass.toString())"
+              pTooltip="{{faClass}}" tooltipPosition="bottom"
+              [style.display]="icons[faClass.toString()] ? 'flex' : 'none'"
+              [attr.aria-label]="'Choose ' + faClass">
         <i [ngClass]="faClass.toString()"></i>
       </button>
     </div>
