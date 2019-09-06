@@ -125,7 +125,7 @@ export class IconSelectComponent {
    * Color class of the button
    */
   @Input()
-  buttonColorClass = 'bg_blue_alt';
+  buttonColorClass = 'overlay_alt2 bg_blue_alt';
 
   /**
    * Icon selected event emitter
@@ -147,6 +147,11 @@ export class IconSelectComponent {
    * List of icons as an object to make lookups easier.
    */
   icons = {};
+
+  /**
+   * Class being hovered over
+   */
+  hoveredClass: string;
 
   /**
    * Constructor adds all of the icons to the icon object and sets them to be visible in the picked by default
