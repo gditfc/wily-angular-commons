@@ -113,7 +113,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       }, 100);
     }
 
-    if (this.breakpoint && (window.innerWidth < this.breakpoint)) {
+    if (this.breakpoint && (window.innerWidth <= this.breakpoint)) {
       this.breakpointExceeded = true;
     }
   }
