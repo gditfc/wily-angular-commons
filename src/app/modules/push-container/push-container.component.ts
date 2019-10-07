@@ -86,7 +86,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   /**
    * Private variable to detect if the breakpoint is exceeded
    */
-  private breakpointExceeded = false;
+  breakpointExceeded = false;
 
   /**
    * Constructor
