@@ -20,4 +20,14 @@ export class Versioning extends Auditable {
    */
   approvalStatus: string;
 
+  /**
+   * Flag to determine if this item has a draft version
+   */
+  hasDraft: string;
+
+  /**
+   * Flag to determine if this item has a pending version
+   */
+  hasPending: string;
+
 }
