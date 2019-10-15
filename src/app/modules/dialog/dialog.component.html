@@ -20,7 +20,8 @@
       </button>
     </div>
     <!-- contents -->
-    <div class="wac_dialog_content scroll_yauto" [ngClass]="bodyClass">
+    <!-- ADD scroll_yauto TO FIX SCROLLBAR OFF SCREEN/ FIX HEADER -->
+    <div class="wac_dialog_content" [ngClass]="bodyClass">
       <ng-content></ng-content>
     </div>
   </div>
