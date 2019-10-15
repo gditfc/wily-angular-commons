@@ -15,7 +15,8 @@
          style="border-left:5px solid hsla(0,0%,100%,.3);">
       <div class="col size_1 pad_right5">
         <input class="access fullwidth_input overlay_alt2 page_container_color mar_right5"
-               type="text" aria-label="Filter Icons" [(ngModel)]="filter" placeholder="Filter Icons..." />
+               type="text" aria-label="Filter Icons" (keyup.enter)="filterClasses()"
+               [(ngModel)]="filter" placeholder="Filter Icons..." />
       </div>
       <div class="col">
         <button class="access btn_pulse sm"
