@@ -8,13 +8,15 @@
 
 <!-- picker dialog -->
 <wily-dialog [object]="showDialog" title="Choose an Icon"
-             [width]="'600px'" [height]="'auto'" #faDialog>
+             [width]="'700px'" [height]="'auto'" #faDialog>
   <div class="row_block">
     <!-- inputs -->
-    <div class="row v_center pad_5 pad_left10 pad_right10 dialog_header_color_light_2">
+    <div class="row v_center pad_5 pad_left10 pad_right10 dialog_header_color_light_2"
+         style="border-left:5px solid hsla(0,0%,100%,.3);">
       <div class="col size_1 pad_right5">
         <input class="access fullwidth_input overlay_alt2 page_container_color mar_right5"
-               type="text" aria-label="Filter Icons" [(ngModel)]="filter" placeholder="Filter Icons..." />
+               type="text" aria-label="Filter Icons" (keyup.enter)="filterClasses()"
+               [(ngModel)]="filter" placeholder="Filter Icons..." />
       </div>
       <div class="col">
         <button class="access btn_pulse sm"
@@ -25,7 +27,7 @@
         <button class="access btn_pulse sm"
                 pTooltip="Clear"
                 aria-label="Clear" (click)="clear()">
-          <i class="fas fa-trash"></i>
+          <i class="fas fa-undo-alt"></i>
         </button>
       </div>
     </div>

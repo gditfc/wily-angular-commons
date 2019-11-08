@@ -182,7 +182,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         const size = window.getComputedStyle(item, ':before').content.replace('\"', '');
         item.setAttribute('aria-label', size);
         item.addEventListener('keyup', (e) => {
-          if (e.keyCode === 13) {
+          if (e.which === 13) {
             item.click();
             optionsContainer.setAttribute('aria-hidden', 'true');
           }
@@ -190,7 +190,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
       }
 
       label.addEventListener('keyup', (e) => {
-        if (e.keyCode === 13) {
+        if (e.which === 13) {
           label.click();
           optionsContainer.setAttribute('aria-hidden', 'false');
         }
@@ -198,4 +198,22 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     }
   }
 
+  /**
+   * Handle content pasted into the editor
+   * @param event the clipboard event
+   */
+  handlePaste(event: ClipboardEvent): void {
+    const selection = window.getSelection();
+
+    if (!selection.rangeCount) {
+      return;
+    }
+
+    const text = (event.clipboardData || window['clipboardData']).getData('text');
+
+    selection.deleteFromDocument();
+    selection.getRangeAt(0).insertNode(document.createTextNode(text));
+
+    event.preventDefault();
+  }
 }
