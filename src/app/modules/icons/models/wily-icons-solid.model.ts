@@ -95,6 +95,19 @@ export class WilyIconsSolid {
   };
 
   /**
+   * wis fa-divider
+   */
+  static wisDivider = {
+    prefix: 'wis',
+    iconName: 'divider',
+    icon: [
+      512, 512,
+      [],
+      null, 'M480,254v20a14,14,0,0,1-14,14H46a14,14,0,0,1-14-14V254a14,14,0,0,1,14-14H466A14,14,0,0,1,480,254ZM256,117.63l72,72L350.63,167,256,72.37,161.37,167,184,189.63Zm0,292.74-72-72L161.37,361,256,455.63,350.63,361,328,338.37Z'
+    ]
+  };
+
+  /**
    * wis fa-document
    */
   static wisDocument = {
@@ -183,6 +196,19 @@ export class WilyIconsSolid {
       24, 24,
       [],
       null, 'M20.5,5H3.5A1.5,1.5,0,0,0,2,6.5v11A1.5,1.5,0,0,0,3.5,19h17A1.5,1.5,0,0,0,22,17.5V6.5A1.5,1.5,0,0,0,20.5,5ZM9.207,14.793l-.3535.3535-.707.707-.3535.3535L3.5859,12,7.793,7.793l.3535.3535.707.707.3535.3535L6.4141,12Zm2.2412,2.0234L10.5,16.5l-.4746-.1582h0l-.4737-.1581,3-9L13.5,7.5l.4746.1582h0l.4737.1581Zm4.7588-.6094-.3535-.3535-.707-.707-.3535-.3535L17.5859,12,14.793,9.207l.3535-.3535.707-.707.3535-.3535L20.4141,12Z'
+    ]
+  };
+
+  /**
+   * wis fa-icon-header
+   */
+  static wisIconHeader = {
+    prefix: 'wis',
+    iconName: 'icon-header',
+    icon: [
+      512, 512,
+      [],
+      null, 'M32,338V302a14,14,0,0,1,14-14H178a14,14,0,0,1,14,14v50H46A14,14,0,0,1,32,338ZM480,78V256H46a14,14,0,0,1-14-14V78A14,14,0,0,1,46,64H466A14,14,0,0,1,480,78ZM192,160a64,64,0,1,0-64,64A64,64,0,0,0,192,160Zm256-16H240v32H448Zm18,144H238a14,14,0,0,0-14,14v36a14,14,0,0,0,14,14H480V302A14,14,0,0,0,466,288Zm0,96H334a14,14,0,0,0-14,14v36a14,14,0,0,0,14,14H480V398A14,14,0,0,0,466,384Zm-192,0H46a14,14,0,0,0-14,14v36a14,14,0,0,0,14,14H288V398A14,14,0,0,0,274,384ZM128,128a32,32,0,1,0,32,32A32,32,0,0,0,128,128Z'
     ]
   };
 
@@ -304,6 +330,19 @@ export class WilyIconsSolid {
   };
 
   /**
+   * wis fa-physical-address
+   */
+  static wisPhysicalAddress = {
+    prefix: 'wis',
+    iconName: 'physical-address',
+    icon: [
+      512, 512,
+      [],
+      null, 'M457.12,354.13,336,284.4l-52.13,30h0l-47.59,27.39-21.4,12.32,16,27.74h0l22.91-13.2h0l2.23-1.29V480H416V367.38l25.15,14.49ZM352,432H320V384h32ZM217,389.85l-16-27.73-8-13.87,13.87-8,92-53,17.87-32.23A142.7,142.7,0,0,0,292.91,84.91h0a142.71,142.71,0,0,0-201.82,0h0A142.7,142.7,0,0,0,67.21,255.06L192,480l46.71-84.2L225,403.72ZM128,176a64,64,0,1,1,64,64A64,64,0,0,1,128,176Z'
+    ]
+  };
+
+  /**
    * wis fa-pid
    */
   static wisPID = {
@@ -403,11 +442,13 @@ export class WilyIconsSolid {
     WilyIconsSolid.wisCheckbox,
     WilyIconsSolid.wisDate,
     WilyIconsSolid.wisDateRange,
+    WilyIconsSolid.wisDivider,
     WilyIconsSolid.wisDocumentUpload,
     WilyIconsSolid.wisDropdown,
     WilyIconsSolid.wisEmail,
     WilyIconsSolid.wisFEIN,
     WilyIconsSolid.wisHTML,
+    WilyIconsSolid.wisIconHeader,
     WilyIconsSolid.wisLicense,
     WilyIconsSolid.wisMMISNPI,
     WilyIconsSolid.wisMoney,
@@ -417,6 +458,7 @@ export class WilyIconsSolid {
     WilyIconsSolid.wisPersonName,
     WilyIconsSolid.wisPhone,
     WilyIconsSolid.wisPID,
+    WilyIconsSolid.wisPhysicalAddress,
     WilyIconsSolid.wisRadioButtons,
     WilyIconsSolid.wisSSN,
     WilyIconsSolid.wisTextArea,
