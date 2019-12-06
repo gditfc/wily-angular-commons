@@ -7,10 +7,11 @@
           [breakpoint]="1000"
           [header]="title"
           [blockScroll]="true"
-          [closeOnEscape]="true"
+          [closeOnEscape]="false"
           [style]="getStyle()"
           appendTo="body"
           #dialog>
+  <div class="wac_dialog_container">
     <!-- title bar -->
     <div class="wac_dialog_header space_between v_center" [ngClass]="titleClass">
       <div class="wac_dialog_header_title">{{title}}</div>
@@ -23,4 +24,5 @@
     <div class="wac_dialog_content" [ngClass]="bodyClass">
       <ng-content></ng-content>
     </div>
+  </div>
 </p-dialog>
