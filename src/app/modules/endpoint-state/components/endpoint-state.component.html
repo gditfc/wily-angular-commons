@@ -1,0 +1,17 @@
+<!-- loading -->
+<div class="row_block" *ngIf="loading">
+  <div class="h_center"><i class="fas fa-cog fa-fw fa-pulse fa-3x" style="opacity:0.8;"></i></div>
+  <div class="text md bold center mar_top5">Loading...</div>
+</div>
+<!-- empty -->
+<div class="row_block" *ngIf="empty">
+  <div class="h_center"><i class="{{emptyIcon}}" style="opacity:0.8;"></i></div>
+  <div class="text md bold center mar_top5">{{emptyText}}</div>
+  <!-- subtext -->
+  <div class="text sm center mar_top5">{{emptySubtext}}</div>
+</div>
+<!-- error -->
+<div class="row_block" *ngIf="error">
+  <div class="h_center"><i class="fas fa-bomb fa-fw fa-3x" style="opacity:0.8;"></i></div>
+  <div class="text md bold center mar_top5">An error has occurred.<br />Please try again.</div>
+</div>
