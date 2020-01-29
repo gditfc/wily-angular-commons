@@ -53,6 +53,18 @@ export class EndpointStateComponent implements OnInit {
   error: boolean;
 
   /**
+   * Flag to determine if overlay spinner
+   */
+  @Input()
+  overlay: boolean;
+
+  /**
+   * The icon on the overlay spinner
+   */
+  @Input()
+  overlayIcon = 'fas fa-spinner fa-spin';
+
+  /**
    * Component constructor
    */
   constructor() { }
