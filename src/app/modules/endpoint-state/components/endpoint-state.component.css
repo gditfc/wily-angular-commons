@@ -1,0 +1,62 @@
+.bar1, .bar2, .bar3, .bar4 {
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction:alternate;
+}
+
+.bar1 {
+  animation-name: bar1grow;
+  animation-delay:0s;
+}
+
+.bar2 {
+  animation-name: bar2grow;
+  animation-delay:0.2s;
+}
+
+.bar3 {
+  animation-name: bar3grow;
+  animation-delay:0.6s;
+}
+
+.bar4 {
+  animation-name: bar4grow;
+  animation-delay:0.8s;
+}
+
+@keyframes bar1grow {
+  from {
+    transform:scaleY(1);
+  }
+  to {
+    transform:scaleY(15);
+  }
+}
+
+@keyframes bar2grow {
+  from {
+    transform:scaleY(1);
+  }
+  to {
+    transform:scaleY(20);
+  }
+}
+
+@keyframes bar3grow {
+  from {
+    transform:scaleY(1);
+  }
+  to {
+    transform:scaleY(20);
+  }
+}
+
+@keyframes bar4grow {
+  from {
+    transform:scaleY(1);
+  }
+  to {
+    transform:scaleY(15);
+  }
+}

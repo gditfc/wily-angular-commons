@@ -5,9 +5,12 @@ import { EndpointStateComponent } from './components/endpoint-state.component';
 
 
 @NgModule({
-  declarations: [EndpointStateComponent],
-  imports: [
-    CommonModule
-  ]
+    declarations: [EndpointStateComponent],
+    exports: [
+        EndpointStateComponent
+    ],
+    imports: [
+        CommonModule
+    ]
 })
-export class EndpointStateModule { }
+export class WilyEndpointStateModule { }

@@ -1,6 +1,16 @@
 <!-- loading -->
-<div class="row_block" *ngIf="loading">
-  <div class="h_center"><i class="fas fa-cog fa-fw fa-pulse fa-3x" style="opacity:0.8;"></i></div>
+<div class="row column center_center" *ngIf="loading">
+  <!-- bars -->
+  <div *ngIf="loadingIcon === 'bars'" class="center_center" style="height:100px; width:250px;">
+    <div class="row loadingbars" style="height:4px;">
+      <div class="col size_1 bg_red bar1"></div>
+      <div class="col size_1 bg_green bar2"></div>
+      <div class="col size_1 bg_blue bar3"></div>
+      <div class="col size_1 bg_yellow bar4"></div>
+    </div>
+  </div>
+  <!-- icon -->
+  <i *ngIf="loadingIcon !== 'bars'" class="{{loadingIcon}}" style="opacity:0.8;"></i>
   <div class="text md bold center mar_top5">Loading...</div>
 </div>
 <!-- empty -->

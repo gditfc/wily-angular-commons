@@ -9,23 +9,25 @@ import {WilyPushContainerModule} from './modules/push-container/wily-push-contai
 import {WilyRichTextModule} from './modules/rich-text/wily-rich-text.module';
 import {WilyIconsModule} from './modules/icons/wily-icons.module';
 import {FormsModule} from '@angular/forms';
+import {WilyEndpointStateModule} from './modules/endpoint-state/endpoint-state.module';
 
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    TooltipModule,
-    WilyDialogModule,
-    WilyProfilePicModule,
-    WilyPaginatorModule,
-    WilyPushContainerModule,
-    WilyRichTextModule,
-    WilyIconsModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        TooltipModule,
+        WilyDialogModule,
+        WilyProfilePicModule,
+        WilyPaginatorModule,
+        WilyPushContainerModule,
+        WilyRichTextModule,
+        WilyIconsModule,
+        FormsModule,
+        WilyEndpointStateModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

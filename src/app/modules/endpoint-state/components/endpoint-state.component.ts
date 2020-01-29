@@ -5,7 +5,8 @@ import {Component, Input, OnInit} from '@angular/core';
  */
 @Component({
   selector: 'wily-endpoint-state',
-  templateUrl: './endpoint-state.component.html'
+  templateUrl: './endpoint-state.component.html',
+  styleUrls: ['./endpoint-state.component.css']
 })
 export class EndpointStateComponent implements OnInit {
 
@@ -14,6 +15,12 @@ export class EndpointStateComponent implements OnInit {
    */
   @Input()
   loading: boolean;
+
+  /**
+   * Icon for loading state
+   */
+  @Input()
+  loadingIcon = 'fas fa-cog fa-fw fa-pulse fa-3x';
 
   /**
    * Flag to determine if in empty state
