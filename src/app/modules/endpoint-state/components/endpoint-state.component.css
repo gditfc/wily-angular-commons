@@ -30,7 +30,7 @@
     transform:scaleY(1);
   }
   to {
-    transform:scaleY(15);
+    transform:scaleY(10);
   }
 }
 
@@ -39,7 +39,7 @@
     transform:scaleY(1);
   }
   to {
-    transform:scaleY(20);
+    transform:scaleY(15);
   }
 }
 
@@ -48,7 +48,7 @@
     transform:scaleY(1);
   }
   to {
-    transform:scaleY(20);
+    transform:scaleY(15);
   }
 }
 
@@ -57,6 +57,6 @@
     transform:scaleY(1);
   }
   to {
-    transform:scaleY(15);
+    transform:scaleY(10);
   }
 }
