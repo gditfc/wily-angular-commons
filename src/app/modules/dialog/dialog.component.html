@@ -7,13 +7,13 @@
           [breakpoint]="1000"
           [header]="title"
           [blockScroll]="true"
-          [closeOnEscape]="true"
+          [closeOnEscape]="false"
           [style]="getStyle()"
           appendTo="body"
           #dialog>
   <div class="wac_dialog_container">
     <!-- title bar -->
-    <div class="wac_dialog_header space_between wrap v_center" style="flex: 0 1 auto;" [ngClass]="titleClass">
+    <div class="wac_dialog_header space_between v_center" [ngClass]="titleClass">
       <div class="wac_dialog_header_title">{{title}}</div>
       <button class="access btn_pulse sm" (click)="close()" aria-label="Close Dialog">
         <i class="fas fa-times"></i>

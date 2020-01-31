@@ -14,6 +14,7 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
 
 /**
  * Rich Text Editor that wraps a PrimeNG Editor, which in turn wraps Quill. Allows us to customize.
+ * TODO: Remove formatting on paste (preserve new-lines)
  */
 @Component({
   selector: 'wily-rich-text',
@@ -196,24 +197,5 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         }
       });
     }
-  }
-
-  /**
-   * Handle content pasted into the editor
-   * @param event the clipboard event
-   */
-  handlePaste(event: ClipboardEvent): void {
-    const selection = window.getSelection();
-
-    if (!selection.rangeCount) {
-      return;
-    }
-
-    const text = (event.clipboardData || window['clipboardData']).getData('text');
-
-    selection.deleteFromDocument();
-    selection.getRangeAt(0).insertNode(document.createTextNode(text));
-
-    event.preventDefault();
   }
 }

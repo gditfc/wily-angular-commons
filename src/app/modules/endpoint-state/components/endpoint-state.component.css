@@ -1,0 +1,98 @@
+.bars {
+
+}
+
+.bar1, .bar2, .bar3, .bar4 {
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+  animation-direction:alternate;
+  transform-origin:bottom center;
+  margin:0 2px;
+}
+
+.bar1 {
+  animation-name: bargrow;
+  animation-delay:0.2s;
+}
+
+.bar2 {
+  animation-name: bargrow;
+  animation-delay:0.4s;
+}
+
+.bar3 {
+  animation-name: bargrow;
+  animation-delay:0.6s;
+}
+
+.bar4 {
+  animation-name: bargrow;
+  animation-delay:0.8s;
+}
+
+@keyframes bargrow {
+  from {
+    transform:scaleY(1);
+  }
+  to {
+    transform: scaleY(10);
+  }
+}
+
+@keyframes bar2grow {
+  from {
+    transform:scaleY(1);
+  }
+  to {
+    transform:scaleY(10);
+  }
+}
+
+@keyframes bar3grow {
+  from {
+    transform:scaleY(1);
+  }
+  to {
+    transform:scaleY(10);
+  }
+}
+
+@keyframes bar4grow {
+  from {
+    transform:scaleY(1);
+  }
+  to {
+    transform:scaleY(10);
+  }
+}
+
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+  z-index: 1000; /* Specify a stack order in case you're using a different order for other elements */
+  animation: fadein 0.8s ease-in-out;
+  backdrop-filter: blur(5px);
+}
+#spinner{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 64px;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  animation: fadein 0.8s ease-in-out;
+}
+
+@keyframes fadein {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
