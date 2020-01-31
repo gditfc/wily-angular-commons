@@ -14,6 +14,7 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
 
 /**
  * Rich Text Editor that wraps a PrimeNG Editor, which in turn wraps Quill. Allows us to customize.
+ * TODO: Remove formatting on paste (preserve new-lines)
  */
 @Component({
   selector: 'wily-rich-text',
