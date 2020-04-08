@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://styles.transcend.csra.io/v3.0.9/transcend.css';
+@import 'https://styles.transcend.csra.io/v3.1.1/transcend.css';
 @import 'theme.css';
 
 .access{
@@ -11,3 +11,8 @@
   outline:rgba(38,184,239,1.0) 1px solid;
   outline-offset: 5px;
 }
+
+footer{
+  height:auto;
+}
+
