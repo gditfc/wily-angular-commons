@@ -23,6 +23,18 @@ export class EndpointStateComponent implements OnInit {
   loadingIcon = 'fas fa-cog fa-fw fa-pulse fa-3x';
 
   /**
+   * Main text for loading state
+   */
+  @Input()
+  loadingText = 'Loading...';
+
+  /**
+   * Subtext for loading state
+   */
+  @Input()
+  loadingSubtext: string;
+
+  /**
    * Flag to determine if in empty state
    */
   @Input()
@@ -51,6 +63,24 @@ export class EndpointStateComponent implements OnInit {
    */
   @Input()
   error: boolean;
+
+  /**
+   * Icon for error state
+   */
+  @Input()
+  errorIcon = 'fas fa-bomb fa-fw fa-3x';
+
+  /**
+   * Main text for error state
+   */
+  @Input()
+  errorText = 'An error has occurred';
+
+  /**
+   * Subtext for error state
+   */
+  @Input()
+  errorSubtext = 'Please try again';
 
   /**
    * Flag to determine if overlay spinner

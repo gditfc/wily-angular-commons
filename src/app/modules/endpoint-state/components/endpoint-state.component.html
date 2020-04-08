@@ -2,8 +2,8 @@
 <ng-container *ngIf="!overlay">
   <!-- loading -->
   <div class="row column center_center" *ngIf="loading">
-    <!-- bars -->
-    <div *ngIf="loadingIcon === 'bars'" class="bottom_center" style="height:50px; width:120px;">
+    <!-- bars1 -->
+    <div *ngIf="loadingIcon === 'bars1'" class="bottom_center" style="height:50px; width:120px;">
       <div class="row bars" style="height:4px;">
         <div class="col size_1 bg_blue bar1"></div>
         <div class="col size_1 bg_purple bar2"></div>
@@ -11,21 +11,40 @@
         <div class="col size_1 bg_red bar4"></div>
       </div>
     </div>
+    <!-- bars2 -->
+    <div *ngIf="loadingIcon === 'bars2'" class="bottom_center" style="width:175px;">
+      <div class="row bars2 brad_5 mar_bot5" style="height:3px;">
+        <div class="col size_1 bg_blue bars2_1"></div>
+        <div class="col size_1 bg_purple bars2_2"></div>
+        <div class="col size_1 bg_yellow bars2_3"></div>
+        <div class="col size_1 bg_red bars2_4"></div>
+      </div>
+    </div>
+    <!-- bars3 -->
+    <div *ngIf="loadingIcon === 'bars3'" class="bottom_center" style="width:175px;">
+      <div class="row bars3 brad_5 mar_bot5" style="height:3px;">
+        <div class="col size_1 bg_blue bars3_1"></div>
+        <div class="col size_1 bg_purple bars3_2"></div>
+        <div class="col size_1 bg_yellow bars3_3"></div>
+        <div class="col size_1 bg_red bars3_4"></div>
+      </div>
+    </div>
     <!-- icon -->
     <i *ngIf="loadingIcon !== 'bars'" class="{{loadingIcon}}" style="opacity:0.8;"></i>
-    <div class="text md bold center mar_top5">Loading...</div>
+    <div class="text md bold center mar_top5">{{loadingText}}</div>
+    <div class="text sm center mar_top5">{{loadingSubtext}}</div>
   </div>
   <!-- empty -->
   <div class="row_block" *ngIf="empty">
     <div class="h_center"><i class="{{emptyIcon}}" style="opacity:0.8;"></i></div>
     <div class="text md bold center mar_top5">{{emptyText}}</div>
-    <!-- subtext -->
     <div class="text sm center mar_top5">{{emptySubtext}}</div>
   </div>
   <!-- error -->
   <div class="row_block" *ngIf="error">
-    <div class="h_center"><i class="fas fa-bomb fa-fw fa-3x" style="opacity:0.8;"></i></div>
-    <div class="text md bold center mar_top5">An error has occurred.<br />Please try again.</div>
+    <div class="h_center"><i class="{{errorIcon}}" style="opacity:0.8;"></i></div>
+    <div class="text md bold center mar_top5">{{errorText}}</div>
+    <div class="text sm center mar_top5">{{errorSubtext}}</div>
   </div>
 </ng-container>
 
