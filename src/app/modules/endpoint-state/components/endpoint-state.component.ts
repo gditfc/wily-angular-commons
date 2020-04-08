@@ -86,13 +86,13 @@ export class EndpointStateComponent implements OnInit {
    * Flag to determine if overlay spinner
    */
   @Input()
-  overlay: boolean;
+  loadingOverlay: boolean;
 
   /**
    * The icon on the overlay spinner
    */
   @Input()
-  overlayIcon = 'fas fa-spinner fa-spin';
+  loadingOverlayIcon = 'fas fa-spinner fa-spin';
 
   /**
    * Component constructor
