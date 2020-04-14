@@ -28,15 +28,31 @@
         </div>
       </div>
       <!-- previous button -->
-      <button class="access btn_pulse xsm" aria-label="Previous Page"
-              (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-        <i class="fas fa-chevron-left"></i>
-      </button>
+      <ng-container *ngIf="activePage !== 0 else disabledPrevious">
+        <button class="access btn_pulse xsm" aria-label="Previous Page"
+                (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </ng-container>
+      <!-- previous button disabled -->
+      <ng-template #disabledPrevious>
+        <button class="access btn_pulse xsm disabled" aria-label="Previous Page">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </ng-template>
       <!-- next button -->
-      <button class="access btn_pulse xsm" aria-label="Next Page"
-              (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-        <i class="fas fa-chevron-right"></i>
-      </button>
+      <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
+        <button class="access btn_pulse xsm" aria-label="Next Page"
+                (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </ng-container>
+      <!-- next button disabled -->
+      <ng-template #disabledNext>
+        <button class="access btn_pulse xsm disabled" aria-label="Next Page">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </ng-template>
     </div>
   </div>
 </div>
