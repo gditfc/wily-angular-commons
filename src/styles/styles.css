@@ -11,3 +11,15 @@
   outline:rgba(38,184,239,1.0) 1px solid;
   outline-offset: 5px;
 }
+
+.btn.disabled {
+  cursor:default;
+  opacity:0.5;
+}
+.btn.disabled:hover > .icon > svg {
+  transform:none !important;
+}
+
+.btn.disabled.glow:hover {
+  box-shadow:none !important;
+}

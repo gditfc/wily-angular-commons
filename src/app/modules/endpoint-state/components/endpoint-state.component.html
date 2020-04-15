@@ -20,7 +20,7 @@
   </div>
   <!-- bars3 -->
   <div *ngIf="loadingIcon === 'bars3'" class="bottom_center" style="width:175px;">
-    <div class="row bars3 brad_5 mar_bot5" style="height:3px;">
+    <div class="row bars3 brad_5 mar_bot5" style="height:4px;">
       <div class="col size_1 bg_blue bars3_1"></div>
       <div class="col size_1 bg_purple bars3_2"></div>
       <div class="col size_1 bg_yellow bars3_3"></div>
@@ -28,9 +28,9 @@
     </div>
   </div>
   <!-- icon -->
-  <i *ngIf="loadingIcon !== 'bars'" class="{{loadingIcon}}" style="opacity:0.8;"></i>
-  <div class="text md bold center mar_top5">{{loadingText}}</div>
-  <div class="text sm center mar_top5">{{loadingSubtext}}</div>
+  <i *ngIf="loadingIcon && loadingIcon !== 'bars'" class="{{loadingIcon}}" style="opacity:0.8;"></i>
+  <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
+  <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
 </div>
 
 <!-- loading overlay -->
@@ -42,14 +42,14 @@
 
 <!-- empty -->
 <div class="row_block" *ngIf="empty">
-  <div class="h_center"><i class="{{emptyIcon}}" style="opacity:0.8;"></i></div>
-  <div class="text md bold center mar_top5">{{emptyText}}</div>
-  <div class="text sm center mar_top5">{{emptySubtext}}</div>
+  <div *ngIf="emptyIcon" class="h_center"><i class="{{emptyIcon}}" style="opacity:0.8;"></i></div>
+  <div *ngIf="emptyText" class="text md bold center mar_top5">{{emptyText}}</div>
+  <div *ngIf="emptySubtext" class="text sm center mar_top5">{{emptySubtext}}</div>
 </div>
 
 <!-- error -->
 <div class="row_block" *ngIf="error">
-  <div class="h_center"><i class="{{errorIcon}}" style="opacity:0.8;"></i></div>
-  <div class="text md bold center mar_top5">{{errorText}}</div>
-  <div class="text sm center mar_top5">{{errorSubtext}}</div>
+  <div *ngIf="errorIcon" class="h_center"><i class="{{errorIcon}}" style="opacity:0.8;"></i></div>
+  <div *ngIf="errorText" class="text md bold center mar_top5">{{errorText}}</div>
+  <div *ngIf="errorSubtext" class="text sm center mar_top5">{{errorSubtext}}</div>
 </div>

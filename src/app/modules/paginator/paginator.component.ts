@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnChanges} from '@angular/core';
 import {PaginationEvent} from './pagination-event.model';
 
 /**
@@ -8,7 +8,7 @@ import {PaginationEvent} from './pagination-event.model';
   selector: 'wily-paginator',
   templateUrl: 'paginator.component.html'
 })
-export class PaginatorComponent {
+export class PaginatorComponent implements OnChanges{
 
   /**
    * Paginator Version to use (1-4 available, 1 is default)
@@ -49,6 +49,18 @@ export class PaginatorComponent {
    * For the page jump text input
    */
   pageJumpInput = '';
+
+  /**
+   * Number of pages
+   */
+  numberOfPages: number;
+
+  /**
+   * Recalculate number of pages on input change
+   */
+  ngOnChanges(): void {
+    this.numberOfPages = this.getNumberOfPages();
+  }
 
   /**
    * Goes to the first page

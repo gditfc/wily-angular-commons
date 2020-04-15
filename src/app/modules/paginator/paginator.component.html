@@ -3,7 +3,7 @@
 <!-- VERSIONS: 4                                                -->
 <!---------------------------------------------------------------->
 
-<!-- VERSION 1 -->
+<!-- VERSION 1 & 4 -->
 <div class="row_block" *ngIf="version === '1' || version === '4'">
   <div class="center_center" style="flex-wrap: wrap-reverse;">
     <!-- items per page -->
@@ -28,15 +28,31 @@
         </div>
       </div>
       <!-- previous button -->
-      <button class="access btn_pulse xsm" aria-label="Previous Page"
-              (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-        <i class="fas fa-chevron-left"></i>
-      </button>
+      <ng-container *ngIf="activePage !== 0 else disabledPrevious">
+        <button class="access btn circle_20px overlay_alt2 bg_grey_alt" style="margin:1px 3px;" aria-label="Previous Page"
+                (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
+          <span class="icon slide_left"><i class="fas fa-angle-left"></i></span>
+        </button>
+      </ng-container>
+      <!-- previous button disabled -->
+      <ng-template #disabledPrevious>
+        <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px;">
+          <i class="fas fa-angle-left"></i>
+        </div>
+      </ng-template>
       <!-- next button -->
-      <button class="access btn_pulse xsm" aria-label="Next Page"
-              (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-        <i class="fas fa-chevron-right"></i>
-      </button>
+      <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
+        <button class="access btn circle_20px overlay_alt2 bg_grey_alt" style="margin:1px 3px;" aria-label="Next Page"
+                (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
+          <span class="icon slide_right"><i class="fas fa-angle-right"></i></span>
+        </button>
+      </ng-container>
+      <!-- next button disabled -->
+      <ng-template #disabledNext>
+        <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px;">
+          <i class="fas fa-angle-right"></i>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
@@ -47,14 +63,31 @@
     <!-- paginator -->
     <div class="col center_center mar_3">
       <!-- first -->
-      <button class="access btn_pulse xsm hide_element" aria-label="First Page" (click)="goToFirst()" style="margin-right:0;">
-        <i class="fas fa-chevron-left" style="margin-right:-2px;"></i><i class="fas fa-chevron-left"></i>
+      <button *ngIf="activePage !== 0 else disabledFirst"
+              class="access btn circle_20px overlay_alt2 bg_grey_alt hide_element" style="margin:1px 0 1px 3px;"
+              aria-label="First Page" (click)="goToFirst()">
+        <span class="icon slide_left"><i class="fas fa-angle-double-left"></i></span>
       </button>
+      <!-- first button disabled -->
+      <ng-template #disabledFirst>
+        <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 0 1px 3px;">
+          <i class="fas fa-angle-double-left"></i>
+        </div>
+      </ng-template>
       <!-- previous -->
-      <button class="access btn_pulse xsm" aria-label="Previous Page"
-              (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-        <i class="fas fa-chevron-left"></i>
-      </button>
+      <ng-container *ngIf="activePage !== 0 else disabledPrevious">
+        <button class="access btn circle_20px overlay_alt2 bg_grey_alt" style="margin:1px 3px;"
+                aria-label="Previous Page"
+                (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
+          <span class="icon slide_left"><i class="fas fa-angle-left"></i></span>
+        </button>
+      </ng-container>
+      <!-- previous button disabled -->
+      <ng-template #disabledPrevious>
+        <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px;">
+          <i class="fas fa-angle-left"></i>
+        </div>
+      </ng-template>
       <!-- navigation -->
       <div class="row v_center pad_left5 pad_right5 overlay_alt2 page_container_color"
            style="border-radius:100px; flex:1 1 auto;">
@@ -108,14 +141,31 @@
         </div>
       </div>
       <!-- next -->
-      <button class="access btn_pulse xsm" aria-label="Next Page"
-              (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-        <i class="fas fa-chevron-right"></i>
-      </button>
+      <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
+        <button class="access btn circle_20px overlay_alt2 bg_grey_alt" style="margin:1px 3px;"
+                aria-label="Next Page"
+                (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
+          <span class="icon slide_right"><i class="fas fa-angle-right"></i></span>
+        </button>
+      </ng-container>
+      <!-- next button disabled -->
+      <ng-template #disabledNext>
+        <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px;">
+          <i class="fas fa-angle-right"></i>
+        </div>
+      </ng-template>
       <!-- last -->
-      <button class="access btn_pulse xsm hide_element" aria-label="Last Page" (click)="goToLast()" style="margin-left:0;">
-        <i class="fas fa-chevron-right" style="margin-right:-2px;"></i><i class="fas fa-chevron-right"></i>
+      <button *ngIf="activePage !== numberOfPages - 1 else disabledLast"
+              class="access btn circle_20px overlay_alt2 bg_grey_alt hide_element" style="margin:1px 3px 1px 0;"
+              aria-label="Last Page" (click)="goToLast()">
+        <span class="icon slide_right"><i class="fas fa-angle-double-right"></i></span>
       </button>
+      <!-- last button disabled -->
+      <ng-template #disabledLast>
+        <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px 1px 0;">
+          <i class="fas fa-angle-double-right"></i>
+        </div>
+      </ng-template>
       <!-- jump to page -->
       <p-overlayPanel styleClass="overlay_alt2 page_container_color brad_3" #op>
         <div class="row_block">
