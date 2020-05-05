@@ -21,6 +21,7 @@ export class DialogService {
   registerDialog(dialog: DialogComponent): void {
     if (this.dialogs.length === 0) {
       window.addEventListener( 'keyup', this.escapeListener);
+      document.body.classList.add('scroll-none');
     }
     this.dialogs.push(dialog);
   }
@@ -31,6 +32,7 @@ export class DialogService {
     }
     if (this.dialogs.length === 0) {
       window.removeEventListener( 'keyup', this.escapeListener);
+      document.body.classList.remove('scroll-none');
     }
   }
 
