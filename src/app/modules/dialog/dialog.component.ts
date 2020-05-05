@@ -78,27 +78,9 @@ export class DialogComponent {
 
   /**
    * Open the dialog, if we're on a phone or tablet, make the dialog takeover the screen.
+   * Method has no body, it's just here for compatibility with the old dialog that wrapped
+   * the p-dialog
    */
-  open(): void {
-    if (this.dialog && window.innerWidth < 768) {
-      setTimeout(() => {
-        try {
-          this.dialog.maximize();
-        } catch (e) {
-        } // Ignore this error, nonsense.
-      }, 100);
-    }
-  }
-
-  /**
-   * Gets the default style to be used by the PrimeNG Dialog.
-   */
-  getStyle(): any {
-    return {
-     'overflow-y': 'auto',
-     'max-width': this.width,
-     'max-height': this.height
-    };
-  }
+  open(): void { }
 
 }
