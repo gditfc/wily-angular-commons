@@ -12,7 +12,6 @@ export class DialogService {
     if (event.key === 'Esc' || event.key === 'Escape') {
       if (this.dialogs && this.dialogs.length) {
         const topDialog = this.dialogs.pop();
-        console.log('About to close ' + topDialog.title);
         topDialog.close();
         event.stopPropagation();
       }
