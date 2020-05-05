@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {Dialog} from 'primeng/dialog';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 /**
  * Wily Dialog component wraps a PrimeNG dialog to make it behave in the exact way that we want to, along with styles to make it look
@@ -56,12 +55,6 @@ export class DialogComponent {
   width: string;
 
   /**
-   * Reference to the PrimeNG Dialog
-   */
-  @ViewChild('dialog', {static: false})
-  dialog: Dialog;
-
-  /**
    * Event Emitter for when the dialog is closed
    */
   @Output()
@@ -71,34 +64,15 @@ export class DialogComponent {
    * Null the object to close the dialog, emit the close event.
    */
   close(): void {
-    // this.dialog.close(new Event(''));
     this.object = null;
     this.closed.emit({});
   }
 
   /**
    * Open the dialog, if we're on a phone or tablet, make the dialog takeover the screen.
+   * Method has no body, it's just here for compatibility with the old dialog that wrapped
+   * the p-dialog
    */
-  open(): void {
-    if (this.dialog && window.innerWidth < 768) {
-      setTimeout(() => {
-        try {
-          this.dialog.maximize();
-        } catch (e) {
-        } // Ignore this error, nonsense.
-      }, 100);
-    }
-  }
-
-  /**
-   * Gets the default style to be used by the PrimeNG Dialog.
-   */
-  getStyle(): any {
-    return {
-     'overflow-y': 'auto',
-     'max-width': this.width,
-     'max-height': this.height
-    };
-  }
+  open(): void { }
 
 }
