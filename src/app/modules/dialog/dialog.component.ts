@@ -56,12 +56,6 @@ export class DialogComponent {
   width: string;
 
   /**
-   * Reference to the PrimeNG Dialog
-   */
-  @ViewChild('dialog', {static: false})
-  dialog: Dialog;
-
-  /**
    * Event Emitter for when the dialog is closed
    */
   @Output()
@@ -71,7 +65,6 @@ export class DialogComponent {
    * Null the object to close the dialog, emit the close event.
    */
   close(): void {
-    // this.dialog.close(new Event(''));
     this.object = null;
     this.closed.emit({});
   }
