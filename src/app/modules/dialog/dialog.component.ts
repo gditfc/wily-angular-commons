@@ -1,9 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DialogService} from '../../shared/services/dialog.service';
-import {Observable} from 'rxjs/internal/Observable';
-import {fromEvent} from 'rxjs/internal/observable/fromEvent';
-import {map, mapTo, startWith, tap} from 'rxjs/operators';
-import {animate, style, transition, trigger} from '@angular/animations';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Dialog} from 'primeng/dialog';
 
 /**
  * Wily Dialog component wraps a PrimeNG dialog to make it behave in the exact way that we want to, along with styles to make it look
@@ -11,54 +7,15 @@ import {animate, style, transition, trigger} from '@angular/animations';
  */
 @Component({
   selector: 'wily-dialog',
-  templateUrl: 'dialog.component.html',
-  animations: [
-    trigger('dialog', [
-      transition('void => *', [
-        style({ transform: 'scale(1))' }),
-        animate(100)
-      ]),
-      transition('* => void', [
-        animate(100, style({ transform: 'scale(0)' }))
-      ])
-    ])
-  ]
+  templateUrl: 'dialog.component.html'
 })
 export class DialogComponent {
 
-  effectiveWidth$: Observable<string> = fromEvent(window, 'resize').pipe(
-    map(_______ => window.innerWidth),
-    startWith(window.innerWidth),
-    map(windowWidth => {
-      let width: number;
-      if (this.width.includes('px')) {
-        width = parseInt(this.width.substring(0, this.width.length - 2), 10);
-        if (width > windowWidth) {
-          width = windowWidth;
-        }
-        return width + 'px';
-      }
-      return this.width;
-    })
-  );
-
   /**
    * Object to operate whether the dialog is open/closed
    */
+  @Input()
   object: any;
-
-  /**
-   * Object to operate whether the dialog is open/closed
-   */
-  @Input('object') set setObject(value: any) {
-    if (this.object && !value) {
-      this.dialogService.unregisterDialog(this);
-    }
-    if (!this.object && value) {
-      this.dialogService.registerDialog(this);
-    }
-    this.object = value;
-  }
 
   /**
    * Title to show at the top of the dialog
@@ -79,16 +36,22 @@ export class DialogComponent {
   bodyClass = 'dialog_body_color';
 
   /**
-   * Height of the dialog (can use any height measurement)
+   * Height of the dialog (can use any height measurement - e.g. 66vh default)
    */
   @Input()
-  height = '500px';
+  height = '66vh';
 
   /**
-   * Width of the dialog (can use any width measurement)
+   * Width of the dialog (can use any width measurement - e.g. 1000px default)
    */
   @Input()
-  width = '900px';
+  width = '1000px';
+
+  /**
+   * Reference to the PrimeNG Dialog
+   */
+  @ViewChild('dialog', {static: false})
+  dialog: Dialog;
 
   /**
    * Event Emitter for when the dialog is closed
@@ -97,27 +60,37 @@ export class DialogComponent {
   closed: EventEmitter<any> = new EventEmitter();
 
   /**
-   * Dependency injection site
-   * @param dialogService the dialog service
-   */
-  constructor(private dialogService: DialogService) { }
-
-  /**
    * Null the object to close the dialog, emit the close event.
    */
   close(): void {
+    // this.dialog.close(new Event(''));
     this.object = null;
-    this.dialogService.unregisterDialog(this);
     this.closed.emit({});
   }
 
   /**
    * Open the dialog, if we're on a phone or tablet, make the dialog takeover the screen.
-   * Method has no body, it's just here for compatibility with the old dialog that wrapped
-   * the p-dialog
    */
   open(): void {
+    if (this.dialog && window.innerWidth < 768) {
+      setTimeout(() => {
+        try {
+          this.dialog.maximize();
+        } catch (e) {
+        } // Ignore this error, nonsense.
+      }, 100);
+    }
+  }
 
+  /**
+   * Gets the default style to be used by the PrimeNG Dialog.
+   */
+  getStyle(): any {
+    return {
+      'overflow-y': 'auto',
+      'width': this.width,
+      'height': this.height
+    };
   }
 
 }
