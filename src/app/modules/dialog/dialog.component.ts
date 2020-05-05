@@ -37,22 +37,26 @@ export class DialogComponent {
   /**
    * Height of the dialog (can use any height measurement)
    */
-  @Input('height')
-  set setHeight(height: string) {
-    this.height = height === 'auto' ? '' : height;
-  }
-
+  @Input()
   height: string;
+  // @Input('height')
+  // set setHeight(height: string) {
+  //   this.height = height === 'auto' ? '' : height;
+  // }
+  //
+  // height: string;
 
   /**
    * Width of the dialog (can use any width measurement)
    */
-  @Input('width')
-  set setWidth(width: string) {
-    this.width = width === 'auto' ? '' : width;
-  }
-
+  @Input()
   width: string;
+  // @Input('width')
+  // set setWidth(width: string) {
+  //   this.width = width === 'auto' ? '' : width;
+  // }
+  //
+  // width: string;
 
   /**
    * Event Emitter for when the dialog is closed
