@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DialogService} from '../../shared/services/dialog.service';
+import {Observable} from 'rxjs/internal/Observable';
+import {fromEvent} from 'rxjs/internal/observable/fromEvent';
+import {mapTo, startWith} from 'rxjs/operators';
 
 /**
  * Wily Dialog component wraps a PrimeNG dialog to make it behave in the exact way that we want to, along with styles to make it look
@@ -10,6 +13,11 @@ import {DialogService} from '../../shared/services/dialog.service';
   templateUrl: 'dialog.component.html'
 })
 export class DialogComponent {
+
+  windowWidth$: Observable<number> = fromEvent(window, 'resize').pipe(
+    mapTo(window.innerWidth),
+    startWith(window.innerWidth)
+  );
 
   /**
    * Object to operate whether the dialog is open/closed
