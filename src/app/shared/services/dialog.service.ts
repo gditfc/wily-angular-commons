@@ -22,7 +22,6 @@ export class DialogService {
     if (dialog) {
       if (this.dialogs.length === 0) {
         window.addEventListener( 'keyup', this.escapeListener);
-        console.log('Adding scroll-none');
         document.documentElement.classList.add('scroll_none');
       }
       this.dialogs.push(dialog);
