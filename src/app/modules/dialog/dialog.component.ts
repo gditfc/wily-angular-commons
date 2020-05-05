@@ -51,13 +51,13 @@ export class DialogComponent {
    * Height of the dialog (can use any height measurement)
    */
   @Input()
-  height: string;
+  height = '500px';
 
   /**
    * Width of the dialog (can use any width measurement)
    */
   @Input()
-  width: string;
+  width = '900px';
 
   /**
    * Event Emitter for when the dialog is closed
