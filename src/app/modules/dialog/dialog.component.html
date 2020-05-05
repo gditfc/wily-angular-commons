@@ -1,28 +1,58 @@
-<p-dialog [(visible)]="object"
-          [modal]="true"
-          [focusOnShow]="true"
-          [focusTrap]="true"
-          [resizable]="false"
-          [responsive]="true"
-          [breakpoint]="1000"
-          [header]="title"
-          [blockScroll]="true"
-          [closeOnEscape]="false"
-          [style]="getStyle()"
-          appendTo="body"
-          #dialog>
-  <div class="wac_dialog_container">
-    <!-- title bar -->
-    <div class="wac_dialog_header space_between v_center" [ngClass]="titleClass">
-      <div class="wac_dialog_header_title">{{title}}</div>
-      <button class="access btn_pulse sm" (click)="close()" aria-label="Close Dialog">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <!-- contents -->
-    <!-- ADD scroll_yauto TO FIX SCROLLBAR OFF SCREEN/ FIX HEADER -->
-    <div class="wac_dialog_content" [ngClass]="bodyClass">
-      <ng-content></ng-content>
+<div class="wily_dialog_overlay" *ngIf="object">
+  <div class="wily_dialog_container">
+    <div class="row page_container_color shadow wily_dialog_box"
+         [ngStyle]="{'max-width': width, 'max-height': height}">
+      <!-- dialog header -->
+      <div class="col" [ngClass]="titleClass">
+        <div class="col dialog_header_color_light_3" style="width:8px;"></div>
+        <div class="col size_1 v_center" style="padding:5px 5px 5px 10px;">
+          <div class="text md bold paragraph">
+            {{title}}
+          </div>
+        </div>
+        <div class="col" style="padding:5px 10px 5px 5px;">
+          <button class="access btn_pulse sm page_container_color" (click)="close()" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <!-- dialog container -->
+      <div class="col size_1 scroll_yauto">
+        <div class="row_block width100 height100">
+          <!-- content -->
+          <ng-content></ng-content>
+        </div>
+      </div>
     </div>
   </div>
-</p-dialog>
+</div>
+
+
+<!--<p-dialog [(visible)]="object"-->
+<!--          [modal]="true"-->
+<!--          [focusOnShow]="true"-->
+<!--          [focusTrap]="true"-->
+<!--          [resizable]="false"-->
+<!--          [responsive]="true"-->
+<!--          [breakpoint]="1000"-->
+<!--          [header]="title"-->
+<!--          [blockScroll]="true"-->
+<!--          [closeOnEscape]="false"-->
+<!--          [style]="getStyle()"-->
+<!--          appendTo="body"-->
+<!--          #dialog>-->
+<!--  <div class="wac_dialog_container">-->
+<!--    &lt;!&ndash; title bar &ndash;&gt;-->
+<!--    <div class="wac_dialog_header space_between v_center" [ngClass]="titleClass">-->
+<!--      <div class="wac_dialog_header_title">{{title}}</div>-->
+<!--      <button class="access btn_pulse sm" (click)="close()" aria-label="Close Dialog">-->
+<!--        <i class="fas fa-times"></i>-->
+<!--      </button>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; contents &ndash;&gt;-->
+<!--    &lt;!&ndash; ADD scroll_yauto TO FIX SCROLLBAR OFF SCREEN/ FIX HEADER &ndash;&gt;-->
+<!--    <div class="wac_dialog_content" [ngClass]="bodyClass">-->
+<!--      <ng-content></ng-content>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</p-dialog>-->
