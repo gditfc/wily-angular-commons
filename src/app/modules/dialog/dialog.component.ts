@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, QueryList, ViewChildren} from '@angular/core';
 
 /**
  * Wily Dialog component wraps a PrimeNG dialog to make it behave in the exact way that we want to, along with styles to make it look
@@ -9,6 +9,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   templateUrl: 'dialog.component.html'
 })
 export class DialogComponent {
+
+  @ViewChildren(DialogComponent)
+  childDialogs: QueryList<DialogComponent>;
 
   /**
    * Object to operate whether the dialog is open/closed
@@ -78,5 +81,10 @@ export class DialogComponent {
    * the p-dialog
    */
   open(): void { }
+
+  handleEscapePress(): void {
+    console.count();
+    console.log(this.childDialogs);
+  }
 
 }

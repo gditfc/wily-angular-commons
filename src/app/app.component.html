@@ -26,6 +26,12 @@
         <!-- icon select -->
         <wily-icon-select (selected)="iconSelected($event)"></wily-icon-select>
       </div>
+      <div class="row overlay pad_5 center_center brad_3">
+        <!-- icon select -->
+        <button class="access btn_pulse xsm page_container_color" (click)="obj2 = {}">
+          Open Nested Parent
+        </button>
+      </div>
 
       <!-- misc content -->
       <div class="row pad_5">
@@ -203,6 +209,15 @@
     <div class="center_center" style="font-size: 24pt;height: 100%;text-align: center;">
       <div>Here's some text dawg</div>
     </div>
+  </wily-dialog>
+
+  <wily-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null">
+    <button (click)="obj3 = {}">Open Child</button>
+    <wily-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null">
+      <button (click)="obj4 = {}">Open Child</button>
+      <wily-dialog title="Child of Child of Parent Dialog" [object]="obj4" (closed)="obj4 = null">
+      </wily-dialog>
+    </wily-dialog>
   </wily-dialog>
 
   <!-- LEFT PUSH CONTAINER -->
