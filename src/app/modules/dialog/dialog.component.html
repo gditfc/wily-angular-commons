@@ -1,4 +1,4 @@
-<div class="wily_dialog_overlay" *ngIf="object">
+<div class="wily_dialog_overlay" *ngIf="object" (keyup.escape)="handleEscapePress()">
   <div class="wily_dialog_container">
     <div class="col page_container_color shadow wily_dialog_box"
          [ngStyle]="{'max-width': width, 'height': height}">
@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="col" style="padding:5px 10px 5px 5px;">
-          <button class="access btn_pulse sm" (keyup.esc)="handleEscapePress()" (click)="close()" aria-label="Close">
+          <button class="access btn_pulse sm" (click)="close()" aria-label="Close">
             <i class="fas fa-times"></i>
           </button>
         </div>
