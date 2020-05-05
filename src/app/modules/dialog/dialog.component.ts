@@ -1,4 +1,4 @@
-import {Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DialogService} from '../../shared/services/dialog.service';
 
 /**
@@ -11,14 +11,14 @@ import {DialogService} from '../../shared/services/dialog.service';
 })
 export class DialogComponent implements OnInit {
 
-  @ContentChildren(DialogComponent)
-  childDialogs: QueryList<DialogComponent>;
-
   /**
    * Object to operate whether the dialog is open/closed
    */
   object: any;
 
+  /**
+   * Object to operate whether the dialog is open/closed
+   */
   @Input('object') set setObject(value: any) {
     if (this.object && !value) {
       this.dialogService.unregisterDialog(this);
@@ -52,24 +52,12 @@ export class DialogComponent implements OnInit {
    */
   @Input()
   height: string;
-  // @Input('height')
-  // set setHeight(height: string) {
-  //   this.height = height === 'auto' ? '' : height;
-  // }
-  //
-  // height: string;
 
   /**
    * Width of the dialog (can use any width measurement)
    */
   @Input()
   width: string;
-  // @Input('width')
-  // set setWidth(width: string) {
-  //   this.width = width === 'auto' ? '' : width;
-  // }
-  //
-  // width: string;
 
   /**
    * Event Emitter for when the dialog is closed
@@ -77,10 +65,17 @@ export class DialogComponent implements OnInit {
   @Output()
   closed: EventEmitter<any> = new EventEmitter();
 
+  /**
+   * Dependency injection site
+   * @param dialogService the dialog service
+   */
   constructor(private dialogService: DialogService) {
     this.dialogService.registerDialog(this);
   }
 
+  /**
+   * Init component
+   */
   ngOnInit(): void {
 
   }
