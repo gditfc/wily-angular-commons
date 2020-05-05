@@ -40,18 +40,19 @@
     </div>
     <!-- icons list -->
     <div class="row wrap top_left pad_5 scroll_y">
-      <button class="col size_1 access btn wac_icon_select_btn brad_3 mar_3 overlay_alt2"
-              style="box-sizing:border-box;"
-              [ngClass]="faClass === hoveredClass ? 'page_container_color' : 'page_container_color_dark_1'"
-              (mouseover)="hoveredClass = faClass"
-              (mouseout)="hoveredClass = null"
-              *ngFor="let faClass of getValues()"
-              (click)="choose(faClass.toString())"
-              pTooltip="{{faClass}}" tooltipPosition="bottom"
-              [style.display]="icons[faClass.toString()] ? 'flex' : 'none'"
-              [attr.aria-label]="'Choose ' + faClass">
-        <i [ngClass]="faClass.toString()"></i>
-      </button>
+      <ng-container *ngFor="let faClass of getValues()">
+        <button *ngIf="icons[faClass.toString()]"
+                class="col size_1 access btn wac_icon_select_btn brad_3 mar_3 overlay_alt2"
+                style="box-sizing:border-box;display: flex"
+                [ngClass]="faClass === hoveredClass ? 'page_container_color' : 'page_container_color_dark_1'"
+                (mouseover)="hoveredClass = faClass"
+                (mouseout)="hoveredClass = null"
+                (click)="choose(faClass.toString())"
+                pTooltip="{{faClass}}" tooltipPosition="bottom"
+                [attr.aria-label]="'Choose ' + faClass">
+          <i [ngClass]="faClass.toString()"></i>
+        </button>
+      </ng-container>
     </div>
   </div>
 </wily-dialog>
