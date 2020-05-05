@@ -19,11 +19,14 @@ export class DialogService {
   }
 
   registerDialog(dialog: DialogComponent): void {
-    if (this.dialogs.length === 0) {
-      window.addEventListener( 'keyup', this.escapeListener);
-      document.body.classList.add('scroll-none');
+    if (dialog) {
+      if (this.dialogs.length === 0) {
+        window.addEventListener( 'keyup', this.escapeListener);
+        console.log('Adding scroll-none');
+        document.documentElement.classList.add('scroll_none');
+      }
+      this.dialogs.push(dialog);
     }
-    this.dialogs.push(dialog);
   }
 
   unregisterDialog(dialog: DialogComponent): void {
@@ -32,7 +35,7 @@ export class DialogService {
     }
     if (this.dialogs.length === 0) {
       window.removeEventListener( 'keyup', this.escapeListener);
-      document.body.classList.remove('scroll-none');
+      document.documentElement.classList.remove('scroll_none');
     }
   }
 

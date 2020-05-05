@@ -9,7 +9,7 @@ import {DialogService} from '../../shared/services/dialog.service';
   selector: 'wily-dialog',
   templateUrl: 'dialog.component.html'
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent {
 
   /**
    * Object to operate whether the dialog is open/closed
@@ -69,16 +69,7 @@ export class DialogComponent implements OnInit {
    * Dependency injection site
    * @param dialogService the dialog service
    */
-  constructor(private dialogService: DialogService) {
-    this.dialogService.registerDialog(this);
-  }
-
-  /**
-   * Init component
-   */
-  ngOnInit(): void {
-
-  }
+  constructor(private dialogService: DialogService) { }
 
   /**
    * Null the object to close the dialog, emit the close event.
