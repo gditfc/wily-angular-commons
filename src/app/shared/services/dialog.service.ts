@@ -21,7 +21,6 @@ export class DialogService {
 
   registerDialog(dialog: DialogComponent): void {
     if (this.dialogs.length === 0) {
-      console.log('Adding event listener');
       window.addEventListener( 'keyup', this.escapeListener);
     }
     this.dialogs.push(dialog);
@@ -29,7 +28,7 @@ export class DialogService {
 
   unregisterDialog(dialog: DialogComponent): void {
     if (this.dialogs.includes(dialog)) {
-      this.dialogs = this.dialogs.filter(d => d.title !== dialog.title);
+      this.dialogs = this.dialogs.filter(d => d !== dialog);
     }
     if (this.dialogs.length === 0) {
       window.removeEventListener( 'keyup', this.escapeListener);
