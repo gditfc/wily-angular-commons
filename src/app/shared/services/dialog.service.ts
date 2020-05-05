@@ -1,4 +1,4 @@
-import {Injectable, Renderer2} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {DialogComponent} from '../../modules/dialog/dialog.component';
 
 @Injectable({
