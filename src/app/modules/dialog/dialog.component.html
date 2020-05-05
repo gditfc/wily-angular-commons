@@ -1,4 +1,4 @@
-<div class="wily_dialog_overlay" *ngIf="object">
+<div [@dialog] class="wily_dialog_overlay" *ngIf="object">
   <div class="wily_dialog_container">
     <div class="col page_container_color shadow wily_dialog_box"
          *ngIf="effectiveWidth$ | async as effectiveWidth"
