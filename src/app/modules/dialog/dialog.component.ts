@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DialogService} from '../../shared/services/dialog.service';
 import {Observable} from 'rxjs/internal/Observable';
 import {fromEvent} from 'rxjs/internal/observable/fromEvent';
-import {mapTo, startWith} from 'rxjs/operators';
+import {map, mapTo, startWith, tap} from 'rxjs/operators';
 
 /**
  * Wily Dialog component wraps a PrimeNG dialog to make it behave in the exact way that we want to, along with styles to make it look
@@ -15,7 +15,7 @@ import {mapTo, startWith} from 'rxjs/operators';
 export class DialogComponent {
 
   windowWidth$: Observable<number> = fromEvent(window, 'resize').pipe(
-    mapTo(window.innerWidth),
+    map(_______ => window.innerWidth),
     startWith(window.innerWidth)
   );
 
