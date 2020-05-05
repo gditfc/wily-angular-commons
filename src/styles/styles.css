@@ -76,3 +76,7 @@
   from { transform:scale(0); }
   to   { transform:scale(1); }
 }
+
+.scroll_none{
+  overflow:hidden !important;
+}
