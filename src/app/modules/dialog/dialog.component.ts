@@ -36,16 +36,24 @@ export class DialogComponent {
   bodyClass = 'dialog_body_color';
 
   /**
-   * Height of the dialog (can use any height measurement - e.g. 66vh default)
+   * Height of the dialog (can use any height measurement)
    */
-  @Input()
-  height = '66vh';
+  @Input('height')
+  set setHeight(height: string) {
+    this.height = height === 'auto' ? '' : height;
+  }
+
+  height: string;
 
   /**
-   * Width of the dialog (can use any width measurement - e.g. 1000px default)
+   * Width of the dialog (can use any width measurement)
    */
-  @Input()
-  width = '1000px';
+  @Input('width')
+  set setWidth(width: string) {
+    this.width = width === 'auto' ? '' : width;
+  }
+
+  width: string;
 
   /**
    * Reference to the PrimeNG Dialog
