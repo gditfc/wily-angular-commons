@@ -20,12 +20,16 @@ export class DialogComponent implements OnInit {
   object: any;
 
   @Input('object') set setObject(value: any) {
-    this.object = value;
     if (this.object) {
-      this.dialogService.registerDialog(this);
+      if (!value) {
+        this.dialogService.unregisterDialog(this);
+      }
     } else {
-      this.dialogService.unregisterDialog(this);
+      if (value) {
+        this.dialogService.registerDialog(this);
+      }
     }
+    this.object = value;
   }
 
   /**
