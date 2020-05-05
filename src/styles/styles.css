@@ -61,11 +61,14 @@
   overflow:hidden;
   border-radius:3px;
 }
+.wily_dialog_accent {
+  width:8px;
+  background-color: rgba(255,255,255,0.25);
+}
 @media screen and (max-width:768px) {
   .wily_dialog_box {
     border-radius:0;
-    height: 100%;
-    max-height:unset !important;
+    height: 100% !important;
     max-width:unset !important;
   }
 }

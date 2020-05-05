@@ -8,10 +8,10 @@
 
 <!-- picker dialog -->
 <wily-dialog [object]="showDialog" title="Choose an Icon"
-             [width]="'700px'" [height]="'auto'" #faDialog>
-  <div class="row_block">
+             [width]="'750px'" [height]="'500px'" #faDialog>
+  <div class="row column height100">
     <!-- inputs -->
-    <div class="row v_center pad_5 pad_left10 pad_right10 dialog_header_color_light_2"
+    <div class="col v_center pad_5 pad_left10 pad_right10 dialog_header_color_light_2"
          style="border-left:5px solid hsla(0,0%,100%,.3);">
       <div class="col size_1 pad_right5">
         <input class="access fullwidth_input overlay_alt2 page_container_color mar_right5"
@@ -32,7 +32,7 @@
       </div>
     </div>
     <!-- icons list -->
-    <div class="row wrap pad_5 scroll_yauto wac_icon_select_list">
+    <div class="row wrap pad_5 scroll_yauto">
       <button class="col size_1 access btn underline_md wac_icon_select_btn brad_3 mar_3"
               [ngClass]="faClass === hoveredClass ? 'overlay_alt2 page_container_color' : 'overlay'"
               (mouseover)="hoveredClass = faClass"
