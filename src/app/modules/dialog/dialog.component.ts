@@ -15,11 +15,11 @@ import {animate, style, transition, trigger} from '@angular/animations';
   animations: [
     trigger('dialog', [
       transition('void => *', [
-        style({ transform: 'scale3d(.3, .3, .3)' }),
+        style({ transform: 'scale(1))' }),
         animate(100)
       ]),
       transition('* => void', [
-        animate(100, style({ transform: 'scale3d(.0, .0, .0)' }))
+        animate(100, style({ transform: 'scale(0)' }))
       ])
     ])
   ]
