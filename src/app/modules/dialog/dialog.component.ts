@@ -14,9 +14,20 @@ import {map, mapTo, startWith, tap} from 'rxjs/operators';
 })
 export class DialogComponent {
 
-  windowWidth$: Observable<number> = fromEvent(window, 'resize').pipe(
+  effectiveWidth$: Observable<string> = fromEvent(window, 'resize').pipe(
     map(_______ => window.innerWidth),
-    startWith(window.innerWidth)
+    startWith(window.innerWidth),
+    map(windowWidth => {
+      let width: number;
+      if (this.width.includes('px')) {
+        width = parseInt(this.width.substring(0, this.width.length - 2), 10);
+        if (width > windowWidth) {
+          width = windowWidth;
+        }
+        return width + 'px';
+      }
+      return this.width;
+    })
   );
 
   /**
