@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {Dialog} from 'primeng/dialog';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 /**
  * Wily Dialog component wraps a PrimeNG dialog to make it behave in the exact way that we want to, along with styles to make it look
