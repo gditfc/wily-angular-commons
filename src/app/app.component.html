@@ -211,7 +211,7 @@
     </div>
   </wily-dialog>
 
-  <wily-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null">
+  <wily-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" width="auto" height="auto">
     <button (click)="obj3 = {}">Open Child</button>
     <wily-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null">
       <button (click)="obj4 = {}">Open Child</button>
