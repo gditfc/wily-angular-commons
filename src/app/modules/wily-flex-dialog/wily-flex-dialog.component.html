@@ -1,0 +1,30 @@
+<div [ngClass]="{'wily_dialog_overlay' : object}">
+  <div [@dialog] class="wily_dialog_container" *ngIf="object">
+    <div class="col page_container_color shadow wily_dialog_box"
+         *ngIf="effectiveWidth$ | async as effectiveWidth"
+         [ngStyle]="{'width': effectiveWidth, 'height': height}">
+      <!-- dialog header -->
+      <div class="col" [ngClass]="titleClass">
+        <div class="col wily_dialog_accent"></div>
+        <div class="col size_1 v_center" style="padding:5px 5px 5px 10px;">
+          <div class="text lg bold paragraph">
+            {{title}}
+          </div>
+        </div>
+        <div class="col" style="padding:5px 10px 5px 5px;">
+          <button class="access btn_pulse sm" (click)="close()" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <!-- dialog container -->
+      <div class="col size_1 scroll_yauto" style="-ms-flex: 1 1 auto;">
+        <div class="row_block width100 height100">
+          <!-- content -->
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
