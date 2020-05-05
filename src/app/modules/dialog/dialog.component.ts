@@ -88,8 +88,8 @@ export class DialogComponent {
   getStyle(): any {
     return {
      'overflow-y': 'auto',
-     'width': this.width,
-     'height': this.height
+     'max-width': this.width,
+     'max-height': this.height
     };
   }
 
