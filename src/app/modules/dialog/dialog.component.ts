@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, Output, QueryList, ViewChildren} from '@angular/core';
+import {Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList} from '@angular/core';
+import {DialogService} from '../../shared/services/dialog.service';
 
 /**
  * Wily Dialog component wraps a PrimeNG dialog to make it behave in the exact way that we want to, along with styles to make it look
@@ -8,16 +9,25 @@ import {Component, EventEmitter, Input, Output, QueryList, ViewChildren} from '@
   selector: 'wily-dialog',
   templateUrl: 'dialog.component.html'
 })
-export class DialogComponent {
+export class DialogComponent implements OnInit {
 
-  @ViewChildren(DialogComponent)
+  @ContentChildren(DialogComponent)
   childDialogs: QueryList<DialogComponent>;
 
   /**
    * Object to operate whether the dialog is open/closed
    */
-  @Input()
   object: any;
+
+  @Input('object') set setObject(value: any) {
+    if (this.object && !value) {
+      this.dialogService.unregisterDialog(this);
+    }
+    if (!this.object && value) {
+      this.dialogService.registerDialog(this);
+    }
+    this.object = value;
+  }
 
   /**
    * Title to show at the top of the dialog
@@ -67,11 +77,20 @@ export class DialogComponent {
   @Output()
   closed: EventEmitter<any> = new EventEmitter();
 
+  constructor(private dialogService: DialogService) {
+    this.dialogService.registerDialog(this);
+  }
+
+  ngOnInit(): void {
+
+  }
+
   /**
    * Null the object to close the dialog, emit the close event.
    */
   close(): void {
     this.object = null;
+    this.dialogService.unregisterDialog(this);
     this.closed.emit({});
   }
 
@@ -80,11 +99,8 @@ export class DialogComponent {
    * Method has no body, it's just here for compatibility with the old dialog that wrapped
    * the p-dialog
    */
-  open(): void { }
+  open(): void {
 
-  handleEscapePress(): void {
-    console.count();
-    console.log(this.childDialogs);
   }
 
 }
