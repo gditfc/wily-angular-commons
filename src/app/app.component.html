@@ -211,14 +211,14 @@
     </div>
   </wily-dialog>
 
-  <wily-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" width="auto" height="auto">
+  <wily-flex-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" width="auto" height="auto">
     <button (click)="obj3 = {}">Open Child</button>
-    <wily-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null">
+    <wily-flex-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null">
       <button (click)="obj4 = {}">Open Child</button>
-      <wily-dialog title="Child of Child of Parent Dialog" [object]="obj4" (closed)="obj4 = null">
-      </wily-dialog>
-    </wily-dialog>
-  </wily-dialog>
+      <wily-flex-dialog title="Child of Child of Parent Dialog" [object]="obj4" (closed)="obj4 = null">
+      </wily-flex-dialog>
+    </wily-flex-dialog>
+  </wily-flex-dialog>
 
   <!-- LEFT PUSH CONTAINER -->
   <wily-push-container
