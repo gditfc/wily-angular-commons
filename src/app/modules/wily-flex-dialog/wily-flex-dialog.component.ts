@@ -17,10 +17,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       state('void', style({ transform: 'scale(0)'})),
       transition('void => *', [
         style({ height: '*', width: '*' }),
-        animate('.3s', style({ transform: 'scale(1)'}) )
+        animate('.3s 0ms ease-in-out', style({ transform: 'scale(1)'}) )
       ]),
       transition(':leave', [
-        animate('.3s', style({ transform: 'scale(0)' }))
+        animate('.3s 0ms ease-in-out', style({ transform: 'scale(0)' }))
       ]),
     ])
   ]
