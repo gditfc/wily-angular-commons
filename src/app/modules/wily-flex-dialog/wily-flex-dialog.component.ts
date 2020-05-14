@@ -3,7 +3,7 @@ import {DialogService} from '../../shared/services/dialog.service';
 import {Observable} from 'rxjs/internal/Observable';
 import {fromEvent} from 'rxjs/internal/observable/fromEvent';
 import {map, mapTo, startWith, tap} from 'rxjs/operators';
-import {animate, style, transition, trigger} from '@angular/animations';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 /**
  * Wily Dialog component wraps a PrimeNG dialog to make it behave in the exact way that we want to, along with styles to make it look
@@ -14,13 +14,14 @@ import {animate, style, transition, trigger} from '@angular/animations';
   templateUrl: 'wily-flex-dialog.component.html',
   animations: [
     trigger('dialog', [
+      state('void', style({ transform: 'scale(0)'})),
       transition('void => *', [
-        style({ transform: 'scale(1))' }),
-        animate(100)
+        style({ height: '*', width: '*' }),
+        animate('.3s', style({ transform: 'scale(1)'}) )
       ]),
-      transition('* => void', [
-        animate(100, style({ transform: 'scale(0)' }))
-      ])
+      transition(':leave', [
+        animate('.3s', style({ transform: 'scale(0)' }))
+      ]),
     ])
   ]
 })

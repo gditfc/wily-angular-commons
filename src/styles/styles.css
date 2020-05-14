@@ -36,7 +36,6 @@
   bottom: 0;
   background-color: rgba(0,0,0,0.3); /* Black background with opacity */
   z-index: 1000; /* Specify a stack order in case you're using a different order for other elements */
-  animation: fadein 0.3s ease-in-out;
 }
 .wily_dialog_container {
   position: fixed;
@@ -50,7 +49,6 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  animation: scalein 0.3s ease-in-out;
   z-index: 1001; /* Specify a stack order in case you're using a different order for other elements */
 }
 .wily_dialog_box {
