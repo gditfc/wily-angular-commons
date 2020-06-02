@@ -22,6 +22,13 @@ export class AppComponent {
    */
   obj: any;
 
+  obj2: any;
+  obj3: any;
+  obj4: any;
+  obj5: any;
+  obj6: any;
+  obj7: any;
+
   /**
    * Reference to the dialog component
    */

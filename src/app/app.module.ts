@@ -10,6 +10,7 @@ import {WilyRichTextModule} from './modules/rich-text/wily-rich-text.module';
 import {WilyIconsModule} from './modules/icons/wily-icons.module';
 import {FormsModule} from '@angular/forms';
 import {WilyEndpointStateModule} from './modules/endpoint-state/endpoint-state.module';
+import {WilyFlexDialogModule} from './modules/wily-flex-dialog/wily-flex-dialog.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {WilyEndpointStateModule} from './modules/endpoint-state/endpoint-state.m
         BrowserModule,
         TooltipModule,
         WilyDialogModule,
+        WilyFlexDialogModule,
         WilyProfilePicModule,
         WilyPaginatorModule,
         WilyPushContainerModule,

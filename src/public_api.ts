@@ -8,6 +8,7 @@ export * from './app/modules/safe-pipes/wily-safe-pipes.module';
 export * from './app/modules/dialog/wily-dialog.module';
 export * from './app/modules/icons/wily-icons.module';
 export * from './app/modules/endpoint-state/endpoint-state.module';
+export * from './app/modules/wily-flex-dialog/wily-flex-dialog.module';
 
 /** COMPONENTS */
 export * from './app/modules/icons/components/icon-select.component';
@@ -17,6 +18,7 @@ export * from './app/modules/push-container/push-container.component';
 export * from './app/modules/rich-text/rich-text.component';
 export * from './app/modules/dialog/dialog.component';
 export * from './app/modules/endpoint-state/components/endpoint-state.component';
+export * from './app/modules/wily-flex-dialog/wily-flex-dialog.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
@@ -26,6 +28,7 @@ export * from './app/shared/interceptors/cognito-auth.interceptor';
 export * from './app/shared/services/base-data.service';
 export * from './app/shared/services/local-storage.service';
 export * from './app/shared/services/cognito-auth.service';
+export * from './app/shared/services/dialog.service';
 
 /** MODELS */
 export * from './app/modules/paginator/pagination-event.model';

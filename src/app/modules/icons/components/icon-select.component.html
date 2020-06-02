@@ -7,43 +7,58 @@
 </button>
 
 <!-- picker dialog -->
-<wily-dialog [object]="showDialog" title="Choose an Icon"
-             [width]="'700px'" [height]="'auto'" #faDialog>
-  <div class="row_block">
+<wily-flex-dialog
+  [object]="showDialog"
+  title="Choose an Icon"
+  [width]="'745px'" [height]="'500px'"
+  #faDialog>
+  <div class="row column height100 page_container_color_dark_1">
     <!-- inputs -->
-    <div class="row v_center pad_5 pad_left10 pad_right10 dialog_header_color_light_2"
-         style="border-left:5px solid hsla(0,0%,100%,.3);">
-      <div class="col size_1 pad_right5">
+    <div class="col v_center pad_5 page_container_color">
+      <div class="col size_1 mar_3">
         <input class="access fullwidth_input overlay_alt2 page_container_color mar_right5"
                type="text" aria-label="Filter Icons" (keyup.enter)="filterClasses()"
                [(ngModel)]="filter" placeholder="Filter Icons..." />
       </div>
-      <div class="col">
-        <button class="access btn_pulse sm"
-                pTooltip="Filter"
-                aria-label="Filter" (click)="filterClasses()">
-          <i class="fas fa-search"></i>
+      <div class="col" style="padding-right:8px;">
+        <button class="access btn md overlay_alt2 bg_blue_alt mar_3"
+                pTooltip="Filter" aria-label="Filter" (click)="filterClasses()">
+          <span class="text">Submit</span>
+          <span class="icon border_left grow"><i class="fas fa-search"></i></span>
         </button>
-        <button class="access btn_pulse sm"
-                pTooltip="Clear"
-                aria-label="Clear" (click)="clear()">
-          <i class="fas fa-undo-alt"></i>
+        <button class="access btn md overlay mar_3"
+                pTooltip="Clear" aria-label="Clear" (click)="clear()">
+          <span class="text">Clear</span>
+          <span class="icon border_left_alt grow"><i class="fas fa-undo-alt"></i></span>
         </button>
       </div>
     </div>
+    <div class="col" style="background-color:rgba(0,0,0,.3); height:3px;">
+      <div class="col size_1"></div>
+      <div class="col size_1 bg_blue"></div>
+      <div class="col size_1 bg_purple"></div>
+      <div class="col size_1 bg_yellow"></div>
+      <div class="col size_1 bg_red"></div>
+      <div class="col size_8"></div>
+    </div>
     <!-- icons list -->
-    <div class="row wrap pad_5 scroll_yauto wac_icon_select_list">
-      <button class="col size_1 access btn underline_md wac_icon_select_btn brad_3 mar_3"
-              [ngClass]="faClass === hoveredClass ? 'overlay_alt2 page_container_color' : 'overlay'"
-              (mouseover)="hoveredClass = faClass"
-              (mouseout)="hoveredClass = null"
-              *ngFor="let faClass of getValues()"
-              (click)="choose(faClass.toString())"
-              pTooltip="{{faClass}}" tooltipPosition="bottom"
-              [style.display]="icons[faClass.toString()] ? 'flex' : 'none'"
-              [attr.aria-label]="'Choose ' + faClass">
-        <i [ngClass]="faClass.toString()"></i>
-      </button>
+    <div class="row scroll_y">
+      <div class="row_block width100">
+        <div class="row wrap pad_5">
+          <button *ngFor="let faClass of getValues()"
+                  class="access btn brad_3 mar_3 overlay_alt2"
+                  style="box-sizing:border-box; width:60px; height:60px;"
+                  [ngClass]="faClass === hoveredClass ? 'page_container_color' : 'page_container_color_dark_1'"
+                  (mouseover)="hoveredClass = faClass"
+                  (mouseout)="hoveredClass = null"
+                  (click)="choose(faClass.toString())"
+                  pTooltip="{{faClass}}" tooltipPosition="bottom"
+                  [style.display]="icons[faClass.toString()] ? 'flex' : 'none'"
+                  [attr.aria-label]="'Choose ' + faClass">
+            <i [ngClass]="faClass.toString()" style="font-size:32px;"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-</wily-dialog>
+</wily-flex-dialog>
