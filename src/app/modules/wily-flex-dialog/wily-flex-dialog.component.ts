@@ -12,6 +12,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 @Component({
   selector: 'wily-flex-dialog',
   templateUrl: 'wily-flex-dialog.component.html',
+  styleUrls: ['wily-flex-dialog.component.css'],
   animations: [
     trigger('dialog', [
       state('void', style({ transform: 'scale(0.5)', opacity: '0' })),
