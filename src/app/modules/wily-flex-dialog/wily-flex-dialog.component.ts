@@ -29,8 +29,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class WilyFlexDialogComponent {
 
   effectiveWidth$: Observable<string> = fromEvent(window, 'resize').pipe(
-    map(_______ => window.innerWidth),
     startWith(window.innerWidth),
+    map(_______ => window.innerWidth),
     map(windowWidth => {
       let width: number;
       if (this.width.includes('px')) {
