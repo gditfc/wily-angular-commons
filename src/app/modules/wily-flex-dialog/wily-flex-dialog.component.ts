@@ -14,13 +14,13 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   templateUrl: 'wily-flex-dialog.component.html',
   animations: [
     trigger('dialog', [
-      state('void', style({ transform: 'scale(0)'})),
+      state('void', style({ transform: 'scale(0.5)', opacity: '0' })),
       transition('void => *', [
         style({ height: '*', width: '*' }),
-        animate('.3s 0ms ease-in-out', style({ transform: 'scale(1)'}) )
+        animate('.15s 0ms ease-in-out', style({ transform: 'scale(1)', opacity: '1' }) )
       ]),
       transition(':leave', [
-        animate('.3s 0ms ease-in-out', style({ transform: 'scale(0)' }))
+        animate('.15s 0ms ease-in-out', style({ transform: 'scale(0.5)', opacity: '0' }))
       ]),
     ])
   ]

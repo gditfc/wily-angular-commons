@@ -7,8 +7,11 @@
 </button>
 
 <!-- picker dialog -->
-<wily-dialog [object]="showDialog" title="Choose an Icon"
-             [width]="'750px'" [height]="'500px'" #faDialog>
+<wily-flex-dialog
+  [object]="showDialog"
+  title="Choose an Icon"
+  [width]="'745px'" [height]="'500px'"
+  #faDialog>
   <div class="row column height100 page_container_color_dark_1">
     <!-- inputs -->
     <div class="col v_center pad_5 page_container_color">
@@ -39,9 +42,9 @@
       <div class="col size_8"></div>
     </div>
     <!-- icons list -->
-    <div class="row pad_5 scroll_y">
+    <div class="row scroll_y">
       <div class="row_block width100">
-        <div class="row wrap">
+        <div class="row wrap pad_5">
           <button *ngFor="let faClass of getValues()"
                   class="access btn brad_3 mar_3 overlay_alt2"
                   style="box-sizing:border-box; width:60px; height:60px;"
@@ -58,4 +61,4 @@
       </div>
     </div>
   </div>
-</wily-dialog>
+</wily-flex-dialog>
