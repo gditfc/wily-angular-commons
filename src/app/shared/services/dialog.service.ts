@@ -23,7 +23,7 @@ export class DialogService {
     if (dialog) {
       if (this.dialogs.length === 0) {
         window.addEventListener( 'keyup', this.escapeListener);
-        document.documentElement.classList.add('scroll_none');
+        document.body.classList.add('scroll_none');
       }
       this.dialogs.push(dialog);
     }
@@ -35,7 +35,7 @@ export class DialogService {
     }
     if (this.dialogs.length === 0) {
       window.removeEventListener( 'keyup', this.escapeListener);
-      document.documentElement.classList.remove('scroll_none');
+      document.body.classList.remove('scroll_none');
     }
   }
 

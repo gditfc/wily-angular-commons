@@ -74,6 +74,12 @@ export class WilyFlexDialogComponent {
   titleClass = 'dialog_header_color';
 
   /**
+   * Show or hide the title bar
+   */
+  @Input()
+  showTitle = true;
+
+  /**
    * Class to apply to the body of the dialog
    */
   @Input()
