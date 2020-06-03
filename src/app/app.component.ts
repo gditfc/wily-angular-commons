@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {DialogComponent} from './modules/dialog/dialog.component';
+import {WilyDialogLegacyComponent} from './modules/wily-dialog-legacy/wily-dialog-legacy.component';
 import {PushContainerComponent} from './modules/push-container/push-container.component';
 
 /**
@@ -33,7 +33,7 @@ export class AppComponent {
    * Reference to the dialog component
    */
   @ViewChild('dialog', {static: false})
-  dialog: DialogComponent;
+  dialog: WilyDialogLegacyComponent;
 
   /**
    * Push Container component.

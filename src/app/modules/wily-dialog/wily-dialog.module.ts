@@ -1,20 +1,20 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DialogComponent} from './dialog.component';
 import {DialogModule} from 'primeng/dialog';
 import {TooltipModule} from 'primeng/tooltip';
+import {WilyDialogComponent} from './wily-dialog.component';
 
 @NgModule({
   declarations: [
-    DialogComponent
+    WilyDialogComponent
   ],
   imports: [
     CommonModule,
     DialogModule,
-    TooltipModule,
+    TooltipModule
   ],
   exports: [
-    DialogComponent
+    WilyDialogComponent
   ]
 })
 export class WilyDialogModule {

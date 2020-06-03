@@ -6,8 +6,8 @@ import {WilyIconsSolid} from './models/wily-icons-solid.model';
 import {IconSelectComponent} from './components/icon-select.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TooltipModule} from 'primeng/tooltip';
-import {WilyDialogModule} from '../dialog/wily-dialog.module';
-import {WilyFlexDialogModule} from '../wily-flex-dialog/wily-flex-dialog.module';
+import {WilyDialogLegacyModule} from '../wily-dialog-legacy/wily-dialog-legacy.module';
+import {WilyDialogModule} from '../wily-dialog/wily-dialog.module';
 
 /**
  * Reference to the Font Awesome variable to add icons
@@ -23,8 +23,8 @@ const FontAwesome = window['FontAwesome'];
         FormsModule,
         ReactiveFormsModule,
         TooltipModule,
-        WilyDialogModule,
-        WilyFlexDialogModule
+        WilyDialogLegacyModule,
+        WilyDialogModule
     ],
   exports: [
     IconSelectComponent

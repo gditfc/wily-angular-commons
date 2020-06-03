@@ -6,10 +6,10 @@ import {Dialog} from 'primeng/dialog';
  * consistent across all use cases.
  */
 @Component({
-  selector: 'wily-dialog',
-  templateUrl: 'dialog.component.html'
+  selector: 'wily-dialog-legacy',
+  templateUrl: 'wily-dialog-legacy.component.html'
 })
-export class DialogComponent {
+export class WilyDialogLegacyComponent {
 
   /**
    * Object to operate whether the dialog is open/closed
