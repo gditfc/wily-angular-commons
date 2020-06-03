@@ -11,6 +11,7 @@
   [object]="showDialog"
   title="Choose an Icon"
   [width]="'745px'" [height]="'500px'"
+  (closed)="closed.emit()"
   #faDialog>
   <div class="row column height100 page_container_color_dark_1">
     <!-- inputs -->
