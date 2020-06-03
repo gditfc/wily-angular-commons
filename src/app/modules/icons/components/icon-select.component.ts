@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {WilyDialogLegacyComponent} from '../../wily-dialog-legacy/wily-dialog-legacy.component';
+import {DialogComponent} from '../../dialog/dialog.component';
 import {WilyIconsLight} from '../models/wily-icons-light.model';
 import {WilyIconsRegular} from '../models/wily-icons-regular.model';
 import {WilyIconsSolid} from '../models/wily-icons-solid.model';
@@ -119,7 +119,7 @@ export class IconSelectComponent {
    * Reference to the dialog component
    */
   @ViewChild('faDialog', {static: false})
-  faDialog: WilyDialogLegacyComponent;
+  faDialog: DialogComponent;
 
   /**
    * Color class of the button

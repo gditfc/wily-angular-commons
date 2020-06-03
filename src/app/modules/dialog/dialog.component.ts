@@ -11,8 +11,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
  */
 @Component({
   selector: 'wily-dialog',
-  templateUrl: 'wily-dialog.component.html',
-  styleUrls: ['wily-dialog.component.css'],
+  templateUrl: 'dialog.component.html',
+  styleUrls: ['dialog.component.css'],
   animations: [
     trigger('dialog', [
       state('void', style({ transform: 'scale(0.5)', opacity: '0' })),
@@ -26,7 +26,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-export class WilyDialogComponent {
+export class DialogComponent {
 
   effectiveWidth$: Observable<string> = fromEvent(window, 'resize').pipe(
     startWith(window.innerWidth),
