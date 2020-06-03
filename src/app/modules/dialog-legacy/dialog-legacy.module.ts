@@ -17,5 +17,5 @@ import {TooltipModule} from 'primeng/tooltip';
     DialogLegacyComponent
   ]
 })
-export class DialogLegacyModule {
+export class WilyDialogLegacyModule {
 }

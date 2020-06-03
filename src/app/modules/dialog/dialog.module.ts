@@ -15,5 +15,5 @@ import {DialogComponent} from './dialog.component';
     DialogComponent
   ]
 })
-export class DialogModule {
+export class WilyDialogModule {
 }
