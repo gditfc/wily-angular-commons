@@ -1,6 +1,6 @@
 <div [ngClass]="{'wily_dialog_overlay' : object}">
   <div [@dialog] class="wily_dialog_container" *ngIf="object">
-    <div class="col dialog_body_color shadow wily_dialog_box"
+    <div class="col shadow wily_dialog_box"
          *ngIf="effectiveWidth$ | async as effectiveWidth"
          [ngStyle]="{'width': effectiveWidth, 'height': height}">
       <!-- dialog header -->
