@@ -58,8 +58,17 @@
 </div>
 
 <!-- VERSION 2 & 3 -->
-<div class="row center_center" *ngIf="version === '2' || version === '3'">
-  <div class="row_block">
+<div class="center_center wrap_reverse" *ngIf="version === '2' || version === '3'">
+    <!-- items per page -->
+    <div class="col center_center mar_3 mar_left15 mar_right15" *ngIf="version === '2'">
+      <div class="text xsm center_right mar_right5" style="width:120px;">
+        <label for="pageSizeV2">Items per Page:</label>
+      </div>
+      <select class="access fullwidth_input overlay_alt2 page_container_color text sm" style="width:50px;"
+              [(ngModel)]="pageSize" (change)="pageSizeChange()" title="Choose Page Size" id="pageSizeV2">
+        <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize">{{option}}</option>
+      </select>
+    </div>
     <!-- paginator -->
     <div class="col center_center mar_3">
       <!-- first -->
@@ -181,15 +190,4 @@
         </div>
       </p-overlayPanel>
     </div>
-    <!-- items per page -->
-    <div class="col center_center mar_3" *ngIf="version === '2'">
-      <div class="text xsm center_right mar_right5" style="width:120px;">
-        <label for="pageSizeV2">Items per Page:</label>
-      </div>
-      <select class="access fullwidth_input overlay_alt2 page_container_color text sm" style="width:50px;"
-              [(ngModel)]="pageSize" (change)="pageSizeChange()" title="Choose Page Size" id="pageSizeV2">
-        <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize">{{option}}</option>
-      </select>
-    </div>
-  </div>
 </div>
