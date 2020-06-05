@@ -118,7 +118,7 @@ export class IconSelectComponent {
   /**
    * Reference to the dialog component
    */
-  @ViewChild('faDialog', {static: false})
+  @ViewChild('faDialog')
   faDialog: DialogComponent;
 
   /**
