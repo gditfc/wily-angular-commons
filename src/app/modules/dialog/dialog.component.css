@@ -1,0 +1,52 @@
+/* dark overlay behind the dialog */
+.wily_dialog_overlay {
+  position: fixed;
+  display: block;
+  width: 100%; /* used intead of vh for mobile safari compatibility */
+  height: 100%; /* used intead of vh for mobile safari compatibility */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3); /* black background with opacity */
+  z-index: 1000; /* Specify a stack order in case of using a different order for other elements */
+}
+/* invisible container over the overlay that fills screen and then centers dialog within it */
+.wily_dialog_container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex-direction:column; /* so that height is scaleable automatically */
+  display:flex;
+  align-items:center; /* center the inner dialog container */
+  justify-content:center;
+  z-index: 1001; /* Specify a stack order in case of using a different order for other elements */
+}
+/* inner dialog container that is visible */
+.wily_dialog_box {
+  box-sizing:border-box;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border-radius:3px;
+}
+/* accent in dialog header */
+.wily_dialog_accent {
+  width:8px;
+  background-color: rgba(255,255,255,0.25);
+}
+/* make dialog scale to fill screen at mobile breakpoint */
+@media screen and (max-width:768px) {
+  .wily_dialog_box {
+    border-radius:0;
+    width:100% !important;
+    height: 100% !important;
+    max-height:unset !important;
+    max-width:unset !important;
+  }
+}

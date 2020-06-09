@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {WilyDialogModule} from './modules/dialog/wily-dialog.module';
+import {WilyDialogLegacyModule} from './modules/dialog-legacy/dialog-legacy.module';
 import {WilyProfilePicModule} from './modules/profile-pic/wily-profile-pic.module';
 import {TooltipModule} from 'primeng/tooltip';
 import {WilyPaginatorModule} from './modules/paginator/wily-paginator.module';
@@ -10,7 +10,7 @@ import {WilyRichTextModule} from './modules/rich-text/wily-rich-text.module';
 import {WilyIconsModule} from './modules/icons/wily-icons.module';
 import {FormsModule} from '@angular/forms';
 import {WilyEndpointStateModule} from './modules/endpoint-state/endpoint-state.module';
-import {WilyFlexDialogModule} from './modules/wily-flex-dialog/wily-flex-dialog.module';
+import {WilyDialogModule} from './modules/dialog/dialog.module';
 
 
 @NgModule({
@@ -20,8 +20,8 @@ import {WilyFlexDialogModule} from './modules/wily-flex-dialog/wily-flex-dialog.
     imports: [
         BrowserModule,
         TooltipModule,
+        WilyDialogLegacyModule,
         WilyDialogModule,
-        WilyFlexDialogModule,
         WilyProfilePicModule,
         WilyPaginatorModule,
         WilyPushContainerModule,

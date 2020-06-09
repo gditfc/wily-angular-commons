@@ -134,6 +134,12 @@ export class IconSelectComponent {
   selected: EventEmitter<any> = new EventEmitter();
 
   /**
+   * Dialog closed event emitter
+   */
+  @Output()
+  closed = new EventEmitter<any>();
+
+  /**
    * Object that controls whether to show the dialog or not
    */
   showDialog: any;

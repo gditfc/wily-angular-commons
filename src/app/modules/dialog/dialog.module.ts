@@ -1,21 +1,19 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DialogModule} from 'primeng/dialog';
 import {TooltipModule} from 'primeng/tooltip';
-import {WilyFlexDialogComponent} from './wily-flex-dialog.component';
+import {DialogComponent} from './dialog.component';
 
 @NgModule({
   declarations: [
-    WilyFlexDialogComponent
+    DialogComponent
   ],
   imports: [
     CommonModule,
-    DialogModule,
     TooltipModule
   ],
   exports: [
-    WilyFlexDialogComponent
+    DialogComponent
   ]
 })
-export class WilyFlexDialogModule {
+export class WilyDialogModule {
 }

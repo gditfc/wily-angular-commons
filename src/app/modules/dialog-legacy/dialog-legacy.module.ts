@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DialogComponent} from './dialog.component';
+import {DialogLegacyComponent} from './dialog-legacy.component';
 import {DialogModule} from 'primeng/dialog';
 import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
-    DialogComponent
+    DialogLegacyComponent
   ],
   imports: [
     CommonModule,
@@ -14,8 +14,8 @@ import {TooltipModule} from 'primeng/tooltip';
     TooltipModule,
   ],
   exports: [
-    DialogComponent
+    DialogLegacyComponent
   ]
 })
-export class WilyDialogModule {
+export class WilyDialogLegacyModule {
 }

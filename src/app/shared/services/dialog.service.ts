@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
+import {DialogLegacyComponent} from '../../modules/dialog-legacy/dialog-legacy.component';
 import {DialogComponent} from '../../modules/dialog/dialog.component';
-import {WilyFlexDialogComponent} from '../../modules/wily-flex-dialog/wily-flex-dialog.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
 
-  dialogs: WilyFlexDialogComponent[] = [];
+  dialogs: DialogComponent[] = [];
 
   private escapeListener: (event) => void = event => {
     if (event.key === 'Esc' || event.key === 'Escape') {
@@ -19,7 +19,7 @@ export class DialogService {
     }
   }
 
-  registerDialog(dialog: WilyFlexDialogComponent): void {
+  registerDialog(dialog: DialogComponent): void {
     if (dialog) {
       if (this.dialogs.length === 0) {
         window.addEventListener( 'keyup', this.escapeListener);
@@ -29,7 +29,7 @@ export class DialogService {
     }
   }
 
-  unregisterDialog(dialog: WilyFlexDialogComponent): void {
+  unregisterDialog(dialog: DialogComponent): void {
     if (this.dialogs.includes(dialog)) {
       this.dialogs = this.dialogs.filter(d => d !== dialog);
     }

@@ -1,5 +1,5 @@
 <!-- choose button -->
-<button class="access btn underline_md md"
+<button class="access btn glow md"
         [ngClass]="buttonColorClass"
         (click)="doShowDialog()"
         aria-label="Choose Icon">
@@ -7,10 +7,11 @@
 </button>
 
 <!-- picker dialog -->
-<wily-flex-dialog
+<wily-dialog
   [object]="showDialog"
-  title="Choose an Icon"
+  [title]="'Choose an Icon'"
   [width]="'745px'" [height]="'500px'"
+  (closed)="closed.emit()"
   #faDialog>
   <div class="row column height100 page_container_color_dark_1">
     <!-- inputs -->
@@ -61,4 +62,4 @@
       </div>
     </div>
   </div>
-</wily-flex-dialog>
+</wily-dialog>
