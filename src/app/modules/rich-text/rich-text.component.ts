@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, forwardRef, Input, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Editor} from 'primeng/editor';
-import {DomHandler} from 'primeng/api';
+import {DomHandler} from 'primeng/dom';
 
 /**
  * Accessor information for the Rich Text Editor

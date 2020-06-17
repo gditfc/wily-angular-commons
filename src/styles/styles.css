@@ -27,3 +27,8 @@
 .scroll_none{
   overflow:hidden !important;
 }
+
+.ui-widget-overlay{
+  background-color:rgba(0,0,0,0.4);
+  opacity:1 !important;
+}

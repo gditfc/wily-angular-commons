@@ -32,13 +32,13 @@ export class AppComponent {
   /**
    * Reference to the dialog component
    */
-  @ViewChild('dialog', {static: false})
+  @ViewChild('dialog')
   dialog: DialogLegacyComponent;
 
   /**
    * Push Container component.
    */
-  @ViewChild('pushContainerLeft', {static: false})
+  @ViewChild('pushContainerLeft')
   pushContainerLeft: PushContainerComponent;
 
   text: string;

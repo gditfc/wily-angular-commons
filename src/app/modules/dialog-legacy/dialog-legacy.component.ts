@@ -50,7 +50,7 @@ export class DialogLegacyComponent {
   /**
    * Reference to the PrimeNG Dialog
    */
-  @ViewChild('dialog', {static: false})
+  @ViewChild('dialog')
   dialog: Dialog;
 
   /**
