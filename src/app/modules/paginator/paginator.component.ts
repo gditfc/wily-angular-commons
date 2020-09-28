@@ -8,7 +8,7 @@ import {PaginationEvent} from './pagination-event.model';
   selector: 'wily-paginator',
   templateUrl: 'paginator.component.html'
 })
-export class PaginatorComponent implements OnChanges{
+export class PaginatorComponent implements OnChanges {
 
   /**
    * Paginator Version to use (1-4 available, 1 is default)
@@ -147,7 +147,6 @@ export class PaginatorComponent implements OnChanges{
    */
   pageSizeChange(): void {
     this.goToFirst();
-    this.emitEvent();
   }
 
   /**
