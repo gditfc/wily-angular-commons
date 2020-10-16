@@ -218,6 +218,14 @@ export class UserIdleService {
   }
 
   /**
+   * Reset the timer
+   */
+  resetTimer() {
+    this.stopTimer();
+    this.isTimeout = false;
+  }
+
+  /**
    * Set up the idle config
    * @param config the config to set
    * @private
