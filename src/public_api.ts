@@ -9,6 +9,7 @@ export * from './app/modules/dialog-legacy/dialog-legacy.module';
 export * from './app/modules/icons/wily-icons.module';
 export * from './app/modules/endpoint-state/endpoint-state.module';
 export * from './app/modules/dialog/dialog.module';
+export * from './app/modules/user-idle/user-idle.module';
 
 /** COMPONENTS */
 export * from './app/modules/icons/components/icon-select.component';
