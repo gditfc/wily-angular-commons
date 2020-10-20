@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://styles.transcend.csra.io/v3.1.1/transcend.css';
+@import 'https://styles.transcend.csra.io/v3.1.3/transcend.css';
 @import 'theme.css';
 
 .access{
@@ -12,22 +12,7 @@
   outline-offset: 5px;
 }
 
-.btn.disabled {
-  cursor:default;
-  opacity:0.5;
-}
-.btn.disabled:hover > .icon > svg {
-  transform:none !important;
-}
-
-.btn.disabled.glow:hover {
-  box-shadow:none !important;
-}
-
-.scroll_none{
-  overflow:hidden !important;
-}
-
+/* REMOVE AFTER STYLES UPGRADE */
 .ui-widget-overlay{
   background-color:rgba(0,0,0,0.4);
   opacity:1 !important;
