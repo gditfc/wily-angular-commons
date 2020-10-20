@@ -128,6 +128,12 @@ export class IconSelectComponent {
   buttonColorClass = 'overlay_alt2 bg_blue_alt';
 
   /**
+   * Icon select opened event emitter
+   */
+  @Output()
+  opened = new EventEmitter<void>();
+
+  /**
    * Icon selected event emitter
    */
   @Output()
@@ -193,6 +199,7 @@ export class IconSelectComponent {
   doShowDialog(): void {
     this.showDialog = {};
     this.faDialog.open();
+    this.opened.emit();
   }
 
   /**

@@ -24,7 +24,10 @@
       <!-- button toolbar -->
       <div class="row overlay pad_5 center_center brad_3">
         <!-- icon select -->
-        <wily-icon-select (selected)="iconSelected($event)"></wily-icon-select>
+        <wily-icon-select (opened)="iconSelectOpened()"
+                          (closed)="iconSelectClosed()"
+                          (selected)="iconSelected($event)">
+        </wily-icon-select>
       </div>
       <div class="row overlay pad_5 center_center brad_3">
         <!-- icon select -->

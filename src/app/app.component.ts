@@ -65,4 +65,18 @@ export class AppComponent {
   iconSelected(event: any) {
     console.log(event.value);
   }
+
+  /**
+   * Icon select opened event handler
+   */
+  iconSelectOpened() {
+    console.log('Icon select opened');
+  }
+
+  /**
+   * Icon select closed event handler
+   */
+  iconSelectClosed(): void {
+    console.log('Icon select closed');
+  }
 }
