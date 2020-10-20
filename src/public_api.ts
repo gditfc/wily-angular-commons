@@ -9,6 +9,7 @@ export * from './app/modules/dialog-legacy/dialog-legacy.module';
 export * from './app/modules/icons/wily-icons.module';
 export * from './app/modules/endpoint-state/endpoint-state.module';
 export * from './app/modules/dialog/dialog.module';
+export * from './app/modules/user-idle/wily-user-idle.module';
 
 /** COMPONENTS */
 export * from './app/modules/icons/components/icon-select.component';
@@ -29,6 +30,7 @@ export * from './app/shared/services/base-data.service';
 export * from './app/shared/services/local-storage.service';
 export * from './app/shared/services/cognito-auth.service';
 export * from './app/shared/services/dialog.service';
+export * from './app/modules/user-idle/services/user-idle.service';
 
 /** MODELS */
 export * from './app/modules/paginator/pagination-event.model';
@@ -43,6 +45,7 @@ export * from './app/shared/models/chart/gantt-chart.model';
 export * from './app/shared/models/chart/pie-chart.model';
 export * from './app/shared/models/chart/stacked-bar-chart.model';
 export * from './app/shared/models/chart/state-choropleth.model';
+export * from './app/modules/user-idle/models/user-idle-config.model';
 
 /** ENUMS */
 export * from './app/shared/enums/endpoint-status.enum';

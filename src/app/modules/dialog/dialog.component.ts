@@ -1,8 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {DialogService} from '../../shared/services/dialog.service';
-import {Observable} from 'rxjs/internal/Observable';
-import {fromEvent} from 'rxjs/internal/observable/fromEvent';
-import {map, mapTo, startWith, tap} from 'rxjs/operators';
+import {fromEvent, Observable} from 'rxjs/index';
+import {map, startWith} from 'rxjs/operators';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 /**

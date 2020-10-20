@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, forwardRef, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, forwardRef, Input, Output, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Editor} from 'primeng/editor';
 import {DomHandler} from 'primeng/dom';
+import { EventEmitter } from '@angular/core';
 
 /**
  * Accessor information for the Rich Text Editor
@@ -51,6 +52,13 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
    */
   @Input()
   placeholder = '';
+
+  /**
+   * Event emitted on editor text change. Wrapper around the p-editor onTextChange event,
+   * see PrimeNG documentation for event payload details
+   */
+  @Output()
+  textChanged = new EventEmitter<any>();
 
   /**
    * Reference to the PrimeNG Editor

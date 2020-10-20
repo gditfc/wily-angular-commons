@@ -24,7 +24,10 @@
       <!-- button toolbar -->
       <div class="row overlay pad_5 center_center brad_3">
         <!-- icon select -->
-        <wily-icon-select (selected)="iconSelected($event)"></wily-icon-select>
+        <wily-icon-select (opened)="iconSelectOpened()"
+                          (closed)="iconSelectClosed()"
+                          (selected)="iconSelected($event)">
+        </wily-icon-select>
       </div>
       <div class="row overlay pad_5 center_center brad_3">
         <!-- icon select -->
@@ -104,7 +107,7 @@
         <!-- rich text -->
         <div class="col size_1 overlay brad_3 pad_5 mar_3">
           <div class="row_block width100 overlay_alt2 page_container_color brad_3">
-            <wily-rich-text [(ngModel)]="text">
+            <wily-rich-text [(ngModel)]="text" (textChanged)="handleEditorTextChange($event)">
             </wily-rich-text>
           </div>
         </div>

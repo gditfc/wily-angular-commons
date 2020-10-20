@@ -9,9 +9,14 @@
 
 .push_close_bar {
   position: absolute;
-  right:12px;
-  top:12px;
+  right:0;
+  top:0;
+  width:45px;
+  height:45px;
   z-index: 999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .layout_sidebar_inactive_left {

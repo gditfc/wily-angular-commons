@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://styles.transcend.csra.io/v3.1.3/transcend.css';
+@import 'https://styles.transcend.csra.io/v3.1.5/transcend.css';
 @import 'theme.css';
 
 .access{
@@ -10,10 +10,7 @@
 .access:focus{
   outline:rgba(38,184,239,1.0) 1px solid;
   outline-offset: 5px;
+  position:relative;
+  z-index:1;
 }
 
-/* REMOVE AFTER STYLES UPGRADE */
-.ui-widget-overlay{
-  background-color:rgba(0,0,0,0.4);
-  opacity:1 !important;
-}
