@@ -36,9 +36,9 @@
       </ng-container>
       <!-- previous button disabled -->
       <ng-template #disabledPrevious>
-        <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px;">
+        <button class="circle_20px overlay_alt2 bg_grey_alt btn" disabled style="margin:1px 3px;">
           <i class="fas fa-angle-left"></i>
-        </div>
+        </button>
       </ng-template>
       <!-- next button -->
       <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
@@ -49,9 +49,9 @@
       </ng-container>
       <!-- next button disabled -->
       <ng-template #disabledNext>
-        <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px;">
+        <button class="circle_20px overlay_alt2 bg_grey_alt btn" disabled style="margin:1px 3px;">
           <i class="fas fa-angle-right"></i>
-        </div>
+        </button>
       </ng-template>
     </div>
   </div>
@@ -79,9 +79,9 @@
     </button>
     <!-- first button disabled -->
     <ng-template #disabledFirst>
-      <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 0 1px 3px;">
+      <button class="circle_20px overlay_alt2 bg_grey_alt btn" disabled style="margin:1px 0 1px 3px;">
         <i class="fas fa-angle-double-left"></i>
-      </div>
+      </button>
     </ng-template>
     <!-- previous -->
     <ng-container *ngIf="activePage !== 0 else disabledPrevious">
@@ -93,9 +93,9 @@
     </ng-container>
     <!-- previous button disabled -->
     <ng-template #disabledPrevious>
-      <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px;">
+      <button class="circle_20px overlay_alt2 bg_grey_alt btn" disabled style="margin:1px 3px;">
         <i class="fas fa-angle-left"></i>
-      </div>
+      </button>
     </ng-template>
     <!-- navigation -->
     <div class="row v_center pad_left5 pad_right5 overlay_alt2 page_container_color"
@@ -159,9 +159,9 @@
     </ng-container>
     <!-- next button disabled -->
     <ng-template #disabledNext>
-      <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px;">
+      <button class="circle_20px overlay_alt2 bg_grey_alt btn" disabled style="margin:1px 3px;">
         <i class="fas fa-angle-right"></i>
-      </div>
+      </button>
     </ng-template>
     <!-- last -->
     <button *ngIf="activePage !== numberOfPages - 1 else disabledLast"
@@ -171,9 +171,9 @@
     </button>
     <!-- last button disabled -->
     <ng-template #disabledLast>
-      <div class="circle_20px overlay_alt2 bg_grey_alt btn disabled" style="margin:1px 3px 1px 0;">
+      <button class="circle_20px overlay_alt2 bg_grey_alt btn" disabled style="margin:1px 3px 1px 0;">
         <i class="fas fa-angle-double-right"></i>
-      </div>
+      </button>
     </ng-template>
     <!-- jump to page -->
     <p-overlayPanel appendTo="body" styleClass="overlay_alt2 page_container_color brad_3" #op>
