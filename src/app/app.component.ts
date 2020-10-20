@@ -79,4 +79,16 @@ export class AppComponent {
   iconSelectClosed(): void {
     console.log('Icon select closed');
   }
+
+  /**
+   * Rich text editor text changed event handler
+   * @param event
+   */
+  handleEditorTextChange(event: any): void {
+    const { textValue } = event;
+    console.log('Editor is empty:');
+    console.log(
+      !(textValue as string)?.replace(/\s+/g, '')?.length
+    );
+  }
 }
