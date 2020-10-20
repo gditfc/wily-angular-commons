@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "rxjs"
+            ],
             "aot": true,
             "outputPath": "dist/wily-angular-commons",
             "index": "src/index.html",
