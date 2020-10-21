@@ -1,5 +1,5 @@
 <div [ngClass]="{'wily_dialog_overlay' : object}">
-  <div [@dialog] class="wily_dialog_container" *ngIf="object">
+  <div [@dialog] class="wily_dialog_container" *ngIf="object" cdkTrapFocus>
     <div class="col shadow wily_dialog_box"
          *ngIf="effectiveWidth$ | async as effectiveWidth"
          [ngStyle]="{'width': effectiveWidth, 'height': height}">
@@ -12,7 +12,11 @@
           </div>
         </div>
         <div class="col" style="padding:5px 10px 5px 5px;">
-          <button class="access btn_pulse sm" (click)="close()" aria-label="Close">
+          <button #closeButton
+                  (click)="close()"
+                  (cdkObserveContent)="focusCloseButton()"
+                  class="access btn_pulse sm"
+                  aria-label="Close">
             <i class="fas fa-times"></i>
           </button>
         </div>

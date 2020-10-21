@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {DialogService} from '../../shared/services/dialog.service';
 import {fromEvent, Observable} from 'rxjs/index';
 import {map, startWith} from 'rxjs/operators';
@@ -27,6 +27,15 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class DialogComponent {
 
+  /**
+   * Element reference to the dialog close button
+   */
+  @ViewChild('closeButton')
+  closeButton: ElementRef<HTMLButtonElement>;
+
+  /**
+   * Observable to update the effective width of the dialog on screen resize
+   */
   effectiveWidth$: Observable<string> = fromEvent(window, 'resize').pipe(
     startWith(window.innerWidth),
     map(_______ => window.innerWidth),
@@ -119,12 +128,14 @@ export class DialogComponent {
   }
 
   /**
-   * Open the dialog, if we're on a phone or tablet, make the dialog takeover the screen.
-   * Method has no body, it's just here for compatibility with the old dialog that wrapped
-   * the p-dialog
+   * Method to focus on the dialog close button
    */
-  open(): void {
-
+  focusCloseButton(): void {
+    this.closeButton.nativeElement.focus();
   }
 
+  /**
+   * Method for compatibility with legacy dialog API. Method does nothing.
+   */
+  open(): void { }
 }
