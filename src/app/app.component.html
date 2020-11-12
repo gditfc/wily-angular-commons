@@ -251,6 +251,7 @@
     [showSidePanel]="false"
     [width]="300"
     [showCloseButton]="true"
+    (closed)="onPushContainerClose()"
     #pushContainerLeft>
     <div>
       LEFT PUSH

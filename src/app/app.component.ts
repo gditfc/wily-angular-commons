@@ -91,4 +91,8 @@ export class AppComponent {
       !(textValue as string)?.replace(/\s+/g, '')?.length
     );
   }
+
+  onPushContainerClose() {
+    console.log('Push container closed.');
+  }
 }
