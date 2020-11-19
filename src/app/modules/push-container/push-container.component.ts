@@ -138,6 +138,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       if (this.closeOnResize) {
         this.showSidePanel = false;
         this.visibility = false;
+        this.closed.emit();
       }
 
       this.setMargin('0px');

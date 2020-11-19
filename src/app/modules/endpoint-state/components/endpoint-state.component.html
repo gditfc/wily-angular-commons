@@ -1,36 +1,60 @@
 <!-- loading -->
 <div class="row column center_center" *ngIf="loading && !loadingOverlay">
-  <!-- bars1 -->
-  <div *ngIf="loadingIcon === 'bars1'" class="bottom_center" style="height:50px; width:120px;">
-    <div class="row bars" style="height:4px;">
-      <div class="col size_1 bg_blue bar1"></div>
-      <div class="col size_1 bg_purple bar2"></div>
-      <div class="col size_1 bg_yellow bar3"></div>
-      <div class="col size_1 bg_red bar4"></div>
+  <ng-container [ngSwitch]="loadingIcon">
+    <!-- bars_bounce -->
+    <ng-container *ngSwitchCase="'bars_bounce'">
+      <div class="bars_bounce">
+        <div class="row" style="height:4px;">
+          <div class="col size_1 bg_blue_light_2 bar1"></div>
+          <div class="col size_1 bg_purple_light_2 bar2"></div>
+          <div class="col size_1 bg_yellow_light_2 bar3"></div>
+          <div class="col size_1 bg_red_light_2 bar4"></div>
+        </div>
+      </div>
+      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
+      <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
+    </ng-container>
+    <!-- bars_vertical -->
+    <ng-container *ngSwitchCase="'bars_vertical'">
+      <div class="bars_vertical">
+        <div class="col size_1 bg_blue_light_2 bar1"></div>
+        <div class="col size_1 bg_purple_light_2 bar2"></div>
+        <div class="col size_1 bg_yellow_light_2 bar3"></div>
+        <div class="col size_1 bg_red_light_2 bar4"></div>
+      </div>
+      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
+      <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
+    </ng-container>
+    <!-- bars_progress -->
+    <ng-container *ngSwitchCase="'bars_progress'">
+      <div class="bars_progress">
+        <div class="row overlay_alt1" style="height:6px; overflow:hidden; border-radius:2px;">
+          <div class="col size_1 bg_blue_light_2 bar1"></div>
+          <div class="col size_1 bg_purple_light_2 bar2"></div>
+          <div class="col size_1 bg_yellow_light_2 bar3"></div>
+          <div class="col size_1 bg_red_light_2 bar4"></div>
+        </div>
+      </div>
+      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
+      <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
+    </ng-container>
+    <div *ngSwitchDefault>
+      <i class="{{loadingIcon}} fa-fw fa-3x opac_80"></i>
+      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
+      <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
     </div>
-  </div>
-  <!-- bars2 -->
-  <div *ngIf="loadingIcon === 'bars2'" class="bottom_center" style="width:175px;">
-    <div class="row bars2 brad_5 mar_bot5" style="height:3px;">
-      <div class="col size_1 bg_blue bars2_1"></div>
-      <div class="col size_1 bg_purple bars2_2"></div>
-      <div class="col size_1 bg_yellow bars2_3"></div>
-      <div class="col size_1 bg_red bars2_4"></div>
-    </div>
-  </div>
-  <!-- bars3 -->
-  <div *ngIf="loadingIcon === 'bars3'" class="bottom_center" style="width:175px;">
-    <div class="row bars3 brad_5 mar_bot5" style="height:4px;">
-      <div class="col size_1 bg_blue bars3_1"></div>
-      <div class="col size_1 bg_purple bars3_2"></div>
-      <div class="col size_1 bg_yellow bars3_3"></div>
-      <div class="col size_1 bg_red bars3_4"></div>
-    </div>
-  </div>
-  <!-- icon -->
-  <i *ngIf="loadingIcon && loadingIcon !== 'bars'" class="{{loadingIcon}}" style="opacity:0.8;"></i>
-  <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
-  <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
+
+<!--    &lt;!&ndash; bars2 &ndash;&gt;-->
+<!--    <div *ngIf="loadingIcon === 'bars2'" class="bottom_center" style="width:175px;">-->
+<!--      <div class="row bars2 brad_5 mar_bot5" style="height:3px;">-->
+<!--        <div class="col size_1 bg_blue bars2_1"></div>-->
+<!--        <div class="col size_1 bg_purple bars2_2"></div>-->
+<!--        <div class="col size_1 bg_yellow bars2_3"></div>-->
+<!--        <div class="col size_1 bg_red bars2_4"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+  </ng-container>
 </div>
 
 <!-- loading overlay -->

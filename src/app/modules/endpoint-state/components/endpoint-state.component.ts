@@ -20,7 +20,7 @@ export class EndpointStateComponent implements OnInit {
    * Icon for loading state
    */
   @Input()
-  loadingIcon = 'fas fa-cog fa-fw fa-pulse fa-3x';
+  loadingIcon = 'bars_bounce';
 
   /**
    * Main text for loading state
