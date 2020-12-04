@@ -16,7 +16,7 @@
                   (click)="close()"
                   (cdkObserveContent)="focusCloseButton()"
                   class="access btn_pulse sm"
-                  aria-label="Close Dialog">
+                  [attr.aria-label]="'Close ' + title + ' Dialog'">
             <i class="fas fa-times"></i>
           </button>
         </div>

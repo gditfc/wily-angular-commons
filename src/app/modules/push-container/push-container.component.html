@@ -7,7 +7,8 @@
   [style.right]="getRightProperty()"
   [style.visibility]="visibility ? 'visible' : 'hidden'">
   <div class="push_close_bar" *ngIf="showCloseButton">
-    <button (click)="close()" class="data_hide_button access" tabindex="0" aria-label="Close">
+    <button (click)="close()" class="data_hide_button access" tabindex="0"
+            [attr.aria-label]="'Close ' + side + ' menu'">
       <i class="fas fa-times"></i>
     </button>
   </div>
