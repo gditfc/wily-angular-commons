@@ -91,6 +91,7 @@ export class DialogComponent {
   /**
    * Whether to show close button and allow escape to close
    */
+    // TODO: prevent close on escape when false
   @Input()
   allowClose = true;
 
