@@ -12,13 +12,15 @@
           </div>
         </div>
         <div class="col" style="padding:5px 10px 5px 5px;">
-          <button #closeButton
-                  (click)="close()"
-                  (cdkObserveContent)="focusCloseButton()"
-                  class="access btn_pulse sm"
-                  [attr.aria-label]="'Close ' + title + ' Dialog'">
-            <i class="fas fa-times"></i>
-          </button>
+          <ng-container *ngIf="allowClose">
+            <button #closeButton
+                    (click)="close()"
+                    (cdkObserveContent)="focusCloseButton()"
+                    class="access btn_pulse sm"
+                    [attr.aria-label]="'Close ' + title + ' Dialog'">
+              <i class="fas fa-times"></i>
+            </button>
+          </ng-container>
         </div>
       </div>
       <!-- dialog container -->

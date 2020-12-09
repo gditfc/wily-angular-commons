@@ -1,4 +1,4 @@
-<main>
+<main class="site-content">
   <!-- HEADER -->
   <div class="row v_center dialog_header_color page_shadow mar_bot10 pad_5">
     <!-- left push button -->
@@ -224,7 +224,7 @@
     </div>
   </wily-dialog>
 
-  <wily-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" width="auto" height="auto">
+  <wily-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" [allowClose]="false" width="auto" height="auto">
     <button class="access" (click)="obj3 = {}">Open Child</button>
     <wily-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null">
       <button class="access" (click)="obj4 = {}">Open Child</button>
