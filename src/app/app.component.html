@@ -97,9 +97,10 @@
             </div>
 
             <wily-endpoint-state
-              [loading]="true"
-              [loadingIcon]="'bars_vertical'"
-              [loadingOverlay]="false">
+              [loadingOverlay]="true"
+              [loadingOverlayText]="'Please wait while we get things ready for you'"
+              [loadingOverlaySubtext]="'This may take a few minutes...'"
+              [loadingIcon]="'bars_vertical'">
             </wily-endpoint-state>
           </div>
         </div>
