@@ -2,17 +2,34 @@
 @import 'https://styles.transcend.csra.io/v3.1.5/transcend.css';
 @import 'theme.css';
 
-.access{
-  outline:rgba(38,184,239,0.0) 1px solid;
-  transition:all 0.2s ease-in-out;
-  text-decoration: none;
-}
-.access:focus{
-  outline:rgba(38,184,239,1.0) 1px solid;
-  outline-offset: 5px;
+/*.access{*/
+/*  outline:rgba(38,184,239,0.0) 1px solid;*/
+/*  transition:all 0.2s ease-in-out;*/
+/*  text-decoration: none;*/
+/*}*/
+/*.access:focus{*/
+/*  outline:rgba(38,184,239,1.0) 1px solid;*/
+/*  outline-offset: 5px;*/
+/*  position:relative;*/
+/*  z-index:1;*/
+/*}*/
+
+.access {
   position:relative;
-  z-index:1;
+  overflow:visible;
 }
+.access:focus::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  border-radius: inherit;
+  background-color: transparent;
+  border:2px solid #65a3c7;
+}
+
 
 .site {
   position:fixed; /* so 100% height works correctly */
