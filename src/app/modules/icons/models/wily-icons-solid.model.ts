@@ -461,6 +461,32 @@ export class WilyIconsSolid {
   };
 
   /**
+   * wis fa-sidebar-close
+   */
+  static wisSidebarClose = {
+    prefix: 'wis',
+    iconName: 'sidebar-close',
+    icon: [
+      512, 512,
+      [],
+      null, 'M504.4,413.4c9.6,9.6,9.6,25.1,0,34.6l-23.2,23.2c-9.6,9.6-25.1,9.6-34.7,0L248,272.6c-9.6-9.6-9.6-25.1,0-34.7L446.5,39.5 c9.6-9.6,25.1-9.6,34.7,0l23.2,23.2c9.5,9.6,9.5,25.1,0,34.6L347,255.3L504.4,413.4z M72.7,16H40.3c-13.1,0-23.8,10.7-23.8,23.8 v432.4c0,13.1,10.7,23.8,23.8,23.8h32.4c13.1,0,23.8-10.7,23.8-23.8V39.8C96.5,26.7,85.8,16,72.7,16z'
+    ]
+  };
+
+  /**
+   * wis fa-sidebar-open
+   */
+  static wisSidebarOpen = {
+    prefix: 'wis',
+    iconName: 'sidebar-open',
+    icon: [
+      512, 512,
+      [],
+      null, 'M504.3,272.7L305.8,471.2c-9.6,9.6-25.1,9.6-34.7,0L248,448c-9.6-9.6-9.6-25.1,0-34.6l157.3-158L247.9,97.3 c-9.6-9.6-9.6-25.1,0-34.6l23.1-23.2c9.6-9.6,25.1-9.6,34.7,0L504.3,238C513.9,247.6,513.9,263.1,504.3,272.7z M72.7,16H40.3 c-13.1,0-23.8,10.7-23.8,23.8v432.4c0,13.1,10.7,23.8,23.8,23.8h32.4c13.1,0,23.8-10.7,23.8-23.8V39.8C96.5,26.7,85.8,16,72.7,16z'
+    ]
+  };
+
+  /**
    * wis fa-ssn
    */
   static wisSSN = {
@@ -531,6 +557,9 @@ export class WilyIconsSolid {
     WilyIconsSolid.wisPhysicalAddress,
     WilyIconsSolid.wisPhysicianPID,
     WilyIconsSolid.wisRadioButtons,
+    WilyIconsSolid.wisSelectAll,
+    WilyIconsSolid.wisSidebarClose,
+    WilyIconsSolid.wisSidebarOpen,
     WilyIconsSolid.wisSSN,
     WilyIconsSolid.wisTextArea,
     WilyIconsSolid.wisTextBox
