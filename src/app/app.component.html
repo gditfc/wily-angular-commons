@@ -1,4 +1,4 @@
-<main>
+<main class="site-content">
   <!-- HEADER -->
   <div class="row v_center dialog_header_color page_shadow mar_bot10 pad_5">
     <!-- left push button -->
@@ -97,9 +97,11 @@
             </div>
 
             <wily-endpoint-state
+              [loadingOverlay]="false"
               [loading]="true"
-              [loadingIcon]="'bars_vertical'"
-              [loadingOverlay]="false">
+              [loadingOverlayText]="'Please wait while we get things ready for you'"
+              [loadingOverlaySubtext]="'This may take a few minutes...'"
+              [loadingIcon]="'bars_vertical'">
             </wily-endpoint-state>
           </div>
         </div>
@@ -209,6 +211,8 @@
             <div><i class="wis fa-pid fa-2x fa-fw"></i> fa-pid</div>
             <div><i class="wis fa-radio-buttons fa-2x fa-fw"></i> fa-radio-buttons</div>
             <div><i class="wis fa-ssn fa-2x fa-fw"></i> fa-ssn</div>
+            <div><i class="wis fa-sidebar-close fa-2x fa-fw"></i> fa-sidebar-close</div>
+            <div><i class="wis fa-sidebar-open fa-2x fa-fw"></i> fa-sidebar-open</div>
             <div><i class="wis fa-text-area fa-2x fa-fw"></i> fa-text-area</div>
             <div><i class="wis fa-text-box fa-2x fa-fw"></i> fa-text-box</div>
           </div>
@@ -224,7 +228,7 @@
     </div>
   </wily-dialog>
 
-  <wily-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" width="auto" height="auto">
+  <wily-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" [allowClose]="false" width="auto" height="auto">
     <button class="access" (click)="obj3 = {}">Open Child</button>
     <wily-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null">
       <button class="access" (click)="obj4 = {}">Open Child</button>

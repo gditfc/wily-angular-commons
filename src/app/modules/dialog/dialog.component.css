@@ -37,8 +37,9 @@
 }
 /* accent in dialog header */
 .wily_dialog_accent {
-  width:8px;
-  background-color: rgba(255,255,255,0.25);
+  width:6px;
+  margin-right:4px;
+  /*background-color: rgba(255,255,255,0.2);*/
 }
 /* make dialog scale to fill screen at mobile breakpoint */
 @media screen and (max-width:768px) {

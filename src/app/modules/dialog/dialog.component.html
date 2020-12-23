@@ -5,20 +5,22 @@
          [ngStyle]="{'width': effectiveWidth, 'height': height}">
       <!-- dialog header -->
       <div *ngIf="showTitle" class="col" [ngClass]="titleClass">
-        <div class="col wily_dialog_accent"></div>
+        <div class="col wily_dialog_accent" [ngClass]="titleClass + '_light_3'"></div>
         <div class="col size_1 v_center" style="padding:5px 5px 5px 10px;">
           <div class="text lg bold paragraph">
             {{title}}
           </div>
         </div>
         <div class="col" style="padding:5px 10px 5px 5px;">
-          <button #closeButton
-                  (click)="close()"
-                  (cdkObserveContent)="focusCloseButton()"
-                  class="access btn_pulse sm"
-                  aria-label="Close Dialog">
-            <i class="fas fa-times"></i>
-          </button>
+          <ng-container *ngIf="allowClose">
+            <button #closeButton
+                    (click)="close()"
+                    (cdkObserveContent)="focusCloseButton()"
+                    class="access btn_pulse sm"
+                    [attr.aria-label]="'Close ' + title + ' Dialog'">
+              <i class="fas fa-times"></i>
+            </button>
+          </ng-container>
         </div>
       </div>
       <!-- dialog container -->

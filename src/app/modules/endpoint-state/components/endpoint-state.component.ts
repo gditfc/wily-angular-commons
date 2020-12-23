@@ -20,7 +20,7 @@ export class EndpointStateComponent implements OnInit {
    * Icon for loading state
    */
   @Input()
-  loadingIcon = 'bars_bounce';
+  loadingIcon: 'bars_bounce' | 'bars_vertical' | 'bars_progress' | string = 'bars_bounce';
 
   /**
    * Main text for loading state
@@ -93,6 +93,18 @@ export class EndpointStateComponent implements OnInit {
    */
   @Input()
   loadingOverlayIcon = 'fas fa-spinner fa-spin';
+
+  /**
+   * Main text for loading overlay
+   */
+  @Input()
+  loadingOverlayText: string;
+
+  /**
+   * Subtext for loading overlay
+   */
+  @Input()
+  loadingOverlaySubtext: string;
 
   /**
    * Component constructor

@@ -89,6 +89,13 @@ export class DialogComponent {
   showTitle = true;
 
   /**
+   * Whether to show close button and allow escape to close
+   */
+    // TODO: prevent close on escape when false
+  @Input()
+  allowClose = true;
+
+  /**
    * Class to apply to the body of the dialog
    */
   @Input()
