@@ -59,7 +59,13 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   breakpoint = 768;
 
   /**
-   * Whether or not to always show the close button, even on desktop. Defaults to false.
+   * Whether or not to always hide the close button, defaults to false.
+   */
+  @Input()
+  hideCloseButton = false;
+
+  /**
+   * Whether or not to show the close button on desktop. Defaults to false.
    */
   @Input()
   alwaysShowClose = false;
