@@ -1,5 +1,5 @@
 <!-- choose button -->
-<button class="access btn glow md"
+<button class="access btn hov_glow sm"
         [ngClass]="buttonColorClass"
         (click)="doShowDialog()"
         aria-label="Choose Icon">
@@ -22,15 +22,15 @@
                [(ngModel)]="filter" placeholder="Filter Icons..." />
       </div>
       <div class="col" style="padding-right:8px;">
-        <button class="access btn md overlay_alt2 bg_blue_alt mar_3"
+        <button class="access btn md icon_right overlay_alt2 bg_blue_alt mar_3"
                 pTooltip="Filter" aria-label="Filter" (click)="filterClasses()">
-          <span class="text">Submit</span>
-          <span class="icon border_left grow"><i class="fas fa-search"></i></span>
+          Submit
+          <span class="icon grow"><i class="fas fa-search"></i></span>
         </button>
-        <button class="access btn md overlay mar_3"
+        <button class="access btn md icon_right overlay mar_3"
                 pTooltip="Clear" aria-label="Clear" (click)="clear()">
-          <span class="text">Clear</span>
-          <span class="icon border_left_alt grow"><i class="fas fa-undo-alt"></i></span>
+          Clear
+          <span class="icon grow"><i class="fas fa-undo-alt"></i></span>
         </button>
       </div>
     </div>
@@ -47,8 +47,8 @@
       <div class="row_block width100">
         <div class="row wrap pad_5">
           <button *ngFor="let faClass of getValues()"
-                  class="access btn brad_3 mar_3 overlay_alt2"
-                  style="box-sizing:border-box; width:60px; height:60px;"
+                  class="access btn brad_3 mar_3 center_center overlay_alt2"
+                  style="width:60px; height:60px;"
                   [ngClass]="faClass === hoveredClass ? 'page_container_color' : 'page_container_color_dark_1'"
                   (mouseover)="hoveredClass = faClass"
                   (mouseout)="hoveredClass = null"

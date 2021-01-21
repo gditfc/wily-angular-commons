@@ -123,7 +123,7 @@
         </button>
         <!-- active page -->
         <div class="row pag_btn active brad_3 page_container_color">
-          <button class="access col size_1 btn brad_3 overlay" id="activePage"
+          <button class="access col size_1 btn center_center brad_3 overlay" id="activePage"
                   [attr.aria-label]="'Page ' + (activePage + 1)" >
             {{activePage + 1}}
           </button>
@@ -176,7 +176,7 @@
       </button>
     </ng-template>
     <!-- jump to page -->
-    <p-overlayPanel appendTo="body" styleClass="overlay_alt2 page_container_color brad_3" #op>
+    <p-overlayPanel appendTo="body" styleClass="overlay_alt2 page_container_color brad_3 pad_10" #op>
       <div class="row_block">
         <div class="text sm">Jump to Page (out of {{getNumberOfPages()}}):</div>
         <div class="center_center mar_top10">
