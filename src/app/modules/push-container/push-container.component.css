@@ -1,10 +1,9 @@
 .layout_sidebar {
-  position: fixed;
+  position: absolute;
   z-index: 3;
   overflow-y: scroll;
   overflow-x: hidden;
   user-select: none;
-  box-sizing: border-box;
 }
 
 .push_close_bar {
