@@ -1,5 +1,5 @@
 .layout_sidebar {
-  position: absolute;
+  position: fixed;
   z-index: 3;
   overflow-y: scroll;
   overflow-x: hidden;
