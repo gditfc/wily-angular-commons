@@ -7,7 +7,8 @@ import {Dialog} from 'primeng/dialog';
  */
 @Component({
   selector: 'wily-dialog-legacy',
-  templateUrl: 'dialog-legacy.component.html'
+  templateUrl: 'dialog-legacy.component.html',
+  styleUrls: ['./dialog-legacy.component.css']
 })
 export class DialogLegacyComponent {
 

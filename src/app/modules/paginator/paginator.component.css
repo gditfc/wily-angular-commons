@@ -1,0 +1,14 @@
+/* NEW PAGINATOR */
+.pag_btn {
+  flex: 1;
+  max-width: 60px;
+  margin: 0 1px;
+  height: 24px;
+  font-size: 10pt;
+}
+
+.pag_btn.active {
+  height: 30px;
+  margin-top: -3px;
+  margin-bottom: -3px;
+}

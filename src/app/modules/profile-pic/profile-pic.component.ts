@@ -5,6 +5,7 @@ import {Component, Input} from '@angular/core';
  */
 @Component({
   selector: 'wily-profile-pic',
+  styleUrls: ['./profile-pic.component.css'],
   template: `
     <div class="wac_photo_id_round"
          [style.height]="size"
