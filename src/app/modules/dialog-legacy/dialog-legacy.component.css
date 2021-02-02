@@ -1,0 +1,47 @@
+/* DIALOGS */
+.ui-dialog.ui-widget .ui-dialog-content  {
+  height: 100%;
+  padding: 0;
+}
+
+.ui-dialog.ui-widget .ui-dialog-content {
+  padding: 0;
+  height: 100%;
+}
+
+.ui-dialog-titlebar {
+  display: none;
+}
+
+/* fix so dialog doesnt go under nav bar on safari */
+.ui-dialog-maximized {
+  height: 100% !important;
+}
+
+/* Primeng dialog overlay */
+.ui-widget-overlay {
+  background-color:rgba(120,120,120,0.4);
+}
+
+/* DIALOG */
+.wac_dialog_header {
+  display: flex;
+  padding: 3px 10px;
+  border-left: 5px solid rgba(255, 255, 255, 0.3);
+  min-height: 35px;
+}
+
+.wac_dialog_header_title {
+  font-size: 14pt;
+  font-weight: 500;
+}
+
+.wac_dialog_container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.wac_dialog_content {
+  flex: 1 1 auto;
+}

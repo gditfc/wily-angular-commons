@@ -56,13 +56,19 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Breakpoint that will make the container take over the screen when it's crossed.
    */
   @Input()
-  breakpoint: number;
+  breakpoint = 769;
 
   /**
-   * Whether or not to show the close button, defaults to true.
+   * Whether or not to always hide the close button, defaults to false.
    */
   @Input()
-  showCloseButton = true;
+  hideCloseButton = false;
+
+  /**
+   * Whether or not to show the close button on desktop. Defaults to false.
+   */
+  @Input()
+  alwaysShowClose = false;
 
   /**
    * Event emitter for open

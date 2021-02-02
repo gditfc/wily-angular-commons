@@ -177,21 +177,21 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1000; /* Specify a stack order in case you're using a different order for other elements */
+  z-index: 1100; /* Specify a stack order in case you're using a different order for other elements */
   animation: fadein 0.3s ease-in-out;
   /*opacity:0.5;*/
-  background-color:rgba(128,128,128,0.7);
+  background-color:rgba(120,120,120,0.4);
   /*backdrop-filter: blur(5px);*/
 }
 #spinner{
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   font-size: 64px;
   transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
   animation: fadein 0.3s ease-in-out;
-  z-index:1001;
+  z-index:1101;
 }
 
 @keyframes fadein {

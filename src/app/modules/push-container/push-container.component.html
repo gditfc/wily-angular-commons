@@ -6,7 +6,7 @@
   [style.left]="getLeftProperty()"
   [style.right]="getRightProperty()"
   [style.visibility]="visibility ? 'visible' : 'hidden'">
-  <div class="push_close_bar" *ngIf="showCloseButton">
+  <div class="push_close_bar" *ngIf="(alwaysShowClose || breakpointExceeded) && !hideCloseButton">
     <button (click)="close()" class="data_hide_button access" tabindex="0"
             [attr.aria-label]="'Close ' + side + ' sidebar'">
       <i class="fas fa-times"></i>

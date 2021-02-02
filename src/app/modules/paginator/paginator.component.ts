@@ -6,7 +6,8 @@ import {PaginationEvent} from './pagination-event.model';
  */
 @Component({
   selector: 'wily-paginator',
-  templateUrl: 'paginator.component.html'
+  templateUrl: 'paginator.component.html',
+  styleUrls: ['./paginator.component.css']
 })
 export class PaginatorComponent implements OnChanges {
 

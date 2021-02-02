@@ -20,6 +20,7 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'wily-rich-text',
   templateUrl: 'rich-text.component.html',
+  styleUrls: ['./rich-text.component.css'],
   providers: [DomHandler, RICH_TEXT_VALUE_ACCESSOR]
 })
 export class RichTextComponent implements ControlValueAccessor, AfterViewInit {

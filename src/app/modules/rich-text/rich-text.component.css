@@ -1,0 +1,17 @@
+.ql-editor {
+  line-height:1.5;
+  overflow-x:hidden;
+  font-size: 14px;
+}
+.ql-editor strong {font-weight:500;}
+.ql-editor h1 {font-size:18px; font-weight:500; line-height:1.5; margin-bottom:0.5em;}
+.ql-editor h2 {font-size:15px; font-weight:400; line-height:1.5; margin-bottom:0.5em;}
+.ql-editor ol li:not(.ql-direction-rtl), .ql-editor ul li:not(.ql-direction-rtl) {
+  padding-left:0;
+}
+/* placeholder text override to fix dark theme */
+.ql-editor.ql-blank::before {
+  color: inherit;
+  opacity:0.5;
+  font-style:normal;
+}
