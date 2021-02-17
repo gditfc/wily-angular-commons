@@ -1,4 +1,4 @@
-<main class="site-content">
+<main class="site-content scroll_none">
   <!-- HEADER -->
   <div class="row v_center dialog_header_color page_shadow mar_bot10 pad_5">
     <!-- left push button -->
@@ -28,17 +28,178 @@
                           (closed)="iconSelectClosed()"
                           (selected)="iconSelected($event)">
         </wily-icon-select>
+        <!-- TODO: build a tooltip component -->
+        <!-- tooltip -->
+        <div class="tooltip_container bg_green mar_5">Hover over me for tooltips
+          <!-- top -->
+          <div class="tooltip top" >top tooltip text</div>
+          <!-- top -->
+          <div class="tooltip bottom" >bottom tooltip text</div>
+          <!-- left -->
+          <div class="tooltip left" #tooltip
+               [style.margin-top]="'-' + (tooltip.scrollHeight / 2) + 'px'">left tooltip text</div>
+          <!-- right -->
+          <div class="tooltip right" #tooltip
+               [style.margin-top]="'-' + (tooltip.scrollHeight / 2) + 'px'">right tooltip text</div>
+        </div>
+        <!-- TODO: build an overlay panel component -->
+        <!-- overlay panel -->
+        <div class="overlaypanel_container">
+          hover for overlay panel
+          <div class="overlaypanel bottom page_container_color card_shadow">
+            text in overlay panel
+          </div>
+        </div>
+        <!-- TODO: build a toast component -->
+        <!-- toast -->
+        <div style="display:none;position:fixed; justify-content:flex-end; top:0;bottom:0;left:0;right:0; z-index:1000;pointer-events: none;">
+          <div class="col size_3 min_w0"></div>
+          <div class="col size_1 min_w280 pad_right5" style="max-width:400px;">
+            <div class="row_block width100">
+              <!-- success item -->
+              <div class="row v_center bg_green card_shadow mar_15 pad_y5 pad_x10 brad_3" style="pointer-events: initial;">
+                <div class="col mar_5"><i class="fas fa-check-circle text lg"></i></div>
+                <div class="col size_1 mar_5"><div class="text sm paragraph">This is a success message!<br/>You did it!</div></div>
+                <div class="col mar_y5">
+                  <button class="access btn overlay_alt1 hov_bg square_22px brad_3">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- warning item -->
+              <div class="row v_center bg_orange card_shadow mar_15 pad_y5 pad_x10 brad_3" style="pointer-events: initial;">
+                <div class="col mar_5"><i class="fas fa-exclamation-circle"></i></div>
+                <div class="col size_1 mar_5"><div class="text sm paragraph">This is a warning message!<br/>He's right behind you!</div></div>
+                <div class="col mar_y5">
+                  <button class="access btn overlay_alt1 hov_bg square_22px brad_3">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- error item -->
+              <div class="row v_center bg_red card_shadow mar_15 pad_y5 pad_x10 brad_3" style="pointer-events: initial;">
+                <div class="col mar_5"><i class="fas fa-times-circle"></i></div>
+                <div class="col size_1 mar_5"><div class="text sm paragraph">This is an error message!<br/>Uh oh!</div></div>
+                <div class="col mar_y5">
+                  <button class="access btn overlay_alt1 hov_bg square_22px brad_3">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- info item -->
+              <div class="row v_center bg_purple card_shadow mar_15 pad_y5 pad_x10 brad_3" style="pointer-events: initial;">
+                <div class="col mar_5"><i class="fas fa-info-circle"></i></div>
+                <div class="col size_1 mar_5"><div class="text sm paragraph">This is an informational message!<br/>Wow!</div></div>
+                <div class="col mar_y5">
+                  <button class="access btn overlay_alt1 hov_bg square_22px brad_3">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- custom select component -->
+        <div style="width:400px">
+          <div class="wily_select" style="font-size:14px;" id="myCustomSelect">
+            <input type="text" placeholder="Make a selection..." id="custom-select-input" 
+                   class="access page_container_color wily_select_input">
+            <span class="wily_select_caret">
+              <i class="fas fa-caret-down" id="icon-circle-down"></i>
+              <i class="fas fa-caret-up all_hide" id="icon-circle-up"></i>
+            </span>
+            <ul class="wily_select_options page_container_color card_shadow" id="custom-select-list">
+              <li class="overlay_alt1 hov_bg">
+                <strong>User</strong><br>Logged in Users can read locked content and update their profile.
+              </li>
+              <li class="overlay_alt1 hov_bg">
+                <div class="accent bg_blue"></div>
+                <strong>Author</strong><br>Authors can create, edit and delete their own posts.
+              </li>
+              <li class="overlay_alt1 hov_bg">
+                <div class="accent bg_blue"></div>
+                <strong>Editor</strong><br>Editors can create, edit and delete all posts by all authors.
+              </li>
+              <li class="overlay_alt1 hov_bg">
+                <div class="accent bg_blue"></div>
+                <strong>Manager</strong><br>Managers have the same permissions as Editors, plus they can create, edit and delete categories, pages and manage comments.
+              </li>
+              <li class="overlay_alt1 hov_bg">
+                <div class="accent bg_blue"></div>
+                <strong>Administrator</strong><br>Administrators have full control over the posts, pages, categories, themes and plugins of the site.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- date picker component -->
+        <div style="width:400px">
+          <div class="wily_datepicker" style="font-size:14px;" id="myDatePicker">
+            <input type="text" placeholder="mm/dd/yyyy" id="custom-select-input" 
+                   class="access page_container_color wily_datepicker_input" />
+            <i class="fas fa-calendar-day fa-fw wily_datepicker_icon"></i>
+            <span class="wily_datepicker_caret">
+              <i class="fas fa-caret-down" id="icon-circle-down"></i>
+              <i class="fas fa-caret-up all_hide" id="icon-circle-up"></i>
+            </span>
+            <div class="wily_datepicker_options page_container_color card_shadow" id="date-picker">
+              <!-- title / save -->
+              <div class="row v_center space_between">
+                <div class="text sm faded mar_5">Please select a date</div>
+                <button class="access btn sm overlay_alt1 hov_bg mar_5">
+                  <i class="fas fa-check mar_right5"></i><span class="text bold">Save</span>
+                </button>
+              </div>
+              <!-- month / year select -->
+              <div class="row space_between">
+                <div class="col size_2 mar_5">
+                  <select class="access input sm">
+                    <option>January</option>
+                  </select>
+                </div>
+                <div class="col size_1 mar_5">
+                  <select class="access input sm">
+                    <option>2020</option>
+                  </select>
+                </div>
+              </div>
+              <!-- weekdays -->
+              <div class="row wrap space_between" style="margin:2px; margin-bottom:-5px;">
+                <div class="wily_datepicker_weekday mar_3">S</div>
+                <div class="wily_datepicker_weekday mar_3">M</div>
+                <div class="wily_datepicker_weekday mar_3">T</div>
+                <div class="wily_datepicker_weekday mar_3">W</div>
+                <div class="wily_datepicker_weekday mar_3">T</div>
+                <div class="wily_datepicker_weekday mar_3">F</div>
+                <div class="wily_datepicker_weekday mar_3">S</div>
+              </div>
+              <!-- days -->
+              <div class="row wrap space_between" style="margin:2px;">
+                <div class="wily_datepicker_day disabled mar_3">
+                  30
+                </div>
+                <button *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]" 
+                     class="wily_datepicker_day overlay hov_bg mar_3">
+                  {{number + 1}}
+                </button>
+                <div *ngFor="let number of [0,1,2]" 
+                     class="wily_datepicker_day disabled mar_3">
+                  {{number + 1}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="row overlay pad_5 center_center brad_3">
         <!-- icon select -->
-        <button class="access btn_pulse xsm page_container_color" (click)="obj2 = {}">
+        <button class="access btn xsm page_container_color" (click)="obj2 = {}">
           Open Nested Flex Dialog Parent
         </button>
       </div>
 
       <div class="row overlay pad_5 center_center brad_3">
         <!-- icon select -->
-        <button class="access btn_pulse xsm page_container_color" (click)="obj5 = {}">
+        <button class="access btn xsm page_container_color" (click)="obj5 = {}">
           Open Nested Prime Dialog Parent
         </button>
       </div>
