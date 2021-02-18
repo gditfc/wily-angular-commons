@@ -176,6 +176,7 @@
   appearance: none;
   position: relative;
   cursor:pointer;
+  font-size:inherit;
 }
 .wily_select_input::-ms-expand {
   display: none;
