@@ -15,11 +15,11 @@
 /*}*/
 
 /* Experimental new access class */
-.access:focus {
+.access:not(input, select):focus {
   position:relative;
   overflow:visible;
 }
-.access:focus::after {
+.access:not(input, select):focus::after {
   content: "";
   position: absolute;
   top: -5px;
@@ -30,6 +30,23 @@
   background-color: transparent;
   border:2px solid #65a3c7;
 }
+input.access:focus, select.access:focus {
+  position:relative;
+  z-index:2;
+  outline:2px solid #65a3c7;
+  outline-offset:2px;
+}
+
+
+.all_hide {
+  display:none;
+}
+
+select:not(disabled) {
+  cursor:pointer;
+}
+
+
 
 /* EXPERIMENTS WITH PRIMENG REPLACEMENTS */
 .tooltip_container {
@@ -177,6 +194,7 @@
   position: relative;
   cursor:pointer;
   font-size:inherit;
+  outline:none;
 }
 .wily_select_input::-ms-expand {
   display: none;
@@ -208,11 +226,6 @@
   padding: 8px 12px;
 }
 
-.all_hide {
-  display:none;
-}
-
-
 
 /* custom date picker styles */
 .wily_datepicker {
@@ -233,6 +246,7 @@
   background-size: 1px 1em;
   background-repeat: no-repeat;
   font-size:inherit;
+  outline:none;
 }
 .wily_datepicker_input::-ms-expand {
   display: none;
