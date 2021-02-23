@@ -263,13 +263,14 @@ select:not(disabled) {
   margin: 0;
   margin-top:5px;
   margin-left:1px;
-  padding: 5px;
+  /* padding: 5px; */
   list-style-type: none;
   font-weight: normal;
   z-index: 4;
   position: absolute;
   width: 100%;
   min-width:280px;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2);
 }
 .wily_datepicker_weekday {
   font-size:12px;
