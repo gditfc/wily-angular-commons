@@ -1,0 +1,93 @@
+/* custom date picker styles */
+.wily_datepicker {
+  position: relative;
+}
+.wily_datepicker_input {
+  padding: 0.5em 0.8em;
+  width: 100%;
+  max-width: 100%;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  font-size:inherit;
+  outline:none;
+}
+.wily_datepicker_input::-ms-expand {
+  display: none;
+}
+.wily_datepicker_button {
+  position: absolute;
+  height:100%;
+  width:2.5em;
+  top: 0;
+  right: 0;
+  z-index: 20;
+  border-radius:0 3px 3px 0;
+  font-size:inherit;
+  /* background: transparent; */
+}
+.wily_datepicker_options {
+  border-radius: 3px;
+  line-height: 1.5;
+  overflow:hidden;
+  margin: 0;
+  margin-top:8px;
+  margin-left:1px;
+  /* padding: 5px; */
+  list-style-type: none;
+  font-weight: normal;
+  z-index: 4;
+  position: absolute;
+  width: 100%;
+  min-width:280px;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2);
+}
+.wily_datepicker_weekday {
+  font-size:12px;
+  font-weight:700;
+  min-width:30px;
+  height:32px;
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content:center;
+  opacity:0.8;
+  user-select:none;
+}
+.wily_datepicker_day {
+  font-size:12px;
+  font-weight:400;
+  min-width:14%;
+  height:32px;
+  padding:0;
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content:center;
+  border-radius:3px;
+  cursor:pointer;
+  user-select:none;
+  border:none;
+}
+.wily_datepicker_day.today {
+  background-color:rgba(128,128,128,0.1);
+}
+.wily_datepicker_day.disabled {
+  cursor:default;
+  opacity:0.3;
+  /* border:1px solid transparent; */
+}
+/* fix to center of screen on mobile */
+@media screen and (max-width: 768px) {
+  .wily_datepicker_options {
+    margin:0;
+    z-index: 10;
+    position: fixed;
+    width: 300px;
+    top:50%;
+    left:50%;
+    margin-left:-150px;
+    margin-top:-142px;
+  }
+}
