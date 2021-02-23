@@ -15,8 +15,8 @@
 /*}*/
 
 /* Experimental new access class */
-.access:focus {
-  /* position:relative; */
+/* .access:focus {
+  position:relative;
   overflow:visible;
 }
 .access:focus::after {
@@ -35,7 +35,7 @@ input.access:focus, select.access:focus {
   z-index:2;
   outline:2px solid #65a3c7;
   outline-offset:2px;
-}
+} */
 
 
 .all_hide {
@@ -232,32 +232,18 @@ select:not(disabled) {
   position: relative;
 }
 .wily_datepicker_input {
-  padding: 0.5em 1.5em 0.5em 0.8em;
+  padding: 0.5em 0.8em;
   width: 100%;
   max-width: 100%;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
   position: relative;
-  padding-left:3em !important;
-  background-image: linear-gradient(to right, #999999, #999999);
-  background-position: 2.25em 50%;
-  background-size: 1px 1em;
-  background-repeat: no-repeat;
   font-size:inherit;
   outline:none;
 }
 .wily_datepicker_input::-ms-expand {
   display: none;
-}
-.wily_datepicker_icon {
-  position: absolute;
-  left:0.6em;
-  top:50%;
-  margin-top:-0.5em;
-  opacity:0.8;
-  font-size:inherit;
-  z-index:2;
 }
 .wily_datepicker_button {
   position: absolute;
@@ -282,25 +268,26 @@ select:not(disabled) {
   font-weight: normal;
   z-index: 4;
   position: absolute;
-  width: 300px;
+  width: 100%;
+  min-width:280px;
 }
 .wily_datepicker_weekday {
   font-size:12px;
   font-weight:700;
   min-width:30px;
-  height:26px;
+  height:32px;
   display:flex;
   flex:1;
   align-items:center;
   justify-content:center;
-  opacity:0.5;
+  opacity:0.8;
   user-select:none;
 }
 .wily_datepicker_day {
   font-size:12px;
-  font-weight:600;
-  min-width:30px;
-  height:30px;
+  font-weight:400;
+  min-width:14%;
+  height:32px;
   padding:0;
   display:flex;
   flex:1;
