@@ -15,11 +15,11 @@
 /*}*/
 
 /* Experimental new access class */
-.access:not(input, select):focus {
-  position:relative;
+.access:focus {
+  /* position:relative; */
   overflow:visible;
 }
-.access:not(input, select):focus::after {
+.access:focus::after {
   content: "";
   position: absolute;
   top: -5px;
@@ -239,7 +239,6 @@ select:not(disabled) {
   -webkit-appearance: none;
   appearance: none;
   position: relative;
-  cursor:pointer;
   padding-left:3em !important;
   background-image: linear-gradient(to right, #999999, #999999);
   background-position: 2.25em 50%;
@@ -260,12 +259,16 @@ select:not(disabled) {
   font-size:inherit;
   z-index:2;
 }
-.wily_datepicker_caret {
+.wily_datepicker_button {
   position: absolute;
-  top: 0.5em;
-  right: 1em;
+  height:100%;
+  width:2.5em;
+  top: 0;
+  right: 0;
   z-index: 20;
-  background: transparent;
+  border-radius:0 3px 3px 0;
+  font-size:inherit;
+  /* background: transparent; */
 }
 .wily_datepicker_options {
   border-radius: 3px;
@@ -297,7 +300,7 @@ select:not(disabled) {
   font-size:12px;
   font-weight:600;
   min-width:30px;
-  height:28px;
+  height:30px;
   padding:0;
   display:flex;
   flex:1;
@@ -306,11 +309,15 @@ select:not(disabled) {
   border-radius:3px;
   cursor:pointer;
   user-select:none;
+  border:none;
+}
+.wily_datepicker_day.today {
+  background-color:rgba(128,128,128,0.1);
 }
 .wily_datepicker_day.disabled {
   cursor:default;
   opacity:0.3;
-  border:1px solid transparent;
+  /* border:1px solid transparent; */
 }
 /* fix to center of screen on mobile */
 @media screen and (max-width: 768px) {

@@ -102,7 +102,7 @@
         <!-- custom select component -->
         <div style="width:400px">
           <div class="wily_select" style="font-size:14px;" id="myCustomSelect">
-            <input type="text" placeholder="Make a selection..." id="custom-select-input" 
+            <input type="text" placeholder="Make a selection..." id="custom-select-input"
                    class="access page_container_color wily_select_input">
             <span class="wily_select_caret">
               <i class="fas fa-caret-down" id="icon-circle-down"></i>
@@ -134,13 +134,17 @@
         <!-- date picker component -->
         <div style="width:400px">
           <div class="wily_datepicker" style="font-size:14px;" id="myDatePicker">
-            <input type="text" placeholder="mm/dd/yyyy" id="custom-select-input" 
+            <input type="text" placeholder="mm/dd/yyyy" id="custom-select-input"
                    class="access page_container_color wily_datepicker_input" />
             <i class="fas fa-calendar-day fa-fw wily_datepicker_icon"></i>
-            <span class="wily_datepicker_caret">
+            <button class="access btn wily_datepicker_button overlay_alt2 bg_blue_alt"
+                    aria-label="submit search">
+              <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
+            </button>
+            <!-- <span class="wily_datepicker_caret">
               <i class="fas fa-caret-down" id="icon-circle-down"></i>
               <i class="fas fa-caret-up all_hide" id="icon-circle-up"></i>
-            </span>
+            </span> -->
             <div class="wily_datepicker_options page_container_color card_shadow" id="date-picker">
               <!-- title / save -->
               <div class="row v_center space_between">
@@ -177,11 +181,11 @@
                 <div class="wily_datepicker_day disabled mar_3">
                   30
                 </div>
-                <button *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]" 
-                     class="access wily_datepicker_day overlay hov_bg mar_3">
+                <button *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]"
+                     class="access wily_datepicker_day overlay_alt1 hov_bg mar_3">
                   {{number + 1}}
                 </button>
-                <div *ngFor="let number of [0,1,2]" 
+                <div *ngFor="let number of [0,1,2]"
                      class="wily_datepicker_day disabled mar_3">
                   {{number + 1}}
                 </div>
