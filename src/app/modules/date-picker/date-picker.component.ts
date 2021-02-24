@@ -37,6 +37,12 @@ declare interface MetaDate {
 
 /**
  * Component to allow a user to input/select a date
+ *
+ * TODO: Close on escape click
+ * TODO: Close on button click
+ * TODO: Close on click off
+ * TODO: Auto-focus on open
+ * TODO: Save on date select
  */
 @Component({
   selector: 'wily-date-picker',
@@ -313,7 +319,6 @@ export class DatePickerComponent implements OnInit {
    * Handle date selection
    * @param date the selected date
    */
-  // TODO: decide how we want to handle accessibility at this point
   handleDateSelection(date: MetaDate): void {
     this.selectedDate = date;
   }
