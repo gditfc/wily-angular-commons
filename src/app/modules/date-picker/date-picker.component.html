@@ -20,8 +20,15 @@
       <!-- <div class="text sm center mar_5 mar_bot0">Please select a year, month, and day</div> -->
       <div class="row space_between">
         <div class="col size_1 mar_5">
-          <select class="access input sm page_container_color border_none" aria-label="Select a year">
-            <option>2020</option>
+          <select #yearSelect
+                  [ngModel]="_selectedYear | async"
+                  (change)="_selectedYear.next(+yearSelect.value)"
+                  class="access input sm page_container_color border_none"
+                  aria-label="Select a year">
+            <option *ngFor="let year of validYearRange"
+                    [value]="year">
+                    {{year}}
+            </option>
           </select>
         </div>
         <div class="col size_2 mar_5">

@@ -84,6 +84,12 @@ export class DatePickerComponent implements OnInit {
       new Date(this.currentDate.year, this.currentDate.month, this.currentDate.date),
       selectionInterval
     );
+
+    this.validYearRange = DatePickerComponent.generateYearRange(
+      (selectionInterval.start as Date).getFullYear(),
+      (selectionInterval.end as Date).getFullYear(),
+      this.currentDate.year
+    );
   }
 
   /**
@@ -139,6 +145,11 @@ export class DatePickerComponent implements OnInit {
    * The valid selection interval
    */
   validSelectionInterval: Interval;
+
+  /**
+   * The range of selectable years (based on validSelectionInterval)
+   */
+  validYearRange: Array<number> = [];
 
   /**
    * Generate a 42 element array representing the input month's days with
@@ -205,6 +216,36 @@ export class DatePickerComponent implements OnInit {
     return null;
   }
 
+  /**
+   * Generate an Array of numbers representing the span of years between the input
+   * @param minYear the start of the range
+   * @param maxYear the end of the range
+   * @param currentYear the current year
+   */
+  private static generateYearRange(minYear, maxYear, currentYear): Array<number> {
+    let start: number, end: number;
+    if (!minYear && !!maxYear) {
+      start = maxYear = 50;
+      end = maxYear;
+    } else if (!!minYear && !maxYear) {
+      start = minYear;
+      end = minYear + 50;
+    } else if (!!minYear && !!maxYear) {
+      start = minYear;
+      end = maxYear;
+    } else {
+      start = currentYear - 50;
+      end = currentYear + 50;
+    }
+
+    const range: Array<number> = [];
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+
+    return range;
+  }
+
   constructor() {
     const currentDate = new Date();
     this.currentDate = {
@@ -226,6 +267,8 @@ export class DatePickerComponent implements OnInit {
         start: new Date(year - 50, 0, 1),
         end: new Date(year + 50, 11, 31)
       };
+
+      this.validYearRange = DatePickerComponent.generateYearRange(null, null, year);
     }
 
     if (!this._value.getValue()) {
