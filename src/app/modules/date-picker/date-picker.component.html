@@ -60,7 +60,7 @@
           <!-- TODO: loop over for each day, hook up aria label -->
           <!-- TODO: add 'disabled' class for disabled, 'today' class for current day -->
           <ng-container *ngFor="let dayInMonth of fullMonth">
-            <ng-container *ngIf="dayInMonth.selectable">
+            <ng-container *ngIf="dayInMonth.selectable else disabledDate">
               <button class="access wily_datepicker_day overlay_alt1 hov_bg"
                       aria-label="Select %weekday% the %number%">
                 {{dayInMonth.date}}
@@ -68,8 +68,8 @@
             </ng-container>
             <ng-template #disabledDate>
               <div class="wily_datepicker_day disabled">
-            {{dayInMonth.date}}
-          </div>
+                {{dayInMonth.date}}
+              </div>
             </ng-template>
           </ng-container>
         </div>
