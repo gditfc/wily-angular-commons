@@ -12,12 +12,8 @@
 <div class="wily_datepicker_overlay">
   <div class="wily_datepicker_options card_shadow">
     <!-- title / save -->
-    <!-- <div class="row v_center">
-      <div class="text sm faded mar_5">Please select a date</div>
-    </div> -->
     <!-- month / year select -->
     <div class="dialog_header_color pad_5">
-      <!-- <div class="text sm center mar_5 mar_bot0">Please select a year, month, and day</div> -->
       <div class="row space_between">
         <div class="col size_1 mar_5">
           <select #yearSelect
@@ -69,8 +65,13 @@
         <div class="row wrap space_between">
           <ng-container *ngFor="let dayInMonth of fullMonth$ | async">
             <ng-container *ngIf="dayInMonth.selectable else disabledDate">
-              <button [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
-                      class="access wily_datepicker_day overlay_alt1 hov_bg"
+              <button (click)="handleDateSelection(dayInMonth)"
+                      [ngClass]="{
+                        'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year),
+                        'bg_blue_alt': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),
+                        'overlay_alt1 hov_bg': (dayInMonth.date !== selectedDate?.date || dayInMonth.month !== selectedDate?.month || dayInMonth.year !== selectedDate?.year)
+                      }"
+                      class="access wily_datepicker_day"
                       [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)">
                 {{dayInMonth.date}}
               </button>
@@ -87,9 +88,21 @@
       <div class="overlay_alt2 hr mar_5"></div>
       <div class="row space_between">
         <!-- TODO: hide if current day is out of range, disable if today already selected -->
-        <button class="access btn sm overlay_alt1 hov_bg mar_5" aria-label="Reset date selection to today's date">
-          <span class="text bold">Select Today</span>
-        </button>
+        <ng-container *ngIf="currentDate.selectable">
+          <button *ngIf="(currentDate.date === selectedDate?.date && currentDate.month === selectedDate?.month && currentDate.year === selectedDate?.year) else selectTodayButton"
+                  disabled
+                  class="access btn sm overlay_alt1 hov_bg mar_5"
+                  aria-label="Reset date selection to today's date">
+              <span class="text bold">Select Today</span>
+            </button>
+          <ng-template #selectTodayButton>
+            <button (click)="selectToday()"
+                    class="access btn sm overlay_alt1 hov_bg mar_5"
+                    aria-label="Reset date selection to today's date">
+              <span class="text bold">Select Today</span>
+            </button>
+          </ng-template>
+        </ng-container>
         <button class="access btn sm overlay_alt2 bg_green_alt mar_5 hov_glow" aria-label="Save date selection">
           <i class="fas fa-check mar_right5"></i><span class="text bold">Done</span>
         </button>

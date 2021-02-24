@@ -50,13 +50,16 @@ export class DatePickerComponent implements OnInit {
    */
   @Input('value')
   set setValue(value: Date) {
-    this._value.next({
+    const metaDate = {
       day: value?.getDay(),
       date: value?.getDate(),
       month: value?.getMonth(),
       year: value?.getFullYear(),
       selectable: true
-    });
+    };
+
+    this._value.next(metaDate);
+    this.selectedDate = metaDate;
   }
 
   /**
@@ -150,6 +153,11 @@ export class DatePickerComponent implements OnInit {
    * The range of selectable years (based on validSelectionInterval)
    */
   validYearRange: Array<number> = [];
+
+  /**
+   * The currently selected date
+   */
+  selectedDate: MetaDate;
 
   /**
    * Generate a 42 element array representing the input month's days with
@@ -268,6 +276,11 @@ export class DatePickerComponent implements OnInit {
         end: new Date(year + 50, 11, 31)
       };
 
+      this.currentDate.selectable = isWithinInterval(
+        new Date(this.currentDate.year, this.currentDate.month, this.currentDate.date),
+        this.validSelectionInterval
+      );
+
       this.validYearRange = DatePickerComponent.generateYearRange(null, null, year);
     }
 
@@ -275,5 +288,24 @@ export class DatePickerComponent implements OnInit {
       this._selectedMonth.next(this.currentDate.month);
       this._selectedYear.next(this.currentDate.year);
     }
+
+    // TODO: throw error if input value not in interval
+  }
+
+  /**
+   * Handle date selection
+   * @param date the selected date
+   */
+  handleDateSelection(date: MetaDate): void {
+    this.selectedDate = date;
+  }
+
+  /**
+   * Select the current date and toggle selected month/year to match
+   */
+  selectToday(): void {
+    this.selectedDate = this.currentDate;
+    this._selectedMonth.next(this.currentDate.month);
+    this._selectedYear.next(this.currentDate.year);
   }
 }
