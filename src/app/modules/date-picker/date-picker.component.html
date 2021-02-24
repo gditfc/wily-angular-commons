@@ -25,7 +25,11 @@
           </select>
         </div>
         <div class="col size_2 mar_5">
-          <select class="access input sm page_container_color border_none" aria-label="Select a month">
+          <select #monthSelect
+                  [ngModel]="_selectedMonth | async"
+                  (change)="_selectedMonth.next(+monthSelect.value)"
+                  class="access input sm page_container_color border_none"
+                  aria-label="Select a month">
             <option value="0">January</option>
             <option value="1">February</option>
             <option value="2">March</option>
@@ -43,7 +47,6 @@
       </div>
     </div>
     <div class="page_container_color pad_5">
-      <!-- <div class="overlay_alt2 hr mar_5"></div> -->
       <!-- weekdays -->
       <div class="mar_5 mar_bot10">
         <div class="row wrap space_between body_color brad_3 mar_bot5">
@@ -57,7 +60,7 @@
         </div>
         <!-- days -->
         <div class="row wrap space_between">
-          <ng-container *ngFor="let dayInMonth of fullMonth">
+          <ng-container *ngFor="let dayInMonth of fullMonth$ | async">
             <ng-container *ngIf="dayInMonth.selectable else disabledDate">
               <button [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
                       class="access wily_datepicker_day overlay_alt1 hov_bg"
