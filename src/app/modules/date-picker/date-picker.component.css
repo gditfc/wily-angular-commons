@@ -29,7 +29,7 @@
 }
 
 .wily_datepicker_overlay {
-  position:absolute;
+  position:fixed;
   top:0;
   bottom:0;
   left:0;
@@ -86,16 +86,18 @@
   opacity:0.3;
   /* border:1px solid transparent; */
 }
-/* fix to center of screen on mobile */
+
 @media screen and (max-width: 768px) {
+  .wily_datepicker_overlay {
+    background: rgba(120,120,120,0.4);
+  }
+  /* fix to center of screen on mobile */
   .wily_datepicker_options {
-    margin:0;
     z-index: 10;
     position: fixed;
     width: 300px;
     top:50%;
     left:50%;
-    margin-left:-150px;
-    margin-top:-142px;
+    margin:-170px 0 0 -150px;
   }
 }
