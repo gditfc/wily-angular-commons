@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { addDays, endOfMonth, isWithinInterval, subDays } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs/index';
 import { map } from 'rxjs/operators';
@@ -110,6 +110,12 @@ export class DatePickerComponent implements OnInit {
       this.currentDate.year
     );
   }
+
+  /**
+   * Event that emits the selected date
+   */
+  @Output()
+  selected = new EventEmitter<Date>();
 
   /**
    * The current Date broken down by day/month/year
@@ -316,11 +322,12 @@ export class DatePickerComponent implements OnInit {
   }
 
   /**
-   * Handle date selection
-   * @param date the selected date
+   * Update selected date and emit selection event
+   * @param selectedDate the selected date
    */
-  handleDateSelection(date: MetaDate): void {
-    this.selectedDate = date;
+  handleDateSelection(selectedDate: MetaDate): void {
+    this.selectedDate = selectedDate;
+    this.selected.emit(new Date(selectedDate.year, selectedDate.month, selectedDate.date));
   }
 
   /**
