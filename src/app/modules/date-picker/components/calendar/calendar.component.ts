@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { addDays, endOfMonth, isWithinInterval, subDays } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs/index';
 import { map } from 'rxjs/operators';
@@ -37,11 +37,8 @@ declare interface MetaDate {
 
 /**
  * Component that allows a user to select a date from a calendar
- * TODO: Close on escape click
- * TODO: Close on button click
  * TODO: Close on click off
  * TODO: Auto-focus on open
- * TODO: Save on date select
  */
 @Component({
   selector: 'wily-calendar',
@@ -111,10 +108,18 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
-   * Event that emits the selected date
+   * Event emitted on date select
    */
   @Output()
   selected = new EventEmitter<Date>();
+
+  /**
+   * Event emitted on close (either through the button, escape keyup or click off of widget).
+   * Note: it is the parent component's job to actually hide the calendar, this event
+   *       acts as a signal that that action should be taken
+   */
+  @Output()
+  closed = new EventEmitter<void>();
 
   /**
    * The current Date broken down by day/month/year
@@ -273,6 +278,18 @@ export class CalendarComponent implements OnInit {
     }
 
     return range;
+  }
+
+  /**
+   * Emit closed event on escape keyup
+   * @param event the keyup KeyboardEvent
+   */
+  @HostListener('window:keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent): void {
+    const {key} = event;
+    if (key === 'Esc' || key === 'Escape') {
+      this.closed.emit();
+    }
   }
 
   constructor() {
