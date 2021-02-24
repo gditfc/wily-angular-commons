@@ -58,7 +58,6 @@
         <!-- days -->
         <div class="row wrap space_between">
           <!-- TODO: loop over for each day, hook up aria label -->
-          <!-- TODO: add 'disabled' class for disabled, 'today' class for current day -->
           <ng-container *ngFor="let dayInMonth of fullMonth">
             <ng-container *ngIf="dayInMonth.selectable else disabledDate">
               <button [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
