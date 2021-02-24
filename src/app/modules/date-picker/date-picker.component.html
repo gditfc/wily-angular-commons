@@ -61,13 +61,15 @@
           <!-- TODO: add 'disabled' class for disabled, 'today' class for current day -->
           <ng-container *ngFor="let dayInMonth of fullMonth">
             <ng-container *ngIf="dayInMonth.selectable else disabledDate">
-              <button class="access wily_datepicker_day overlay_alt1 hov_bg"
+              <button [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
+                      class="access wily_datepicker_day overlay_alt1 hov_bg"
                       aria-label="Select %weekday% the %number%">
                 {{dayInMonth.date}}
               </button>
             </ng-container>
             <ng-template #disabledDate>
-              <div class="wily_datepicker_day disabled">
+              <div [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
+                   class="wily_datepicker_day disabled">
                 {{dayInMonth.date}}
               </div>
             </ng-template>
