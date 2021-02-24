@@ -63,28 +63,41 @@
   opacity:0.8;
   user-select:none;
 }
+
 .wily_datepicker_day {
   font-size:12px;
   font-weight:400;
   min-width:14%;
   height:32px;
-  padding:0;
   display:flex;
   flex:1;
-  align-items:center;
-  justify-content:center;
   border-radius:3px;
-  cursor:pointer;
+  overflow:hidden;
   user-select:none;
-  border:none;
+  background-color:transparent;
 }
 .wily_datepicker_day.today {
   background-color:rgba(128,128,128,0.1);
 }
-.wily_datepicker_day.disabled {
-  cursor:default;
+/* styles clickable days */
+.wily_datepicker_day .day_button {
+  cursor:pointer;
+  user-select:none;
+  border:none;
+  display:flex;
+  flex:1;
+  width:100%;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+/* styles unclickable days from other months */
+.wily_datepicker_day .day_disabled {
   opacity:0.3;
-  /* border:1px solid transparent; */
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content:center;
 }
 
 @media screen and (max-width: 768px) {
