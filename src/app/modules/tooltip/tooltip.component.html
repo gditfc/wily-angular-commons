@@ -1,0 +1,13 @@
+<!-- tooltip -->
+<div class="tooltip_container bg_green mar_5">Hover over me for tooltips
+  <!-- top -->
+  <div class="tooltip top" >top tooltip text</div>
+  <!-- top -->
+  <div class="tooltip bottom" >bottom tooltip text</div>
+  <!-- left -->
+  <div class="tooltip left" #tooltip
+       [style.margin-top]="'-' + (tooltip.scrollHeight / 2) + 'px'">left tooltip text</div>
+  <!-- right -->
+  <div class="tooltip right" #tooltip
+       [style.margin-top]="'-' + (tooltip.scrollHeight / 2) + 'px'">right tooltip text</div>
+</div>

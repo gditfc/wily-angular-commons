@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {WilyDialogLegacyModule} from './modules/dialog-legacy/dialog-legacy.module';
 import {WilyProfilePicModule} from './modules/profile-pic/wily-profile-pic.module';
-import {TooltipModule} from 'primeng/tooltip';
 import {WilyPaginatorModule} from './modules/paginator/wily-paginator.module';
 import {WilyPushContainerModule} from './modules/push-container/wily-push-container.module';
 import {WilyRichTextModule} from './modules/rich-text/wily-rich-text.module';
@@ -13,6 +12,7 @@ import {WilyEndpointStateModule} from './modules/endpoint-state/endpoint-state.m
 import {WilyDialogModule} from './modules/dialog/dialog.module';
 import { DatePickerModule } from './modules/date-picker/date-picker.module';
 import { DropdownModule } from './modules/dropdown/dropdown.module';
+import { TooltipModule } from './modules/tooltip/tooltip.module';
 
 
 @NgModule({
@@ -32,7 +32,8 @@ import { DropdownModule } from './modules/dropdown/dropdown.module';
         FormsModule,
         WilyEndpointStateModule,
         DatePickerModule,
-        DropdownModule
+        DropdownModule,
+        TooltipModule
     ],
   providers: [],
   bootstrap: [AppComponent]
