@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { addDays, endOfMonth, isWithinInterval, subDays } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs/index';
 import { map } from 'rxjs/operators';
@@ -37,7 +37,6 @@ declare interface MetaDate {
 
 /**
  * Component that allows a user to select a date from a calendar
- * TODO: Close on click off
  * TODO: Auto-focus on open
  */
 @Component({
@@ -46,6 +45,12 @@ declare interface MetaDate {
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+
+  /**
+   * ViewChild of the calendar widget parent div element
+   */
+  @ViewChild('calendarWidgetDiv')
+  calendarWidgetDiv: ElementRef<HTMLDivElement>;
 
   /**
    * The selected date value
@@ -280,18 +285,6 @@ export class CalendarComponent implements OnInit {
     return range;
   }
 
-  /**
-   * Emit closed event on escape keyup
-   * @param event the keyup KeyboardEvent
-   */
-  @HostListener('window:keyup', ['$event'])
-  onKeyUp(event: KeyboardEvent): void {
-    const {key} = event;
-    if (key === 'Esc' || key === 'Escape') {
-      this.closed.emit();
-    }
-  }
-
   constructor() {
     const currentDate = new Date();
     this.currentDate = {
@@ -334,6 +327,36 @@ export class CalendarComponent implements OnInit {
         this._value.next(null);
         this.selectedDate = null;
       }
+    }
+  }
+
+  /**
+   * Emit closed event on escape keyup
+   * @param event the keyup KeyboardEvent
+   */
+  @HostListener('window:keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent): void {
+    const {key} = event;
+    if (key === 'Esc' || key === 'Escape') {
+      this.closed.emit();
+    }
+  }
+
+  /**
+   * Emit closed event on click if clicked outside calendar widget
+   * @param event the click MouseEvent
+   */
+  @HostListener('window:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const {pageX, pageY} = event;
+    const {x, y, width, height} = this.calendarWidgetDiv.nativeElement.getBoundingClientRect();
+
+    const insideX = (pageX >= x) && (pageX <= (x + width));
+    const insideY = (pageY >= y) && (pageY <= (y + height));
+    const shouldClose = !(insideX && insideY);
+
+    if (shouldClose) {
+      this.closed.emit();
     }
   }
 
