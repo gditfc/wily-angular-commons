@@ -57,19 +57,21 @@
         </div>
         <!-- days -->
         <div class="row wrap space_between">
-          <div class="wily_datepicker_day disabled">
-            30
-          </div>
           <!-- TODO: loop over for each day, hook up aria label -->
           <!-- TODO: add 'disabled' class for disabled, 'today' class for current day -->
-          <button *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]"
-              class="access wily_datepicker_day overlay_alt1 hov_bg" aria-label="Select %weekday% the %number%">
-            {{number + 1}}
-          </button>
-          <div *ngFor="let number of [0,1,2]"
-              class="wily_datepicker_day disabled">
-            {{number + 1}}
+          <ng-container *ngFor="let dayInMonth of fullMonth">
+            <ng-container *ngIf="dayInMonth.selectable">
+              <button class="access wily_datepicker_day overlay_alt1 hov_bg"
+                      aria-label="Select %weekday% the %number%">
+                {{dayInMonth.date}}
+              </button>
+            </ng-container>
+            <ng-template #disabledDate>
+              <div class="wily_datepicker_day disabled">
+            {{dayInMonth.date}}
           </div>
+            </ng-template>
+          </ng-container>
         </div>
       </div>
       <div class="overlay_alt2 hr mar_5"></div>
