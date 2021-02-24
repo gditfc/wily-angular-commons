@@ -1,0 +1,52 @@
+/* custom select styles */
+.wily_select {
+  position: relative;
+}
+.wily_select_input {
+  padding: 0.5em 1.5em 0.5em 0.8em;
+  width: 100%;
+  max-width: 100%;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  cursor:pointer;
+  font-size:inherit;
+  outline:none;
+}
+.wily_select_input::-ms-expand {
+  display: none;
+}
+.wily_select_caret {
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  z-index: 20;
+  background: transparent;
+}
+
+.wily_select_overlay {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:1000;
+}
+.wily_select_options {
+  border-radius: 3px;
+  line-height: 1.5;
+  overflow:hidden;
+  margin: 5px 0 0 1px;
+  padding: 0;
+  list-style-type: none;
+  font-weight: normal;
+  cursor: pointer;
+  z-index: 4;
+  position: absolute;
+  width: calc(100% - 2px);
+}
+.wily_select_options li {
+  font-size:14px;
+  padding: 8px 12px;
+}

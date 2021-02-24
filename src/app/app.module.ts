@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import {WilyEndpointStateModule} from './modules/endpoint-state/endpoint-state.module';
 import {WilyDialogModule} from './modules/dialog/dialog.module';
 import { DatePickerModule } from './modules/date-picker/date-picker.module';
+import { DropdownModule } from './modules/dropdown/dropdown.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { DatePickerModule } from './modules/date-picker/date-picker.module';
         WilyIconsModule,
         FormsModule,
         WilyEndpointStateModule,
-        DatePickerModule
+        DatePickerModule,
+        DropdownModule
     ],
   providers: [],
   bootstrap: [AppComponent]
