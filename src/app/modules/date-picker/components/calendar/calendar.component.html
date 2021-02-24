@@ -1,0 +1,100 @@
+<div class="wily_datepicker_overlay">
+  <div class="wily_datepicker_options card_shadow">
+    <!-- month / year select -->
+    <div class="dialog_header_color pad_5">
+      <div class="row space_between">
+        <div class="col size_1 mar_5">
+          <select #yearSelect
+                  [ngModel]="_selectedYear | async"
+                  (change)="_selectedYear.next(+yearSelect.value)"
+                  class="access input sm page_container_color border_none"
+                  aria-label="Select a year">
+            <option *ngFor="let year of validYearRange"
+                    [value]="year">
+                    {{year}}
+            </option>
+          </select>
+        </div>
+        <div class="col size_2 mar_5">
+          <select #monthSelect
+                  [ngModel]="_selectedMonth | async"
+                  (change)="_selectedMonth.next(+monthSelect.value)"
+                  class="access input sm page_container_color border_none"
+                  aria-label="Select a month">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="page_container_color pad_5">
+      <!-- weekdays -->
+      <div class="mar_5 mar_bot10">
+        <div class="row wrap space_between body_color brad_3 mar_bot5">
+          <div class="wily_datepicker_weekday">Su</div>
+          <div class="wily_datepicker_weekday">Mo</div>
+          <div class="wily_datepicker_weekday">Tu</div>
+          <div class="wily_datepicker_weekday">We</div>
+          <div class="wily_datepicker_weekday">Th</div>
+          <div class="wily_datepicker_weekday">Fr</div>
+          <div class="wily_datepicker_weekday">Sa</div>
+        </div>
+        <!-- days -->
+        <div class="row wrap space_between">
+          <ng-container *ngFor="let dayInMonth of fullMonth$ | async">
+            <div [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
+                 class="wily_datepicker_day">
+              <ng-container *ngIf="dayInMonth.selectable else disabledDate">
+                <button (click)="handleDateSelection(dayInMonth)"
+                        [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)"
+                        [ngClass]="{
+                          'bg_blue_alt': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),
+                          'overlay_alt1 hov_bg': (dayInMonth.date !== selectedDate?.date || dayInMonth.month !== selectedDate?.month || dayInMonth.year !== selectedDate?.year)
+                        }"
+                        class="access day_button">
+                  {{dayInMonth.date}}
+                </button>
+              </ng-container>
+              <ng-template #disabledDate>
+                <div class="day_disabled">
+                  {{dayInMonth.date}}
+                </div>
+              </ng-template>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="overlay_alt2 hr mar_5"></div>
+      <div class="row space_between">
+        <ng-container *ngIf="currentDate.selectable">
+          <button *ngIf="(currentDate.date === selectedDate?.date && currentDate.month === selectedDate?.month && currentDate.year === selectedDate?.year) else selectTodayButton"
+                  disabled
+                  class="access btn sm overlay_alt1 hov_bg mar_5"
+                  aria-label="Reset date selection to today's date">
+              <span class="text bold">Select Today</span>
+            </button>
+          <ng-template #selectTodayButton>
+            <button (click)="selectToday()"
+                    class="access btn sm overlay_alt1 hov_bg mar_5"
+                    aria-label="Reset date selection to today's date">
+              <span class="text bold">Select Today</span>
+            </button>
+          </ng-template>
+        </ng-container>
+        <button class="access btn sm overlay_alt2 bg_green_alt mar_5 hov_glow" aria-label="Save date selection">
+          <i class="fas fa-check mar_right5"></i><span class="text bold">Done</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
