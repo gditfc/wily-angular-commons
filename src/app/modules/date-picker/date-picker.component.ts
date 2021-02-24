@@ -50,16 +50,26 @@ export class DatePickerComponent implements OnInit {
    */
   @Input('value')
   set setValue(value: Date) {
-    const metaDate = {
-      day: value?.getDay(),
-      date: value?.getDate(),
-      month: value?.getMonth(),
-      year: value?.getFullYear(),
-      selectable: true
-    };
+    if (!value || !this.validSelectionInterval) {
+      this._value.next(null);
+      this.selectedDate = null;
+    } else {
+      const metaDate = {
+        day: value?.getDay(),
+        date: value?.getDate(),
+        month: value?.getMonth(),
+        year: value?.getFullYear(),
+        selectable: true
+      };
 
-    this._value.next(metaDate);
-    this.selectedDate = metaDate;
+      if (isWithinInterval(value, this.validSelectionInterval)) {
+        this._value.next(metaDate);
+        this.selectedDate = metaDate;
+      } else {
+        this._value.next(null);
+        this.selectedDate = null;
+      }
+    }
   }
 
   /**
@@ -289,7 +299,14 @@ export class DatePickerComponent implements OnInit {
       this._selectedYear.next(this.currentDate.year);
     }
 
-    // TODO: throw error if input value not in interval
+    const value = this._value.getValue();
+    if (!!this._value.getValue()) {
+      const valueDate = new Date(value.year, value.month, value.date);
+      if (!isWithinInterval(valueDate, this.validSelectionInterval)) {
+        this._value.next(null);
+        this.selectedDate = null;
+      }
+    }
   }
 
   /**
