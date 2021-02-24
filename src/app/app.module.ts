@@ -13,6 +13,7 @@ import {WilyDialogModule} from './modules/dialog/dialog.module';
 import { DatePickerModule } from './modules/date-picker/date-picker.module';
 import { DropdownModule } from './modules/dropdown/dropdown.module';
 import { TooltipModule } from './modules/tooltip/tooltip.module';
+import { NotificationModule } from './modules/notification/notification.module';
 
 
 @NgModule({
@@ -20,20 +21,21 @@ import { TooltipModule } from './modules/tooltip/tooltip.module';
     AppComponent
   ],
     imports: [
-        BrowserModule,
-        TooltipModule,
-        WilyDialogLegacyModule,
-        WilyDialogModule,
-        WilyProfilePicModule,
-        WilyPaginatorModule,
-        WilyPushContainerModule,
-        WilyRichTextModule,
-        WilyIconsModule,
-        FormsModule,
-        WilyEndpointStateModule,
-        DatePickerModule,
-        DropdownModule,
-        TooltipModule
+      BrowserModule,
+      TooltipModule,
+      WilyDialogLegacyModule,
+      WilyDialogModule,
+      WilyProfilePicModule,
+      WilyPaginatorModule,
+      WilyPushContainerModule,
+      WilyRichTextModule,
+      WilyIconsModule,
+      FormsModule,
+      WilyEndpointStateModule,
+      DatePickerModule,
+      DropdownModule,
+      TooltipModule,
+      NotificationModule
     ],
   providers: [],
   bootstrap: [AppComponent]
