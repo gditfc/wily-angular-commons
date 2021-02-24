@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { addDays, endOfMonth, isWithinInterval, subDays } from 'date-fns';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs/index';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs/index';
 import { map } from 'rxjs/operators';
 
 /**
@@ -313,6 +313,7 @@ export class DatePickerComponent implements OnInit {
    * Handle date selection
    * @param date the selected date
    */
+  // TODO: decide how we want to handle accessibility at this point
   handleDateSelection(date: MetaDate): void {
     this.selectedDate = date;
   }
@@ -321,7 +322,7 @@ export class DatePickerComponent implements OnInit {
    * Select the current date and toggle selected month/year to match
    */
   selectToday(): void {
-    this.selectedDate = this.currentDate;
+    this.handleDateSelection(this.currentDate);
     this._selectedMonth.next(this.currentDate.month);
     this._selectedYear.next(this.currentDate.year);
   }

@@ -88,7 +88,6 @@
       </div>
       <div class="overlay_alt2 hr mar_5"></div>
       <div class="row space_between">
-        <!-- TODO: hide if current day is out of range, disable if today already selected -->
         <ng-container *ngIf="currentDate.selectable">
           <button *ngIf="(currentDate.date === selectedDate?.date && currentDate.month === selectedDate?.month && currentDate.year === selectedDate?.year) else selectTodayButton"
                   disabled
