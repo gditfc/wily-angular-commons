@@ -44,13 +44,13 @@
 
 .animate_in {
   animation-name: datepicker_in;
-  animation-duration: 0.1s;
+  animation-duration: 0.3s;
   animation-timing-function: ease;
   animation-direction: normal;
 }
 .animate_out {
   animation-name: datepicker_in;
-  animation-duration: 0.1s;
+  animation-duration: 0.3s;
   animation-timing-function: ease;
   animation-direction: reverse;
 }
