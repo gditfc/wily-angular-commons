@@ -77,6 +77,8 @@ export class CalendarComponent implements AfterViewInit, OnInit {
       if (isWithinInterval(value, this.validSelectionInterval)) {
         this._value.next(metaDate);
         this.selectedDate = metaDate;
+        this._selectedMonth.next(metaDate.month);
+        this._selectedYear.next(metaDate.year);
       } else {
         this._value.next(null);
         this.selectedDate = null;
@@ -329,18 +331,20 @@ export class CalendarComponent implements AfterViewInit, OnInit {
       this.validYearRange = CalendarComponent.generateYearRange(null, null, year);
     }
 
-    if (!this._value.getValue()) {
-      this._selectedMonth.next(this.currentDate.month);
-      this._selectedYear.next(this.currentDate.year);
-    }
-
     const value = this._value.getValue();
     if (!!this._value.getValue()) {
       const valueDate = new Date(value.year, value.month, value.date);
-      if (!isWithinInterval(valueDate, this.validSelectionInterval)) {
+      if (isWithinInterval(valueDate, this.validSelectionInterval)) {
+        this.selectedDate = value;
+        this._selectedMonth.next(value.month);
+        this._selectedYear.next(value.year);
+      } else {
         this._value.next(null);
         this.selectedDate = null;
       }
+    } else {
+      this._selectedMonth.next(this.currentDate.month);
+      this._selectedYear.next(this.currentDate.year);
     }
   }
 
