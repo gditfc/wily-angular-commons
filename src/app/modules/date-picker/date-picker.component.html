@@ -9,4 +9,6 @@
 </div>
 
 <!-- calendar widget -->
-<wily-calendar *ngIf="showCalendar" (closed)="showCalendar = false; console.log('closed')"></wily-calendar>
+<div *ngIf="showCalendar" class="wily_datepicker_overlay">
+  <wily-calendar (closed)="showCalendar = false; console.log('closed')"></wily-calendar>
+</div>
