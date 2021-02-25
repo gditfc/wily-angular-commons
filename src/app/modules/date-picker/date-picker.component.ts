@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 /**
  * Component to allow a user to input/select a date
@@ -9,7 +9,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css']
 })
-export class DatePickerComponent implements OnInit {
+export class DatePickerComponent implements OnDestroy, OnInit {
 
   /**
    * ViewChild of the date picker div
@@ -42,6 +42,11 @@ export class DatePickerComponent implements OnInit {
   showCalendar = false;
 
   /**
+   * Window resize unlisten function
+   */
+  private resizeListener: () => void;
+
+  /**
    * Dependency injection site
    * @param renderer the Angular renderer
    */
@@ -50,7 +55,20 @@ export class DatePickerComponent implements OnInit {
   /**
    * Init component, set up window resize listener
    */
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.resizeListener = this.renderer.listen(window, 'resize', () => {
+      if (this.showCalendar) {
+        this.setCalendarPosition();
+      }
+    });
+  }
+
+  /**
+   * Destroy component, invoke window resize unlisten function
+   */
+  ngOnDestroy(): void {
+    this.resizeListener();
+  }
 
   /**
    * Open the calendar widget
