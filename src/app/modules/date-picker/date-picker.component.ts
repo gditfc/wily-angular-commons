@@ -62,7 +62,7 @@ export class DatePickerComponent implements OnInit {
     } else if (availableTopSpace > offsetCalendarHeight) {
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'bottom left');
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${x}px`);
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'bottom', `${y - this.calendarPadding}px`);
+      this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${y - offsetCalendarHeight}px`);
     }
 
     this.renderer.setStyle(this.calendarOverlayDiv.nativeElement, 'display', '');
