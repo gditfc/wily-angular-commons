@@ -2,7 +2,6 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
 
 /**
  * Component to allow a user to input/select a date
- * TODO: reposition on screen resize
  */
 @Component({
   selector: 'wily-date-picker',
