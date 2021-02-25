@@ -84,6 +84,18 @@ export class DatePickerComponent implements OnInit {
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'bottom left');
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${x}px`);
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${y - offsetCalendarHeight}px`);
+    } else {
+      let topPosition: string;
+      if (this.calendarDimensions.height > window.innerHeight) {
+        topPosition = '0';
+      } else {
+        const availableSpace = window.innerHeight - this.calendarDimensions.height;
+        topPosition = String(availableSpace / 2);
+      }
+
+      this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'top left');
+      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${x}px`);
+      this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${topPosition}px`);
     }
   }
 }
