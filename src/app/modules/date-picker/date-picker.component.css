@@ -35,3 +35,9 @@
   font-size:inherit;
   /* background: transparent; */
 }
+
+@media screen and (max-width: 768px) {
+  .wily_datepicker_overlay {
+    background: rgba(120, 120, 120, 0.4);
+  }
+}
