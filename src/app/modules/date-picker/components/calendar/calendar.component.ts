@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { addDays, endOfMonth, isWithinInterval, subDays } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs/index';
 import { map } from 'rxjs/operators';
@@ -44,7 +44,7 @@ declare interface MetaDate {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements AfterViewInit, OnInit {
 
   /**
    * ViewChild of the calendar widget parent div element
@@ -346,6 +346,13 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
+   * Enable click listening and focus on year select
+   */
+  ngAfterViewInit(): void {
+    this.yearSelect.nativeElement.focus();
+  }
+
+  /**
    * Emit closed event on escape keyup
    * @param event the keyup KeyboardEvent
    */
@@ -393,13 +400,5 @@ export class CalendarComponent implements OnInit {
     this.handleDateSelection(this.currentDate);
     this._selectedMonth.next(this.currentDate.month);
     this._selectedYear.next(this.currentDate.year);
-  }
-
-  /**
-   * Set focus to the month select element
-   */
-  focusYearSelect() {
-    this.yearSelect.nativeElement.focus();
-    console.log('focused on year');
   }
 }

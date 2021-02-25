@@ -1,7 +1,8 @@
 <div cdkTrapFocus class="wily_datepicker_overlay">
   <div #calendarWidgetDiv
        (cdkObserveContent)="listenToClicks = true"
-       class="wily_datepicker_options card_shadow" role="dialog">
+       class="wily_datepicker_options card_shadow"
+       role="dialog">
     <!-- month / year select -->
     <div class="dialog_header_color pad_5">
       <div class="row space_between">
@@ -9,7 +10,6 @@
           <select #yearSelect
                   [ngModel]="_selectedYear | async"
                   (change)="_selectedYear.next(+yearSelect.value)"
-                  (cdkObserveContent)="focusYearSelect()"
                   class="access input sm page_container_color border_none"
                   aria-label="Select a year">
             <option *ngFor="let year of validYearRange"
