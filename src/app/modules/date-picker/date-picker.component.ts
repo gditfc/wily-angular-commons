@@ -48,7 +48,28 @@ export class DatePickerComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  /**
+   * Open the calendar widget
+   */
   openCalendar(): void {
+    this.setCalendarPosition();
+
+    this.renderer.setStyle(this.calendarOverlayDiv.nativeElement, 'display', '');
+    this.showCalendar = true;
+  }
+
+  /**
+   * Hide calendar overlay and remove calendar from the DOM
+   */
+  handleCalendarClose(): void {
+    this.renderer.setStyle(this.calendarOverlayDiv.nativeElement, 'display', 'none');
+    this.showCalendar = false;
+  }
+
+  /**
+   * Calculate and set the calendar's position based on the screen height
+   */
+  private setCalendarPosition(): void {
     const {x, y, height} = this.datePickerDiv.nativeElement.getBoundingClientRect();
     const datePickerBottomLeftAnchor = y + height;
     const availableBottomSpace = window.innerHeight - datePickerBottomLeftAnchor;
@@ -64,13 +85,5 @@ export class DatePickerComponent implements OnInit {
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${x}px`);
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${y - offsetCalendarHeight}px`);
     }
-
-    this.renderer.setStyle(this.calendarOverlayDiv.nativeElement, 'display', '');
-    this.showCalendar = true;
-  }
-
-  handleCalendarClose(): void {
-    this.renderer.setStyle(this.calendarOverlayDiv.nativeElement, 'display', 'none');
-    this.showCalendar = false;
   }
 }
