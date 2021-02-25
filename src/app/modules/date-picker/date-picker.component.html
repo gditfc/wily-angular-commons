@@ -10,10 +10,12 @@
 
 <!-- calendar widget -->
 <div #calendarOverlayDiv
-     [style.display]="showCalendar ? '' : 'none'"
+     [style.display]="'none'"
      class="wily_datepicker_overlay">
   <!-- position this div based on input -->
-  <div #calendarDiv class="position_absolute" [ngClass]="showCalendar ? 'animate_in' : 'animate_out'">
+  <div #calendarDiv
+       [@openClose]="showCalendar ? 'open' : 'closed'"
+       class="position_absolute">
     <wily-calendar *ngIf="showCalendar" (closed)="handleCalendarClose()"></wily-calendar>
   </div>
 </div>

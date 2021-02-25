@@ -1,3 +1,4 @@
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 /**
@@ -6,7 +7,33 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
 @Component({
   selector: 'wily-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.css']
+  styleUrls: ['./date-picker.component.css'],
+  animations: [
+    trigger('openClose', [
+      transition('closed => open', [
+        animate('240ms ease', keyframes([
+          style({
+            opacity: 0,
+            transform: 'scaleY(0.5)',
+            offset: 0
+          }),
+          style({ opacity: 0, offset: .25 }),
+          style({ opacity: 1, transform: 'scaleY(1)', offset: 1 })
+        ]))
+      ]),
+      transition('open => closed', [
+        animate('240ms ease', keyframes([
+          style({ opacity: 1, transform: 'scaleY(1)', offset: 0 }),
+          style({ opacity: 0, offset: .25 }),
+          style({
+            opacity: 0,
+            transform: 'scaleY(0.5)',
+            offset: 1
+          })
+        ]))
+      ])
+    ])
+  ]
 })
 export class DatePickerComponent implements OnDestroy, OnInit {
 
@@ -21,6 +48,12 @@ export class DatePickerComponent implements OnDestroy, OnInit {
    */
   @ViewChild('calendarDiv')
   calendarDiv: ElementRef<HTMLDivElement>;
+
+  /**
+   * ViewChild of the calendar overlay div
+   */
+  @ViewChild('calendarOverlayDiv')
+  calendarOverlayDiv: ElementRef<HTMLDivElement>;
 
   /**
    * Object representing the fixed dimensions of the calendar widget
@@ -71,6 +104,7 @@ export class DatePickerComponent implements OnDestroy, OnInit {
    */
   openCalendar(): void {
     this.setCalendarPosition();
+    this.renderer.setStyle(this.calendarOverlayDiv.nativeElement, 'display', '');
     this.showCalendar = true;
   }
 
