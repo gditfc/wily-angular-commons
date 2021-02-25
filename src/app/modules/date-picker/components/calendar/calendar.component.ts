@@ -96,26 +96,20 @@ export class CalendarComponent implements AfterViewInit, OnInit {
       throw new Error('Min date must be less than max date');
     }
 
-    let selectionInterval: Interval;
-    if (!dateRange) {
-      const {year} = this.currentDate;
-      selectionInterval = {
-        start: new Date(year - 50, 0, 1),
-        end: new Date(year + 50, 11, 31)
-      };
-    } else {
-      selectionInterval = { start: dateRange.minDate, end: dateRange.maxDate };
-    }
+    const {year} = this.currentDate;
+    this.validSelectionInterval = {
+      start: dateRange?.minDate ?? new Date(year - 50, 0, 1),
+      end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
+    };
 
-    this.validSelectionInterval = selectionInterval;
     this.currentDate.selectable = isWithinInterval(
       new Date(this.currentDate.year, this.currentDate.month, this.currentDate.date),
-      selectionInterval
+      this.validSelectionInterval
     );
 
     this.validYearRange = CalendarComponent.generateYearRange(
-      (selectionInterval.start as Date).getFullYear(),
-      (selectionInterval.end as Date).getFullYear(),
+      (this.validSelectionInterval.start as Date).getFullYear(),
+      (this.validSelectionInterval.end as Date).getFullYear(),
       this.currentDate.year
     );
   }
