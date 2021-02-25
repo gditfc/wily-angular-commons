@@ -12,8 +12,8 @@
 <div #calendarOverlayDiv
      [style.display]="showCalendar ? '' : 'none'"
      class="wily_datepicker_overlay">
-  <!-- TODO: position this div -->
-  <div #calendarDiv class="position_absolute">
+  <!-- position this div based on input -->
+  <div #calendarDiv class="position_absolute" [ngClass]="showCalendar ? 'animate_in' : 'animate_out'">
     <wily-calendar *ngIf="showCalendar" (closed)="handleCalendarClose()"></wily-calendar>
   </div>
 </div>
