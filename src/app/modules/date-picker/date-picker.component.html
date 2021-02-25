@@ -9,7 +9,9 @@
 </div>
 
 <!-- calendar widget -->
-<div #calendarOverlayDiv style="display: none;" class="wily_datepicker_overlay">
+<div #calendarOverlayDiv
+     [style.display]="showCalendar ? '' : 'none'"
+     class="wily_datepicker_overlay">
   <!-- TODO: position this div -->
   <div #calendarDiv class="position_absolute">
     <wily-calendar *ngIf="showCalendar" (closed)="handleCalendarClose()"></wily-calendar>

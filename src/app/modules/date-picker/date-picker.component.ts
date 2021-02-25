@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 
 /**
  * Component to allow a user to input/select a date
- * TODO: position calendar either above/below input based on viewport/height
  * TODO: reposition on screen resize
  */
 @Component({
@@ -25,12 +24,6 @@ export class DatePickerComponent implements OnInit {
   calendarDiv: ElementRef<HTMLDivElement>;
 
   /**
-   * ViewChild of the calendar overlay div
-   */
-  @ViewChild('calendarOverlayDiv')
-  calendarOverlayDiv: ElementRef<HTMLDivElement>;
-
-  /**
    * Object representing the fixed dimensions of the calendar widget
    */
   readonly calendarDimensions = {
@@ -38,14 +31,25 @@ export class DatePickerComponent implements OnInit {
     height: 340
   };
 
+  /**
+   * The amount of padding to apply between the date picker input and the calendar widget
+   */
   private readonly calendarPadding = 5;
 
+  /**
+   * Whether or not to show the calendar
+   */
   showCalendar = false;
 
-  console = console;
-
+  /**
+   * Dependency injection site
+   * @param renderer the Angular renderer
+   */
   constructor(private renderer: Renderer2) { }
 
+  /**
+   * Init component, set up window resize listener
+   */
   ngOnInit(): void { }
 
   /**
@@ -53,8 +57,6 @@ export class DatePickerComponent implements OnInit {
    */
   openCalendar(): void {
     this.setCalendarPosition();
-
-    this.renderer.setStyle(this.calendarOverlayDiv.nativeElement, 'display', '');
     this.showCalendar = true;
   }
 
@@ -62,12 +64,14 @@ export class DatePickerComponent implements OnInit {
    * Hide calendar overlay and remove calendar from the DOM
    */
   handleCalendarClose(): void {
-    this.renderer.setStyle(this.calendarOverlayDiv.nativeElement, 'display', 'none');
     this.showCalendar = false;
   }
 
   /**
-   * Calculate and set the calendar's position based on the screen height
+   * Calculate and set the calendar's position based on the screen height.
+   * Positioning prefers to open at the bottom, if not enough room on bottom,
+   * positioning is attempted at the top, otherwise it attempts to vertically
+   * center
    */
   private setCalendarPosition(): void {
     const {x, y, height} = this.datePickerDiv.nativeElement.getBoundingClientRect();
