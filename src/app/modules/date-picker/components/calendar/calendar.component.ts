@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { addDays, endOfMonth, isWithinInterval, subDays } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs/index';
 import { map } from 'rxjs/operators';
@@ -51,6 +51,12 @@ export class CalendarComponent implements OnInit {
    */
   @ViewChild('calendarWidgetDiv')
   calendarWidgetDiv: ElementRef<HTMLDivElement>;
+
+  /**
+   * ViewChild of the month select element
+   */
+  @ViewChild('yearSelect')
+  yearSelect: ElementRef<HTMLSelectElement>;
 
   /**
    * The selected date value
@@ -191,6 +197,11 @@ export class CalendarComponent implements OnInit {
   selectedDate: MetaDate;
 
   /**
+   * Whether or not the click listener should respond to clicks
+   */
+  listenToClicks = false;
+
+  /**
    * Generate a 42 element array representing the input month's days with
    * padding from the previous/following month
    * @param month the month to generate dates for
@@ -285,7 +296,11 @@ export class CalendarComponent implements OnInit {
     return range;
   }
 
-  constructor() {
+  /**
+   * Dependency injection site
+   * @param renderer the Angular renderer
+   */
+  constructor(private renderer: Renderer2) {
     const currentDate = new Date();
     this.currentDate = {
       day: currentDate.getDay(),
@@ -347,16 +362,18 @@ export class CalendarComponent implements OnInit {
    * @param event the click MouseEvent
    */
   @HostListener('window:click', ['$event'])
-  onClick(event: MouseEvent) {
-    const {pageX, pageY} = event;
-    const {x, y, width, height} = this.calendarWidgetDiv.nativeElement.getBoundingClientRect();
+  handleClick(event: MouseEvent) {
+    if (this.listenToClicks) {
+      const {pageX, pageY} = event;
+      const {x, y, width, height} = this.calendarWidgetDiv.nativeElement.getBoundingClientRect();
 
-    const insideX = (pageX >= x) && (pageX <= (x + width));
-    const insideY = (pageY >= y) && (pageY <= (y + height));
-    const shouldClose = !(insideX && insideY);
+      const insideX = (pageX >= x) && (pageX <= (x + width));
+      const insideY = (pageY >= y) && (pageY <= (y + height));
+      const shouldClose = !(insideX && insideY);
 
-    if (shouldClose) {
-      this.closed.emit();
+      if (shouldClose) {
+        this.closed.emit();
+      }
     }
   }
 
@@ -376,5 +393,13 @@ export class CalendarComponent implements OnInit {
     this.handleDateSelection(this.currentDate);
     this._selectedMonth.next(this.currentDate.month);
     this._selectedYear.next(this.currentDate.year);
+  }
+
+  /**
+   * Set focus to the month select element
+   */
+  focusYearSelect() {
+    this.yearSelect.nativeElement.focus();
+    console.log('focused on year');
   }
 }

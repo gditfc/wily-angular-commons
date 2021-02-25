@@ -10,6 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatePickerComponent implements OnInit {
 
+  showCalendar = false;
+
+  console = console;
+
   constructor() { }
 
   ngOnInit(): void { }
