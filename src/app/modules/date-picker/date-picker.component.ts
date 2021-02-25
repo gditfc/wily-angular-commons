@@ -25,10 +25,7 @@ export class DatePickerComponent implements OnDestroy, OnInit {
   /**
    * Object representing the fixed dimensions of the calendar widget
    */
-  readonly calendarDimensions = {
-    width: 300,
-    height: 340
-  };
+  private readonly calendarHeight = 340;
 
   /**
    * The amount of padding to apply between the date picker input and the calendar widget
@@ -95,7 +92,7 @@ export class DatePickerComponent implements OnDestroy, OnInit {
     const datePickerBottomLeftAnchor = y + height;
     const availableBottomSpace = window.innerHeight - datePickerBottomLeftAnchor;
     const availableTopSpace = y;
-    const offsetCalendarHeight = this.calendarDimensions.height + this.calendarPadding;
+    const offsetCalendarHeight = this.calendarHeight + this.calendarPadding;
 
     if (availableBottomSpace > offsetCalendarHeight) {
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'top left');
@@ -107,10 +104,10 @@ export class DatePickerComponent implements OnDestroy, OnInit {
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${y - offsetCalendarHeight}px`);
     } else {
       let topPosition: string;
-      if (this.calendarDimensions.height > window.innerHeight) {
+      if (this.calendarHeight > window.innerHeight) {
         topPosition = '0';
       } else {
-        const availableSpace = window.innerHeight - this.calendarDimensions.height;
+        const availableSpace = window.innerHeight - this.calendarHeight;
         topPosition = String(availableSpace / 2);
       }
 
