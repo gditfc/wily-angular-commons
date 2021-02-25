@@ -37,7 +37,6 @@ declare interface MetaDate {
 
 /**
  * Component that allows a user to select a date from a calendar
- * TODO: Auto-focus on open
  */
 @Component({
   selector: 'wily-calendar',
@@ -372,14 +371,18 @@ export class CalendarComponent implements AfterViewInit, OnInit {
   handleClick(event: MouseEvent) {
     if (this.listenToClicks) {
       const {pageX, pageY} = event;
-      const {x, y, width, height} = this.calendarWidgetDiv.nativeElement.getBoundingClientRect();
 
-      const insideX = (pageX >= x) && (pageX <= (x + width));
-      const insideY = (pageY >= y) && (pageY <= (y + height));
-      const shouldClose = !(insideX && insideY);
+      // this check is to prevent the click event from firing on keypress when focused on a button
+      if (pageX > 0 && pageY > 0) {
+        const {x, y, width, height} = this.calendarWidgetDiv.nativeElement.getBoundingClientRect();
 
-      if (shouldClose) {
-        this.closed.emit();
+        const insideX = (pageX >= x) && (pageX <= (x + width));
+        const insideY = (pageY >= y) && (pageY <= (y + height));
+        const shouldClose = !(insideX && insideY);
+
+        if (shouldClose) {
+          this.closed.emit();
+        }
       }
     }
   }
