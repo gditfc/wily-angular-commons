@@ -3,6 +3,7 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
 
 /**
  * Component to allow a user to input/select a date
+ * TODO: figure out close animation
  */
 @Component({
   selector: 'wily-date-picker',
@@ -19,17 +20,6 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
           }),
           style({ opacity: 0, offset: .25 }),
           style({ opacity: 1, transform: 'scaleY(1)', offset: 1 })
-        ]))
-      ]),
-      transition('open => closed', [
-        animate('240ms ease', keyframes([
-          style({ opacity: 1, transform: 'scaleY(1)', offset: 0 }),
-          style({ opacity: 0, offset: .25 }),
-          style({
-            opacity: 0,
-            transform: 'scaleY(0.5)',
-            offset: 1
-          })
         ]))
       ])
     ])

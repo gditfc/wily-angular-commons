@@ -37,7 +37,6 @@ declare interface MetaDate {
 
 /**
  * Component that allows a user to select a date from a calendar
- * TODO: opening/closing animation
  */
 @Component({
   selector: 'wily-calendar',
