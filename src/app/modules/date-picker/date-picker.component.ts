@@ -1,11 +1,23 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {coerceBooleanProperty} from "@angular/cdk/coercion";
 
 /**
  * Component to allow a user to input/select a date
  * TODO: figure out close animation
  * TODO: implement control value accessor
- * TODO: synch input with calendar
+ * TODO: sync input with calendar
  * TODO: validate input as date format
  * TODO: handle paste
  */
@@ -27,9 +39,16 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
         ]))
       ])
     ])
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DatePickerComponent),
+      multi: true
+    }
   ]
 })
-export class DatePickerComponent implements OnDestroy, OnInit {
+export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnInit {
 
   /**
    * Allowed keys for date input
@@ -61,6 +80,32 @@ export class DatePickerComponent implements OnDestroy, OnInit {
   calendarOverlayDiv: ElementRef<HTMLDivElement>;
 
   /**
+   * Value input getter
+   */
+  @Input()
+  get value(): Date {
+    return null;
+  }
+
+  /**
+   * Value input setter
+   */
+  set value(value: Date) {
+    if (this._value !== value) {
+      this._value = value;
+    }
+  }
+
+  /**
+   * Disabled input
+   */
+  @Input()
+  get disabled(): boolean { return this._disabled; }
+  set disabled(disabled: boolean) {
+    this._disabled = coerceBooleanProperty(disabled);
+  }
+
+  /**
    * Object representing the fixed dimensions of the calendar widget
    */
   private readonly calendarHeight = 340;
@@ -76,6 +121,28 @@ export class DatePickerComponent implements OnDestroy, OnInit {
   showCalendar = false;
 
   /**
+   * Function to call on change
+   */
+  onChange: (value: any) => void = () => {};
+
+  /**
+   * Function to call on touch
+   */
+  onTouched: () => any = () => {};
+
+  /**
+   * The internal control accessor value
+   * @private
+   */
+  private _value: Date = null;
+
+  /**
+   * The internal disabled state
+   * @private
+   */
+  private _disabled = false;
+
+  /**
    * Window resize unlisten function
    */
   private resizeListener: () => void;
@@ -83,8 +150,9 @@ export class DatePickerComponent implements OnDestroy, OnInit {
   /**
    * Dependency injection site
    * @param renderer the Angular renderer
+   * @param changeDetectorRef the Angular change detector
    */
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
 
   /**
    * Init component, set up window resize listener
@@ -102,6 +170,41 @@ export class DatePickerComponent implements OnDestroy, OnInit {
    */
   ngOnDestroy(): void {
     this.resizeListener();
+  }
+
+  /**
+   * Write value
+   * @param value the value to write
+   */
+  writeValue(value: Date): void {
+    this.value = value;
+    this.onChange(this.value);
+    this.changeDetectorRef.markForCheck();
+  }
+
+  /**
+   * Register control value accessor change function
+   * @param fn the function to register
+   */
+  registerOnChange(fn: (value: any) => void): void {
+    this.onChange = fn;
+  }
+
+  /**
+   * Register touch handler
+   * @param fn the touch handler to register
+   */
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  /**
+   * Set the disabled state
+   * @param isDisabled whether or not the component should be disabled
+   */
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.changeDetectorRef.markForCheck();
   }
 
   /**

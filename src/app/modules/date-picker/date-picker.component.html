@@ -1,6 +1,8 @@
 <!-- date picker input -->
 <div #datePickerDiv class="wily_datepicker" style="font-size:14px;">
-  <input (keydown)="filterInput($event)"
+  <input *ngIf="!disabled else disabledDatePicker"
+         (keydown)="filterInput($event)"
+         (blur)="onTouched()"
          type="text" placeholder="mm/dd/yyyy"
          maxlength="10"
          aria-label="Enter a date in the format mm/dd/yyyy"
@@ -9,6 +11,17 @@
           aria-label="Open the calendar" aria-haspopup="dialog">
     <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
   </button>
+  <ng-template #disabledDatePicker>
+    <input disabled
+           type="text" placeholder="mm/dd/yyyy"
+           maxlength="10"
+           aria-label="Enter a date in the format mm/dd/yyyy"
+           class="access page_container_color wily_datepicker_input" />
+    <button disabled class="access btn wily_datepicker_button overlay_alt2 bg_blue_alt"
+            aria-label="Open the calendar" aria-haspopup="dialog">
+      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
+    </button>
+  </ng-template>
 </div>
 
 <!-- calendar widget -->
