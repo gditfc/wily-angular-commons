@@ -28,7 +28,7 @@ import {coerceBooleanProperty} from "@angular/cdk/coercion";
   animations: [
     trigger('openClose', [
       transition('closed => open', [
-        animate('240ms ease', keyframes([
+        animate('200ms ease', keyframes([
           style({
             opacity: 0,
             transform: 'scaleY(0.5)',
