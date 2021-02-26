@@ -3,7 +3,6 @@
   <ng-container *ngIf="!disabled else disabledDatePicker">
     <input [(ngModel)]="dateString"
            (keydown)="filterInput($event)"
-           (input)="handleInput()"
            (blur)="onTouched(); handleBlur()"
            type="text" placeholder="mm/dd/yyyy"
            maxlength="10"

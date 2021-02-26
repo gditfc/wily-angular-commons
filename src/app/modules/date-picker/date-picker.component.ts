@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
-import {format, isEqual, parse} from "date-fns";
+import {format, isEqual, isValid, parse} from "date-fns";
 import { EventEmitter } from '@angular/core';
 
 /**
@@ -219,7 +219,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @param value the value to parse
    * @private
    */
-  private static parseValue(value: Date): string {
+  private static parseDate(value: Date): string {
     return !value ? null : format(value, 'MM/dd/yyyy');
   }
 
@@ -229,10 +229,14 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @private
    */
   private static parseDateString(dateString: string): Date {
-    const dateFormat = DatePickerComponent.getDateFormat(dateString);
-    return !!dateString && !!dateFormat
-      ? parse(dateString, DatePickerComponent.getDateFormat(dateString), this.referenceDate)
-      : null;
+    let parsedDate: Date;
+    try {
+      parsedDate = parse(dateString, DatePickerComponent.getDateFormat(dateString), this.referenceDate);
+    } catch (e) {
+      parsedDate = null;
+    }
+
+    return isValid(parsedDate) ? parsedDate : null;
   }
 
   /**
@@ -291,7 +295,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   writeValue(value: Date): void {
     this.value = value;
-    this.dateString = DatePickerComponent.parseValue(value);
+    this.dateString = !!value ? DatePickerComponent.parseDate(value) : null;
     this.onChange(this.value);
     this.changeDetectorRef.markForCheck();
 
@@ -336,26 +340,15 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Clear value if no input, write parsed date if input requirements fulfilled
    */
-  handleInput() {
-    if (!this.dateString) {
-      this.writeValue(null);
-    } else {
-      const dateFormat = DatePickerComponent.getDateFormat(this.dateString);
-
-      if (!!dateFormat) {
-        this.writeValue(DatePickerComponent.parseDateString(this.dateString));
-      }
+  handleBlur() {
+    let valueToWrite: Date;
+    try {
+      valueToWrite = DatePickerComponent.parseDateString(this.dateString);
+    } catch (e) {
+      valueToWrite = null;
     }
-  }
 
-  /**
-   * Null out value if input is not a valid date
-   */
-  handleBlur(): void {
-    const dateFormat = DatePickerComponent.parseDateString(this.dateString);
-    if (!dateFormat) {
-      this.writeValue(null);
-    }
+    this.writeValue(valueToWrite);
   }
 
   /**
