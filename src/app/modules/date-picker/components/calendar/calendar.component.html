@@ -12,7 +12,7 @@
                 (change)="_selectedYear.next(+yearSelect.value)"
                 class="access input sm page_container_color"
                 aria-label="Select a year">
-          <option *ngFor="let year of validYearRange"
+          <option *ngFor="let year of validYearRange$ | async"
                   [value]="year">
               {{year}}
           </option>

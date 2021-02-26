@@ -1,6 +1,18 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { addDays, endOfMonth, isWithinInterval, subDays } from 'date-fns';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs/index';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
+import {addDays, endOfMonth, Interval, isWithinInterval, subDays} from 'date-fns';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 /**
@@ -43,7 +55,7 @@ declare interface MetaDate {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements AfterViewInit, OnInit {
+export class CalendarComponent implements AfterViewInit, OnDestroy, OnInit {
 
   /**
    * ViewChild of the calendar widget parent div element
@@ -62,28 +74,19 @@ export class CalendarComponent implements AfterViewInit, OnInit {
    */
   @Input('value')
   set setValue(value: Date) {
-    if (!value || !this.validSelectionInterval) {
-      this._value.next(null);
-      this.selectedDate = null;
-    } else {
-      const metaDate = {
-        day: value?.getDay(),
-        date: value?.getDate(),
-        month: value?.getMonth(),
-        year: value?.getFullYear(),
+    let metaDateValue: MetaDate = null;
+
+    if (!!value) {
+      metaDateValue = {
+        day: value.getDay(),
+        date: value.getDate(),
+        month: value.getMonth(),
+        year: value.getFullYear(),
         selectable: true
       };
-
-      if (isWithinInterval(value, this.validSelectionInterval)) {
-        this._value.next(metaDate);
-        this.selectedDate = metaDate;
-        this._selectedMonth.next(metaDate.month);
-        this._selectedYear.next(metaDate.year);
-      } else {
-        this._value.next(null);
-        this.selectedDate = null;
-      }
     }
+
+    this._value.next(metaDateValue);
   }
 
   /**
@@ -96,21 +99,10 @@ export class CalendarComponent implements AfterViewInit, OnInit {
     }
 
     const {year} = this.currentDate;
-    this.validSelectionInterval = {
+    this._validSelectionInterval.next({
       start: dateRange?.minDate ?? new Date(year - 50, 0, 1),
       end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
-    };
-
-    this.currentDate.selectable = isWithinInterval(
-      new Date(this.currentDate.year, this.currentDate.month, this.currentDate.date),
-      this.validSelectionInterval
-    );
-
-    this.validYearRange = CalendarComponent.generateYearRange(
-      (this.validSelectionInterval.start as Date).getFullYear(),
-      (this.validSelectionInterval.end as Date).getFullYear(),
-      this.currentDate.year
-    );
+    });
   }
 
   /**
@@ -151,6 +143,11 @@ export class CalendarComponent implements AfterViewInit, OnInit {
   readonly _value = new BehaviorSubject<MetaDate>(null);
 
   /**
+   * BehaviorSubject tracking the valid selection interval
+   */
+  readonly _validSelectionInterval = new BehaviorSubject<Interval>(null);
+
+  /**
    * BehaviorSubject tracking the currently selected month
    */
   readonly _selectedMonth = new BehaviorSubject(0);
@@ -165,26 +162,34 @@ export class CalendarComponent implements AfterViewInit, OnInit {
    */
   readonly fullMonth$: Observable<Array<MetaDate>> = combineLatest([
     this._selectedMonth,
-    this._selectedYear
+    this._selectedYear,
+    this._validSelectionInterval
   ]).pipe(
-    map(([selectedMonth, selectedYear]) => {
+    map(([selectedMonth, selectedYear, validSelectionInterval]) => {
       return CalendarComponent.generateMonth(
         selectedMonth,
         selectedYear,
-        this.validSelectionInterval
+        validSelectionInterval
       );
     })
   );
 
   /**
-   * The valid selection interval
+   * The range of selectable years
    */
-  validSelectionInterval: Interval;
+  readonly validYearRange$: Observable<Array<number>> = this._validSelectionInterval.pipe(
+    map(selectionInterval => CalendarComponent.generateYearRange(
+      (selectionInterval?.start as Date)?.getFullYear() ?? null,
+      (selectionInterval?.end as Date)?.getFullYear() ?? null,
+      this.currentDate.year
+    ))
+  );
 
   /**
-   * The range of selectable years (based on validSelectionInterval)
+   * Subscription for the combination of value and valid selection interval
+   * @private
    */
-  validYearRange: Array<number> = [];
+  private readonly subscription = new Subscription();
 
   /**
    * The currently selected date
@@ -310,36 +315,40 @@ export class CalendarComponent implements AfterViewInit, OnInit {
    * Init component
    */
   ngOnInit(): void {
-    if (!this.validSelectionInterval) {
-      const {year} = this.currentDate;
-      this.validSelectionInterval = {
-        start: new Date(year - 50, 0, 1),
-        end: new Date(year + 50, 11, 31)
-      };
+    this.subscription.add(
+      combineLatest([this._value, this._validSelectionInterval]).subscribe(
+      ([value, validSelectionInterval]) => {
+        let selectionInterval = validSelectionInterval;
 
-      this.currentDate.selectable = isWithinInterval(
-        new Date(this.currentDate.year, this.currentDate.month, this.currentDate.date),
-        this.validSelectionInterval
-      );
+        if (!selectionInterval) {
+          const {year} = this.currentDate;
+          selectionInterval = {
+            start: new Date(year - 50, 0, 1),
+            end: new Date(year + 50, 11, 31)
+          };
 
-      this.validYearRange = CalendarComponent.generateYearRange(null, null, year);
-    }
+          this.currentDate.selectable = isWithinInterval(
+            new Date(this.currentDate.year, this.currentDate.month, this.currentDate.date),
+            selectionInterval
+          );
+        }
 
-    const value = this._value.getValue();
-    if (!!this._value.getValue()) {
-      const valueDate = new Date(value.year, value.month, value.date);
-      if (isWithinInterval(valueDate, this.validSelectionInterval)) {
-        this.selectedDate = value;
-        this._selectedMonth.next(value.month);
-        this._selectedYear.next(value.year);
-      } else {
-        this._value.next(null);
-        this.selectedDate = null;
-      }
-    } else {
-      this._selectedMonth.next(this.currentDate.month);
-      this._selectedYear.next(this.currentDate.year);
-    }
+        if (!!value) {
+          const valueDate = new Date(value.year, value.month, value.date);
+          if (isWithinInterval(valueDate, selectionInterval)) {
+            this.selectedDate = value;
+            this._selectedMonth.next(value.month);
+            this._selectedYear.next(value.year);
+          } else {
+            this._value.next(null);
+            this.selectedDate = null;
+          }
+        } else {
+          this._selectedMonth.next(this.currentDate.month);
+          this._selectedYear.next(this.currentDate.year);
+        }
+      })
+    );
   }
 
   /**
@@ -347,6 +356,13 @@ export class CalendarComponent implements AfterViewInit, OnInit {
    */
   ngAfterViewInit(): void {
     this.yearSelect.nativeElement.focus();
+  }
+
+  /**
+   * Destroy component, unsubscribe from any active subscriptions
+   */
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   /**
