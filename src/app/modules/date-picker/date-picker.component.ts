@@ -179,7 +179,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * The valid selection interval
    * @private
    */
-  validSelectionInterval: Interval = {
+  validSelectionInterval = {
     start: new Date(this.currentDate.getFullYear() - 50, 0, 1),
     end: new Date(this.currentDate.getFullYear() + 50, 0, 1)
   };
