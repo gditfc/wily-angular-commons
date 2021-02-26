@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
-import {format, isEqual, isValid, parse} from "date-fns";
+import {format, isEqual, isValid, isWithinInterval, parse} from "date-fns";
 import { EventEmitter } from '@angular/core';
 
 /**
@@ -106,12 +106,6 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   calendarDiv: ElementRef<HTMLDivElement>;
 
   /**
-   * ViewChild of the calendar overlay div
-   */
-  @ViewChild('calendarOverlayDiv')
-  calendarOverlayDiv: ElementRef<HTMLDivElement>;
-
-  /**
    * Value input getter
    */
   @Input()
@@ -179,13 +173,16 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Whether or not to show the calendar
    */
-  showCalendar = false;
+  showCalendar: Date = null;
 
   /**
    * The valid selection interval
    * @private
    */
-  validSelectionInterval: Interval;
+  validSelectionInterval: Interval = {
+    start: new Date(this.currentDate.getFullYear() - 50, 0, 1),
+    end: new Date(this.currentDate.getFullYear() + 50, 0, 1)
+  };
 
   /**
    * Function to call on change
@@ -294,11 +291,15 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @param value the value to write
    */
   writeValue(value: Date): void {
-    this.value = value;
-    this.dateString = !!value ? DatePickerComponent.parseDate(value) : null;
+    if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
+      this.value = value;
+    } else {
+      this.value = null;
+    }
+
+    this.dateString = DatePickerComponent.parseDate(value);
     this.onChange(this.value);
     this.changeDetectorRef.markForCheck();
-
     this.input.emit();
   }
 
@@ -356,15 +357,14 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   openCalendar(): void {
     this.setCalendarPosition();
-    this.renderer.setStyle(this.calendarOverlayDiv.nativeElement, 'display', '');
-    this.showCalendar = true;
+    this.showCalendar = this.value;
   }
 
   /**
    * Hide calendar overlay and remove calendar from the DOM
    */
   handleCalendarClose(): void {
-    this.showCalendar = false;
+    this.showCalendar = null;
   }
 
   /**
