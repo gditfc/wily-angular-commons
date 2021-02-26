@@ -1,6 +1,9 @@
 <!-- date picker input -->
 <div #datePickerDiv class="wily_datepicker" style="font-size:14px;">
-  <input type="text" placeholder="mm/dd/yyyy" aria-label="Enter a date in the format mm/dd/yyyy"
+  <input (keydown)="filterInput($event)"
+         type="text" placeholder="mm/dd/yyyy"
+         maxlength="10"
+         aria-label="Enter a date in the format mm/dd/yyyy"
          class="access page_container_color wily_datepicker_input" />
   <button (click)="openCalendar()" class="access btn wily_datepicker_button overlay_alt2 bg_blue_alt"
           aria-label="Open the calendar" aria-haspopup="dialog">

@@ -4,6 +4,10 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
 /**
  * Component to allow a user to input/select a date
  * TODO: figure out close animation
+ * TODO: implement control value accessor
+ * TODO: synch input with calendar
+ * TODO: validate input as date format
+ * TODO: handle paste
  */
 @Component({
   selector: 'wily-date-picker',
@@ -26,6 +30,17 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
   ]
 })
 export class DatePickerComponent implements OnDestroy, OnInit {
+
+  /**
+   * Allowed keys for date input
+   */
+  private static readonly ALLOWED_KEYS = [
+    '0', '1', '2', '3', '4', '5', '6', '7',
+    '9', 'Tab', 'Enter', '/', 'ArrowLeft',
+    'ArrowUp', 'ArrowRight', 'ArrowDown',
+    'ShiftLeft', 'ShiftRight', 'Backspace',
+    'Delete'
+  ];
 
   /**
    * ViewChild of the date picker div
@@ -87,6 +102,16 @@ export class DatePickerComponent implements OnDestroy, OnInit {
    */
   ngOnDestroy(): void {
     this.resizeListener();
+  }
+
+  /**
+   * Only allow input from digits, forward slashes, and navigation keys
+   */
+  filterInput(event: KeyboardEvent): void {
+    const {key} = event;
+    if (!DatePickerComponent.ALLOWED_KEYS.includes(key)) {
+      event.preventDefault();
+    }
   }
 
   /**
