@@ -173,7 +173,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Whether or not to show the calendar
    */
-  showCalendar: Date = null;
+  showCalendar: { currentValue: Date } = null;
 
   /**
    * The valid selection interval
@@ -357,7 +357,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   openCalendar(): void {
     this.setCalendarPosition();
-    this.showCalendar = this.value;
+    this.showCalendar = { currentValue: this.value };
   }
 
   /**
