@@ -6,13 +6,14 @@ import {
   forwardRef,
   Input,
   OnDestroy,
-  OnInit,
+  OnInit, Output,
   Renderer2,
   ViewChild
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
 import {format, isEqual, parse} from "date-fns";
+import { EventEmitter } from '@angular/core';
 
 /**
  * Component to allow a user to input/select a date
@@ -87,6 +88,12 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   private static readonly SHORT_DAY_DATE_FORMAT = /^\d\d\/\d\/\d\d\d\d$/;
 
   /**
+   * A reference date with all fields set to 0
+   * @private
+   */
+  private static readonly referenceDate = new Date(0, 0, 0, 0, 0, 0, 0);
+
+  /**
    * ViewChild of the date picker div
    */
   @ViewChild('datePickerDiv')
@@ -142,6 +149,12 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
       end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
     };
   }
+
+  /**
+   * Event emitted on date picker input
+   */
+  @Output()
+  input = new EventEmitter<void>();
 
   /**
    * The current date
@@ -207,7 +220,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @private
    */
   private static parseValue(value: Date): string {
-    return !value ? null : format(value, 'MM/DD/YYYY');
+    return !value ? null : format(value, 'MM/dd/yyyy');
   }
 
   /**
@@ -216,25 +229,35 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @private
    */
   private static parseDateString(dateString: string): Date {
+    const dateFormat = DatePickerComponent.getDateFormat(dateString);
+    return !!dateString && !!dateFormat
+      ? parse(dateString, DatePickerComponent.getDateFormat(dateString), this.referenceDate)
+      : null;
+  }
+
+  /**
+   * Get the date format that matches the input date string, null if no match
+   * @param dateString the string to test
+   * @private
+   */
+  private static getDateFormat(dateString: string): string {
     this.FULL_DATE_FORMAT.lastIndex = 0;
     this.SHORT_MONTH_DATE_FORMAT.lastIndex = 0;
     this.SHORT_DAY_DATE_FORMAT.lastIndex = 0;
     this.SHORT_DATE_FORMAT.lastIndex = 0;
 
-    let dateFormat: string;
+    let dateFormat: string = null;
     if (this.FULL_DATE_FORMAT.test(dateString)) {
-      dateFormat = 'MM/DD/YYYY';
+      dateFormat = 'MM/dd/yyyy';
     } else if (this.SHORT_MONTH_DATE_FORMAT.test(dateString)) {
-      dateFormat = 'M/DD/YYYY';
+      dateFormat = 'M/dd/yyyy';
     } else if (this.SHORT_DAY_DATE_FORMAT.test(dateString)) {
-      dateFormat = 'MM/D/YYYY';
+      dateFormat = 'MM/d/yyyy';
     } else if (this.SHORT_DATE_FORMAT.test(dateString)) {
-      dateFormat = 'M/D/YYYY';
-    } else {
-      return null;
+      dateFormat = 'M/d/yyyy';
     }
 
-    return parse(dateString, dateFormat, new Date(0, 0, 0, 0, 0, 0, 0));
+    return dateFormat;
   }
 
   /**
@@ -271,6 +294,8 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     this.dateString = DatePickerComponent.parseValue(value);
     this.onChange(this.value);
     this.changeDetectorRef.markForCheck();
+
+    this.input.emit();
   }
 
   /**
@@ -305,6 +330,31 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     const {key} = event;
     if (!DatePickerComponent.ALLOWED_KEYS.includes(key)) {
       event.preventDefault();
+    }
+  }
+
+  /**
+   * Clear value if no input, write parsed date if input requirements fulfilled
+   */
+  handleInput() {
+    if (!this.dateString) {
+      this.writeValue(null);
+    } else {
+      const dateFormat = DatePickerComponent.getDateFormat(this.dateString);
+
+      if (!!dateFormat) {
+        this.writeValue(DatePickerComponent.parseDateString(this.dateString));
+      }
+    }
+  }
+
+  /**
+   * Null out value if input is not a valid date
+   */
+  handleBlur(): void {
+    const dateFormat = DatePickerComponent.parseDateString(this.dateString);
+    if (!dateFormat) {
+      this.writeValue(null);
     }
   }
 
