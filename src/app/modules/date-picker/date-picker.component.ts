@@ -18,9 +18,6 @@ import { EventEmitter } from '@angular/core';
 /**
  * Component to allow a user to input/select a date
  * TODO: figure out close animation
- * TODO: implement control value accessor
- * TODO: sync input with calendar
- * TODO: validate input as date format
  * TODO: handle paste
  */
 @Component({
@@ -57,7 +54,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   private static readonly ALLOWED_KEYS = [
     '0', '1', '2', '3', '4', '5', '6', '7',
-    '9', 'Tab', 'Enter', '/', 'ArrowLeft',
+    '8', '9', 'Tab', 'Enter', '/', 'ArrowLeft',
     'ArrowUp', 'ArrowRight', 'ArrowDown',
     'ShiftLeft', 'ShiftRight', 'Backspace',
     'Delete'
@@ -293,11 +290,12 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   writeValue(value: Date): void {
     if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
       this.value = value;
+      this.dateString = DatePickerComponent.parseDate(value);
     } else {
       this.value = null;
+      this.dateString = null;
     }
 
-    this.dateString = DatePickerComponent.parseDate(value);
     this.onChange(this.value);
     this.changeDetectorRef.markForCheck();
     this.input.emit();
@@ -342,14 +340,23 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Clear value if no input, write parsed date if input requirements fulfilled
    */
   handleBlur() {
-    let valueToWrite: Date;
     try {
-      valueToWrite = DatePickerComponent.parseDateString(this.dateString);
+      this.writeValue(DatePickerComponent.parseDateString(this.dateString));
     } catch (e) {
-      valueToWrite = null;
+      this.writeValue(null);
     }
+  }
 
-    this.writeValue(valueToWrite);
+  /**
+   * Write on input if valid date within interval
+   */
+  handleInput() {
+    try {
+      const parsedDate = DatePickerComponent.parseDateString(this.dateString);
+      if (parsedDate !== null && isWithinInterval(parsedDate, this.validSelectionInterval)) {
+        this.writeValue(parsedDate);
+      }
+    } catch (e) { }
   }
 
   /**
