@@ -10,9 +10,8 @@
 
 <!-- calendar widget -->
 <div #calendarOverlayDiv
-     [style.display]="'none'"
+     [style.display]="showCalendar ? '' : 'none'"
      class="wily_datepicker_overlay">
-  <!-- position this div based on input -->
   <div #calendarDiv
        [@openClose]="showCalendar ? 'open' : 'closed'"
        class="position_absolute">
