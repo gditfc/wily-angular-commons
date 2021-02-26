@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
+import {format, isEqual, parse} from "date-fns";
 
 /**
  * Component to allow a user to input/select a date
@@ -62,6 +63,30 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   ];
 
   /**
+   * Matches MM/DD/YYYY
+   * @private
+   */
+  private static readonly FULL_DATE_FORMAT = /^\d\d\/\d\d\/\d\d\d\d$/;
+
+  /**
+   * Matches M/D/YYYY
+   * @private
+   */
+  private static readonly SHORT_DATE_FORMAT = /^\d\/\d\/\d\d\d\d$/;
+
+  /**
+   * Matches M/DD/YYYY
+   * @private
+   */
+  private static readonly SHORT_MONTH_DATE_FORMAT = /^\d\/\d\d\/\d\d\d\d$/;
+
+  /**
+   * Matches MM/D/YYYY
+   * @private
+   */
+  private static readonly SHORT_DAY_DATE_FORMAT = /^\d\d\/\d\/\d\d\d\d$/;
+
+  /**
    * ViewChild of the date picker div
    */
   @ViewChild('datePickerDiv')
@@ -84,14 +109,14 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   @Input()
   get value(): Date {
-    return null;
+    return DatePickerComponent.parseDateString(this.dateString);
   }
 
   /**
    * Value input setter
    */
   set value(value: Date) {
-    if (this._value !== value) {
+    if (!isEqual(value, this._value)) {
       this._value = value;
     }
   }
@@ -105,6 +130,24 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     this._disabled = coerceBooleanProperty(disabled);
   }
 
+  @Input('dateRange')
+  set setDateRange(dateRange: { minDate: Date, maxDate: Date }) {
+    if (dateRange?.minDate > dateRange?.maxDate) {
+      throw new Error('Min date must be less than max date');
+    }
+
+    const year = this.currentDate.getFullYear();
+    this.validSelectionInterval = {
+      start: dateRange?.minDate ?? new Date(year - 50, 0, 1),
+      end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
+    };
+  }
+
+  /**
+   * The current date
+   */
+  private readonly currentDate = new Date();
+
   /**
    * Object representing the fixed dimensions of the calendar widget
    */
@@ -116,9 +159,20 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   private readonly calendarPadding = 5;
 
   /**
+   * String tracking date picker input
+   */
+  dateString = '';
+
+  /**
    * Whether or not to show the calendar
    */
   showCalendar = false;
+
+  /**
+   * The valid selection interval
+   * @private
+   */
+  validSelectionInterval: Interval;
 
   /**
    * Function to call on change
@@ -146,6 +200,42 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Window resize unlisten function
    */
   private resizeListener: () => void;
+
+  /**
+   * Parse the input Date value into a string
+   * @param value the value to parse
+   * @private
+   */
+  private static parseValue(value: Date): string {
+    return !value ? null : format(value, 'MM/DD/YYYY');
+  }
+
+  /**
+   * Parse the input date string into a Date
+   * @param dateString the string to parse
+   * @private
+   */
+  private static parseDateString(dateString: string): Date {
+    this.FULL_DATE_FORMAT.lastIndex = 0;
+    this.SHORT_MONTH_DATE_FORMAT.lastIndex = 0;
+    this.SHORT_DAY_DATE_FORMAT.lastIndex = 0;
+    this.SHORT_DATE_FORMAT.lastIndex = 0;
+
+    let dateFormat: string;
+    if (this.FULL_DATE_FORMAT.test(dateString)) {
+      dateFormat = 'MM/DD/YYYY';
+    } else if (this.SHORT_MONTH_DATE_FORMAT.test(dateString)) {
+      dateFormat = 'M/DD/YYYY';
+    } else if (this.SHORT_DAY_DATE_FORMAT.test(dateString)) {
+      dateFormat = 'MM/D/YYYY';
+    } else if (this.SHORT_DATE_FORMAT.test(dateString)) {
+      dateFormat = 'M/D/YYYY';
+    } else {
+      return null;
+    }
+
+    return parse(dateString, dateFormat, new Date(0, 0, 0, 0, 0, 0, 0));
+  }
 
   /**
    * Dependency injection site
@@ -178,6 +268,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   writeValue(value: Date): void {
     this.value = value;
+    this.dateString = DatePickerComponent.parseValue(value);
     this.onChange(this.value);
     this.changeDetectorRef.markForCheck();
   }
