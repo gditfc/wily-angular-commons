@@ -1,6 +1,6 @@
 <!-- date picker input -->
 <!-- TODO: attach custom input styles to this -->
-<div #datePickerDiv [ngClass]="inputClassList" class="wily_datepicker">
+<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md page_container_color'" class="wily_datepicker">
   <ng-container *ngIf="!disabled else disabledDatePicker">
     <input [(ngModel)]="dateString"
            (keydown)="filterInput($event)"
@@ -12,8 +12,8 @@
            class="access wily_datepicker_input" />
     <!-- TODO: attach custom button styles to this -->
     <button (click)="openCalendar()"
-            [ngClass]="calendarButtonClassList"
-            class="access btn wily_datepicker_button overlay"
+            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'overlay_alt2 bg_blue_alt brad_3'"
+            class="access btn wily_datepicker_button"
             aria-label="Open the calendar" aria-haspopup="dialog">
       <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
     </button>
