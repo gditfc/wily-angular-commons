@@ -62,7 +62,8 @@
   cursor: pointer;
   z-index: 4;
   position: absolute;
-  width: calc(100% - 2px);
+  max-height:300px;
+  overflow-y:auto;
 }
 .wily_select_options li {
   font-size:14px;
