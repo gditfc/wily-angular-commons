@@ -20,7 +20,7 @@ export class TooltipDirective {
    * The direction of the tooltip around the host element
    */
   @Input()
-  tooltipDirection: 'left' | 'right' | 'top' | 'bottom' = 'bottom';
+  tooltipPosition: 'left' | 'right' | 'top' | 'bottom' = 'bottom';
 
   /**
    * The DIV element housing the tooltip
@@ -80,11 +80,95 @@ export class TooltipDirective {
   }
 
   /**
-   * Align the tooltip to the input direction or the next best fit
+   * Align the tooltip to the input position or the next best fit
    * @private
    */
   private alignTooltip(): void {
-    // TODO: Implement
+    switch (this.tooltipPosition) {
+      case 'left':
+        this.renderer.addClass(this.tooltip, 'left');
+
+        if (!this.tooltipFitsInWindow()) {
+          this.renderer.removeClass(this.tooltip, 'left');
+          this.renderer.addClass(this.tooltip, 'top');
+
+          if (!this.tooltipFitsInWindow()) {
+            this.renderer.removeClass(this.tooltip, 'top');
+            this.renderer.addClass(this.tooltip, 'right');
+
+            if (!this.tooltipFitsInWindow()) {
+              this.renderer.removeClass(this.tooltip, 'right');
+              this.renderer.addClass(this.tooltip, 'bottom');
+            }
+          }
+        }
+        break;
+      case 'top':
+        this.renderer.addClass(this.tooltip, 'top');
+
+        if (!this.tooltipFitsInWindow()) {
+          this.renderer.removeClass(this.tooltip, 'top');
+          this.renderer.addClass(this.tooltip, 'right');
+
+          if (!this.tooltipFitsInWindow()) {
+            this.renderer.removeClass(this.tooltip, 'right');
+            this.renderer.addClass(this.tooltip, 'bottom');
+
+            if (!this.tooltipFitsInWindow()) {
+              this.renderer.removeClass(this.tooltip, 'bottom');
+              this.renderer.addClass(this.tooltip, 'left');
+            }
+          }
+        }
+        break;
+      case 'right':
+        this.renderer.addClass(this.tooltip, 'right');
+
+        if (!this.tooltipFitsInWindow()) {
+          this.renderer.removeClass(this.tooltip, 'right');
+          this.renderer.addClass(this.tooltip, 'bottom');
+
+          if (!this.tooltipFitsInWindow()) {
+            this.renderer.removeClass(this.tooltip, 'bottom');
+            this.renderer.addClass(this.tooltip, 'left');
+
+            if (!this.tooltipFitsInWindow()) {
+              this.renderer.removeClass(this.tooltip, 'left');
+              this.renderer.addClass(this.tooltip, 'top');
+            }
+          }
+        }
+        break;
+      case 'bottom':
+        this.renderer.addClass(this.tooltip, 'bottom');
+
+        if (!this.tooltipFitsInWindow()) {
+          this.renderer.removeClass(this.tooltip, 'bottom');
+          this.renderer.addClass(this.tooltip, 'left');
+
+          if (!this.tooltipFitsInWindow()) {
+            this.renderer.removeClass(this.tooltip, 'left');
+            this.renderer.addClass(this.tooltip, 'top');
+
+            if (!this.tooltipFitsInWindow()) {
+              this.renderer.removeClass(this.tooltip, 'top');
+              this.renderer.addClass(this.tooltip, 'right');
+            }
+          }
+        }
+    }
+  }
+
+  /**
+   * Checks if the tooltip fits in the window
+   * @private
+   */
+  private tooltipFitsInWindow(): boolean {
+    const { top, left } = this.tooltip.getBoundingClientRect();
+    const { offsetWidth, offsetHeight } = this.tooltip;
+    const { innerWidth, innerHeight } = window;
+
+    return (left + offsetWidth > innerWidth) || (left < 0) || (top < 0) || (top + offsetHeight > innerHeight);
   }
 
   /**
