@@ -13,7 +13,18 @@ export class TooltipDirective {
    * @param text the text to set for the tooltip
    */
   @Input('wilyTooltip')
-  set text(text: string) { this._text = text }
+  set text(text: string) {
+    this._text = text
+
+    if (!!text) {
+      if (!!this.tooltip?.parentElement) {
+        this.setTooltipText();
+        this.alignTooltip();
+      }
+    } else {
+      this.deleteTooltip();
+    }
+  }
   get text() { return this._text }
 
   /**
@@ -46,9 +57,7 @@ export class TooltipDirective {
    */
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    this.createTooltip();
-    this.updateTooltipText();
-    this.alignTooltip();
+    this.showTooltip();
   }
 
   /**
@@ -60,6 +69,16 @@ export class TooltipDirective {
   }
 
   /**
+   * Create tooltip, set the text and align it
+   * @private
+   */
+  private showTooltip(): void {
+    this.createTooltip();
+    this.setTooltipText();
+    this.alignTooltip();
+  }
+
+  /**
    * Add the tooltip to the DOM
    * @private
    */
@@ -67,16 +86,16 @@ export class TooltipDirective {
     this.deleteTooltip();
 
     this.tooltip = this.renderer.createElement('div');
-    this.renderer.appendChild(document.body, this.tooltip);
-    this.renderer.addClass(this.tooltip, 'tooltip');
+    this.renderer.appendChild(this.element.nativeElement, this.tooltip);
+    this.renderer.addClass(this.tooltip, 'wily_tooltip');
   }
 
   /**
-   * Update tooltip text and alignment
+   * Set tooltip text
    * @private
    */
-  private updateTooltipText(): void {
-    this.renderer.setProperty(this.tooltip, 'innerHtml', this.text);
+  private setTooltipText(): void {
+    this.renderer.setProperty(this.tooltip, 'innerHTML', this.text);
   }
 
   /**
