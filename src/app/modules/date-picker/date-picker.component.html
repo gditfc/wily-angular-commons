@@ -1,5 +1,4 @@
 <!-- date picker input -->
-<!-- TODO: attach custom input styles to this -->
 <div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md overlay_alt2 page_container_color'"
      class="wily_datepicker">
   <ng-container *ngIf="!disabled else disabledDatePicker">
@@ -11,7 +10,6 @@
            maxlength="10"
            aria-label="Enter a date in the format mm/dd/yyyy"
            class="access wily_datepicker_input" />
-    <!-- TODO: attach custom button styles to this -->
     <button (click)="openCalendar()"
             [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'overlay_alt2 bg_blue_alt brad_3'"
             class="access btn wily_datepicker_button"
