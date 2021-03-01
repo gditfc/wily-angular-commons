@@ -1,34 +1,44 @@
-<div class="wily_select" style="font-size:14px;">
-  <!-- TODO: either allow filtering or just make this a button -->
-  <input type="text" placeholder="Make a selection..." aria-label="Make a selection"
-         class="access page_container_color wily_select_input">
-  <!-- TODO: flip caret when dropdown opened/closed -->
-  <span class="wily_select_caret">
-    <i class="fas fa-caret-down" id="icon-circle-down"></i>
-    <i class="fas fa-caret-up all_hide" id="icon-circle-up"></i>
-  </span>
+<!-- TODO: add an input to make classes after wily_select optional (like in date picker) -->
+<div class="wily_select input md overlay_alt2 page_container_color">
+  <!-- TODO: get clicking this to toggle the overlay/list -->
+  <!-- TODO: add input to pass in aria-label -->
+  <button aria-label="Make a selection"
+          class="access page_container_color wily_select_input">
+    <!-- TODO: show this when no option selected -->
+    <div class="wily_select_placeholder">placeholder text</div>
+    <!-- TODO: show when option selected -->
+    <div *ngIf="false">Option Text</div>
+  </button>
+  <!-- TODO: flip caret when dropdown opened/closed (down for closed, up for opened) -->
+  <div class="wily_select_caret">
+    <div><i class="fas fa-caret-down"></i></div>
+    <div class="all_hide"><i class="fas fa-caret-up"></i></div>
+  </div>
 </div>
 
+<!-- TODO: show this when clicking on dropdown -->
 <div class="wily_select_overlay">
-  <ul class="wily_select_options page_container_color card_shadow">
-    <li class="overlay_alt1 hov_bg">
+  <!-- TODO: align this to dropdown, set width to width of dropdown -->
+  <div class="wily_select_options page_container_color card_shadow">
+    <!-- TODO: make this option, insert ng-content inside in place of text -->
+    <div class="overlay_alt1 hov_bg">
       <strong>User</strong><br>Logged in Users can read locked content and update their profile.
-    </li>
-    <li class="overlay_alt1 hov_bg">
+    </div>
+    <div class="overlay_alt1 hov_bg">
       <div class="accent bg_blue"></div>
       <strong>Author</strong><br>Authors can create, edit and delete their own posts.
-    </li>
-    <li class="overlay_alt1 hov_bg">
+    </div>
+    <div class="overlay_alt1 hov_bg">
       <div class="accent bg_blue"></div>
       <strong>Editor</strong><br>Editors can create, edit and delete all posts by all authors.
-    </li>
-    <li class="overlay_alt1 hov_bg">
+    </div>
+    <div class="overlay_alt1 hov_bg">
       <div class="accent bg_blue"></div>
       <strong>Manager</strong><br>Managers have the same permissions as Editors, plus they can create, edit and delete categories, pages and manage comments.
-    </li>
-    <li class="overlay_alt1 hov_bg">
+    </div>
+    <div class="overlay_alt1 hov_bg">
       <div class="accent bg_blue"></div>
       <strong>Administrator</strong><br>Administrators have full control over the posts, pages, categories, themes and plugins of the site.
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>

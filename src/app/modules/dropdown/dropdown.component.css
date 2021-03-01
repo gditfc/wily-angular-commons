@@ -1,18 +1,40 @@
-/* custom select styles */
+:host {
+  width:100%;
+}
+
+/* dropdown container styles */
 .wily_select {
+  width:100%;
+  min-width:150px;
   position: relative;
 }
+.wily_select::after {
+  content:"mm/dd/yyyy";
+  opacity:0;
+  pointer-events:none;
+}
+
+/* dropdown button style */
 .wily_select_input {
-  padding: 0.5em 1.5em 0.5em 0.8em;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:inherit;
   width: 100%;
-  max-width: 100%;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  position: relative;
   cursor:pointer;
   font-size:inherit;
   outline:none;
+  border:none;
+  text-align:left;
+  user-select:none;
+  background-color:transparent;
+  color:inherit;
+  margin:0;
 }
 .wily_select_input::-ms-expand {
   display: none;
@@ -21,18 +43,14 @@
   position: absolute;
   top: 0.5em;
   right: 1em;
-  z-index: 20;
+  z-index: 2;
   background: transparent;
 }
-
-.wily_select_overlay {
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  z-index:1000;
+.wily_select_placeholder {
+  opacity:0.5;
 }
+
+/* options panel */
 .wily_select_options {
   border-radius: 3px;
   line-height: 1.5;
@@ -49,4 +67,19 @@
 .wily_select_options li {
   font-size:14px;
   padding: 8px 12px;
+}
+
+.wily_select_overlay {
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:1000;
+}
+
+@media screen and (max-width: 768px) {
+  .wily_select_overlay {
+    background: rgba(120, 120, 120, 0.4);
+  }
 }
