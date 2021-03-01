@@ -39,7 +39,7 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: black transparent transparent transparent;
+  border-color: #2f2f2f transparent transparent transparent;
 }
 /* bottom tooltip */
 .tooltip_container .tooltip.bottom {
@@ -56,7 +56,7 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent black transparent;
+  border-color: transparent transparent #2f2f2f transparent;
 }
 /* left tooltip */
 .tooltip_container .tooltip.left {
@@ -71,7 +71,7 @@
   margin-top: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent transparent black;
+  border-color: transparent transparent transparent #2f2f2f;
 }
 /* right tooltip */
 .tooltip_container .tooltip.right {
@@ -87,7 +87,7 @@
   margin-top: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent black transparent transparent;
+  border-color: transparent #2f2f2f transparent transparent;
 }
 
 .tooltip_container:hover .tooltip {
