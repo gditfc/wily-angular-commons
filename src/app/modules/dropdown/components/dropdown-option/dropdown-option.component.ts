@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-dropdown-option',
@@ -7,8 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DropdownOptionComponent implements OnInit {
 
+  /**
+   * The option value
+   */
+  @Input()
+  value: unknown;
+
+  /**
+   * The option label
+   */
+  @Input()
+  label: string;
+
+  /**
+   * Dependency injection site
+   */
   constructor() { }
 
+  /**
+   * Init component
+   */
   ngOnInit(): void {
   }
 
