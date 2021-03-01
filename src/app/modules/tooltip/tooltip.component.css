@@ -1,11 +1,4 @@
-/* EXPERIMENTS WITH PRIMENG REPLACEMENTS */
-.tooltip_container {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-.tooltip_container .tooltip {
+.wily_tooltip {
   visibility: hidden;
   width: 120px;
   background-color: #2f2f2f;
@@ -25,13 +18,13 @@
 }
 
 /* top tooltip */
-.tooltip_container .tooltip.top {
+.wily_tooltip.top {
   width: 120px;
   bottom: calc(100% + 10px);
   left: 50%;
   margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
 }
-.tooltip_container .tooltip.top::after {
+.wily_tooltip.top::after {
   content: " ";
   position: absolute;
   top: 100%; /* At the bottom of the tooltip */
@@ -42,13 +35,13 @@
   border-color: #2f2f2f transparent transparent transparent;
 }
 /* bottom tooltip */
-.tooltip_container .tooltip.bottom {
+.wily_tooltip.bottom {
   width: 120px;
   top: calc(100% + 10px);
   left: 50%;
   margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
 }
-.tooltip_container .tooltip.bottom::after {
+.wily_tooltip.bottom::after {
   content: " ";
   position: absolute;
   bottom: 100%;  /* At the top of the tooltip */
@@ -59,11 +52,11 @@
   border-color: transparent transparent #2f2f2f transparent;
 }
 /* left tooltip */
-.tooltip_container .tooltip.left {
+.wily_tooltip.left {
   top: 50%;
   right: calc(100% + 10px);
 }
-.tooltip_container .tooltip.left::after {
+.wily_tooltip.left::after {
   content: " ";
   position: absolute;
   top: 50%;
@@ -74,12 +67,12 @@
   border-color: transparent transparent transparent #2f2f2f;
 }
 /* right tooltip */
-.tooltip_container .tooltip.right {
+.wily_tooltip.right {
   top: 50%;
   /*margin-top:-10px;*/
   left: calc(100% + 10px);
 }
-.tooltip_container .tooltip.right::after {
+.wily_tooltip.right::after {
   content: " ";
   position: absolute;
   top: 50%;
@@ -88,8 +81,4 @@
   border-width: 5px;
   border-style: solid;
   border-color: transparent #2f2f2f transparent transparent;
-}
-
-.tooltip_container:hover .tooltip {
-  visibility: visible;
 }
