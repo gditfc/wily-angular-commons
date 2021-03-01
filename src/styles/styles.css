@@ -80,3 +80,11 @@ select:not(disabled) {
   visibility: visible;
 }
 
+/* TODO: move this to wily */
+.form_input {
+  font-size:13px;
+}
+
+.brad_0 {
+  border-radius:0;
+}

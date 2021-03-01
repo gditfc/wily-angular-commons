@@ -1,3 +1,6 @@
+:host {
+  width:100%;
+}
 .wily_datepicker_overlay {
   position:fixed;
   top:0;
@@ -8,18 +11,28 @@
 }
 /* custom date picker styles */
 .wily_datepicker {
+  width:100%;
+  min-width:150px;
   position: relative;
 }
 .wily_datepicker_input {
-  padding: 0.45em 0.8em;
-  width: 100%;
-  max-width: 100%;
+  /*padding: 0.45em 0.8em;*/
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:inherit;
+  border:none;
+  width: calc(100% - 2.25em);
+  /*max-width: 100%;*/
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  position: relative;
   font-size:inherit;
   outline:none;
+  background-color:transparent;
+  color:inherit;
 }
 .wily_datepicker_input::-ms-expand {
   display: none;
@@ -27,11 +40,12 @@
 .wily_datepicker_button {
   position: absolute;
   height:100%;
-  width:2.5em;
+  width:2.25em;
   top: 0;
   right: 0;
   z-index: 1;
-  border-radius:0 3px 3px 0;
+  border-top-left-radius:0 !important;
+  border-bottom-left-radius:0 !important;
   font-size:inherit;
   /* background: transparent; */
 }
@@ -42,29 +56,29 @@
   }
 }
 
-.animate_in {
-  animation-name: datepicker_in;
-  animation-duration: 0.3s;
-  animation-timing-function: ease;
-  animation-direction: normal;
-}
-.animate_out {
-  animation-name: datepicker_in;
-  animation-duration: 0.3s;
-  animation-timing-function: ease;
-  animation-direction: reverse;
-}
-/* The animation code */
-@keyframes datepicker_in {
-  0%   {
-    opacity: 0;
-    transform:scaleY(0.5);
-  }
-  25% {
-    opacity:0;
-  }
-  100% {
-    opacity: 1;
-    transform:scaleY(1);
-  }
-}
+/*.animate_in {*/
+/*  animation-name: datepicker_in;*/
+/*  animation-duration: 0.3s;*/
+/*  animation-timing-function: ease;*/
+/*  animation-direction: normal;*/
+/*}*/
+/*.animate_out {*/
+/*  animation-name: datepicker_in;*/
+/*  animation-duration: 0.3s;*/
+/*  animation-timing-function: ease;*/
+/*  animation-direction: reverse;*/
+/*}*/
+/*!* The animation code *!*/
+/*@keyframes datepicker_in {*/
+/*  0%   {*/
+/*    opacity: 0;*/
+/*    transform:scaleY(0.5);*/
+/*  }*/
+/*  25% {*/
+/*    opacity:0;*/
+/*  }*/
+/*  100% {*/
+/*    opacity: 1;*/
+/*    transform:scaleY(1);*/
+/*  }*/
+/*}*/
