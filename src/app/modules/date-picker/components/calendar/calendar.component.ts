@@ -388,10 +388,10 @@ export class CalendarComponent implements AfterViewInit, OnDestroy, OnInit {
 
       // this check is to prevent the click event from firing on keypress when focused on a button
       if (pageX > 0 && pageY > 0) {
-        const {x, y, width, height} = this.calendarWidgetDiv.nativeElement.getBoundingClientRect();
+        const {top, bottom, left, right} = this.calendarWidgetDiv.nativeElement.getBoundingClientRect();
 
-        const insideX = (pageX >= x) && (pageX <= (x + width));
-        const insideY = (pageY >= y) && (pageY <= (y + height));
+        const insideX = (pageX >= left) && (pageX <= right);
+        const insideY = (pageY >= top) && (pageY <= bottom);
         const shouldClose = !(insideX && insideY);
 
         if (shouldClose) {

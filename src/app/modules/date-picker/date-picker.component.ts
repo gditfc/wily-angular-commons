@@ -382,20 +382,20 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * center
    */
   private setCalendarPosition(): void {
-    const {x, y, height} = this.datePickerDiv.nativeElement.getBoundingClientRect();
-    const datePickerBottomLeftAnchor = y + height;
+    const {left, top, bottom} = this.datePickerDiv.nativeElement.getBoundingClientRect();
+    const datePickerBottomLeftAnchor = bottom;
     const availableBottomSpace = window.innerHeight - datePickerBottomLeftAnchor;
-    const availableTopSpace = y;
+    const availableTopSpace = top;
     const offsetCalendarHeight = this.calendarHeight + this.calendarPadding;
 
     if (availableBottomSpace > offsetCalendarHeight) {
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'top left');
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${x}px`);
+      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${left}px`);
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${datePickerBottomLeftAnchor + this.calendarPadding}px`);
     } else if (availableTopSpace > offsetCalendarHeight) {
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'bottom left');
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${x}px`);
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${y - offsetCalendarHeight}px`);
+      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${left}px`);
+      this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${top - offsetCalendarHeight}px`);
     } else {
       let topPosition: string;
       if (this.calendarHeight > window.innerHeight) {
@@ -406,7 +406,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
       }
 
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'top left');
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${x}px`);
+      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${left}px`);
       this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${topPosition}px`);
     }
   }
