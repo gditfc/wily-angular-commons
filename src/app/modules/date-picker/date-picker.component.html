@@ -1,6 +1,7 @@
 <!-- date picker input -->
 <!-- TODO: attach custom input styles to this -->
-<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md page_container_color'" class="wily_datepicker">
+<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md overlay_alt2 page_container_color'"
+     class="wily_datepicker">
   <ng-container *ngIf="!disabled else disabledDatePicker">
     <input [(ngModel)]="dateString"
            (keydown)="filterInput($event)"
