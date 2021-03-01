@@ -143,6 +143,18 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   }
 
   /**
+   * Optional class-list to add to the date picker input
+   */
+  @Input()
+  inputClassList = '';
+
+  /**
+   * Optional class-list to add to the calendar button
+   */
+  @Input()
+  calendarButtonClassList = '';
+
+  /**
    * Event emitted on date picker input
    */
   @Output()
