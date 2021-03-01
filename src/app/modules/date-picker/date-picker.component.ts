@@ -18,8 +18,6 @@ import { EventEmitter } from '@angular/core';
 /**
  * Component to allow a user to input/select a date
  * TODO: figure out close animation
- * TODO: handle paste
- * TODO: handle IE11 positioning
  */
 @Component({
   selector: 'wily-date-picker',
@@ -344,7 +342,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   filterInput(event: KeyboardEvent): void {
     const {key} = event;
-    if (!DatePickerComponent.ALLOWED_KEYS.includes(key)) {
+    if (!DatePickerComponent.ALLOWED_KEYS.includes(key) && !event.ctrlKey) {
       event.preventDefault();
     }
   }
