@@ -1,8 +1,9 @@
 <!-- TODO: add an input to make classes after wily_select optional (like in date picker) -->
-<div class="wily_select input md overlay_alt2 page_container_color">
+<div #dropdown class="wily_select input md overlay_alt2 page_container_color">
   <!-- TODO: get clicking this to toggle the overlay/list -->
   <!-- TODO: add input to pass in aria-label -->
-  <button aria-label="Make a selection"
+  <button (click)="openDropdown()"
+          aria-label="Make a selection"
           class="access page_container_color wily_select_input">
     <!-- TODO: show this when no option selected -->
     <div class="wily_select_placeholder">placeholder text</div>
@@ -15,9 +16,11 @@
 </div>
 
 <!-- TODO: show this when clicking on dropdown -->
-<div class="wily_select_overlay">
+<div [style.display]="opened ? '' : 'none'"
+     [attr.aria-hidden]="opened"
+     class="wily_select_overlay">
   <!-- TODO: align this to dropdown, set width to width of dropdown -->
-  <div class="wily_select_options page_container_color card_shadow">
+  <div #dropdownList class="wily_select_options page_container_color card_shadow">
     <!-- TODO: make this option, insert ng-content inside in place of text -->
     <div class="overlay_alt1 hov_bg">
       <strong>User</strong>Logged in Users can read locked content and update their profile.
