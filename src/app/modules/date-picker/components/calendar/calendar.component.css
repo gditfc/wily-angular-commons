@@ -63,14 +63,14 @@
   justify-content:center;
 }
 
-@media screen and (max-width: 768px) {
-  /* fix to center of screen on mobile */
-  .wily_datepicker_options {
-    z-index: 10;
-    position: fixed;
-    width: 300px;
-    top:50%;
-    left:50%;
-    margin:-170px 0 0 -150px;
-  }
-}
+/*@media screen and (max-width: 768px) {*/
+/*  !* fix to center of screen on mobile *!*/
+/*  .wily_datepicker_options {*/
+/*    z-index: 10;*/
+/*    position: fixed;*/
+/*    width: 300px;*/
+/*    top:50%;*/
+/*    left:50%;*/
+/*    margin:-170px 0 0 -150px;*/
+/*  }*/
+/*}*/

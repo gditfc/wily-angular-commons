@@ -55,11 +55,11 @@
   /* background: transparent; */
 }
 
-@media screen and (max-width: 768px) {
-  .wily_datepicker_overlay {
-    background: rgba(120, 120, 120, 0.4);
-  }
-}
+/*@media screen and (max-width: 768px) {*/
+/*  .wily_datepicker_overlay {*/
+/*    background: rgba(120, 120, 120, 0.4);*/
+/*  }*/
+/*}*/
 
 /*.animate_in {*/
 /*  animation-name: datepicker_in;*/
