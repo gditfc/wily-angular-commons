@@ -287,7 +287,7 @@ export class TooltipDirective implements OnDestroy {
   private alignBottom(): void {
     let hostOffset = this.getHostOffset();
     let left = hostOffset.left + (this.element.nativeElement.offsetWidth - this.tooltip.offsetWidth) / 2;
-    let top = hostOffset.top + this.tooltip.offsetHeight + this.TOOLTIP_OFFSET;
+    let top = hostOffset.top + this.element.nativeElement.offsetHeight + this.TOOLTIP_OFFSET;
 
     this.renderer.setStyle(this.tooltip, 'left', `${left}px`);
     this.renderer.setStyle(this.tooltip, 'top', `${top}px`);
