@@ -1,5 +1,6 @@
 <!-- TODO: add an input to make classes after wily_select optional (like in date picker) -->
-<div #dropdown [ngClass]="classList" class="wily_select">
+<div #dropdown class="wily_select"
+     [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
   <!-- TODO: add input to pass in aria-label -->
   <button (click)="openDropdown($event)"
           [attr.aria-label]="ariaLabel"
