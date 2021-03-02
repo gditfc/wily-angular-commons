@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
 
 /**
  * Dropdown component
@@ -51,6 +51,18 @@ export class DropdownComponent implements OnInit {
    * Init component
    */
   ngOnInit(): void { }
+
+  /**
+   * Close the dropdown list on escape keyup
+   * @param event the keyup KeyboardEvent
+   */
+  @HostListener('window:keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent): void {
+    const {key} = event;
+    if (key === 'Esc' || key === 'Escape') {
+      this.closeDropdown();
+    }
+  }
 
   /**
    * Open the dropdown list and align it
