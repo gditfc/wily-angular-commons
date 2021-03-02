@@ -107,7 +107,7 @@ export class DropdownComponent implements OnInit {
 
     this.renderer.setStyle(this.dropdownList.nativeElement, 'transform-origin', transformOrigin);
     this.renderer.setStyle(this.dropdownList.nativeElement, 'left', `${left}px`);
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'top', `${positionTop}px`);
+    this.renderer.setStyle(this.dropdownList.nativeElement, 'top', positionTop);
   }
 
   /**
