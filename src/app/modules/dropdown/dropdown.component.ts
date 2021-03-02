@@ -52,6 +52,17 @@ export class DropdownComponent implements OnInit {
   ngOnInit(): void { }
 
   /**
+   * Reposition and resize the dropdown on window resize
+   */
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    if (this.opened) {
+      this.positionDropdownList();
+      this.resizeDropdownList();
+    }
+  }
+
+  /**
    * Close the dropdown list on escape keyup
    * @param event the keyup KeyboardEvent
    */
