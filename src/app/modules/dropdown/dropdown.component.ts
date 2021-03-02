@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 
 /**
  * Dropdown component
@@ -34,6 +34,24 @@ export class DropdownComponent implements OnInit {
    */
   @ViewChild('dropdownList')
   dropdownList: ElementRef<HTMLDivElement>;
+
+  /**
+   * Placeholder text to display when no option is selected
+   */
+  @Input()
+  placeholder = 'Make a selection';
+
+  /**
+   * Aria label text
+   */
+  @Input()
+  ariaLabel = 'Make a selection';
+
+  /**
+   * Class list to assign to the dropdown
+   */
+  @Input()
+  classList: string;
 
   /**
    * Whether or not the dropdown is open
@@ -98,8 +116,9 @@ export class DropdownComponent implements OnInit {
 
   /**
    * Open the dropdown list and align it
+   * @param event the click MouseEvent
    */
-  openDropdown(event: KeyboardEvent): void {
+  openDropdown(event: MouseEvent): void {
     event.stopImmediatePropagation();
 
     this.opened = true;
