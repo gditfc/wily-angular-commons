@@ -1,15 +1,12 @@
-import {Directive, ElementRef, HostListener, Input, Renderer2} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, OnDestroy, Renderer2} from '@angular/core';
 
 /**
  * Directive to create a tooltip around the host element
- * // TODO: port CSS to JS
- * // TODO: animation using AnimationBuilder
- * // TODO: hide tooltip on scroll/click
  */
 @Directive({
   selector: '[wilyTooltip]'
 })
-export class TooltipDirective {
+export class TooltipDirective implements OnDestroy {
 
   /**
    * The number of pixels from the host to offset the tooltip
@@ -55,6 +52,12 @@ export class TooltipDirective {
   private _text: string;
 
   /**
+   * Array of scroll unlisten functions
+   * @private
+   */
+  private scrollUnlisteners: Array<() => void> = [];
+
+  /**
    * Get window scroll top
    * @private
    */
@@ -78,6 +81,13 @@ export class TooltipDirective {
    * @param renderer the Angular renderer
    */
   constructor(private element: ElementRef<HTMLElement>, private renderer: Renderer2) { }
+
+  /**
+   * Destroy directive, invoke scroll unlisteners
+   */
+  ngOnDestroy(): void {
+    this.removeScrollListeners();
+  }
 
   /**
    * Handle host mouse enter event
@@ -111,6 +121,8 @@ export class TooltipDirective {
     this.createTooltip();
     this.setTooltipText();
     this.alignTooltip();
+
+    this.addScrollListeners();
   }
 
   /**
@@ -302,6 +314,8 @@ export class TooltipDirective {
       this.renderer.removeChild(document.body, this.tooltip);
       this.tooltip = null;
     }
+
+    this.removeScrollListeners();
   }
 
   /**
@@ -314,5 +328,65 @@ export class TooltipDirective {
     const { innerWidth, innerHeight } = window;
 
     return (left + offsetWidth > innerWidth) || (left < 0) || (top < 0) || (top + offsetHeight > innerHeight);
+  }
+
+  /**
+   * Listen for scrolling on all scrollable parents of the host element
+   * @private
+   */
+  private addScrollListeners(): void {
+    const overflowRegex = /(auto|scroll)/;
+    const overflowCheck = (node: any) => {
+      overflowRegex.lastIndex = 0;
+      let styleDeclaration = window['getComputedStyle'](node, null);
+      return overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) ||
+             overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) ||
+             overflowRegex.test(styleDeclaration.getPropertyValue('overflowY'));
+    };
+
+    const parents = this.getParentElements(this.element.nativeElement);
+    for (const parent of parents) {
+      let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
+      if (scrollSelectors) {
+        let selectors = scrollSelectors.split(',');
+        for (let selector of selectors) {
+          let el = parent.querySelector(selector);
+          if (el && overflowCheck(el)) {
+            this.scrollUnlisteners.push(
+              this.renderer.listen(el, 'scroll', () => this.deleteTooltip())
+            );
+          }
+        }
+      } else if (parent.nodeType !== 9 && overflowCheck(parent)) {
+        this.scrollUnlisteners.push(
+          this.renderer.listen(parent, 'scroll', () => this.deleteTooltip())
+        );
+      }
+    }
+  }
+
+  /**
+   * Invoke scroll unlisten functions and clear unlisteners list
+   * @private
+   */
+  private removeScrollListeners(): void {
+    for (const unlisten of this.scrollUnlisteners) {
+      unlisten();
+    }
+
+    this.scrollUnlisteners = [];
+  }
+
+  /**
+   * Get the parent elements for the input element
+   * @param element the element to get parents for
+   * @param parents the parent elements
+   * @private
+   */
+  private getParentElements(element: any, parents: Array<any> = []): Array<any> {
+    const { parentNode } = element;
+    return !parentNode
+      ? parents
+      : this.getParentElements(parentNode, parents.concat([parentNode]));
   }
 }
