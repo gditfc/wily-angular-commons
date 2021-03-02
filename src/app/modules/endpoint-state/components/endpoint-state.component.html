@@ -51,13 +51,11 @@
   <div id="overlay">
   </div>
   <div class="row column center_center dialog_body_color brad_5 shadow min_w280" style="padding:25px;" id="spinner">
-    <div class="bars_bounce">
-      <div class="row" style="height:4px;">
-        <div class="col size_1 bg_blue_light_2 bar1"></div>
-        <div class="col size_1 bg_purple_light_2 bar2"></div>
-        <div class="col size_1 bg_yellow_light_2 bar3"></div>
-        <div class="col size_1 bg_red_light_2 bar4"></div>
-      </div>
+    <div class="bars_vertical">
+      <div class="col size_1 bg_blue_light_2 bar1"></div>
+      <div class="col size_1 bg_purple_light_2 bar2"></div>
+      <div class="col size_1 bg_yellow_light_2 bar3"></div>
+      <div class="col size_1 bg_red_light_2 bar4"></div>
     </div>
     <div *ngIf="loadingOverlayText" class="text xlg bold center" style="margin-top:20px;">{{loadingOverlayText}}</div>
     <div *ngIf="loadingOverlaySubtext" class="text md center mar_top5">{{loadingOverlaySubtext}}</div>
