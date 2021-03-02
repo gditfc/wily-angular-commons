@@ -224,7 +224,7 @@ export class TooltipDirective {
    */
   private alignLeft(): void {
     const hostOffset = this.getHostOffset();
-    const left = hostOffset.left - this.tooltip.offsetWidth;
+    const left = hostOffset.left - this.tooltip.offsetWidth - this.TOOLTIP_OFFSET;
     const top = hostOffset.top + (this.element.nativeElement.offsetHeight - this.tooltip.offsetHeight) / 2;
 
     this.renderer.setStyle(this.tooltip, 'left', `${left}px`);
@@ -237,7 +237,7 @@ export class TooltipDirective {
    */
   private alignRight(): void {
     const hostOffset = this.getHostOffset();
-    const left = hostOffset.left + this.element.nativeElement.offsetWidth;
+    const left = hostOffset.left + this.element.nativeElement.offsetWidth + this.TOOLTIP_OFFSET;
     const top = hostOffset.top + (this.element.nativeElement.offsetHeight - this.tooltip.offsetHeight) / 2;
 
     this.renderer.setStyle(this.tooltip, 'left', `${left}px`);
@@ -251,7 +251,7 @@ export class TooltipDirective {
   private alignTop(): void {
     let hostOffset = this.getHostOffset();
     let left = hostOffset.left + (this.element.nativeElement.offsetWidth - this.tooltip.offsetWidth) / 2;
-    let top = hostOffset.top - this.tooltip.offsetHeight;
+    let top = hostOffset.top - this.tooltip.offsetHeight - this.TOOLTIP_OFFSET;
 
     this.renderer.setStyle(this.tooltip, 'left', `${left}px`);
     this.renderer.setStyle(this.tooltip, 'top', `${top}px`);
@@ -264,7 +264,7 @@ export class TooltipDirective {
   private alignBottom(): void {
     let hostOffset = this.getHostOffset();
     let left = hostOffset.left + (this.element.nativeElement.offsetWidth - this.tooltip.offsetWidth) / 2;
-    let top = hostOffset.top + this.tooltip.offsetHeight;
+    let top = hostOffset.top + this.tooltip.offsetHeight + this.TOOLTIP_OFFSET;
 
     this.renderer.setStyle(this.tooltip, 'left', `${left}px`);
     this.renderer.setStyle(this.tooltip, 'top', `${top}px`);
