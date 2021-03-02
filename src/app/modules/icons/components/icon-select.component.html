@@ -55,6 +55,7 @@
                   (click)="choose(faClass.toString())"
                   pTooltip="{{faClass}}" tooltipPosition="bottom"
                   [style.display]="icons[faClass.toString()] ? 'flex' : 'none'"
+                  [attr.aria-hidden]="!icons[faClass.toString()]"
                   [attr.aria-label]="'Choose ' + faClass">
             <i [ngClass]="faClass.toString()" style="font-size:32px;"></i>
           </button>

@@ -34,6 +34,7 @@
 
 <!-- calendar widget -->
 <div [style.display]="!!showCalendar ? '' : 'none'"
+     [attr.aria-hidden]="!!!showCalendar"
      class="wily_datepicker_overlay">
   <div #calendarDiv
        [@openClose]="!!showCalendar ? 'open' : 'closed'"
