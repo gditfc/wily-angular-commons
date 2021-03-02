@@ -2,11 +2,8 @@ import {Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild
 
 /**
  * Dropdown component
- * TODO: aria-label input
  * TODO: accessibility arrow-key controls
- * TODO: support placeholder
  * TODO: make dropdown option (with value/label)
- * TODO: open option list above/below dropdown based on available space
  * TODO: close list on selection
  */
 @Component({
