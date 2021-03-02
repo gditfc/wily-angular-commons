@@ -14,7 +14,7 @@ export class TooltipDirective {
    */
   @Input('wilyTooltip')
   set text(text: string) {
-    this._text = text
+    this._text = text;
 
     if (!!text) {
       if (!!this.tooltip?.parentElement) {
@@ -25,7 +25,7 @@ export class TooltipDirective {
       this.deleteTooltip();
     }
   }
-  get text() { return this._text }
+  get text() { return this._text; }
 
   /**
    * The direction of the tooltip around the host element
