@@ -7,7 +7,6 @@ import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from 
  * TODO: support placeholder
  * TODO: make dropdown option (with value/label)
  * TODO: open option list above/below dropdown based on available space
- * TODO: escape/click outside to close
  * TODO: close list on selection
  */
 @Component({
@@ -65,14 +64,41 @@ export class DropdownComponent implements OnInit {
   }
 
   /**
+   * Close the dropdown list (if opened) on click if outside the list
+   * @param event the click MouseEvent
+   */
+  @HostListener('window:click', ['$event'])
+  onClick(event: MouseEvent): void {
+    if (this.opened) {
+      const {pageX, pageY} = event;
+
+      if (pageX > 0 && pageY > 0) {
+        const { left, right, top, bottom } = this.dropdownList.nativeElement.getBoundingClientRect();
+        const xPositionValid = pageX >= left && pageX <= right;
+        const yPositionValid = pageY >= top && pageY <= bottom;
+        const shouldClose = !(xPositionValid && yPositionValid);
+
+        if (shouldClose) {
+          this.closeDropdown();
+        }
+      }
+    }
+  }
+
+  /**
    * Open the dropdown list and align it
    */
-  openDropdown(): void {
+  openDropdown(event: KeyboardEvent): void {
+    event.stopImmediatePropagation();
+
     this.opened = true;
     this.positionDropdownList();
     this.resizeDropdownList();
   }
 
+  /**
+   * Close the dropdown list
+   */
   closeDropdown(): void {
     this.opened = false;
   }

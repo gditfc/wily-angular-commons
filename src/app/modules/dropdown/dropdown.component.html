@@ -2,7 +2,7 @@
 <div #dropdown class="wily_select input md overlay_alt2 page_container_color">
   <!-- TODO: get clicking this to toggle the overlay/list -->
   <!-- TODO: add input to pass in aria-label -->
-  <button (click)="openDropdown()"
+  <button (click)="openDropdown($event)"
           aria-label="Make a selection"
           class="access page_container_color wily_select_input">
     <!-- TODO: show this when no option selected -->

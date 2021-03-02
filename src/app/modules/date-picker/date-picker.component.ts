@@ -18,6 +18,7 @@ import { EventEmitter } from '@angular/core';
 /**
  * Component to allow a user to input/select a date
  * TODO: figure out close animation
+ * TODO: check fix width-wise clipping
  */
 @Component({
   selector: 'wily-date-picker',
