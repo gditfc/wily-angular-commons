@@ -29,26 +29,13 @@
                           (closed)="iconSelectClosed()"
                           (selected)="iconSelected($event)">
         </wily-icon-select>
-        <!-- custom tooltip -->
-        <!-- TODO: should be attribute on item like in primeng -->
-<!--        <wily-tooltip></wily-tooltip>-->
-        <!-- TODO: build an overlay panel component -->
-        <!-- overlay panel -->
-        <div class="overlaypanel_container">
-          hover for overlay panel
-          <div class="overlaypanel bottom page_container_color card_shadow">
-            text in overlay panel
-          </div>
-        </div>
         <!-- custom select component -->
 <!--        <wily-dropdown></wily-dropdown>-->
         <!-- date picker component -->
-<!--        <div class="row">-->
         <wily-date-picker
           [inputClassList]="'form_input page_container_color'"
           [calendarButtonClassList]="'overlay border_left brad_0'">
         </wily-date-picker>
-<!--        </div>-->
       </div>
       <div class="row overlay pad_5 center_center brad_3">
         <!-- icon select -->

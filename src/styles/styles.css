@@ -47,38 +47,6 @@ select:not(disabled) {
 }
 
 
-/* overlay panel */
-.overlaypanel_container {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-.overlaypanel_container .overlaypanel {
-  visibility: hidden;
-  width: 400px; /* set as an input, default auto */
-  height:300px; /* set as an input, default auto */
-  display:flex;
-  flex-shrink:1;
-  border-radius: 5px;
-  padding: 10px;
-  font-size:12px;
-  line-height:1.5;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 4;
-  /*top: 100%;*/
-  /*left: 50%;*/
-  /*margin-left: -60px;*/
-
-  top: calc(100% + 10px);
-  left: 0;
-}
-
-.overlaypanel_container:hover .overlaypanel {
-  visibility: visible;
-}
 
 /* TODO: move this to wily */
 .form_input {

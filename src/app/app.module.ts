@@ -14,6 +14,7 @@ import { DatePickerModule } from './modules/date-picker/date-picker.module';
 import { DropdownModule } from './modules/dropdown/dropdown.module';
 import { TooltipModule } from './modules/tooltip/tooltip.module';
 import { NotificationModule } from './modules/notification/notification.module';
+import { PopoverModule} from './modules/popover/popover.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { NotificationModule } from './modules/notification/notification.module';
       DatePickerModule,
       DropdownModule,
       TooltipModule,
-      NotificationModule
+      NotificationModule,
+      PopoverModule
     ],
   providers: [],
   bootstrap: [AppComponent]
