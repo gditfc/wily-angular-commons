@@ -96,6 +96,14 @@ export class TooltipDirective {
   }
 
   /**
+   * Handle host click event
+   */
+  @HostListener('click')
+  onClick(): void {
+    this.deleteTooltip();
+  }
+
+  /**
    * Create tooltip, set the text and align it
    * @private
    */
