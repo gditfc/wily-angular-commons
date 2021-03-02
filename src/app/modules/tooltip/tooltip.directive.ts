@@ -9,6 +9,12 @@ import {Directive, ElementRef, HostListener, Input, Renderer2} from '@angular/co
 export class TooltipDirective {
 
   /**
+   * The number of pixels from the host to offset the tooltip
+   * @private
+   */
+  private readonly TOOLTIP_OFFSET = 10;
+
+  /**
    * Tooltip text input
    * @param text the text to set for the tooltip
    */
@@ -104,7 +110,7 @@ export class TooltipDirective {
     this.deleteTooltip();
 
     this.tooltip = this.renderer.createElement('div');
-    this.renderer.appendChild(this.element.nativeElement, this.tooltip);
+    this.renderer.appendChild(document.body, this.tooltip);
     this.renderer.addClass(this.tooltip, 'wily_tooltip');
   }
 
