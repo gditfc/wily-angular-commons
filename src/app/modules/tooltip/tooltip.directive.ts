@@ -9,6 +9,81 @@ import {Directive, ElementRef, HostListener, Input, Renderer2} from '@angular/co
 export class TooltipDirective {
 
   /**
+.wily_tooltip {
+  min-width: 100px;
+  max-width: 200px;
+  background-color: #2f2f2f;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 3px 5px;
+  font-size:12px;
+  line-height:1.5;
+  position: absolute;
+  z-index: 4;
+  box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2);
+  animation-name: fadeInTooltip;
+  animation-duration: 0.4s;
+}
+@keyframes fadeInTooltip {
+  0%   {opacity:0;}
+  100% {opacity:1;}
+}
+.wily_tooltip.top {
+  transform-origin:bottom center;
+}
+.wily_tooltip.top::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #2f2f2f transparent transparent transparent;
+}
+.wily_tooltip.bottom {
+  transform-origin:top center;
+}
+.wily_tooltip.bottom::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #2f2f2f transparent;
+}
+.wily_tooltip.left {
+  transform-origin:right center;
+}
+.wily_tooltip.left::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #2f2f2f;
+}
+.wily_tooltip.right {
+  transform-origin:left center;
+}
+.wily_tooltip.right::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #2f2f2f transparent transparent;
+}
+**/
+
+  /**
    * The number of pixels from the host to offset the tooltip
    * @private
    */
