@@ -40,6 +40,19 @@ export class TooltipDirective implements OnDestroy {
   tooltipPosition: 'left' | 'right' | 'top' | 'bottom' = 'bottom';
 
   /**
+   * Whether or not to disable the tooltip
+   * @param disabled disabled or not
+   */
+  @Input('tooltipDisabled')
+  set disabled(disabled: boolean) {
+    this._disabled = disabled;
+    if (disabled && !!this.tooltip?.parentElement) {
+      this.deleteTooltip();
+    }
+  }
+  get disabled() { return this._disabled; }
+
+  /**
    * The DIV element housing the tooltip
    * @private
    */
@@ -50,6 +63,12 @@ export class TooltipDirective implements OnDestroy {
    * @private
    */
   private _text: string;
+
+  /**
+   * Whether or not the tooltip is disabled
+   * @private
+   */
+  private _disabled: boolean;
 
   /**
    * Array of scroll unlisten functions
@@ -118,11 +137,13 @@ export class TooltipDirective implements OnDestroy {
    * @private
    */
   private showTooltip(): void {
-    this.createTooltip();
-    this.setTooltipText();
-    this.alignTooltip();
+    if (!this.disabled) {
+      this.createTooltip();
+      this.setTooltipText();
+      this.alignTooltip();
 
-    this.addScrollListeners();
+      this.addScrollListeners();
+    }
   }
 
   /**
