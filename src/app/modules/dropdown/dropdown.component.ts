@@ -139,6 +139,8 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
       let dataContextMap: { [value: string]: { [key: string]: unknown } } = null;
 
       if (!!options?.length) {
+        dataContextMap = {};
+
         for (const option of options) {
           if ('options' in option) {
             for (const groupOption of option.options) {
@@ -213,10 +215,12 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * @param value the value to write
    */
   writeValue(value: string | number): void {
-    this.value = value;
-    this.changeDetectorRef.markForCheck();
+    if (this.value !== value) {
+      this.value = value;
+      this.changeDetectorRef.markForCheck();
 
-    this.change.emit();
+      this.change.emit();
+    }
   }
 
   /**
