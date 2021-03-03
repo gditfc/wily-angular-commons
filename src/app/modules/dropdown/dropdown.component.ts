@@ -25,9 +25,6 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 /**
  * Dropdown component
  * TODO: accessibility arrow-key controls
- * TODO: make dropdown option (with value/label)
- * TODO: close list on selection
- * TODO: on option select, focus on dropdown button
  * TODO: animation (copy from date-picker)
  */
 @Component({
@@ -168,7 +165,9 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   readonly selectedDataContext$: Observable<{ [key: string]: unknown }> = this._internalValue.pipe(
     withLatestFrom(this.dataContextMap$),
     map(([value, dataContextMap]) => {
-      return (value === null || dataContextMap === null) ? null : dataContextMap[String(value)];
+      return (value === null || dataContextMap === null)
+        ? null
+        : JSON.parse(JSON.stringify(dataContextMap[String(value)]));
     })
   );
 
