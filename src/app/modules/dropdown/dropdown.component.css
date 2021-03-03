@@ -29,16 +29,17 @@
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  cursor:pointer;
   font-size:inherit;
   outline:none;
   border:none;
   text-align:left;
   user-select:none;
-  background-color:inherit;
-  border-radius:inherit;
+  background-color:transparent;
   color:inherit;
   margin:0;
+}
+.wily_dropdown_input:not([disabled]) {
+  cursor:pointer;
 }
 .wily_dropdown_input::-ms-expand {
   display: none;

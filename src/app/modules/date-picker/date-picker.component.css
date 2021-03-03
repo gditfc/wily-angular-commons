@@ -36,8 +36,7 @@
   appearance: none;
   font-size:inherit;
   outline:none;
-  background-color:inherit;
-  border-radius:inherit;
+  background-color:transparent;
   color:inherit;
 }
 .wily_datepicker_input::-ms-expand {

@@ -53,9 +53,11 @@ select:not(disabled) {
 .form_input {
   font-size:13px;
 }
-
 .brad_0 {
   border-radius: 0;
+}
+input[disabled] {
+  cursor:not-allowed;
 }
 
 /* TODO: move to wily */
