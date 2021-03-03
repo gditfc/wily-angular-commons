@@ -47,7 +47,7 @@
           <div class="row_block width100">
 <!--            <div class="min_h300"></div>-->
             <!-- button toolbar -->
-            <div class="row wrap overlay pad_5 center_center brad_3 mar_5">
+            <div class="row wrap pad_5 center_center brad_3 mar_5">
               <!-- icon select -->
               <div class="mar_5">
                 <wily-icon-select (opened)="iconSelectOpened()"
@@ -72,28 +72,30 @@
                 </wily-date-picker>
               </div>
             </div>
-            <div class="row overlay pad_5 center_center brad_3 mar_5">
-              <button class="access btn xsm page_container_color mar_5" (click)="obj2 = {}">
+            <div class="row v_center pad_5 brad_3 mar_5">
+              <!-- wily profile pic -->
+              <wily-profile-pic
+                class="mar_10"
+                imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg"
+                toolTip="Some guy">
+              </wily-profile-pic>
+              <button class="access btn xsm overlay mar_5" (click)="obj2 = {}">
                 Open Nested Flex Dialog Parent
               </button>
-              <button class="access btn xsm page_container_color mar_5" (click)="obj5 = {}">
+              <button class="access btn xsm overlay mar_5" (click)="obj5 = {}">
                 Open Nested Prime Dialog Parent
               </button>
             </div>
 
             <!-- misc content -->
             <div class="row pad_5">
-              <!-- wily profile pic -->
-              <wily-profile-pic
-                imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg"
-                toolTip="Some guy">
-              </wily-profile-pic>
+
             </div>
 
             <div class="row pad_3">
               <!-- paginators -->
-              <div class="col size_1 overlay brad_3 pad_5 mar_3">
-                <div class="row_block width100 overlay_alt2 page_container_color brad_3">
+              <div class="col size_1 overlay_alt2 brad_3 pad_5 mar_3">
+                <div class="row_block width100">
                   <!-- version 1 -->
                   <div class="row mar_5">
                     <wily-paginator
@@ -145,8 +147,8 @@
               </div>
 
               <!-- rich text -->
-              <div class="col size_1 overlay brad_3 pad_5 mar_3">
-                <div class="row_block width100 overlay_alt2 page_container_color brad_3">
+              <div class="col size_1 overlay_alt2 brad_3 pad_5 mar_3">
+                <div class="row_block width100">
                   <wily-rich-text [(ngModel)]="text" (textChanged)="handleEditorTextChange($event)">
                   </wily-rich-text>
                 </div>
@@ -156,9 +158,9 @@
             <!-- icons -->
             <div class="row pad_3">
               <!-- light -->
-              <div class="col size_1 overlay brad_3 pad_5 mar_3">
-                <div class="row_block width100 overlay_alt2 page_container_color pad_10 brad_3">
-                  <div class="header md bg_blue round">Light Icons</div>
+              <div class="col size_1 overlay_alt2 brad_3 pad_5 mar_3">
+                <div class="row_block width100 pad_10 brad_3">
+                  <div class="header sm mar_bot15">Light Icons</div>
 
                   <div><i class="wil fa-address fa-2x fa-fw"></i> fa-address</div>
                   <div><i class="wil fa-alpha-text fa-2x fa-fw"></i> fa-alpha-text</div>
@@ -186,9 +188,9 @@
                 </div>
               </div>
               <!-- regular -->
-              <div class="col size_1 overlay brad_3 pad_5 mar_3">
-                <div class="row_block width100 overlay_alt2 page_container_color pad_10 brad_3">
-                  <div class="header md bg_blue round">Regular Icons</div>
+              <div class="col size_1 overlay_alt2 brad_3 pad_5 mar_3">
+                <div class="row_block width100 pad_10 brad_3">
+                  <div class="header sm mar_bot15">Regular Icons</div>
 
                   <div><i class="wir fa-address fa-2x fa-fw"></i> fa-address</div>
                   <div><i class="wir fa-alpha-text fa-2x fa-fw"></i> fa-alpha-text</div>
@@ -216,9 +218,9 @@
                 </div>
               </div>
               <!-- solid -->
-              <div class="col size_1 overlay brad_3 pad_5 mar_3">
-                <div class="row_block width100 overlay_alt2 page_container_color pad_10 brad_3">
-                  <div class="header md bg_blue round">Solid Icons</div>
+              <div class="col size_1 overlay_alt2 brad_3 pad_5 mar_3">
+                <div class="row_block width100 pad_10 brad_3">
+                  <div class="header sm mar_bot15">Solid Icons</div>
 
                   <div><i class="wis fa-address fa-2x fa-fw"></i> fa-address</div>
                   <div><i class="wis fa-alpha-text fa-2x fa-fw"></i> fa-alpha-text</div>

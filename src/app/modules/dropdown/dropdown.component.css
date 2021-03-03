@@ -3,19 +3,19 @@
 }
 
 /* dropdown container styles */
-.wily_select {
+.wily_dropdown {
   width:100%;
   min-width:150px;
   position: relative;
 }
-.wily_select::after {
+.wily_dropdown::after {
   content:"mm/dd/yyyy";
   opacity:0;
   pointer-events:none;
 }
 
 /* dropdown button style */
-.wily_select_input {
+.wily_dropdown_input {
   position:absolute;
   top:0;
   left:0;
@@ -32,26 +32,27 @@
   border:none;
   text-align:left;
   user-select:none;
-  background-color:transparent;
+  background-color:inherit;
+  border-radius:inherit;
   color:inherit;
   margin:0;
 }
-.wily_select_input::-ms-expand {
+.wily_dropdown_input::-ms-expand {
   display: none;
 }
-.wily_select_caret {
+.wily_dropdown_caret {
   position: absolute;
   top: 0.5em;
   right: 1em;
   z-index: 2;
   background: transparent;
 }
-.wily_select_placeholder {
+.wily_dropdown_placeholder {
   opacity:0.5;
 }
 
 /* options panel */
-.wily_select_options {
+.wily_dropdown_options {
   border-radius: 3px;
   line-height: 1.5;
   overflow:hidden;
@@ -66,12 +67,12 @@
   width:100%;
   overflow-y:auto;
 }
-.wily_select_options li {
+.wily_dropdown_options li {
   font-size:14px;
   padding: 8px 12px;
 }
 
-.wily_select_overlay {
+.wily_dropdown_overlay {
   position:fixed;
   top:0;
   bottom:0;
@@ -81,7 +82,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .wily_select_overlay {
+  .wily_dropdown_overlay {
     background: rgba(120, 120, 120, 0.4);
   }
 }

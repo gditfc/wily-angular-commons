@@ -1,23 +1,23 @@
-<div #dropdown class="wily_select"
+<div #dropdown class="wily_dropdown"
      [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
   <button (click)="openDropdown($event)"
           [attr.aria-label]="ariaLabel"
-          class="access page_container_color wily_select_input">
+          class="access page_container_color wily_dropdown_input">
     <!-- TODO: show this when no option selected -->
-    <div class="wily_select_placeholder">{{placeholder}}</div>
+    <div class="wily_dropdown_placeholder">{{placeholder}}</div>
     <!-- TODO: show when option selected -->
     <div *ngIf="false">Option Text</div>
   </button>
-  <div class="wily_select_caret">
+  <div class="wily_dropdown_caret">
     <i class="fas fa-caret-down"></i>
   </div>
 </div>
 
 <div [style.display]="opened ? '' : 'none'"
      [attr.aria-hidden]="opened"
-     class="wily_select_overlay">
+     class="wily_dropdown_overlay">
   <div #dropdownList class="position_absolute">
-    <div class="wily_select_options page_container_color card_shadow">
+    <div class="wily_dropdown_options page_container_color card_shadow">
       <!-- TODO: make this option, insert ng-content inside in place of text -->
       <div class="overlay_alt1 hov_bg">
         <strong>User</strong>Logged in Users can read locked content and update their profile.
