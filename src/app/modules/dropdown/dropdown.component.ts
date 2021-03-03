@@ -25,9 +25,6 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 /**
  * Dropdown component
  * TODO: accessibility arrow-key controls
- * TODO: make dropdown option (with value/label)
- * TODO: close list on selection
- * TODO: on option select, focus on dropdown button
  * TODO: animation (copy from date-picker)
  */
 @Component({
