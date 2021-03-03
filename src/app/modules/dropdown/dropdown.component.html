@@ -21,7 +21,19 @@
       <!-- TODO: make this option, insert ng-content inside in place of text -->
       <ng-container *ngIf="_options | async as options">
         <ng-container *ngIf="!!template else defaultOptionTemplate">
-          <!-- TODO: RENDER ITEM TEMPLATES -->
+          <ng-container *ngFor="let option of options">
+            <!-- OPTION GROUP -->
+            <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
+              <ng-container *ngFor="let groupOption of option.options">
+                <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext">
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <ng-template #nonGroupOption>
+              <ng-container *ngTemplateOutlet="template; context: option.dataContext">
+              </ng-container>
+            </ng-template>
+          </ng-container>
         </ng-container>
         <ng-template #defaultOptionTemplate>
           <ng-container *ngFor="let option of options">
@@ -38,9 +50,6 @@
           </ng-container>
         </ng-template>
       </ng-container>
-      <div class="overlay_alt1 hov_bg">
-        <strong>User</strong>Logged in Users can read locked content and update their profile.
-      </div>
     </div>
   </div>
 </div>
