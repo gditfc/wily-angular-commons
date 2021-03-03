@@ -17,39 +17,49 @@
      [attr.aria-hidden]="opened"
      class="wily_dropdown_overlay">
   <div #dropdownList class="position_absolute">
-    <div class="wily_dropdown_options page_container_color card_shadow">
+    <div class="wily_dropdown_options page_container_color">
       <!-- TODO: make this option, insert ng-content inside in place of text -->
       <ng-container *ngIf="_options | async as options">
-        <ng-container *ngIf="!!template else defaultOptionTemplate">
-          <ng-container *ngFor="let option of options">
-            <!-- OPTION GROUP -->
-            <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
-              <div>{{option.groupLabel}}</div>
-              <ng-container *ngFor="let groupOption of option.options">
-                <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext">
+        <div class="wily_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">
+          <!-- CUSTOM TEMPLATE -->
+          <ng-container *ngIf="!!template else defaultOptionTemplate">
+            <ng-container *ngFor="let option of options">
+              <!-- OPTION GROUP -->
+              <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
+                <div class="wily_dropdown_heading">{{option.groupLabel}}</div>
+                <ng-container *ngFor="let groupOption of option.options">
+                  <button class="wily_dropdown_option overlay_alt1 hov_bg" role="option" tabindex="0">
+                    <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext">
+                    </ng-container>
+                  </button>
                 </ng-container>
               </ng-container>
+              <!-- SINGULAR OPTION -->
+              <ng-template #nonGroupOption>
+                <button class="wily_dropdown_option overlay_alt1 hov_bg" role="option" tabindex="0">
+                  <ng-container *ngTemplateOutlet="template; context: option.dataContext">
+                  </ng-container>
+                </button>
+              </ng-template>
             </ng-container>
-            <ng-template #nonGroupOption>
-              <ng-container *ngTemplateOutlet="template; context: option.dataContext">
+          </ng-container>
+          <!-- NO CUSTOM TEMPLATE -->
+          <ng-template #defaultOptionTemplate>
+            <ng-container *ngFor="let option of options">
+              <!-- OPTION GROUP -->
+              <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
+                <div>{{option.groupLabel}}</div>
+                <div *ngFor="let groupOption of option.options">
+                  {{groupOption.label}}
+                </div>
               </ng-container>
-            </ng-template>
-          </ng-container>
-        </ng-container>
-        <ng-template #defaultOptionTemplate>
-          <ng-container *ngFor="let option of options">
-            <!-- OPTION GROUP -->
-            <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
-              <div>{{option.groupLabel}}</div>
-              <div *ngFor="let groupOption of option.options">
-                {{groupOption.label}}
-              </div>
+              <!-- SINGULAR OPTION -->
+              <ng-template #nonGroupOption>
+                <div>{{option.label}}</div>
+              </ng-template>
             </ng-container>
-            <ng-template #nonGroupOption>
-              <div>{{option.label}}</div>
-            </ng-template>
-          </ng-container>
-        </ng-template>
+          </ng-template>
+        </div>
       </ng-container>
     </div>
   </div>

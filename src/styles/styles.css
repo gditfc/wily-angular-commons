@@ -2,17 +2,18 @@
 @import 'https://cdn.jsdelivr.net/gh/gditfc/wily-styles@v1.0.0/dist/wily-styles.css';
 @import 'theme.css';
 
-.access{
-  outline:rgba(38,184,239,0.0) 1px solid !important;
-  transition:all 0.2s ease-in-out;
-  text-decoration: none;
-}
-.access:focus{
-  outline:rgba(38,184,239,1.0) 1px solid !important;
-  outline-offset: 5px;
-  position:relative;
-  z-index:1;
-}
+/* REGULAR ACCESS CLASS */
+/*.access{*/
+/*  outline:rgba(38,184,239,0.0) 1px solid !important;*/
+/*  transition:all 0.2s ease-in-out;*/
+/*  text-decoration: none;*/
+/*}*/
+/*.access:focus{*/
+/*  outline:rgba(38,184,239,1.0) 1px solid !important;*/
+/*  outline-offset: 5px;*/
+/*  position:relative;*/
+/*  z-index:1;*/
+/*}*/
 
 /* Experimental new access class */
 /* .access:focus {

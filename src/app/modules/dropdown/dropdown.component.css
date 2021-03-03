@@ -1,8 +1,11 @@
+/* make component (input) 100% width */
 :host {
   width:100%;
 }
 
-/* dropdown container styles */
+/******* DROPDOWN INPUT STYLING ********/
+
+/* input container styles */
 .wily_dropdown {
   width:100%;
   min-width:150px;
@@ -46,9 +49,22 @@
   right: 1em;
   z-index: 2;
   background: transparent;
+  pointer-events:none;
 }
 .wily_dropdown_placeholder {
   opacity:0.5;
+}
+
+
+/******* LIST PANEL STYLING ********/
+
+.wily_dropdown_overlay {
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:1000;
 }
 
 /* options panel */
@@ -60,25 +76,40 @@
   /*padding: 0;*/
   list-style-type: none;
   font-weight: normal;
-  cursor: pointer;
+  /*cursor: pointer;*/
   z-index: 4;
   /*position: absolute;*/
-  max-height:300px;
+  max-height:200px;
   width:100%;
   overflow-y:auto;
-}
-.wily_dropdown_options li {
-  font-size:14px;
-  padding: 8px 12px;
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.wily_dropdown_overlay {
-  position:fixed;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  z-index:1000;
+/* heading for groups */
+.wily_dropdown_heading {
+  font-size:12px;
+  font-weight:600;
+  opacity:0.8;
+  padding: 10px 12px 4px 12px;
+}
+
+.wily_dropdown_list {
+  padding:0;
+  margin:0;
+}
+
+.wily_dropdown_option {
+  font-size:13px;
+  padding: 8px 12px;
+  cursor:pointer;
+  border:none;
+  width:100%;
+  text-align:left;
+  display:flex;
+  align-items:center;
 }
 
 @media screen and (max-width: 768px) {

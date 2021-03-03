@@ -39,7 +39,7 @@ export class DropdownComponent implements ControlValueAccessor, AfterContentInit
    * and its list overlay
    * @private
    */
-  private static readonly DROPDOWN_LIST_OFFSET = 10;
+  private static readonly DROPDOWN_LIST_OFFSET = 3;
 
   /**
    * ViewChild of the dropdown
