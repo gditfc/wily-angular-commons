@@ -10,10 +10,11 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
+import {ControlValueAccessor} from '@angular/forms';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {DropdownOption} from './models/dropdown-option.model';
 import {DropdownOptionGroup} from './models/dropdown-option-group.model';
-import {BehaviorSubject, Subscription} from 'rxjs';
-import {ControlValueAccessor} from "@angular/forms";
 
 /**
  * Type representing the dropdown component option input
@@ -115,6 +116,29 @@ export class DropdownComponent implements ControlValueAccessor, AfterContentInit
    * BehaviorSubject tracking the input dropdown options/option groups
    */
   readonly _options = new BehaviorSubject<DropdownOptionInput>(null);
+
+  /**
+   * Observable map of option value (stringified if a number) to data context
+   */
+  readonly dataContextMap$: Observable<{ [value: string]: { [key: string]: unknown } }> = this._options.pipe(
+    map(options => {
+      let dataContextMap: { [value: string]: { [key: string]: unknown } } = null;
+
+      if (!!options?.length) {
+        for (const option of options) {
+          if ('options' in option) {
+            for (const groupOption of option.options) {
+              dataContextMap[String(groupOption.value)] = groupOption.dataContext;
+            }
+          } else if ('dataContext' in option) {
+            dataContextMap[String(option.value)] = option.dataContext;
+          }
+        }
+      }
+
+      return dataContextMap;
+    })
+  );
 
   /**
    * Whether or not the dropdown is open
