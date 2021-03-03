@@ -25,6 +25,7 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
  * TODO: accessibility arrow-key controls
  * TODO: make dropdown option (with value/label)
  * TODO: close list on selection
+ * TODO: on option select, focus on dropdown button
  */
 @Component({
   selector: 'wily-dropdown',
@@ -172,7 +173,7 @@ export class DropdownComponent implements AfterContentInit, OnInit {
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
     const {key} = event;
-    if (key === 'Esc' || key === 'Escape') {
+    if (key === 'Esc' || key === 'Escape' || key === 'Tab') {
       this.closeDropdown();
     }
   }
