@@ -5,11 +5,8 @@
           [disabled]="disabled"
           [attr.aria-label]="ariaLabel"
           class="access page_container_color wily_dropdown_input">
-    <ng-container *ngIf="_internalValue | async as internalValue else placeholderTemplate">
-      <ng-container *ngIf="dataContextMap$ | async as dataContextMap">
-        <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + internalValue]">
-        </ng-container>
-      </ng-container>
+    <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">
+      <ng-container *ngTemplateOutlet="template; context: dataContext"></ng-container>
     </ng-container>
     <ng-template #placeholderTemplate>
       <div class="wily_dropdown_placeholder">{{placeholder}}</div>
@@ -38,8 +35,7 @@
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           class="wily_dropdown_option" role="option" tabindex="0">
-                    <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext">
-                    </ng-container>
+                    <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
                   </button>
                 </ng-container>
               </ng-container>
@@ -49,8 +45,7 @@
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         class="wily_dropdown_option" role="option" tabindex="0">
-                  <ng-container *ngTemplateOutlet="template; context: option.dataContext">
-                  </ng-container>
+                  <ng-container *ngTemplateOutlet="template; context: option.dataContext"></ng-container>
                 </button>
               </ng-template>
             </ng-container>
