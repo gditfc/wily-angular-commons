@@ -110,6 +110,12 @@
   text-align:left;
   display:flex;
   align-items:center;
+  transition:0.2s background-color ease;
+}
+
+.wily_dropdown_option.unselected:not(:hover):not(:focus) {
+  background:none;
+  color:inherit;
 }
 
 @media screen and (max-width: 768px) {
