@@ -19,6 +19,25 @@
   <div #dropdownList class="position_absolute">
     <div class="wily_dropdown_options page_container_color card_shadow">
       <!-- TODO: make this option, insert ng-content inside in place of text -->
+      <ng-container *ngIf="_options | async as options">
+        <ng-container *ngIf="!!template else defaultOptionTemplate">
+          <!-- TODO: RENDER ITEM TEMPLATES -->
+        </ng-container>
+        <ng-template #defaultOptionTemplate>
+          <ng-container *ngFor="let option of options">
+            <!-- OPTION GROUP -->
+            <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
+              <div>{{option.groupLabel}}</div>
+              <div *ngFor="let groupOption of option.options">
+                {{groupOption.label}}
+              </div>
+            </ng-container>
+            <ng-template #nonGroupOption>
+              <div>{{option.label}}</div>
+            </ng-template>
+          </ng-container>
+        </ng-template>
+      </ng-container>
       <div class="overlay_alt1 hov_bg">
         <strong>User</strong>Logged in Users can read locked content and update their profile.
       </div>

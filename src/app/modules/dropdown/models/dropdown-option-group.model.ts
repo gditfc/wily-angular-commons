@@ -9,7 +9,7 @@ export interface DropdownOptionGroup {
   /**
    * The option group label
    */
-  label: string;
+  groupLabel: string;
 
   /**
    * The group options

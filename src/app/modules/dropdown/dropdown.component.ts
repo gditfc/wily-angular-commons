@@ -10,6 +10,15 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
+import {DropdownOption} from './models/dropdown-option.model';
+import {DropdownOptionGroup} from './models/dropdown-option-group.model';
+import {BehaviorSubject} from 'rxjs';
+import {Subscription} from "rxjs/index";
+
+/**
+ * Type representing the dropdown component option input
+ */
+declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 
 /**
  * Dropdown component
@@ -49,8 +58,13 @@ export class DropdownComponent implements AfterContentInit, OnInit {
   @ContentChild(TemplateRef)
   template: TemplateRef<HTMLElement>;
 
-  @Input()
-  options: Array<{ value: string | number, label: string, dataContext?: { [key: string]: unknown } }>
+  /**
+   * The dropdown options/option groups
+   */
+  @Input('options')
+  set setOptions(options: DropdownOptionInput) {
+    this._options.next(DropdownComponent.sanitizeOptionInput(options));
+  }
 
   /**
    * Placeholder text to display when no option is selected
@@ -71,9 +85,51 @@ export class DropdownComponent implements AfterContentInit, OnInit {
   classList: string;
 
   /**
+   * BehaviorSubject tracking the input dropdown options/option groups
+   */
+  readonly _options = new BehaviorSubject<DropdownOptionInput>(null);
+
+  /**
    * Whether or not the dropdown is open
    */
   opened = false;
+
+  /**
+   * Subscription object to store options subscription
+   * @private
+   */
+  private readonly subscription = new Subscription();
+
+  /**
+   * Removes options that do not have both a label and a value,
+   * also removes empty groups (or groups that have no valid options)
+   * @param options the options to sanitize
+   * @private
+   */
+  private static sanitizeOptionInput(options: DropdownOptionInput): DropdownOptionInput {
+    const sanitizedOptions: DropdownOptionInput = [];
+
+    for (const option of options) {
+      if (('groupLabel' in option) && ('options' in option)) {
+        const validOptions: Array<DropdownOption> = [];
+        for (const groupOption of (option.options ?? [])) {
+          if (!!groupOption.label && (!!groupOption.value || (groupOption.value >= 0))) {
+            validOptions.push(groupOption);
+          }
+        }
+
+        if (!!validOptions.length) {
+          sanitizedOptions.push(option);
+        }
+      } else if (('label' in option) && ('value' in option)) {
+        if (!!option.label && (!!option.value || (option.value >= 0))) {
+          sanitizedOptions.push(option);
+        }
+      }
+    }
+
+    return sanitizedOptions;
+  }
 
   /**
    * Dependency injection site
@@ -91,6 +147,11 @@ export class DropdownComponent implements AfterContentInit, OnInit {
    */
   ngAfterContentInit(): void {
     console.log(this.template.elementRef.nativeElement);
+    this.subscription.add(
+      this._options.subscribe(options => {
+        // TODO: is anything needed here?
+      })
+    );
   }
 
   /**
