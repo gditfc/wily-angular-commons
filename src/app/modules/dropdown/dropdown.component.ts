@@ -1,5 +1,5 @@
 import {
-  AfterContentInit,
+  AfterContentInit, ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -12,8 +12,8 @@ import {
 } from '@angular/core';
 import {DropdownOption} from './models/dropdown-option.model';
 import {DropdownOptionGroup} from './models/dropdown-option-group.model';
-import {BehaviorSubject} from 'rxjs';
-import {Subscription} from "rxjs/index";
+import {BehaviorSubject, Subscription} from 'rxjs';
+import {ControlValueAccessor} from "@angular/forms";
 
 /**
  * Type representing the dropdown component option input
@@ -32,7 +32,7 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.css']
 })
-export class DropdownComponent implements AfterContentInit, OnInit {
+export class DropdownComponent implements ControlValueAccessor, AfterContentInit, OnInit {
 
   /**
    * The amount of offset (in pixels) to place between the dropdown
@@ -58,6 +58,22 @@ export class DropdownComponent implements AfterContentInit, OnInit {
    */
   @ContentChild(TemplateRef)
   template: TemplateRef<HTMLElement>;
+
+  /**
+   * Set the value of the dropdown
+   * @param value the value to set
+   */
+  @Input()
+  set value(value: string | number) {
+    this._value = value;
+  }
+  get value() { return this._value; }
+
+  /**
+   * Whether or not the dropdown should be disabled
+   */
+  @Input()
+  disabled: boolean;
 
   /**
    * The dropdown options/option groups
@@ -86,6 +102,16 @@ export class DropdownComponent implements AfterContentInit, OnInit {
   classList: string;
 
   /**
+   * Function to call on change
+   */
+  onChange: (value: any) => void = () => {};
+
+  /**
+   * Function to call on touch
+   */
+  onTouched: () => any = () => {};
+
+  /**
    * BehaviorSubject tracking the input dropdown options/option groups
    */
   readonly _options = new BehaviorSubject<DropdownOptionInput>(null);
@@ -100,6 +126,12 @@ export class DropdownComponent implements AfterContentInit, OnInit {
    * @private
    */
   private readonly subscription = new Subscription();
+
+  /**
+   * The current value of the dropdown
+   * @private
+   */
+  private _value: string | number;
 
   /**
    * Removes options that do not have both a label and a value,
@@ -135,8 +167,9 @@ export class DropdownComponent implements AfterContentInit, OnInit {
   /**
    * Dependency injection site
    * @param renderer the Angular renderer
+   * @param changeDetectorRef reference to the Angular change detector
    */
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
 
   /**
    * Init component
@@ -153,6 +186,40 @@ export class DropdownComponent implements AfterContentInit, OnInit {
         // TODO: is anything needed here?
       })
     );
+  }
+
+  /**
+   * Write value
+   * @param value the value to write
+   */
+  writeValue(value: string | number): void {
+    this.value = value;
+    this.changeDetectorRef.markForCheck();
+  }
+
+  /**
+   * Register function on change
+   * @param fn the function to register
+   */
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  /**
+   * Register function on touch
+   * @param fn the function to register
+   */
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  /**
+   * Set the disabled state
+   * @param isDisabled disabled or not
+   */
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.changeDetectorRef.markForCheck();
   }
 
   /**
