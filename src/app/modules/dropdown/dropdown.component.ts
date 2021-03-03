@@ -168,7 +168,9 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   readonly selectedDataContext$: Observable<{ [key: string]: unknown }> = this._internalValue.pipe(
     withLatestFrom(this.dataContextMap$),
     map(([value, dataContextMap]) => {
-      return (value === null || dataContextMap === null) ? null : dataContextMap[String(value)];
+      return (value === null || dataContextMap === null)
+        ? null
+        : JSON.parse(JSON.stringify(dataContextMap[String(value)]));
     })
   );
 
