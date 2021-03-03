@@ -1,7 +1,8 @@
 <div #dropdown class="wily_dropdown" [style.filter]="disabled ? 'brightness(.95)' : ''"
      style="cursor:default;"
      [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
-  <button (click)="openDropdown($event)"
+  <button #dropdownButton
+          (click)="openDropdown($event)"
           [disabled]="disabled"
           [attr.aria-label]="ariaLabel"
           class="access page_container_color wily_dropdown_input">
@@ -31,7 +32,7 @@
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                 <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options">
-                  <button (click)="writeValue(groupOption.value)"
+                  <button (click)="onDropdownOptionSelect(groupOption.value)"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           class="wily_dropdown_option" role="option" tabindex="0">
@@ -41,7 +42,7 @@
               </ng-container>
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
-                <button (click)="writeValue(option.value)"
+                <button (click)="onDropdownOptionSelect(option.value)"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         class="wily_dropdown_option" role="option" tabindex="0">
@@ -57,7 +58,7 @@
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                 <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options">
-                  <button (click)="writeValue(groupOption.value)"
+                  <button (click)="onDropdownOptionSelect(groupOption.value)"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           class="wily_dropdown_option"
@@ -68,7 +69,7 @@
               </ng-container>
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
-                <button (click)="writeValue(option.value)"
+                <button (click)="onDropdownOptionSelect(option.value)"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         class="wily_dropdown_option"

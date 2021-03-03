@@ -51,6 +51,12 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   dropdown: ElementRef<HTMLDivElement>;
 
   /**
+   * ViewChild of the dropdown button
+   */
+  @ViewChild('dropdownButton')
+  dropdownButton: ElementRef<HTMLButtonElement>;
+
+  /**
    * ViewChild of the dropdown list
    */
   @ViewChild('dropdownList')
@@ -301,6 +307,16 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         }
       }
     }
+  }
+
+  /**
+   * Write value and close dropdown on option select
+   * @param value the value to write
+   */
+  onDropdownOptionSelect(value: string | number): void {
+    this.writeValue(value);
+    this.closeDropdown();
+    this.dropdownButton.nativeElement.focus();
   }
 
   /**
