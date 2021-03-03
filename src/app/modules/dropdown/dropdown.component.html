@@ -28,6 +28,7 @@
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                 <div class="wily_dropdown_heading">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options">
+                  <!-- TODO: swap out 'overlay_alt1 hov_bg' for 'bg_blue' on selected option -->
                   <button class="wily_dropdown_option overlay_alt1 hov_bg" role="option" tabindex="0">
                     <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext">
                     </ng-container>
@@ -36,6 +37,7 @@
               </ng-container>
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
+                <!-- TODO: swap out 'overlay_alt1 hov_bg' for 'bg_blue' on selected option -->
                 <button class="wily_dropdown_option overlay_alt1 hov_bg" role="option" tabindex="0">
                   <ng-container *ngTemplateOutlet="template; context: option.dataContext">
                   </ng-container>
