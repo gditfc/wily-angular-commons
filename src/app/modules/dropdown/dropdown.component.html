@@ -27,14 +27,16 @@
         <div class="wily_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">
           <!-- CUSTOM TEMPLATE -->
           <ng-container *ngIf="!!template else defaultOptionTemplate">
-            <ng-container *ngFor="let option of options">
+            <ng-container *ngFor="let option of options; index as i">
               <!-- OPTION GROUP -->
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                 <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
-                <ng-container *ngFor="let groupOption of option.options">
-                  <button (click)="onDropdownOptionSelect(groupOption.value)"
+                <ng-container *ngFor="let groupOption of option.options; index as i">
+                  <button #dropdownOption
+                          (click)="onDropdownOptionSelect(groupOption.value)"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
+                          [attr.data-value]="groupOption.value"
                           class="wily_dropdown_option" role="option" tabindex="0">
                     <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
                   </button>
@@ -42,9 +44,11 @@
               </ng-container>
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
-                <button (click)="onDropdownOptionSelect(option.value)"
+                <button #dropdownOption
+                        (click)="onDropdownOptionSelect(option.value)"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
+                        [attr.data-value]="option.value"
                         class="wily_dropdown_option" role="option" tabindex="0">
                   <ng-container *ngTemplateOutlet="template; context: option.dataContext"></ng-container>
                 </button>
@@ -57,10 +61,12 @@
               <!-- OPTION GROUP -->
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                 <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
-                <ng-container *ngFor="let groupOption of option.options">
-                  <button (click)="onDropdownOptionSelect(groupOption.value)"
+                <ng-container *ngFor="let groupOption of option.options; index as i">
+                  <button #dropdownOption
+                          (click)="onDropdownOptionSelect(groupOption.value)"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
+                          [attr.data-value]="groupOption.value"
                           class="wily_dropdown_option"
                           role="option" tabindex="0" [attr.aria-label]="groupOption.label">
                     {{groupOption.label}}
@@ -69,9 +75,11 @@
               </ng-container>
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
-                <button (click)="onDropdownOptionSelect(option.value)"
+                <button #dropdownOption
+                        (click)="onDropdownOptionSelect(option.value)"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
+                        [attr.data-value]="option.value"
                         class="wily_dropdown_option"
                         role="option" tabindex="0">
                   {{option.label}}

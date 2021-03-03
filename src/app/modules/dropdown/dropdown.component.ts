@@ -6,10 +6,13 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnInit, Output,
+  OnInit,
+  Output,
+  QueryList,
   Renderer2,
   TemplateRef,
-  ViewChild
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
 import {ControlValueAccessor} from '@angular/forms';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -26,6 +29,7 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
  * Dropdown component
  * TODO: accessibility arrow-key controls
  * TODO: animation (copy from date-picker)
+ * TODO: prevent arrow key scrolling while dropdown open
  */
 @Component({
   selector: 'wily-dropdown',
@@ -58,6 +62,12 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   @ViewChild('dropdownList')
   dropdownList: ElementRef<HTMLDivElement>;
+
+  /**
+   * QueryList of dropdown option ViewChildren
+   */
+  @ViewChildren('dropdownOption')
+  dropdownOptions: QueryList<ElementRef<HTMLButtonElement>>;
 
   /**
    * ContentChild of the dropdown option template
@@ -177,6 +187,11 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   opened = false;
 
   /**
+   * The index of the focused option in the dropdown list
+   */
+  focusedOptionIndex: number;
+
+  /**
    * The current value of the dropdown
    * @private
    */
@@ -280,9 +295,14 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    const {key} = event;
-    if (key === 'Esc' || key === 'Escape' || key === 'Tab') {
-      this.closeDropdown();
+    if (this.opened) {
+      const {key} = event;
+      if (key === 'Esc' || key === 'Escape') {
+        this.closeDropdown();
+        this.dropdownButton.nativeElement.focus();
+      } else if (key === 'Tab') {
+        this.closeDropdown();
+      }
     }
   }
 
@@ -303,6 +323,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
 
         if (shouldClose) {
           this.closeDropdown();
+          this.dropdownButton.nativeElement.focus();
         }
       }
     }
@@ -329,8 +350,8 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
       this.opened = true;
       this.positionDropdownList();
       this.resizeDropdownList();
+      this.focusSelectedOption();
     }
-
   }
 
   /**
@@ -382,5 +403,23 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     const width = right - left;
 
     this.renderer.setStyle(this.dropdownList.nativeElement, 'width', `${width}px`);
+  }
+
+  /**
+   * Focus on the selected dropdown option on dropdown open
+   * @private
+   */
+  private focusSelectedOption(): void {
+    if (!!this.value || this.value >= 0) {
+      const dropdownOptionsArray = this.dropdownOptions.toArray();
+      const foundIndex = dropdownOptionsArray.findIndex(option => {
+        return String(this.value) === option.nativeElement.getAttribute('data-value')
+      });
+
+      this.focusedOptionIndex = foundIndex > -1 ? foundIndex : null;
+      if (this.focusedOptionIndex !== null) {
+        setTimeout(() => dropdownOptionsArray[this.focusedOptionIndex].nativeElement.focus());
+      }
+    }
   }
 }
