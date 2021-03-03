@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import {ControlValueAccessor} from '@angular/forms';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, withLatestFrom} from 'rxjs/operators';
 import {DropdownOption} from './models/dropdown-option.model';
 import {DropdownOptionGroup} from './models/dropdown-option-group.model';
 
@@ -134,7 +134,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   /**
    * Observable map of option value (stringified if a number) to data context
    */
-  readonly dataContextMap$: Observable<{ [value: string]: { [key: string]: unknown } }> = this._options.pipe(
+  private readonly dataContextMap$: Observable<{ [value: string]: { [key: string]: unknown } }> = this._options.pipe(
     map(options => {
       let dataContextMap: { [value: string]: { [key: string]: unknown } } = null;
 
@@ -144,15 +144,25 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         for (const option of options) {
           if ('options' in option) {
             for (const groupOption of option.options) {
-              dataContextMap[String(groupOption.value)] = groupOption.dataContext;
+              dataContextMap[String(groupOption.value)] = JSON.parse(JSON.stringify(groupOption.dataContext));
             }
           } else if ('dataContext' in option) {
-            dataContextMap[String(option.value)] = option.dataContext;
+            dataContextMap[String(option.value)] = JSON.parse(JSON.stringify(option.dataContext));
           }
         }
       }
 
       return dataContextMap;
+    })
+  );
+
+  /**
+   * The data context of the selected option as an Observable
+   */
+  readonly selectedDataContext$: Observable<{ [key: string]: unknown }> = this._internalValue.pipe(
+    withLatestFrom(this.dataContextMap$),
+    map(([value, dataContextMap]) => {
+      return (value === null || dataContextMap === null) ? null : dataContextMap[String(value)];
     })
   );
 
