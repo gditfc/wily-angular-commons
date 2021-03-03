@@ -1,12 +1,20 @@
 <div #dropdown class="wily_dropdown"
      [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
   <button (click)="openDropdown($event)"
+          [disabled]="disabled"
           [attr.aria-label]="ariaLabel"
           class="access page_container_color wily_dropdown_input">
-    <!-- TODO: show this when no option selected -->
-    <div class="wily_dropdown_placeholder">{{placeholder}}</div>
     <!-- TODO: show when option selected -->
-    <div *ngIf="false">Option Text</div>
+    <ng-container *ngIf="_internalValue | async as internalValue else placeholderTemplate">
+      <ng-container *ngIf="dataContextMap$ | async as dataContextMap">
+        <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + internalValue]">
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <!-- TODO: show this when no option selected -->
+    <ng-template #placeholderTemplate>
+      <div class="wily_dropdown_placeholder">{{placeholder}}</div>
+    </ng-template>
   </button>
   <div class="wily_dropdown_caret">
     <i class="fas fa-caret-down"></i>
@@ -18,7 +26,6 @@
      class="wily_dropdown_overlay">
   <div #dropdownList class="position_absolute">
     <div class="wily_dropdown_options page_container_color">
-      <!-- TODO: make this option, insert ng-content inside in place of text -->
       <ng-container *ngIf="_options | async as options">
         <div class="wily_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">
           <!-- CUSTOM TEMPLATE -->
@@ -28,8 +35,8 @@
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                 <div class="wily_dropdown_heading">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options">
-                  <!-- TODO: swap out 'overlay_alt1 unselected' for 'bg_blue' on selected option -->
-                  <button class="wily_dropdown_option overlay_alt1 unselected" role="option" tabindex="0">
+                  <button [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
+                          class="wily_dropdown_option" role="option" tabindex="0">
                     <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext">
                     </ng-container>
                   </button>
@@ -37,8 +44,8 @@
               </ng-container>
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
-                <!-- TODO: swap out 'overlay_alt1 unselected' for 'bg_blue' on selected option -->
-                <button class="wily_dropdown_option overlay_alt1 unselected" role="option" tabindex="0">
+                <button [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
+                        class="wily_dropdown_option" role="option" tabindex="0">
                   <ng-container *ngTemplateOutlet="template; context: option.dataContext">
                   </ng-container>
                 </button>
