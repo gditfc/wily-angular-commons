@@ -24,6 +24,7 @@
           <ng-container *ngFor="let option of options">
             <!-- OPTION GROUP -->
             <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
+              <div>{{option.groupLabel}}</div>
               <ng-container *ngFor="let groupOption of option.options">
                 <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext">
                 </ng-container>
