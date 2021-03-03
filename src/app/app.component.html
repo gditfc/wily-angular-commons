@@ -57,7 +57,19 @@
               </div>
               <!-- custom select component -->
               <div class="col size_1 mar_5 min_w250">
-                <wily-dropdown [options]="[{ value: 'value', label: 'label', dataContext: { 'placeholder': 'placeholder value' } }]"
+                <wily-dropdown [options]="[
+                                 { value: 'value', label: 'label', dataContext: { 'placeholder': 'placeholder value' } },
+                                 { value: 'value2', label: 'label2', dataContext: { 'placeholder': 'placeholder value 2' } },
+                                 { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
+                                 {
+                                   groupLabel: 'This is a Group',
+                                   options: [
+                                     { value: 'value4', label: 'label4', dataContext: { 'placeholder': 'placeholder value 4' } },
+                                     { value: 'value5', label: 'label5', dataContext: { 'placeholder': 'placeholder value 5' } },
+                                     { value: 'value6', label: 'label6', dataContext: { 'placeholder': 'placeholder value 6' } }
+                                   ]
+                                 }
+                               ]"
                                [classList]="'input md overlay_alt2 page_container_color'">
                   <ng-template let-placeholder="placeholder">
                     <div>Content: {{placeholder}}</div>
