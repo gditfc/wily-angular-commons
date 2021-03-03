@@ -1,17 +1,18 @@
 import {
-  AfterContentInit, ChangeDetectorRef,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
-  OnInit,
+  OnInit, Output,
   Renderer2,
   TemplateRef,
   ViewChild
 } from '@angular/core';
 import {ControlValueAccessor} from '@angular/forms';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DropdownOption} from './models/dropdown-option.model';
 import {DropdownOptionGroup} from './models/dropdown-option-group.model';
@@ -27,13 +28,14 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
  * TODO: make dropdown option (with value/label)
  * TODO: close list on selection
  * TODO: on option select, focus on dropdown button
+ * TODO: animation (copy from date-picker)
  */
 @Component({
   selector: 'wily-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.css']
 })
-export class DropdownComponent implements ControlValueAccessor, AfterContentInit, OnInit {
+export class DropdownComponent implements ControlValueAccessor, OnInit {
 
   /**
    * The amount of offset (in pixels) to place between the dropdown
@@ -67,6 +69,7 @@ export class DropdownComponent implements ControlValueAccessor, AfterContentInit
   @Input()
   set value(value: string | number) {
     this._value = value;
+    this._internalValue.next(value);
   }
   get value() { return this._value; }
 
@@ -103,6 +106,12 @@ export class DropdownComponent implements ControlValueAccessor, AfterContentInit
   classList: string;
 
   /**
+   * Event emitted on value change
+   */
+  @Output()
+  change = new EventEmitter<void>();
+
+  /**
    * Function to call on change
    */
   onChange: (value: any) => void = () => {};
@@ -116,6 +125,11 @@ export class DropdownComponent implements ControlValueAccessor, AfterContentInit
    * BehaviorSubject tracking the input dropdown options/option groups
    */
   readonly _options = new BehaviorSubject<DropdownOptionInput>(null);
+
+  /**
+   * BehaviorSubject tracking the current value of the dropdown
+   */
+  readonly _internalValue = new BehaviorSubject<number | string>(null);
 
   /**
    * Observable map of option value (stringified if a number) to data context
@@ -144,12 +158,6 @@ export class DropdownComponent implements ControlValueAccessor, AfterContentInit
    * Whether or not the dropdown is open
    */
   opened = false;
-
-  /**
-   * Subscription object to store options subscription
-   * @private
-   */
-  private readonly subscription = new Subscription();
 
   /**
    * The current value of the dropdown
@@ -201,24 +209,14 @@ export class DropdownComponent implements ControlValueAccessor, AfterContentInit
   ngOnInit(): void { }
 
   /**
-   * After content init
-   */
-  ngAfterContentInit(): void {
-    console.log(this.template.elementRef.nativeElement);
-    this.subscription.add(
-      this._options.subscribe(options => {
-        // TODO: is anything needed here?
-      })
-    );
-  }
-
-  /**
    * Write value
    * @param value the value to write
    */
   writeValue(value: string | number): void {
     this.value = value;
     this.changeDetectorRef.markForCheck();
+
+    this.change.emit();
   }
 
   /**
@@ -298,9 +296,12 @@ export class DropdownComponent implements ControlValueAccessor, AfterContentInit
   openDropdown(event: MouseEvent): void {
     event.stopImmediatePropagation();
 
-    this.opened = true;
-    this.positionDropdownList();
-    this.resizeDropdownList();
+    if (!this.disabled) {
+      this.opened = true;
+      this.positionDropdownList();
+      this.resizeDropdownList();
+    }
+
   }
 
   /**
