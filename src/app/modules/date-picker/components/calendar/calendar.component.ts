@@ -49,6 +49,7 @@ declare interface MetaDate {
 
 /**
  * Component that allows a user to select a date from a calendar
+ * TODO: replace observer for click listener with host listener (prevent event immediate propogation in parent)
  */
 @Component({
   selector: 'wily-calendar',
