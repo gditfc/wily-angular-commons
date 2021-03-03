@@ -53,7 +53,7 @@
         <div class="wily_datepicker_weekday">Sa</div>
       </div>
       <!-- days -->
-      <div class="row wrap space_between">
+      <div class="row wrap space_between" role="grid">
         <ng-container *ngFor="let dayInMonth of fullMonth$ | async">
           <div [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
                class="wily_datepicker_day">
