@@ -33,10 +33,9 @@
             <ng-container *ngFor="let option of options">
               <!-- OPTION GROUP -->
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
-                <div class="wily_dropdown_heading">{{option.groupLabel}}</div>
+                <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options">
                   <!-- TODO: set aria-selected to true on selected option -->
-                  <!-- TODO: append group name to option name in aria label -->
                   <button [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           class="wily_dropdown_option" role="option" tabindex="0" aria-selected="false">
                     <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext">
@@ -60,11 +59,10 @@
             <ng-container *ngFor="let option of options">
               <!-- OPTION GROUP -->
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
-                <div class="wily_dropdown_heading">{{option.groupLabel}}</div>
+                <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options">
                   <!-- TODO: swap out 'overlay_alt1 unselected' for 'bg_blue' on selected option -->
                   <!-- TODO: set aria-selected to true on selected option -->
-                  <!-- TODO: append group name to option name in aria label -->
                   <button class="wily_dropdown_option overlay_alt1 unselected"
                           role="option" tabindex="0" aria-selected="false" [attr.aria-label]="groupOption.label">
                     {{groupOption.label}}
