@@ -1,4 +1,15 @@
-import {Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChild,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  Renderer2,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 
 /**
  * Dropdown component
@@ -11,7 +22,7 @@ import {Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.css']
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent implements AfterContentInit, OnInit {
 
   /**
    * The amount of offset (in pixels) to place between the dropdown
@@ -31,6 +42,15 @@ export class DropdownComponent implements OnInit {
    */
   @ViewChild('dropdownList')
   dropdownList: ElementRef<HTMLDivElement>;
+
+  /**
+   * ContentChild of the dropdown option template
+   */
+  @ContentChild(TemplateRef)
+  template: TemplateRef<HTMLElement>;
+
+  @Input()
+  options: Array<{ value: string | number, label: string, dataContext?: { [key: string]: unknown } }>
 
   /**
    * Placeholder text to display when no option is selected
@@ -65,6 +85,13 @@ export class DropdownComponent implements OnInit {
    * Init component
    */
   ngOnInit(): void { }
+
+  /**
+   * After content init
+   */
+  ngAfterContentInit(): void {
+    console.log(this.template.elementRef.nativeElement);
+  }
 
   /**
    * Reposition and resize the dropdown on window resize

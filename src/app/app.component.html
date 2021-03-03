@@ -57,7 +57,11 @@
               </div>
               <!-- custom select component -->
               <div class="col size_1 mar_5 min_w250">
-                <wily-dropdown [classList]="'input md overlay_alt2 page_container_color'"></wily-dropdown>
+                <wily-dropdown [classList]="'input md overlay_alt2 page_container_color'">
+                  <ng-template let-placeholder="placeholder">
+                    <div>Content: {{placeholder}}</div>
+                  </ng-template>
+                </wily-dropdown>
               </div>
               <!-- date picker component -->
               <div class="col size_1 mar_5 min_w250">
