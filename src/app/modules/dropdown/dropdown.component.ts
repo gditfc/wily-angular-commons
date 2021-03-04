@@ -28,6 +28,7 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 /**
  * Dropdown component
  * TODO: animation (copy from date-picker)
+ * TODO: focus bug when mixing mouse and arrow keys
  */
 @Component({
   selector: 'wily-dropdown',
@@ -231,16 +232,20 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         const validOptions: Array<DropdownOption> = [];
         for (const groupOption of (option.options ?? [])) {
           if (!!groupOption.label && (!!groupOption.value || (groupOption.value >= 0))) {
-            validOptions.push(groupOption);
+            const groupOptionCopy = JSON.parse(JSON.stringify(groupOption));
+            this.addLabelToDataContext(groupOptionCopy.label, groupOptionCopy.dataContext);
+
+            validOptions.push(groupOptionCopy);
           }
         }
 
         if (!!validOptions.length) {
-          sanitizedOptions.push(option);
+          sanitizedOptions.push({ groupLabel: option.groupLabel, options: validOptions });
         }
       } else if (('label' in option) && ('value' in option)) {
         if (!!option.label && (!!option.value || (option.value >= 0))) {
-          sanitizedOptions.push(option);
+          sanitizedOptions.push(JSON.parse(JSON.stringify(option)));
+          this.addLabelToDataContext(option.label, option.dataContext);
         }
       }
     }
@@ -252,11 +257,24 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * Add option label to data context if not present. If $implicit
    * value is not present, it will be added with the label as its value.
    * If $implicit is already present, it will add a label key to the context
-   * @param dataContext
+   * @param label the option label
+   * @param dataContext the option data context
    * @private
    */
   private static addLabelToDataContext(label: string, dataContext: { [key: string]: unknown }) {
-    // TODO: Implement
+    if (!!label && !!dataContext) {
+      const implicitValue = dataContext['$implicit'];
+
+      if (!!implicitValue || implicitValue >= 0) {
+        const labelExists = !!dataContext['label'];
+
+        if (!labelExists) {
+          dataContext['label'] = label;
+        }
+      } else {
+        dataContext['$implicit'] = label;
+      }
+    }
   }
 
   /**
