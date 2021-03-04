@@ -375,6 +375,16 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Set focus to dropdown option on mouse enter and update selected index
+   * @param option the dropdown option to focus
+   * @param index the index of the option to focus
+   */
+  onDropdownOptionMouseEnter(option: HTMLButtonElement, index: number): void {
+    this.selectionIndex = index;
+    option.focus();
+  }
+
+  /**
    * Write value and close dropdown on option select
    * @param value the value to write
    */
@@ -512,13 +522,14 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     let nextIndex: number;
 
     if (this.selectionIndex === null) {
-      this.selectionIndex = 0;
       nextIndex = 0;
     } else {
       nextIndex = (this.selectionIndex + 1) >= optionsArray.length
         ? optionsArray.length - 1
         : this.selectionIndex + 1;
     }
+
+    this.selectionIndex = nextIndex;
 
     return optionsArray[nextIndex].nativeElement;
   }
@@ -538,9 +549,9 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         ? 0
         : this.selectionIndex - 1;
 
+      this.selectionIndex = previousIndex;
       previousOption = optionsArray[previousIndex].nativeElement;
     }
-
 
     return previousOption;
   }
