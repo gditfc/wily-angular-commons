@@ -476,6 +476,11 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         });
       }
 
+      /*
+        The height of the dropdown list is zero at the point where the above code executes,
+        this is a workaround to align the list after its height is known to avoid a frame
+        or two of the list at origin
+       */
       this.renderer.setStyle(this.dropdownList.nativeElement, 'top', '-999px');
       this.renderer.setStyle(this.dropdownList.nativeElement, 'left', '-999px');
       setTimeout(() => this.positionDropdownList());
