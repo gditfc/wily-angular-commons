@@ -452,11 +452,14 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   /**
    * Write value and close dropdown on option select
    * @param value the value to write
+   * @param disabled whether or not the selected option is disabled
    */
-  onDropdownOptionSelect(value: string | number): void {
-    this.writeValue(value);
-    this.closeDropdown();
-    this.dropdownButton.nativeElement.focus();
+  onDropdownOptionSelect(value: string | number, disabled: boolean): void {
+    if (!disabled) {
+      this.writeValue(value);
+      this.closeDropdown();
+      this.dropdownButton.nativeElement.focus();
+    }
   }
 
   /**

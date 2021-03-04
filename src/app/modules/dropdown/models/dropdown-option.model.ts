@@ -14,6 +14,11 @@ export interface DropdownOption {
   label: string;
 
   /**
+   * Whether or not the option is disabled
+   */
+  disabled?: boolean;
+
+  /**
    * Data context object containing properties to fill
    * dropdown option template placeholders
    */
