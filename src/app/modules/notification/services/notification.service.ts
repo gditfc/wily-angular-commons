@@ -21,7 +21,8 @@ export class NotificationService {
   private readonly _notifications = new BehaviorSubject<Array<Notification>>([]);
 
   /**
-   * The number of milliseconds before an added notification automatically removes itself
+   * The number of milliseconds before an added notification automatically removes itself.
+   * Defaults to 5000 milliseconds
    * @private
    */
   private notificationLife = 5000;
@@ -51,5 +52,38 @@ export class NotificationService {
    */
   setNotificationLife(milliseconds: number): void {
     this.notificationLife = milliseconds;
+  }
+
+  /**
+   * Add a notification
+   * @param notification the notification to add
+   */
+  addNotification(notification: Notification): void {
+    notification.id = NotificationService.generateId();
+
+    const notifications = this._notifications.getValue();
+    notifications.push(notification);
+
+    this._notifications.next(notifications);
+
+    setTimeout(
+      () => this.deleteNotification(notification.id),
+      this.notificationLife
+    );
+  }
+
+  /**
+   * Delete a notification
+   * @param id the ID of the notification to delete
+   */
+  deleteNotification(id: string): void {
+    const notifications = this._notifications.getValue();
+    const foundIndex = notifications.findIndex(notification => notification.id === id);
+
+    if (foundIndex > -1) {
+      notifications.splice(foundIndex, 1);
+    }
+
+    this._notifications.next(notifications);
   }
 }
