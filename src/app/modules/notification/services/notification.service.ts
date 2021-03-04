@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Notification } from '../models/notification.model';
 
 /**
@@ -47,14 +47,6 @@ export class NotificationService {
   constructor() { }
 
   /**
-   * Set the number of milliseconds before added notifications disappear
-   * @param milliseconds the number of milliseconds to set
-   */
-  setNotificationLife(milliseconds: number): void {
-    this.notificationLife = milliseconds;
-  }
-
-  /**
    * Add a notification
    * @param notification the notification to add
    */
@@ -85,5 +77,20 @@ export class NotificationService {
     }
 
     this._notifications.next(notifications);
+  }
+
+  /**
+   * Get notifications as an Observable
+   */
+  getNotifications(): Observable<Array<Notification>> {
+    return this._notifications.asObservable();
+  }
+
+  /**
+   * Set the number of milliseconds before added notifications disappear
+   * @param milliseconds the number of milliseconds to set
+   */
+  setNotificationLife(milliseconds: number): void {
+    this.notificationLife = milliseconds;
   }
 }
