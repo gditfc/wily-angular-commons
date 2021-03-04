@@ -318,7 +318,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    if (document.activeElement.id === this.dropdownId) {
+    if (document.activeElement?.id?.includes(this.dropdownId)) {
       const {key} = event;
 
       if (DropdownComponent.ARROW_KEYS.includes(key)) {

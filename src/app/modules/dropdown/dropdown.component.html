@@ -39,6 +39,7 @@
                 <ng-container *ngFor="let groupOption of option.options; index as i">
                   <button #dropdownOption
                           (click)="onDropdownOptionSelect(groupOption.value)"
+                          [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           [attr.data-value]="groupOption.value"
@@ -51,6 +52,7 @@
               <ng-template #nonGroupOption>
                 <button #dropdownOption
                         (click)="onDropdownOptionSelect(option.value)"
+                        [id]="dropdownId + '-' + option.value"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         [attr.data-value]="option.value"
@@ -69,6 +71,7 @@
                 <ng-container *ngFor="let groupOption of option.options; index as i">
                   <button #dropdownOption
                           (click)="onDropdownOptionSelect(groupOption.value)"
+                          [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           [attr.data-value]="groupOption.value"
@@ -82,6 +85,7 @@
               <ng-template #nonGroupOption>
                 <button #dropdownOption
                         (click)="onDropdownOptionSelect(option.value)"
+                        [id]="dropdownId + '-' + option.value"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         [attr.data-value]="option.value"
