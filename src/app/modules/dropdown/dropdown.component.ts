@@ -313,6 +313,21 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Prevent default behavior for arrow key keydown event
+   * @param event the keydown KeyboardEvent
+   */
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    if (document.activeElement?.id?.includes(this.dropdownId)) {
+      const { key } = event;
+
+      if (DropdownComponent.ARROW_KEYS.includes(key)) {
+        event.preventDefault();
+      }
+    }
+  }
+
+  /**
    * Close the dropdown list on escape keyup
    * @param event the keyup KeyboardEvent
    */
