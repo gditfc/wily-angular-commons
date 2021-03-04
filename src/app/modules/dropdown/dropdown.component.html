@@ -39,13 +39,14 @@
                 <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options; index as j">
                   <button #dropdownOption
-                          (click)="onDropdownOptionSelect(groupOption.value)"
+                          (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           [attr.data-value]="groupOption.value"
+                          [disabled]="groupOption.disabled"
                           class="wily_dropdown_option" role="option" tabindex="0">
                     <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
                   </button>
@@ -54,13 +55,14 @@
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
                 <button #dropdownOption
-                        (click)="onDropdownOptionSelect(option.value)"
+                        (click)="onDropdownOptionSelect(option.value, option.disabled)"
                         (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
                         (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                         [id]="dropdownId + '-' + option.value"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         [attr.data-value]="option.value"
+                        [disabled]="option.disabled"
                         class="wily_dropdown_option" role="option" tabindex="0">
                   <ng-container *ngTemplateOutlet="template; context: option.dataContext"></ng-container>
                 </button>
@@ -75,15 +77,17 @@
                 <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options; index as j">
                   <button #dropdownOption
-                          (click)="onDropdownOptionSelect(groupOption.value)"
+                          (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
+                          [attr.aria-label]="groupOption.label"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           [attr.data-value]="groupOption.value"
+                          [disabled]="groupOption.disabled"
                           class="wily_dropdown_option"
-                          role="option" tabindex="0" [attr.aria-label]="groupOption.label">
+                          role="option" tabindex="0">
                     {{groupOption.label}}
                   </button>
                 </ng-container>
@@ -91,13 +95,14 @@
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
                 <button #dropdownOption
-                        (click)="onDropdownOptionSelect(option.value)"
+                        (click)="onDropdownOptionSelect(option.value, option.disabled)"
                         (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
                         (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                         [id]="dropdownId + '-' + option.value"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         [attr.data-value]="option.value"
+                        [disabled]="option.disabled"
                         class="wily_dropdown_option"
                         role="option" tabindex="0">
                   {{option.label}}
