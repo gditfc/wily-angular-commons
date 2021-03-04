@@ -89,6 +89,8 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   set value(value: string | number) {
     this._value = value;
     this._internalValue.next(value);
+
+    this.setSelectionIndex();
   }
   get value() { return this._value; }
 
@@ -104,6 +106,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   @Input('options')
   set setOptions(options: DropdownOptionInput) {
     this._options.next(DropdownComponent.sanitizeOptionInput(options));
+    this.setSelectionIndex();
   }
 
   /**
@@ -356,11 +359,29 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     }
   }
 
+  /**
+   * Handle arrow keyup event
+   * @param key the arrow key
+   */
   onArrowKeyUp(key: string): void {
-    if (this.opened) {
+    if (key === 'ArrowLeft' || key === 'ArrowUp') {
+      const previousOption = this.getPreviousOption();
 
-    } else {
+      if (previousOption !== null) {
+        if (this.opened) {
+          previousOption.focus();
+        } else {
+          this.writeValue(previousOption.getAttribute('data-value'));
+        }
+      }
+    } else if (key === 'ArrowRight' || key === 'ArrowDown') {
+      const nextOption = this.getNextOption();
 
+      if (this.opened) {
+        nextOption.focus();
+      } else {
+        this.writeValue(nextOption.getAttribute('data-value'));
+      }
     }
   }
 
@@ -410,8 +431,8 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   setSelectionIndex(): void {
     this.selectionIndex = null;
-    
-    if (!!this.value || this.value >= 0) {
+
+    if ((!!this.value || this.value >= 0) && !!this.dropdownOptions?.length) {
       const dropdownOptionsArray = this.dropdownOptions.toArray();
       const foundIndex = dropdownOptionsArray.findIndex(option => {
         return String(this.value) === option.nativeElement.getAttribute('data-value')
@@ -468,14 +489,21 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   /**
    * Get the next dropdown option (relative to the current selection index).
    * If the currently selected option is the final available option, it is
-   * returned
+   * returned. If no selection has been made, the first available option is returned
    * @private
    */
   private getNextOption(): HTMLButtonElement {
     const optionsArray = this.dropdownOptions.toArray();
-    const nextIndex = (this.selectionIndex + 1) >= optionsArray.length
-      ? this.selectionIndex + 1
-      : optionsArray.length - 1;
+    let nextIndex: number;
+
+    if (this.selectionIndex === null) {
+      this.selectionIndex = 0;
+      nextIndex = 0;
+    } else {
+      nextIndex = (this.selectionIndex + 1) >= optionsArray.length
+        ? this.selectionIndex + 1
+        : optionsArray.length - 1;
+    }
 
     return optionsArray[nextIndex].nativeElement;
   }
@@ -487,11 +515,17 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * @private
    */
   private getPreviousOption(): HTMLButtonElement {
-    const optionsArray = this.dropdownOptions.toArray();
-    const previousIndex = (this.selectionIndex - 1) < 0
-      ? 0
-      : this.selectionIndex - 1;
+    let previousOption: HTMLButtonElement = null;
 
-    return optionsArray[previousIndex].nativeElement;
+    if (this.selectionIndex !== null) {
+      const optionsArray = this.dropdownOptions.toArray();
+      const previousIndex = (this.selectionIndex - 1) < 0
+        ? 0
+        : this.selectionIndex - 1;
+
+      previousOption = optionsArray[previousIndex].nativeElement;
+    }
+
+    return previousOption;
   }
 }
