@@ -29,6 +29,7 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 /**
  * Dropdown component
  * TODO: close animation
+ * TODO: disabled options support
  */
 @Component({
   selector: 'wily-dropdown',
@@ -259,8 +260,10 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         }
       } else if (('label' in option) && ('value' in option)) {
         if (!!option.label && (!!option.value || (option.value >= 0))) {
-          sanitizedOptions.push(JSON.parse(JSON.stringify(option)));
-          this.addLabelToDataContext(option.label, option.dataContext);
+          const optionCopy = JSON.parse(JSON.stringify(option));
+          this.addLabelToDataContext(optionCopy.label, optionCopy.dataContext);
+
+          sanitizedOptions.push(optionCopy);
         }
       }
     }
