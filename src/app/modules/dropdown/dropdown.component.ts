@@ -527,7 +527,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
       positionTop = `${top - offsetListHeight}px`;
     } else {
       if (offsetHeight > window.innerHeight) {
-        positionTop = '0';
+        positionTop = '0px';
       } else {
         const availableSpace = window.innerHeight - offsetHeight;
         positionTop = String(availableSpace / 2);
@@ -538,7 +538,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
 
     this.renderer.setStyle(this.dropdownList.nativeElement, 'transform-origin', transformOrigin);
     this.renderer.setStyle(this.dropdownList.nativeElement, 'left', `${left}px`);
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'top', `${positionTop}px`);
+    this.renderer.setStyle(this.dropdownList.nativeElement, 'top', positionTop);
   }
 
   /**
