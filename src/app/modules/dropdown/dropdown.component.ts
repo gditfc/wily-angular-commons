@@ -449,7 +449,6 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
 
     if (!this.disabled) {
       this.opened = true;
-      this.positionDropdownList();
       this.resizeDropdownList();
       this.setSelectionIndex();
 
@@ -460,6 +459,10 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
             .focus()
         });
       }
+
+      this.renderer.setStyle(this.dropdownList.nativeElement, 'top', '-999px');
+      this.renderer.setStyle(this.dropdownList.nativeElement, 'left', '-999px');
+      setTimeout(() => this.positionDropdownList());
     }
   }
 
