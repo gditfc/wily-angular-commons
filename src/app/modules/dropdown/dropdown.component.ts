@@ -629,8 +629,6 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
       for (let i = this.selectionIndex - 1; i >= 0; i--) {
         const option = optionsArray[i].nativeElement;
 
-        console.log(`Option at index ${i} is disabled: ` + option.disabled);
-
         if (!option.disabled) {
           this.selectionIndex = i;
           previousOption = option;
