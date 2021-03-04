@@ -125,7 +125,7 @@
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
                     <wily-dropdown [options]="[
-                                   { value: 'value', label: 'label', dataContext: { 'placeholder': 'placeholder value' } },
+                                   { value: 'value', label: 'label', dataContext: { 'colorClass': 'bg_red', 'placeholder': 'placeholder value' } },
                                    { value: 'value2', label: 'label2', dataContext: { 'placeholder': 'placeholder value 2' } },
                                    { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
                                    {
@@ -138,8 +138,10 @@
                                    }
                                  ]"
                                    [classList]="'input md overlay_alt2 page_container_color'" [disabled]="false">
-                      <ng-template let-placeholder="placeholder">
-                        <div>Content: {{placeholder}}</div>
+                      <ng-template let-colorClass="colorClass" let-placeholder="placeholder" let-label>
+                        <div class="v_center">
+                          <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{placeholder}} {{label}}
+                        </div>
                       </ng-template>
                     </wily-dropdown>
                   </div>
