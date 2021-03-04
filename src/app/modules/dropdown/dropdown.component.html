@@ -40,6 +40,7 @@
                   <button #dropdownOption
                           (click)="onDropdownOptionSelect(groupOption.value)"
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                           [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
@@ -54,6 +55,7 @@
                 <button #dropdownOption
                         (click)="onDropdownOptionSelect(option.value)"
                         (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                        (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                         [id]="dropdownId + '-' + option.value"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
@@ -74,6 +76,7 @@
                   <button #dropdownOption
                           (click)="onDropdownOptionSelect(groupOption.value)"
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                           [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
@@ -89,6 +92,7 @@
                 <button #dropdownOption
                         (click)="onDropdownOptionSelect(option.value)"
                         (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                        (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                         [id]="dropdownId + '-' + option.value"
                         [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"

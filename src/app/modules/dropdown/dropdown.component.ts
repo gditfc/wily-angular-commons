@@ -420,6 +420,18 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Set focus to dropdown option on mouse move and update selected index
+   * @param option the dropdown option to focus
+   * @param index the index of the option to focus
+   */
+  onDropdownOptionMouseMove(option: HTMLButtonElement, index: number): void {
+    if (this.selectionIndex !== index) {
+      this.selectionIndex = index;
+      option.focus();
+    }
+  }
+
+  /**
    * Write value and close dropdown on option select
    * @param value the value to write
    */
