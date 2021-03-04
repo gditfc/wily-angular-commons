@@ -26,8 +26,8 @@
 <div [style.display]="opened ? '' : 'none'"
      [attr.aria-hidden]="opened"
      class="wily_dropdown_overlay">
-  <div #dropdownList class="position_absolute">
-    <div [@openClose]="opened ? 'open' : 'closed'" class="wily_dropdown_options page_container_color">
+  <div #dropdownList [@openClose]="opened ? 'open' : 'closed'" class="position_absolute">
+    <div class="wily_dropdown_options page_container_color">
       <ng-container *ngIf="_options | async as options">
         <div class="wily_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">
           <!-- CUSTOM TEMPLATE -->
