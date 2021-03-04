@@ -173,7 +173,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * The amount of padding to apply between the date picker input and the calendar widget
    */
-  private readonly calendarPadding = 5;
+  private readonly calendarPadding = 0;
 
   /**
    * String tracking date picker input

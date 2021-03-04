@@ -58,7 +58,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * and its list overlay
    * @private
    */
-  private static readonly DROPDOWN_LIST_OFFSET = 3;
+  private static readonly DROPDOWN_LIST_OFFSET = 0;
 
   /**
    * List of arrow key keycodes
