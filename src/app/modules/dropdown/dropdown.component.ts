@@ -1,3 +1,4 @@
+import {animate, keyframes, style, transition, trigger} from '@angular/animations';
 import {
   ChangeDetectorRef,
   Component,
@@ -32,7 +33,22 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 @Component({
   selector: 'wily-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.css']
+  styleUrls: ['./dropdown.component.css'],
+  animations: [
+    trigger('openClose', [
+      transition('closed => open', [
+        animate('200ms ease', keyframes([
+          style({
+            opacity: 0,
+            transform: 'scaleY(0.5)',
+            offset: 0
+          }),
+          style({ opacity: 0, offset: .25 }),
+          style({ opacity: 1, transform: 'scaleY(1)', offset: 1 })
+        ]))
+      ])
+    ])
+  ],
 })
 export class DropdownComponent implements ControlValueAccessor, OnInit {
 
