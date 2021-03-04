@@ -1,0 +1,21 @@
+.wily_notification_overlay {
+  display:flex;
+  position:fixed;
+  justify-content:flex-end;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:1000;
+  pointer-events: none;
+}
+
+.wily_notification {
+  display:flex;
+  flex:1;
+  align-items:center;
+  padding:5px 10px;
+  margin:15px;
+  border-radius:3px;
+  pointer-events: initial;
+}
