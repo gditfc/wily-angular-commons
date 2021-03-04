@@ -249,6 +249,17 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Add option label to data context if not present. If $implicit
+   * value is not present, it will be added with the label as its value.
+   * If $implicit is already present, it will add a label key to the context
+   * @param dataContext
+   * @private
+   */
+  private static addLabelToDataContext(label: string, dataContext: { [key: string]: unknown }) {
+    // TODO: Implement
+  }
+
+  /**
    * Dependency injection site
    * @param renderer the Angular renderer
    * @param changeDetectorRef reference to the Angular change detector
@@ -274,7 +285,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * @param value the value to write
    */
   writeValue(value: string | number): void {
-    if (this.value !== value) {
+    if (this.value !== value && !this.disabled) {
       this.value = value;
       this.changeDetectorRef.markForCheck();
 
@@ -324,7 +335,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.dropdownId)) {
+    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled) {
       const { key } = event;
 
       if (DropdownComponent.ARROW_KEYS.includes(key)) {
@@ -339,7 +350,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.dropdownId)) {
+    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled) {
       const {key} = event;
 
       if (DropdownComponent.ARROW_KEYS.includes(key)) {
