@@ -1,5 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {DialogLegacyComponent} from './modules/dialog-legacy/dialog-legacy.component';
+import { Notification } from './modules/notification/models/notification.model';
+import { NotificationService } from './modules/notification/services/notification.service';
 import {PushContainerComponent} from './modules/push-container/push-container.component';
 
 /**
@@ -46,8 +48,7 @@ export class AppComponent {
   /**
    * Constructor
    */
-  constructor() {
-  }
+  constructor(private notificationService: NotificationService) { }
 
   /**
    * Open the dialog
@@ -94,5 +95,30 @@ export class AppComponent {
 
   onPushContainerClose() {
     console.log('Push container closed.');
+  }
+
+  addNotification(severity: 'success' | 'warn' | 'error' | 'info'): void {
+    const notification = { severity } as Notification;
+
+    switch (severity) {
+      case 'success':
+        notification.summary = 'Success Message';
+        notification.detail = 'This is a success message!';
+        break;
+      case 'warn':
+        notification.summary = 'Warning Message';
+        notification.detail = 'This is a warning message!';
+        break;
+      case 'error':
+        notification.summary = 'Error Message';
+        notification.detail = 'This is an error message!';
+        break;
+      case 'info':
+        notification.summary = 'Info Message';
+        notification.detail = 'This is an info message!';
+        break;
+    }
+
+    this.notificationService.addNotification(notification);
   }
 }

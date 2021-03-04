@@ -187,16 +187,20 @@
                 a set period of time.
               </div>
               <div class="row wrap v_center mar_5">
-                <button class="access btn md overlay_alt2 bg_green_alt mar_5">
+                <button (click)="addNotification('success')"
+                        class="access btn md overlay_alt2 bg_green_alt mar_5">
                   Show Success
                 </button>
-                <button class="access btn md overlay_alt2 bg_orange_alt mar_5">
+                <button (click)="addNotification('warn')"
+                        class="access btn md overlay_alt2 bg_orange_alt mar_5">
                   Show Warning
                 </button>
-                <button class="access btn md overlay_alt2 bg_red_alt mar_5">
+                <button (click)="addNotification('error')"
+                        class="access btn md overlay_alt2 bg_red_alt mar_5">
                   Show Error
                 </button>
-                <button class="access btn md overlay_alt2 bg_purple_alt mar_5">
+                <button (click)="addNotification('info')"
+                        class="access btn md overlay_alt2 bg_purple_alt mar_5">
                   Show Info
                 </button>
               </div>

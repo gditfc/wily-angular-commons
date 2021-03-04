@@ -12,7 +12,7 @@
            [ngClass]="severityColorMap[notification.severity]"
            class="wily_notification card_shadow">
         <div class="col mar_5"><i class="fas {{severityIconMap[notification.severity]}} text xlg"></i></div>
-        <div class="col size_1 mar_5"><div class="text sm paragraph">This is a success message!<br/>You did it!</div></div>
+        <div class="col size_1 mar_5"><div class="text sm paragraph">{{notification.summary}}<br/>{{notification.detail}}</div></div>
         <div class="col mar_y5">
           <!-- TODO: close toast -->
           <button (click)="deleteNotification(notification.id)"

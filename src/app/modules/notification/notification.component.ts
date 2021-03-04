@@ -25,7 +25,7 @@ export class NotificationComponent implements OnInit {
     'success': 'bg_green',
     'warn': 'bg_orange',
     'error': 'bg_red',
-    'info': 'bg_blue'
+    'info': 'bg_purple'
   };
 
   /**
