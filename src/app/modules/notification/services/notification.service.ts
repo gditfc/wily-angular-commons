@@ -22,10 +22,10 @@ export class NotificationService {
 
   /**
    * The number of milliseconds before an added notification automatically removes itself.
-   * Defaults to 5000 milliseconds
+   * Defaults to 3000 milliseconds
    * @private
    */
-  private notificationLife = 5000;
+  private notificationLife = 3000;
 
   /**
    * Generate a random ID
