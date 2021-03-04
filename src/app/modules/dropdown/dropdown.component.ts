@@ -375,32 +375,6 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Handle arrow keyup event
-   * @param key the arrow key
-   */
-  onArrowKeyUp(key: string): void {
-    if (key === 'ArrowLeft' || key === 'ArrowUp') {
-      const previousOption = this.getPreviousOption();
-
-      if (previousOption !== null) {
-        if (this.opened) {
-          previousOption.focus();
-        } else {
-          this.writeValue(previousOption.getAttribute('data-value'));
-        }
-      }
-    } else if (key === 'ArrowRight' || key === 'ArrowDown') {
-      const nextOption = this.getNextOption();
-
-      if (this.opened) {
-        nextOption.focus();
-      } else {
-        this.writeValue(nextOption.getAttribute('data-value'));
-      }
-    }
-  }
-
-  /**
    * Write value and close dropdown on option select
    * @param value the value to write
    */
@@ -502,6 +476,32 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Handle arrow keyup event
+   * @param key the arrow key
+   */
+  private onArrowKeyUp(key: string): void {
+    if (key === 'ArrowLeft' || key === 'ArrowUp') {
+      const previousOption = this.getPreviousOption();
+
+      if (previousOption !== null) {
+        if (this.opened) {
+          previousOption.focus();
+        } else {
+          this.writeValue(previousOption.getAttribute('data-value'));
+        }
+      }
+    } else if (key === 'ArrowRight' || key === 'ArrowDown') {
+      const nextOption = this.getNextOption();
+
+      if (this.opened) {
+        nextOption.focus();
+      } else {
+        this.writeValue(nextOption.getAttribute('data-value'));
+      }
+    }
+  }
+
+  /**
    * Get the next dropdown option (relative to the current selection index).
    * If the currently selected option is the final available option, it is
    * returned. If no selection has been made, the first available option is returned
@@ -516,8 +516,8 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
       nextIndex = 0;
     } else {
       nextIndex = (this.selectionIndex + 1) >= optionsArray.length
-        ? this.selectionIndex + 1
-        : optionsArray.length - 1;
+        ? optionsArray.length - 1
+        : this.selectionIndex + 1;
     }
 
     return optionsArray[nextIndex].nativeElement;
@@ -540,6 +540,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
 
       previousOption = optionsArray[previousIndex].nativeElement;
     }
+
 
     return previousOption;
   }

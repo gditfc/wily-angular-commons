@@ -1,15 +1,15 @@
 <div #dropdown class="wily_dropdown" [style.filter]="disabled ? 'brightness(.95)' : ''"
      style="cursor:default;"
      [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
-  <!-- TODO: set aria-expanded to true/false -->
   <button #dropdownButton
           role="combobox"
-          aria-expanded="false"
           aria-haspopup="listbox"
           (click)="openDropdown($event)"
+          (focus)="setSelectionIndex()"
           [id]="dropdownId"
           [disabled]="disabled"
           [attr.aria-label]="ariaLabel"
+          [attr.aria-expanded]="opened"
           class="access page_container_color wily_dropdown_input">
     <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">
       <ng-container *ngTemplateOutlet="template; context: dataContext"></ng-container>
