@@ -29,7 +29,6 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 /**
  * Dropdown component
  * TODO: close animation
- * TODO: disabled options support
  */
 @Component({
   selector: 'wily-dropdown',
@@ -581,39 +580,42 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     } else if (key === 'ArrowRight' || key === 'ArrowDown') {
       const nextOption = this.getNextOption();
 
-      if (this.opened) {
-        nextOption.focus();
-      } else {
-        this.writeValue(nextOption.getAttribute('data-value'));
+      if (nextOption !== null) {
+        if (this.opened) {
+          nextOption.focus();
+        } else {
+          this.writeValue(nextOption.getAttribute('data-value'));
+        }
       }
     }
   }
 
   /**
-   * Get the next dropdown option (relative to the current selection index).
+   * Get the next enabled dropdown option (relative to the current selection index).
    * If the currently selected option is the final available option, it is
    * returned. If no selection has been made, the first available option is returned
    * @private
    */
   private getNextOption(): HTMLButtonElement {
     const optionsArray = this.dropdownOptions.toArray();
-    let nextIndex: number;
 
-    if (this.selectionIndex === null) {
-      nextIndex = 0;
-    } else {
-      nextIndex = (this.selectionIndex + 1) >= optionsArray.length
-        ? optionsArray.length - 1
-        : this.selectionIndex + 1;
+    const startIndex = this.selectionIndex === null ? 0 : this.selectionIndex + 1;
+    for (let i = startIndex; i < optionsArray.length; i++) {
+      const option = optionsArray[i].nativeElement;
+
+      if (!option.disabled) {
+        this.selectionIndex = i;
+        break;
+      }
     }
 
-    this.selectionIndex = nextIndex;
-
-    return optionsArray[nextIndex].nativeElement;
+    return this.selectionIndex === null
+      ? null
+      : optionsArray[this.selectionIndex].nativeElement;
   }
 
   /**
-   * Get the previous dropdown option (relative to the current selection index).
+   * Get the previous enabled dropdown option (relative to the current selection index).
    * If the currently selected option is the first available option, it is
    * returned
    * @private
@@ -623,12 +625,18 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
 
     if (this.selectionIndex !== null) {
       const optionsArray = this.dropdownOptions.toArray();
-      const previousIndex = (this.selectionIndex - 1) < 0
-        ? 0
-        : this.selectionIndex - 1;
 
-      this.selectionIndex = previousIndex;
-      previousOption = optionsArray[previousIndex].nativeElement;
+      for (let i = this.selectionIndex - 1; i >= 0; i--) {
+        const option = optionsArray[i].nativeElement;
+
+        console.log(`Option at index ${i} is disabled: ` + option.disabled);
+
+        if (!option.disabled) {
+          this.selectionIndex = i;
+          previousOption = option;
+          break;
+        }
+      }
     }
 
     return previousOption;
