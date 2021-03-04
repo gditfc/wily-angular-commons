@@ -76,6 +76,36 @@
 
             <div class="overlay_alt2 hr mar_10 mar_y15"></div>
 
+            <!-- DIALOG SECTION -->
+            <div class="mar_10">
+              <div class="header md mar_10 mar_bot5">
+                <i class="far fa-window-restore fa-sm mar_right10"></i>Dialog
+              </div>
+              <div class="row wrap">
+                <div class="col size_2 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <div class="text sm paragraph">
+                      The dialog can be used to open a window over the page content to perform sub-functions or
+                      display warnings or important information to the user.
+                      <br/><br/>
+                      The dialog is fully accessible and responsive, and supports features such as opening multiple
+                      dialogs on top of each other, trapping focus and close on escape.
+                    </div>
+                  </div>
+                </div>
+                <div class="col size_1 top_center wrap min_w250 mar_10">
+                  <button class="access btn md overlay_alt2 bg_blue_alt mar_5" (click)="obj2 = {}">
+                    Preview Dialog
+                  </button>
+<!--                  <button class="access btn sm overlay mar_5" (click)="obj5 = {}">-->
+<!--                    Open Nested Prime Dialog Parent-->
+<!--                  </button>-->
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay_alt2 hr mar_10 mar_y15"></div>
+
             <!-- DROPDOWN SECTION -->
             <div class="mar_10">
               <div class="header md mar_10 mar_bot5">
@@ -119,6 +149,9 @@
 
             <div class="overlay_alt2 hr mar_10 mar_y15"></div>
 
+
+
+
 <!--            <div class="min_h300"></div>-->
             <!-- button toolbar -->
             <div class="row wrap pad_5 center_center brad_3 mar_5">
@@ -129,14 +162,6 @@
                                   (selected)="iconSelected($event)">
                 </wily-icon-select>
               </div>
-              <!-- custom select component -->
-              <div class="col size_1 mar_5 min_w250">
-
-              </div>
-              <!-- date picker component -->
-              <div class="col size_1 mar_5 min_w250">
-
-              </div>
             </div>
             <div class="row v_center pad_5 brad_3 mar_5">
               <!-- wily profile pic -->
@@ -145,16 +170,6 @@
                 imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg"
                 toolTip="Some guy">
               </wily-profile-pic>
-              <button class="access btn xsm overlay mar_5" (click)="obj2 = {}">
-                Open Nested Flex Dialog Parent
-              </button>
-              <button class="access btn xsm overlay mar_5" (click)="obj5 = {}">
-                Open Nested Prime Dialog Parent
-              </button>
-            </div>
-
-            <!-- misc content -->
-            <div class="row pad_5">
 
             </div>
 
