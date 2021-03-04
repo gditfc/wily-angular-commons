@@ -114,7 +114,8 @@
   transition:0.2s background-color ease;
 }
 
-.wily_dropdown_option.unselected:not(:hover):not(:focus) {
+/* option hover/focus state */
+.wily_dropdown_option.unselected:not(:focus) {
   background:none;
   color:inherit;
 }
