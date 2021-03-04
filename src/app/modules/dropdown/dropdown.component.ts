@@ -46,6 +46,12 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   private static readonly DROPDOWN_LIST_OFFSET = 3;
 
   /**
+   * List of arrow key keycodes
+   * @private
+   */
+  private static readonly ARROW_KEYS = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
+
+  /**
    * ViewChild of the dropdown
    */
   @ViewChild('dropdown')
@@ -182,6 +188,11 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   );
 
   /**
+   * Unique ID to assign to the dropdown
+   */
+  readonly dropdownId;
+
+  /**
    * Whether or not the dropdown is open
    */
   opened = false;
@@ -189,7 +200,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   /**
    * The index of the focused option in the dropdown list
    */
-  focusedOptionIndex: number;
+  selectionIndex: number;
 
   /**
    * The current value of the dropdown
@@ -233,7 +244,16 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * @param renderer the Angular renderer
    * @param changeDetectorRef reference to the Angular change detector
    */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+
+    for (let i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    this.dropdownId = `dropdown-${result}${new Date().getTime()}`;
+  }
 
   /**
    * Init component
@@ -295,13 +315,20 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    if (this.opened) {
+    if (document.activeElement.id === this.dropdownId) {
       const {key} = event;
-      if (key === 'Esc' || key === 'Escape') {
-        this.closeDropdown();
-        this.dropdownButton.nativeElement.focus();
-      } else if (key === 'Tab') {
-        this.closeDropdown();
+
+      if (DropdownComponent.ARROW_KEYS.includes(key)) {
+        this.onArrowKeyUp(key);
+      } else {
+        if (this.opened) {
+          if (key === 'Esc' || key === 'Escape') {
+            this.closeDropdown();
+            this.dropdownButton.nativeElement.focus();
+          } else if (key === 'Tab') {
+            this.closeDropdown();
+          }
+        }
       }
     }
   }
@@ -329,6 +356,14 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     }
   }
 
+  onArrowKeyUp(key: string): void {
+    if (this.opened) {
+
+    } else {
+
+    }
+  }
+
   /**
    * Write value and close dropdown on option select
    * @param value the value to write
@@ -350,7 +385,15 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
       this.opened = true;
       this.positionDropdownList();
       this.resizeDropdownList();
-      this.focusSelectedOption();
+      this.setSelectionIndex();
+
+      if (this.selectionIndex !== null) {
+        setTimeout(() => {
+          this.dropdownOptions.toArray()[this.selectionIndex]
+            .nativeElement
+            .focus()
+        });
+      }
     }
   }
 
@@ -359,6 +402,23 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   closeDropdown(): void {
     this.opened = false;
+  }
+
+  /**
+   * Focus on the selected dropdown option on dropdown open
+   * @private
+   */
+  setSelectionIndex(): void {
+    this.selectionIndex = null;
+    
+    if (!!this.value || this.value >= 0) {
+      const dropdownOptionsArray = this.dropdownOptions.toArray();
+      const foundIndex = dropdownOptionsArray.findIndex(option => {
+        return String(this.value) === option.nativeElement.getAttribute('data-value')
+      });
+
+      this.selectionIndex = foundIndex > -1 ? foundIndex : null;
+    }
   }
 
   /**
@@ -406,20 +466,32 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Focus on the selected dropdown option on dropdown open
+   * Get the next dropdown option (relative to the current selection index).
+   * If the currently selected option is the final available option, it is
+   * returned
    * @private
    */
-  private focusSelectedOption(): void {
-    if (!!this.value || this.value >= 0) {
-      const dropdownOptionsArray = this.dropdownOptions.toArray();
-      const foundIndex = dropdownOptionsArray.findIndex(option => {
-        return String(this.value) === option.nativeElement.getAttribute('data-value')
-      });
+  private getNextOption(): HTMLButtonElement {
+    const optionsArray = this.dropdownOptions.toArray();
+    const nextIndex = (this.selectionIndex + 1) >= optionsArray.length
+      ? this.selectionIndex + 1
+      : optionsArray.length - 1;
 
-      this.focusedOptionIndex = foundIndex > -1 ? foundIndex : null;
-      if (this.focusedOptionIndex !== null) {
-        setTimeout(() => dropdownOptionsArray[this.focusedOptionIndex].nativeElement.focus());
-      }
-    }
+    return optionsArray[nextIndex].nativeElement;
+  }
+
+  /**
+   * Get the previous dropdown option (relative to the current selection index).
+   * If the currently selected option is the first available option, it is
+   * returned
+   * @private
+   */
+  private getPreviousOption(): HTMLButtonElement {
+    const optionsArray = this.dropdownOptions.toArray();
+    const previousIndex = (this.selectionIndex - 1) < 0
+      ? 0
+      : this.selectionIndex - 1;
+
+    return optionsArray[previousIndex].nativeElement;
   }
 }
