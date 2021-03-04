@@ -532,11 +532,13 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         const availableSpace = window.innerHeight - offsetHeight;
         positionTop = String(availableSpace / 2);
       }
+
+      transformOrigin = 'top left';
     }
 
     this.renderer.setStyle(this.dropdownList.nativeElement, 'transform-origin', transformOrigin);
     this.renderer.setStyle(this.dropdownList.nativeElement, 'left', `${left}px`);
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'top', positionTop);
+    this.renderer.setStyle(this.dropdownList.nativeElement, 'top', `${positionTop}px`);
   }
 
   /**
