@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Notification } from './models/notification.model';
@@ -5,11 +6,23 @@ import { NotificationService } from './services/notification.service';
 
 /**
  * Component for displaying notifications
+ * // TODO: Finalize animation
  */
 @Component({
   selector: 'wily-notification',
   templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.css']
+  styleUrls: ['./notification.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({transform: 'translateX(100%)'}),
+        animate('200ms ease-in', style({transform: 'translateX(0%)'}))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({transform: 'translateX(100%)'}))
+      ])
+    ])
+  ]
 })
 export class NotificationComponent implements OnInit {
 

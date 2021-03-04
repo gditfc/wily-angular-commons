@@ -7,14 +7,13 @@
        style="max-width:400px;">
     <div class="row_block width100">
       <!-- success item -->
-      <!-- TODO: set color depending on type (replace bg_green) -->
       <div *ngFor="let notification of notifications$ | async"
+           @slideInOut
            [ngClass]="severityColorMap[notification.severity]"
            class="wily_notification card_shadow">
         <div class="col mar_5"><i class="fas {{severityIconMap[notification.severity]}} text xlg"></i></div>
         <div class="col size_1 mar_5"><div class="text sm paragraph">{{notification.summary}}<br/>{{notification.detail}}</div></div>
         <div class="col mar_y5">
-          <!-- TODO: close toast -->
           <button (click)="deleteNotification(notification.id)"
                   class="access btn overlay_alt1 hov_bg square_22px brad_3">
             <i class="fas fa-times"></i>
