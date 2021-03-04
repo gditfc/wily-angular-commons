@@ -28,7 +28,6 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 /**
  * Dropdown component
  * TODO: animation (copy from date-picker)
- * TODO: focus bug when mixing mouse and arrow keys
  */
 @Component({
   selector: 'wily-dropdown',

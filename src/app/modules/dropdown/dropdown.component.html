@@ -36,11 +36,11 @@
               <!-- OPTION GROUP -->
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                 <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
-                <ng-container *ngFor="let groupOption of option.options; index as i">
+                <ng-container *ngFor="let groupOption of option.options; index as j">
                   <button #dropdownOption
                           (click)="onDropdownOptionSelect(groupOption.value)"
-                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
-                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
@@ -72,11 +72,11 @@
               <!-- OPTION GROUP -->
               <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                 <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
-                <ng-container *ngFor="let groupOption of option.options">
+                <ng-container *ngFor="let groupOption of option.options; index as j">
                   <button #dropdownOption
                           (click)="onDropdownOptionSelect(groupOption.value)"
-                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
-                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
