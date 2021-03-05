@@ -13,7 +13,12 @@
           [attr.aria-expanded]="opened"
           class="access page_container_color wily_dropdown_input">
     <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">
-      <ng-container *ngTemplateOutlet="template; context: dataContext"></ng-container>
+      <ng-container *ngIf="!!template else noCustomTemplate">
+        <ng-container *ngTemplateOutlet="template; context: dataContext"></ng-container>
+      </ng-container>
+      <ng-template #noCustomTemplate>
+        <div>{{dataContext['$implicit'] || dataContext['label']}}</div>
+      </ng-template>
     </ng-container>
     <ng-template #placeholderTemplate>
       <div class="wily_dropdown_placeholder">{{placeholder}}</div>
