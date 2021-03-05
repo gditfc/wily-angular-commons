@@ -4,7 +4,7 @@ import {
   Component,
   ContentChild,
   ElementRef,
-  EventEmitter,
+  EventEmitter, forwardRef,
   HostListener,
   Input,
   OnInit,
@@ -15,7 +15,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {ControlValueAccessor} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map, withLatestFrom} from 'rxjs/operators';
 import {DropdownOption} from './models/dropdown-option.model';
@@ -49,6 +49,13 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
       ])
     ])
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DropdownComponent),
+      multi: true
+    }
+  ]
 })
 export class DropdownComponent implements ControlValueAccessor, OnInit {
 

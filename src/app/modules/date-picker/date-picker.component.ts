@@ -10,9 +10,9 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {coerceBooleanProperty} from "@angular/cdk/coercion";
-import {format, isEqual, isValid, isWithinInterval, parse} from "date-fns";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {format, isEqual, isValid, isWithinInterval, parse} from 'date-fns';
 import { EventEmitter } from '@angular/core';
 
 /**
@@ -49,6 +49,52 @@ import { EventEmitter } from '@angular/core';
   ]
 })
 export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnInit {
+
+  /**
+   * Value input getter
+   */
+  @Input()
+  get value(): Date {
+    return DatePickerComponent.parseDateString(this.dateString);
+  }
+
+  /**
+   * Value input setter
+   */
+  set value(value: Date) {
+    if (!isEqual(value, this._value)) {
+      this._value = value;
+    }
+  }
+
+  /**
+   * Disabled input
+   */
+  @Input()
+  get disabled(): boolean { return this._disabled; }
+  set disabled(disabled: boolean) {
+    this._disabled = coerceBooleanProperty(disabled);
+  }
+
+  @Input('dateRange')
+  set setDateRange(dateRange: { minDate: Date, maxDate: Date }) {
+    if (dateRange?.minDate > dateRange?.maxDate) {
+      throw new Error('Min date must be less than max date');
+    }
+
+    const year = this.currentDate.getFullYear();
+    this.validSelectionInterval = {
+      start: dateRange?.minDate ?? new Date(year - 50, 0, 1),
+      end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
+    };
+  }
+
+  /**
+   * Dependency injection site
+   * @param renderer the Angular renderer
+   * @param changeDetectorRef the Angular change detector
+   */
+  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
 
   /**
    * Allowed keys for date input
@@ -104,45 +150,6 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   calendarDiv: ElementRef<HTMLDivElement>;
 
   /**
-   * Value input getter
-   */
-  @Input()
-  get value(): Date {
-    return DatePickerComponent.parseDateString(this.dateString);
-  }
-
-  /**
-   * Value input setter
-   */
-  set value(value: Date) {
-    if (!isEqual(value, this._value)) {
-      this._value = value;
-    }
-  }
-
-  /**
-   * Disabled input
-   */
-  @Input()
-  get disabled(): boolean { return this._disabled; }
-  set disabled(disabled: boolean) {
-    this._disabled = coerceBooleanProperty(disabled);
-  }
-
-  @Input('dateRange')
-  set setDateRange(dateRange: { minDate: Date, maxDate: Date }) {
-    if (dateRange?.minDate > dateRange?.maxDate) {
-      throw new Error('Min date must be less than max date');
-    }
-
-    const year = this.currentDate.getFullYear();
-    this.validSelectionInterval = {
-      start: dateRange?.minDate ?? new Date(year - 50, 0, 1),
-      end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
-    };
-  }
-
-  /**
    * Optional class-list to add to the date picker input
    */
   @Input()
@@ -193,16 +200,6 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     start: new Date(this.currentDate.getFullYear() - 50, 0, 1),
     end: new Date(this.currentDate.getFullYear() + 50, 0, 1)
   };
-
-  /**
-   * Function to call on change
-   */
-  onChange: (value: any) => void = () => {};
-
-  /**
-   * Function to call on touch
-   */
-  onTouched: () => any = () => {};
 
   /**
    * The internal control accessor value
@@ -272,11 +269,14 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   }
 
   /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   * @param changeDetectorRef the Angular change detector
+   * Function to call on change
    */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
+  onChange: (value: any) => void = () => {};
+
+  /**
+   * Function to call on touch
+   */
+  onTouched: () => any = () => {};
 
   /**
    * Init component, set up window resize listener

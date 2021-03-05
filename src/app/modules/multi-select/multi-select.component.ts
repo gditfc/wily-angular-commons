@@ -4,7 +4,7 @@ import {
   Component,
   ContentChild,
   ElementRef,
-  EventEmitter,
+  EventEmitter, forwardRef,
   HostListener,
   Input,
   OnInit,
@@ -15,7 +15,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {ControlValueAccessor} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MultiSelectOption} from './models/multi-select-option.model';
@@ -49,6 +49,13 @@ declare type MultiSelectOptionInput = Array<MultiSelectOption | MultiSelectOptio
       ])
     ])
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MultiSelectComponent),
+      multi: true
+    }
+  ]
 })
 export class MultiSelectComponent implements ControlValueAccessor, OnInit {
 
@@ -56,10 +63,26 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * Set the value of the multi-select
    * @param value the value to set
    */
-  @Input()
+  @Input('value')
   set value(value: Array<string | number>) {
-    this._value = value;
-    this._internalValue.next(value);
+    // ngModel apparently boxes array input into another array, so this unwraps it
+    let valueToSet: Array<string | number> = null;
+    if (Array.isArray(value)) {
+      valueToSet = [];
+      for (const valueItem of value) {
+        if (Array.isArray(valueItem)) {
+          valueToSet.push(...valueItem);
+        } else if ((typeof valueItem === 'string') || (typeof valueItem === 'number')) {
+          valueToSet.push(valueItem);
+        }
+      }
+
+      const nonNullValues = valueToSet.filter(item => item !== null);
+      valueToSet = !nonNullValues.length ? null : nonNullValues;
+    }
+
+    this._value = valueToSet;
+    this._internalValue.next(valueToSet);
   }
   get value() { return this._value; }
 

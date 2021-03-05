@@ -45,6 +45,8 @@ export class AppComponent {
 
   text: string;
 
+  value = ['value', 'value6', 'value4'];
+
   /**
    * Constructor
    */
