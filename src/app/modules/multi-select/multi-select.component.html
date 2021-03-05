@@ -49,7 +49,7 @@
                           [disabled]="groupOption.disabled"
                           class="wily_dropdown_option" role="option" tabindex="0">
                     <!-- TODO: show check icon if selected, replace 'unselected' class with bg_blue -->
-                    <div class="wily_multiselect_checkbox overlay_alt2 unselected">
+                    <div class="wily_multiselect_checkbox overlay_alt2 unselected" aria-hidden="true">
                       <div *ngIf="true"><i class="fas fa-check"></i></div>
                     </div>
                     <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
