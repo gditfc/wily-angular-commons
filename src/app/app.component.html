@@ -130,7 +130,26 @@
                 </div>
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
-                    <div class="form_label mar_bot3">Select an option from the dropdown below</div>
+                    <div class="form_label mar_bot3">Basic Dropdown</div>
+                    <wily-dropdown
+                      [placeholder]="'Select an option...'"
+                      [options]="[
+                           { value: 'red', label: 'Option A' },
+                           { value: 'green', label: 'Disabled Option', disabled: true },
+                           { value: 'blue', label: 'Option C' },
+                           {
+                             groupLabel: 'Option Group',
+                             options: [
+                               { value: 'darkPurple', label: 'Group Option 1' },
+                               { value: 'purple', label: 'Group Option $' },
+                               { value: 'lightPurple', label: 'Group Option X' }
+                             ]
+                           }
+                         ]"
+                      [disabled]="false">
+                    </wily-dropdown>
+                    <div class="pad_10"></div>
+                    <div class="form_label mar_bot3">Dropdown with Templating</div>
                     <wily-dropdown
                       [placeholder]="'Select a color...'"
                       [options]="[
@@ -146,12 +165,19 @@
                              ]
                            }
                          ]"
-                         [classList]="'input md overlay_alt2 page_container_color'" [disabled]="false">
+                         [classList]="'form_input page_container_color'"
+                         [disabled]="false">
                       <ng-template let-colorClass="colorClass" let-label>
                         <div class="v_center">
                           <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
                         </div>
                       </ng-template>
+                    </wily-dropdown>
+                    <div class="pad_10"></div>
+                    <div class="form_label mar_bot3">Disabled Dropdown</div>
+                    <wily-dropdown
+                      [placeholder]="'Select nothing...'"
+                      [disabled]="true">
                     </wily-dropdown>
                   </div>
                 </div>
