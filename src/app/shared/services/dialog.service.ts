@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {DialogLegacyComponent} from '../../modules/dialog-legacy/dialog-legacy.component';
 import {DialogComponent} from '../../modules/dialog/dialog.component';
 
 @Injectable({
@@ -19,6 +18,7 @@ export class DialogService {
     }
   }
 
+  // TODO: Figure out how to intercept escape listeners from calendar/dropdown to prevent dialog closing
   registerDialog(dialog: DialogComponent): void {
     if (dialog) {
       if (this.dialogs.length === 0) {
