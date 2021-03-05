@@ -3,10 +3,9 @@
   <!-- spacer -->
   <div class="col size_3 min_w0"></div>
   <!-- container -->
-  <div class="col size_1 min_w280 pad_right5"
-       style="max-width:400px;">
+  <div class="col size_1 min_w280 pad_right5" style="max-width:400px;">
     <div @list class="row_block width100">
-      <!-- success item -->
+      <!-- item -->
       <div *ngFor="let notification of notifications$ | async"
            @items
            [ngClass]="severityColorMap[notification.severity]"
