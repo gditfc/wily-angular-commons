@@ -566,24 +566,18 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @param key the arrow key
    */
   private onArrowKeyUp(key: string): void {
-    if (key === 'ArrowLeft' || key === 'ArrowUp') {
-      const previousOption = this.getPreviousOption();
+    if (this.opened) {
+      if (key === 'ArrowLeft' || key === 'ArrowUp') {
+        const previousOption = this.getPreviousOption();
 
-      if (previousOption !== null) {
-        if (this.opened) {
+        if (previousOption !== null) {
           previousOption.focus();
-        } else {
-          this.writeValue(previousOption.getAttribute('data-value'));
         }
-      }
-    } else if (key === 'ArrowRight' || key === 'ArrowDown') {
-      const nextOption = this.getNextOption();
+      } else if (key === 'ArrowRight' || key === 'ArrowDown') {
+        const nextOption = this.getNextOption();
 
-      if (nextOption !== null) {
-        if (this.opened) {
+        if (nextOption !== null) {
           nextOption.focus();
-        } else {
-          this.writeValue(nextOption.getAttribute('data-value'));
         }
       }
     }
