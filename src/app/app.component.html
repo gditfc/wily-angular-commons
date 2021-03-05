@@ -234,136 +234,200 @@
               </div>
             </div>
 
-
-
-            
-
-            <!-- NOTIFICATION SECTION -->
-            <div class="mar_10">
-              <div class="header md mar_10 mar_bot5">
-                <i class="fas fa-exclamation-circle fa-sm mar_right10"></i>Notifications
-              </div>
-              <div class="text sm paragraph mar_10">
-                Notifications are used to display short messages to the user as feedback for an action.
-                Notifications will stack in the top-right corner of the screen, and will fade out after
-                a set period of time.
-              </div>
-              <div class="row wrap v_center mar_5">
-                <button (click)="addNotification('success')"
-                        class="access btn md overlay_alt2 bg_green_alt mar_5">
-                  Show Success
-                </button>
-                <button (click)="addNotification('warn')"
-                        class="access btn md overlay_alt2 bg_orange_alt mar_5">
-                  Show Warning
-                </button>
-                <button (click)="addNotification('error')"
-                        class="access btn md overlay_alt2 bg_red_alt mar_5">
-                  Show Error
-                </button>
-                <button (click)="addNotification('info')"
-                        class="access btn md overlay_alt2 bg_purple_alt mar_5">
-                  Show Info
-                </button>
-              </div>
-            </div>
-
-            <div class="overlay_alt2 hr mar_10"></div>
-
-            <!-- PAGINATOR SECTION -->
-            <div class="mar_10">
-              <div class="header md mar_10 mar_bot5">
-                <i class="fas fa-arrow-circle-right fa-sm mar_right10"></i>Paginator
-              </div>
-              <div class="text sm paragraph mar_10">
-                The paginator is a component that makes it easy to split data into multiple 'pages.' The paginator
-                includes multiple versions with different looks and supported functions.
-              </div>
-              <div class="bg_everyodd">
-                <!-- version 1 -->
-                <div class="row wrap v_center brad_3 pad_x5">
-                  <div class="col size_1 mar_10">
-                    <div class="text md bolder uppercase">Version 1</div>
-                  </div>
-                  <div class="col size_1 center_center mar_10">
-                    <wily-paginator
-                      version="1"
-                      [totalLength]="100"
-                      [pageSizeOptions]="[10,25,50]"
-                      [pageSize]="10"
-                    ></wily-paginator>
-                  </div>
-                </div>
-                <!-- version 2 -->
-                <div class="row wrap v_center brad_3 pad_x5">
-                  <div class="col size_1 mar_10">
-                    <div class="text md bolder uppercase">Version 2</div>
-                  </div>
-                  <div class="col size_1 center_center mar_10">
-                    <wily-paginator
-                      version="2"
-                      [totalLength]="200"
-                      [pageSizeOptions]="[10,25,50]"
-                      [pageSize]="25"
-                    ></wily-paginator>
-                  </div>
-                </div>
-                <!-- version 3 -->
-                <div class="row wrap v_center brad_3 pad_x5">
-                  <div class="col size_1 mar_10">
-                    <div class="text md bolder uppercase">Version 3</div>
-                  </div>
-                  <div class="col size_1 center_center mar_10">
-                    <wily-paginator
-                      version="3"
-                      [totalLength]="30000"
-                      [pageSizeOptions]="[10,25,50]"
-                      [pageSize]="50"
-                    ></wily-paginator>
-                  </div>
-                </div>
-                <!-- version 4 -->
-                <div class="row wrap v_center brad_3 pad_x5">
-                  <div class="col size_1 mar_10">
-                    <div class="text md bolder uppercase">Version 4</div>
-                  </div>
-                  <div class="col size_1 center_center mar_10">
-                    <wily-paginator
-                      version="4"
-                      [totalLength]="30000"
-                      [pageSizeOptions]="[10,25,50]"
-                      [pageSize]="50"
-                    ></wily-paginator>
-                  </div>
+            <!-- NOTIFICATIONS SECTION -->
+            <div style="margin:20px;">
+              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
+                <div class="text xlg bold v_center">
+                  <div class="circle_24px bg_green_alt mar_right10"><i class="fas fa-exclamation-circle"></i></div>
+                  Notification
                 </div>
               </div>
-            </div>
-
-            <div class="overlay_alt2 hr mar_10"></div>
-
-            <!-- PROFILE PICTURE SECTION -->
-            <div class="mar_10">
-              <div class="row wrap">
-                <div class="col size_2 min_w250 mar_10">
+              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
+                <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
-                    <div class="header md mar_bot5">
-                      <i class="fas fa-user-circle fa-sm mar_right10"></i>Profile Picture
-                    </div>
                     <div class="text sm paragraph">
-                      This component allows a user to set a profile picture. Check this guy out.
+                      Notifications are used to display short messages to the user as feedback for an action.
+                      Notifications will stack in the top-right corner of the screen, and will fade out after
+                      a set period of time.
                     </div>
                   </div>
                 </div>
-                <div class="col size_1 top_center wrap min_w250 mar_10">
-                  <wily-profile-pic
-                    imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg"
-                    toolTip="Some guy">
-                  </wily-profile-pic>
+                <div class="col size_1 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <div class="form_label mar_bot5">Select a button below to preview a notification type</div>
+                    <div class="row wrap v_center" style="margin:0 -5px;">
+                      <button (click)="addNotification('success')"
+                              class="access btn sm overlay_alt2 bg_green_alt mar_5">
+                        Show Success
+                      </button>
+                      <button (click)="addNotification('warn')"
+                              class="access btn sm overlay_alt2 bg_orange_alt mar_5">
+                        Show Warning
+                      </button>
+                      <button (click)="addNotification('error')"
+                              class="access btn sm overlay_alt2 bg_red_alt mar_5">
+                        Show Error
+                      </button>
+                      <button (click)="addNotification('info')"
+                              class="access btn sm overlay_alt2 bg_purple_alt mar_5">
+                        Show Info
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="overlay_alt2 hr mar_10"></div>
+            <!-- PAGINATORS SECTION -->
+            <div style="margin:20px;">
+              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
+                <div class="text xlg bold v_center">
+                  <div class="circle_24px bg_yellow mar_right10"><i class="fas fa-arrow-circle-right"></i></div>
+                  Paginator
+                </div>
+              </div>
+              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
+                <div class="row_block width100">
+                  <div class="row mar_10">
+                    <div class="text sm paragraph">
+                      The paginator is a component that makes it easy to split data into multiple 'pages.' The paginator
+                      includes multiple versions with different looks and supported functions.
+                    </div>
+                  </div>
+                  <div class="bg_everyodd mar_10">
+                    <!-- version 1 -->
+                    <div class="row wrap brad_3 pad_x5 mar_y10">
+                      <div class="col size_1 mar_10 pad_y5">
+                        <div class="text md bolder">Version 1</div>
+                      </div>
+                      <div class="col size_1 center_center mar_10">
+                        <wily-paginator
+                          version="1"
+                          [totalLength]="100"
+                          [pageSizeOptions]="[10,25,50]"
+                          [pageSize]="10"
+                        ></wily-paginator>
+                      </div>
+                    </div>
+                    <!-- version 2 -->
+                    <div class="row wrap brad_3 pad_x5 mar_y10">
+                      <div class="col size_1 mar_10 pad_y5">
+                        <div class="text md bolder">Version 2</div>
+                      </div>
+                      <div class="col size_1 center_center mar_10">
+                        <wily-paginator
+                          version="2"
+                          [totalLength]="200"
+                          [pageSizeOptions]="[10,25,50]"
+                          [pageSize]="25"
+                        ></wily-paginator>
+                      </div>
+                    </div>
+                    <!-- version 3 -->
+                    <div class="row wrap brad_3 pad_x5 mar_y10">
+                      <div class="col size_1 mar_10 pad_y5">
+                        <div class="text md bolder">Version 3</div>
+                      </div>
+                      <div class="col size_1 center_center mar_10">
+                        <wily-paginator
+                          version="3"
+                          [totalLength]="30000"
+                          [pageSizeOptions]="[10,25,50]"
+                          [pageSize]="50"
+                        ></wily-paginator>
+                      </div>
+                    </div>
+                    <!-- version 4 -->
+                    <div class="row wrap brad_3 pad_x5 mar_y10">
+                      <div class="col size_1 mar_10 pad_y5">
+                        <div class="text md bolder">Version 4</div>
+                      </div>
+                      <div class="col size_1 center_center mar_10">
+                        <wily-paginator
+                          version="4"
+                          [totalLength]="30000"
+                          [pageSizeOptions]="[10,25,50]"
+                          [pageSize]="50"
+                        ></wily-paginator>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROFILE PIC SECTION -->
+            <div style="margin:20px;">
+              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
+                <div class="text xlg bold v_center">
+                  <div class="circle_24px bg_yellow_alt mar_right10"><i class="fas fa-user-circle"></i></div>
+                  Profile Picture
+                </div>
+              </div>
+              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
+                <div class="col size_1 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <div class="text sm paragraph">
+                      This component allows a user to set a profile picture.
+                    </div>
+                  </div>
+                </div>
+                <div class="col size_1 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <div class="form_label mar_bot5">Check this guy out</div>
+                    <wily-profile-pic
+                      imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg">
+                    </wily-profile-pic>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TOOLTIP SECTION -->
+            <div style="margin:20px;">
+              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
+                <div class="text xlg bold v_center">
+                  <div class="circle_24px bg_orange mar_right10"><i class="fas fa-comment-alt"></i></div>
+                  Tooltip
+                </div>
+              </div>
+              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
+                <div class="col size_1 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <div class="text sm paragraph">
+                      Tooltips can be added to any element for a short description that appears on hover. Tooltips
+                      can be positioned at any side of the element, and will automatically reposition if there isn't
+                      enough room.
+                    </div>
+                  </div>
+                </div>
+                <div class="col size_1 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <div class="form_label mar_bot5">Hover a box below to see a tooltip</div>
+                    <div class="row wrap v_center" style="margin:0 -5px;">
+                      <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                           toolTip="I'm above it">
+                        <i class="fas fa-arrow-up mar_right5"></i>Top Tooltip
+                      </div>
+                      <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                           toolTip="I'm feeling down">
+                        <i class="fas fa-arrow-down mar_right5"></i>Bottom Tooltip
+                      </div>
+                      <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                           toolTip="I'm left out">
+                        <i class="fas fa-arrow-left mar_right5"></i>Left Tooltip
+                      </div>
+                      <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                           toolTip="I'm always right">
+                        <i class="fas fa-arrow-right mar_right5"></i>Right Tooltip
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
 
 
 <!--            <div class="min_h300"></div>-->
@@ -377,7 +441,7 @@
             <div class="row v_center pad_5 brad_3 mar_5">
               <!-- wily profile pic -->
 
-              <wily-notification></wily-notification>
+
 
             </div>
 
@@ -594,6 +658,10 @@
             RIGHT PUSH
           </div>
         </wily-push-container>
+
+        <!-- NOTIFICATION CONTAINER -->
+        <wily-notification></wily-notification>
+
       </div>
     </main>
   </div>
