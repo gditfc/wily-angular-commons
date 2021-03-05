@@ -219,6 +219,30 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   );
 
   /**
+   * Observable map of stringified option value to boolean indicating the user's selections
+   */
+  readonly selectionValueMap$: Observable<{ [key: string]: boolean }> = this._internalValue.pipe(
+    map(values => {
+      const selectionValueMap = {};
+
+      if (!!values?.length) {
+        for (const value of values) {
+          selectionValueMap[String(value)] = true;
+        }
+      }
+
+      return selectionValueMap;
+    })
+  );
+
+  /**
+   * Observable boolean indicating if the input values array is defined and non-empty
+   */
+  readonly hasSelections$: Observable<boolean> = this._internalValue.pipe(
+    map(values => !!values?.length)
+  );
+
+  /**
    * Unique ID to assign to the dropdown
    */
   readonly dropdownId;
@@ -232,12 +256,6 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * The index of the focused option in the dropdown list
    */
   selectionIndex: number;
-
-  /**
-   * A map of stringified option values to boolean that tracks
-   * the user's multiple selections
-   */
-  selectionMap: { [key: string]: boolean };
 
   /**
    * The current value of the dropdown
