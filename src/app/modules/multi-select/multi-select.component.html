@@ -11,10 +11,9 @@
           [attr.aria-label]="ariaLabel"
           [attr.aria-expanded]="opened"
           class="access page_container_color wily_dropdown_input">
-    <ng-container *ngIf="hasSelections$ | async else placeholderTemplate">
+    <ng-container *ngIf="selectionCount$ | async as selectionCount else placeholderTemplate">
       <div class="pill text xsm brad_3 bg_grey mar_right10" style="display:inline-block">
-        <!-- TODO: add selection count here -->
-        5
+        {{selectionCount}}
       </div>
       <ng-container *ngIf="dataContextMap$ | async as dataContextMap">
         <ng-container *ngIf="!!template else noCustomTemplate">

@@ -220,10 +220,10 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   );
 
   /**
-   * Observable boolean indicating if the input values array is defined and non-empty
+   * The count of selected options as an Observable
    */
-  readonly hasSelections$: Observable<boolean> = this._internalValue.pipe(
-    map(values => !!values?.length)
+  readonly selectionCount$: Observable<number> = this._internalValue.pipe(
+    map(values => values?.length ?? 0)
   );
 
   /**
