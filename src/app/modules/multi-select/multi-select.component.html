@@ -33,97 +33,105 @@
         <div class="wily_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">
           <!-- CUSTOM TEMPLATE -->
           <ng-container *ngIf="!!template else defaultOptionTemplate">
-            <ng-container *ngFor="let option of options; index as i">
-              <!-- OPTION GROUP -->
-              <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
-                <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
-                <ng-container *ngFor="let groupOption of option.options; index as j">
-                  <button #dropdownOption
-                          (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
-                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
-                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
-                          [id]="dropdownId + '-' + groupOption.value"
-                          [ngClass]="(_internalValue | async) === groupOption.value ? '' : 'unselected'"
-                          [attr.aria-selected]="(_internalValue | async) === groupOption.value"
-                          [attr.data-value]="groupOption.value"
-                          [disabled]="groupOption.disabled"
-                          class="wily_dropdown_option overlay_alt1" role="option" tabindex="0">
-                    <!-- TODO: show check icon if selected, replace 'unselected' class with bg_blue -->
-                    <div class="wily_multiselect_checkbox overlay_alt2 unselected" aria-hidden="true">
-                      <div *ngIf="true"><i class="fas fa-check"></i></div>
-                    </div>
-                    <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
-                  </button>
+            <ng-container *ngIf="selectionValueMap$ | async as selectionValueMap">
+              <ng-container *ngFor="let option of options; index as i">
+                <!-- OPTION GROUP -->
+                <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
+                  <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
+                  <ng-container *ngFor="let groupOption of option.options; index as j">
+                    <button #dropdownOption
+                            (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
+                            (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
+                            (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
+                            [id]="dropdownId + '-' + groupOption.value"
+                            [ngClass]="{ 'unselected': !selectionValueMap['' + groupOption.value] }"
+                            [attr.aria-selected]="(_internalValue | async) === groupOption.value"
+                            [attr.data-value]="groupOption.value"
+                            [disabled]="groupOption.disabled"
+                            class="wily_dropdown_option overlay_alt1" role="option" tabindex="0">
+                      <div class="wily_multiselect_checkbox overlay_alt2"
+                           [ngClass]="selectionValueMap['' + groupOption.value] ? 'bg_blue' : 'unselected'"
+                           aria-hidden="true">
+                        <div *ngIf="selectionValueMap['' + groupOption.value]"><i class="fas fa-check"></i></div>
+                      </div>
+                      <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
+                    </button>
+                  </ng-container>
                 </ng-container>
+                <!-- SINGULAR OPTION -->
+                <ng-template #nonGroupOption>
+                  <button #dropdownOption
+                          (click)="onDropdownOptionSelect(option.value, option.disabled)"
+                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                          [id]="dropdownId + '-' + option.value"
+                          [attr.aria-selected]="(_internalValue | async) === option.value"
+                          [attr.data-value]="option.value"
+                          [disabled]="option.disabled"
+                          [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
+                          class="wily_dropdown_option overlay_alt1" role="option" tabindex="0">
+                    <div class="wily_multiselect_checkbox overlay_alt2"
+                         [ngClass]="selectionValueMap['' + option.value] ? 'bg_blue' : 'unselected'"
+                         aria-hidden="true">
+                      <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>
+                    </div>
+                    <ng-container *ngTemplateOutlet="template; context: option.dataContext"></ng-container>
+                  </button>
+                </ng-template>
               </ng-container>
-              <!-- SINGULAR OPTION -->
-              <ng-template #nonGroupOption>
-                <button #dropdownOption
-                        (click)="onDropdownOptionSelect(option.value, option.disabled)"
-                        (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
-                        (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
-                        [id]="dropdownId + '-' + option.value"
-                        [ngClass]="(_internalValue | async) === option.value ? '' : 'unselected'"
-                        [attr.aria-selected]="(_internalValue | async) === option.value"
-                        [attr.data-value]="option.value"
-                        [disabled]="option.disabled"
-                        class="wily_dropdown_option overlay_alt1" role="option" tabindex="0">
-                  <!-- TODO: show check icon if selected, replace 'unselected' class with bg_blue -->
-                  <div class="wily_multiselect_checkbox overlay_alt2 unselected" aria-hidden="true">
-                    <div *ngIf="true"><i class="fas fa-check"></i></div>
-                  </div>
-                  <ng-container *ngTemplateOutlet="template; context: option.dataContext"></ng-container>
-                </button>
-              </ng-template>
             </ng-container>
           </ng-container>
           <!-- NO CUSTOM TEMPLATE -->
           <ng-template #defaultOptionTemplate>
-            <ng-container *ngFor="let option of options; index as i">
-              <!-- OPTION GROUP -->
-              <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
-                <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
-                <ng-container *ngFor="let groupOption of option.options; index as j">
+            <ng-container *ngIf="selectionValueMap$ | async as selectionValueMap">
+              <ng-container *ngFor="let option of options; index as i">
+                <!-- OPTION GROUP -->
+                <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
+                  <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
+                  <ng-container *ngFor="let groupOption of option.options; index as j">
+                    <button #dropdownOption
+                            (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
+                            (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
+                            (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
+                            [id]="dropdownId + '-' + groupOption.value"
+                            [attr.aria-label]="groupOption.label"
+                            [attr.aria-selected]="(_internalValue | async) === groupOption.value"
+                            [attr.data-value]="groupOption.value"
+                            [disabled]="groupOption.disabled"
+                            [ngClass]="{ 'unselected': !selectionValueMap['' + groupOption.value] }"
+                            class="wily_dropdown_option overlay_alt1"
+                            role="option" tabindex="0">
+                      <div class="wily_multiselect_checkbox overlay_alt2"
+                           [ngClass]="selectionValueMap['' + groupOption.value] ? 'bg_blue' : 'unselected'"
+                           aria-hidden="true">
+                        <div *ngIf="selectionValueMap['' + groupOption.value]"><i class="fas fa-check"></i></div>
+                      </div>
+                      {{groupOption.label}}
+                    </button>
+                  </ng-container>
+                </ng-container>
+                <!-- SINGULAR OPTION -->
+                <ng-template #nonGroupOption>
                   <button #dropdownOption
-                          (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
-                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
-                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
-                          [id]="dropdownId + '-' + groupOption.value"
-                          [ngClass]="(_internalValue | async) === groupOption.value ? '' : 'unselected'"
-                          [attr.aria-label]="groupOption.label"
-                          [attr.aria-selected]="(_internalValue | async) === groupOption.value"
-                          [attr.data-value]="groupOption.value"
-                          [disabled]="groupOption.disabled"
+                          (click)="onDropdownOptionSelect(option.value, option.disabled)"
+                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                          [id]="dropdownId + '-' + option.value"
+                          [attr.aria-selected]="(_internalValue | async) === option.value"
+                          [attr.data-value]="option.value"
+                          [disabled]="option.disabled"
+                          [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
                           class="wily_dropdown_option overlay_alt1"
                           role="option" tabindex="0">
-                    <!-- TODO: show check icon if selected, replace 'unselected' class with bg_blue -->
-                    <div class="wily_multiselect_checkbox overlay_alt2 unselected" aria-hidden="true">
-                      <div *ngIf="true"><i class="fas fa-check"></i></div>
+                    <div class="wily_multiselect_checkbox overlay_alt2 unselected"
+                         [ngClass]="selectionValueMap['' + option.value] ? 'bg_blue' : 'unselected'"
+                         aria-hidden="true">
+                      <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>
                     </div>
-                    {{groupOption.label}}
+                    {{option.label}}
                   </button>
-                </ng-container>
+                </ng-template>
               </ng-container>
-              <!-- SINGULAR OPTION -->
-              <ng-template #nonGroupOption>
-                <button #dropdownOption
-                        (click)="onDropdownOptionSelect(option.value, option.disabled)"
-                        (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
-                        (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
-                        [id]="dropdownId + '-' + option.value"
-                        [ngClass]="(_internalValue | async) === option.value ? '' : 'unselected'"
-                        [attr.aria-selected]="(_internalValue | async) === option.value"
-                        [attr.data-value]="option.value"
-                        [disabled]="option.disabled"
-                        class="wily_dropdown_option overlay_alt1"
-                        role="option" tabindex="0">
-                  <!-- TODO: show check icon if selected, replace 'unselected' class with bg_blue -->
-                  <div class="wily_multiselect_checkbox overlay_alt2 unselected" aria-hidden="true">
-                    <div *ngIf="true"><i class="fas fa-check"></i></div>
-                  </div>
-                  {{option.label}}
-                </button>
-              </ng-template>
             </ng-container>
           </ng-template>
         </div>
