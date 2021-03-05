@@ -24,7 +24,7 @@ import {MultiSelectOptionGroup} from './models/multi-select-option-group.model';
 /**
  * Type representing the multi-select component option input
  */
-declare type DropdownOptionInput = Array<MultiSelectOption | MultiSelectOptionGroup>;
+declare type MultiSelectOptionInput = Array<MultiSelectOption | MultiSelectOptionGroup>;
 
 /**
  * Multi-select component
@@ -67,7 +67,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * The multi-select options/option groups
    */
   @Input('options')
-  set setOptions(options: DropdownOptionInput) {
+  set setOptions(options: MultiSelectOptionInput) {
     this._options.next(MultiSelectComponent.sanitizeOptionInput(options));
   }
 
@@ -147,7 +147,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   /**
    * BehaviorSubject tracking the input multi-select options/option groups
    */
-  readonly _options = new BehaviorSubject<DropdownOptionInput>(null);
+  readonly _options = new BehaviorSubject<MultiSelectOptionInput>(null);
 
   /**
    * BehaviorSubject tracking the current value of the multi-select
@@ -230,8 +230,8 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @param options the options to sanitize
    * @private
    */
-  private static sanitizeOptionInput(options: DropdownOptionInput): DropdownOptionInput {
-    const sanitizedOptions: DropdownOptionInput = [];
+  private static sanitizeOptionInput(options: MultiSelectOptionInput): MultiSelectOptionInput {
+    const sanitizedOptions: MultiSelectOptionInput = [];
 
     for (const option of options) {
       if (('groupLabel' in option) && ('options' in option)) {
@@ -377,8 +377,8 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   @HostListener('window:resize')
   onWindowResize(): void {
     if (this.opened) {
-      this.positionDropdownList();
-      this.resizeDropdownList();
+      this.positionMultiSelectList();
+      this.resizeMultiSelectList();
     }
   }
 
@@ -411,10 +411,10 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
       } else {
         if (this.opened) {
           if (key === 'Esc' || key === 'Escape') {
-            this.closeDropdown();
+            this.closeMultiSelect();
             this.multiSelectButton.nativeElement.focus();
           } else if (key === 'Tab') {
-            this.closeDropdown();
+            this.closeMultiSelect();
           }
         }
       }
@@ -437,7 +437,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
         const shouldClose = !(xPositionValid && yPositionValid);
 
         if (shouldClose) {
-          this.closeDropdown();
+          this.closeMultiSelect();
           this.multiSelectButton.nativeElement.focus();
         }
       }
@@ -449,7 +449,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @param option the multiSelect option to focus
    * @param index the index of the option to focus
    */
-  onDropdownOptionMouseEnter(option: HTMLButtonElement, index: number): void {
+  onMultiSelectOptionMouseEnter(option: HTMLButtonElement, index: number): void {
     this.selectionIndex = index;
     option.focus();
   }
@@ -459,7 +459,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @param option the multiSelect option to focus
    * @param index the index of the option to focus
    */
-  onDropdownOptionMouseMove(option: HTMLButtonElement, index: number): void {
+  onMultiSelectOptionMouseMove(option: HTMLButtonElement, index: number): void {
     if (this.selectionIndex !== index) {
       this.selectionIndex = index;
       option.focus();
@@ -471,7 +471,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @param value the value to write
    * @param disabled whether or not the selected option is disabled
    */
-  onDropdownOptionSelect(value: string | number, disabled: boolean): void {
+  onMultiSelectOptionSelect(value: string | number, disabled: boolean): void {
     if (!disabled) {
       this.writeValue(value);
     }
@@ -481,12 +481,12 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * Open the multi-select list and align it
    * @param event the click MouseEvent
    */
-  openDropdown(event: MouseEvent): void {
+  openMultiSelect(event: MouseEvent): void {
     event.stopImmediatePropagation();
 
     if (!this.disabled) {
       this.opened = true;
-      this.resizeDropdownList();
+      this.resizeMultiSelectList();
 
       setTimeout(() => {
         const option = this.getNextOption();
@@ -502,14 +502,14 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
        */
       this.renderer.setStyle(this.multiSelectList.nativeElement, 'top', '-999px');
       this.renderer.setStyle(this.multiSelectList.nativeElement, 'left', '-999px');
-      setTimeout(() => this.positionDropdownList());
+      setTimeout(() => this.positionMultiSelectList());
     }
   }
 
   /**
    * Close the multiSelect list
    */
-  closeDropdown(): void {
+  closeMultiSelect(): void {
     this.opened = false;
     this.selectionIndex = null;
   }
@@ -518,7 +518,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * Align the multi-select list with the multiSelect
    * @private
    */
-  private positionDropdownList(): void {
+  private positionMultiSelectList(): void {
     const {left, top, bottom} = this.multiSelect.nativeElement.getBoundingClientRect();
     const {offsetHeight} = this.multiSelectList.nativeElement;
     const datePickerBottomLeftAnchor = bottom;
@@ -553,7 +553,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * Match the multi-select list width to the multi-select's width
    * @private
    */
-  private resizeDropdownList(): void {
+  private resizeMultiSelectList(): void {
     const { left, right } = this.multiSelect.nativeElement.getBoundingClientRect();
     const width = right - left;
 

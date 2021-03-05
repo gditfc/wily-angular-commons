@@ -5,8 +5,7 @@
   <button #multiSelectButton
           role="combobox"
           aria-haspopup="listbox"
-          (click)="openDropdown($event)"
-          (focus)="setSelectionIndex()"
+          (click)="openMultiSelect($event)"
           [id]="multiSelectId"
           [disabled]="disabled"
           [attr.aria-label]="ariaLabel"
@@ -51,9 +50,9 @@
                   <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
                   <ng-container *ngFor="let groupOption of option.options; index as j">
                     <button #multiSelectOption
-                            (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
-                            (mouseenter)="onDropdownOptionMouseEnter(multiSelectOption, i + j)"
-                            (mousemove)="onDropdownOptionMouseMove(multiSelectOption, i + j)"
+                            (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled)"
+                            (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i + j)"
+                            (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i + j)"
                             [id]="multiSelectId + '-' + groupOption.value"
                             [ngClass]="{ 'unselected': !selectionValueMap['' + groupOption.value] }"
                             [attr.aria-selected]="(_internalValue | async) === groupOption.value"
@@ -71,10 +70,10 @@
                 </ng-container>
                 <!-- SINGULAR OPTION -->
                 <ng-template #nonGroupOption>
-                  <button #dropdownOption
-                          (click)="onDropdownOptionSelect(option.value, option.disabled)"
-                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
-                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                  <button #multiSelectOption
+                          (click)="onMultiSelectOptionSelect(option.value, option.disabled)"
+                          (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
+                          (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
                           [id]="multiSelectId + '-' + option.value"
                           [attr.aria-selected]="(_internalValue | async) === option.value"
                           [attr.data-value]="option.value"
@@ -100,10 +99,10 @@
                 <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                   <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
                   <ng-container *ngFor="let groupOption of option.options; index as j">
-                    <button #dropdownOption
-                            (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
-                            (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
-                            (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
+                    <button #multiSelectOption
+                            (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled)"
+                            (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i + j)"
+                            (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i + j)"
                             [id]="multiSelectId + '-' + groupOption.value"
                             [attr.aria-label]="groupOption.label"
                             [attr.aria-selected]="(_internalValue | async) === groupOption.value"
@@ -123,10 +122,10 @@
                 </ng-container>
                 <!-- SINGULAR OPTION -->
                 <ng-template #nonGroupOption>
-                  <button #dropdownOption
-                          (click)="onDropdownOptionSelect(option.value, option.disabled)"
-                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
-                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                  <button #multiSelectOption
+                          (click)="onMultiSelectOptionSelect(option.value, option.disabled)"
+                          (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
+                          (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
                           [id]="multiSelectId + '-' + option.value"
                           [attr.aria-selected]="(_internalValue | async) === option.value"
                           [attr.data-value]="option.value"
