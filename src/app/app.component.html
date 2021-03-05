@@ -43,15 +43,18 @@
           </button>
         </div>
         <!-- CONTENT -->
-        <div class="page_container page_container_color pad_10">
+        <div class="page_container page_container_color">
           <div class="row_block width100">
 
             <!-- DATE PICKER SECTION -->
-            <div class="mar_10 mar_y15">
-              <div class="header md bold mar_10 mar_bot5">
-                <i class="fas fa-calendar-alt fa-sm mar_right10"></i>Date Picker
+            <div style="margin:20px;">
+              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
+                <div class="text xlg bold v_center">
+                  <div class="circle_24px bg_purple mar_right10"><i class="fas fa-calendar-alt"></i></div>
+                  Date Picker
+                </div>
               </div>
-              <div class="row wrap">
+              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
                     <div class="text sm paragraph">
@@ -64,6 +67,7 @@
                 </div>
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
+                    <div class="form_label mar_bot3">Enter a date below</div>
                     <wily-date-picker
                       [disabled]="false"
                       [inputClassList]="'form_input page_container_color'"
@@ -74,15 +78,16 @@
               </div>
             </div>
 
-            <div class="overlay_alt2 hr mar_10"></div>
-
             <!-- DIALOG SECTION -->
-            <div class="mar_10 mar_y15">
-              <div class="header md mar_10 mar_bot5">
-                <i class="far fa-window-restore fa-sm mar_right10"></i>Dialog
+            <div style="margin:20px;">
+              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
+                <div class="text xlg bold v_center">
+                  <div class="circle_24px bg_purple_alt mar_right10"><i class="far fa-window-restore"></i></div>
+                  Dialog
+                </div>
               </div>
-              <div class="row wrap">
-                <div class="col size_2 min_w250 mar_10">
+              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
+                <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
                     <div class="text sm paragraph">
                       The dialog can be used to open a window over the page content to perform sub-functions or
@@ -93,25 +98,26 @@
                     </div>
                   </div>
                 </div>
-                <div class="col size_1 top_center wrap min_w250 mar_10">
-                  <button class="access btn md overlay_alt2 bg_blue_alt mar_5" (click)="obj2 = {}">
-                    Preview Dialog
-                  </button>
-<!--                  <button class="access btn sm overlay mar_5" (click)="obj5 = {}">-->
-<!--                    Open Nested Prime Dialog Parent-->
-<!--                  </button>-->
+                <div class="col size_1 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <div class="form_label mar_bot5">Select the button below to preview the dialog</div>
+                    <button class="access btn sm overlay_alt2 bg_blue_alt" (click)="obj2 = {}">
+                      Preview Dialog
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="overlay_alt2 hr mar_10"></div>
-
             <!-- DROPDOWN SECTION -->
-            <div class="mar_10">
-              <div class="header md mar_10 mar_bot5">
-                <i class="fas fa-caret-square-down fa-sm mar_right10"></i>Dropdown
+            <div style="margin:20px;">
+              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
+                <div class="text xlg bold v_center">
+                  <div class="circle_24px bg_blue mar_right10"><i class="fas fa-caret-square-down"></i></div>
+                  Dropdown
+                </div>
               </div>
-              <div class="row wrap">
+              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
                     <div class="text sm paragraph">
@@ -124,20 +130,23 @@
                 </div>
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
-                    <wily-dropdown [options]="[
-                                   { value: 'value', label: 'label', dataContext: { 'colorClass': 'bg_red', 'placeholder': 'placeholder value' } },
-                                   { value: 'value2', label: 'label2', disabled: true, dataContext: { 'placeholder': 'placeholder value 2' } },
-                                   { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
-                                   {
-                                     groupLabel: 'This is a Group',
-                                     options: [
-                                       { value: 'value4', label: 'label4', dataContext: { 'placeholder': 'placeholder value 4' } },
-                                       { value: 'value5', label: 'label5', dataContext: { 'placeholder': 'placeholder value 5' } },
-                                       { value: 'value6', label: 'label6', dataContext: { 'placeholder': 'placeholder value 6' } }
-                                     ]
-                                   }
-                                 ]"
-                                   [classList]="'input md overlay_alt2 page_container_color'" [disabled]="false">
+                    <div class="form_label mar_bot3">Select an option from the dropdown below</div>
+                    <wily-dropdown
+                      [placeholder]="'Make a selection...'"
+                      [options]="[
+                           { value: 'value', label: 'label', dataContext: { 'colorClass': 'bg_red', 'placeholder': 'placeholder value' } },
+                           { value: 'value2', label: 'label2', disabled: true, dataContext: { 'placeholder': 'placeholder value 2' } },
+                           { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
+                           {
+                             groupLabel: 'This is a Group',
+                             options: [
+                               { value: 'value4', label: 'label4', dataContext: { 'placeholder': 'placeholder value 4' } },
+                               { value: 'value5', label: 'label5', dataContext: { 'placeholder': 'placeholder value 5' } },
+                               { value: 'value6', label: 'label6', dataContext: { 'placeholder': 'placeholder value 6' } }
+                             ]
+                           }
+                         ]"
+                         [classList]="'input md overlay_alt2 page_container_color'" [disabled]="false">
                       <ng-template let-colorClass="colorClass" let-placeholder="placeholder" let-label>
                         <div class="v_center">
                           <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{placeholder}} {{label}}
@@ -149,15 +158,16 @@
               </div>
             </div>
 
-            <div class="overlay_alt2 hr mar_10"></div>
-
             <!-- ICON SELECT SECTION -->
-            <div class="mar_10">
-              <div class="header md mar_10 mar_bot5">
-                <i class="fas fa-hand-point-up fa-sm mar_right10"></i>Icon Select
+            <div style="margin:20px;">
+              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
+                <div class="text xlg bold v_center">
+                  <div class="circle_24px bg_blue_alt mar_right10"><i class="fas fa-hand-point-up"></i></div>
+                  Icon Select
+                </div>
               </div>
-              <div class="row wrap">
-                <div class="col size_2 min_w250 mar_10">
+              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
+                <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
                     <div class="text sm paragraph">
                       The icon select is a dialog that allows a user to choose an icon from a collection of fontawesome
@@ -165,23 +175,27 @@
                     </div>
                   </div>
                 </div>
-                <div class="col size_1 top_center wrap min_w250 mar_10">
-                  <wily-icon-select (opened)="iconSelectOpened()"
-                                    (closed)="iconSelectClosed()"
-                                    (selected)="iconSelected($event)">
-                  </wily-icon-select>
+                <div class="col size_1 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <div class="form_label mar_bot5">Select the button below to open the icon select</div>
+                    <wily-icon-select (opened)="iconSelectOpened()"
+                                      (closed)="iconSelectClosed()"
+                                      (selected)="iconSelected($event)">
+                    </wily-icon-select>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="overlay_alt2 hr mar_10"></div>
-
             <!-- MULTISELECT SECTION -->
-            <div class="mar_10">
-              <div class="header md mar_10 mar_bot5">
-                <i class="far fa-check-square fa-sm mar_right10"></i>MultiSelect
+            <div style="margin:20px;">
+              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
+                <div class="text xlg bold v_center">
+                  <div class="circle_24px bg_green mar_right10"><i class="far fa-check-square"></i></div>
+                  MultiSelect
+                </div>
               </div>
-              <div class="row wrap">
+              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
                     <div class="text sm paragraph">
@@ -193,20 +207,22 @@
                 </div>
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
-                    <wily-multi-select [options]="[
-                                   { value: 'value', label: 'label', dataContext: { 'colorClass': 'bg_red', 'placeholder': 'placeholder value' } },
-                                   { value: 'value2', label: 'label2', disabled: true, dataContext: { 'placeholder': 'placeholder value 2' } },
-                                   { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
-                                   {
-                                     groupLabel: 'This is a Group',
-                                     options: [
-                                       { value: 'value4', label: 'label4', dataContext: { 'placeholder': 'placeholder value 4' } },
-                                       { value: 'value5', label: 'label5', dataContext: { 'placeholder': 'placeholder value 5' } },
-                                       { value: 'value6', label: 'label6', dataContext: { 'placeholder': 'placeholder value 6' } }
-                                     ]
-                                   }
-                                 ]"
-                                   [classList]="'input md overlay_alt2 page_container_color'" [disabled]="false">
+                    <div class="form_label mar_bot3">Select at least one option from the dropdown below</div>
+                    <wily-multi-select
+                      [options]="[
+                         { value: 'value', label: 'label', dataContext: { 'colorClass': 'bg_red', 'placeholder': 'placeholder value' } },
+                         { value: 'value2', label: 'label2', disabled: true, dataContext: { 'placeholder': 'placeholder value 2' } },
+                         { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
+                         {
+                           groupLabel: 'This is a Group',
+                           options: [
+                             { value: 'value4', label: 'label4', dataContext: { 'placeholder': 'placeholder value 4' } },
+                             { value: 'value5', label: 'label5', dataContext: { 'placeholder': 'placeholder value 5' } },
+                             { value: 'value6', label: 'label6', dataContext: { 'placeholder': 'placeholder value 6' } }
+                           ]
+                         }
+                       ]"
+                       [classList]="'input md overlay_alt2 page_container_color'" [disabled]="false">
                       <ng-template let-colorClass="colorClass" let-placeholder="placeholder" let-label>
                         <div class="v_center">
                           <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{placeholder}} {{label}}
@@ -218,7 +234,9 @@
               </div>
             </div>
 
-            <div class="overlay_alt2 hr mar_10"></div>
+
+
+            
 
             <!-- NOTIFICATION SECTION -->
             <div class="mar_10">

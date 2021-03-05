@@ -100,6 +100,7 @@
 .wily_dropdown_list {
   padding:0;
   margin:0;
+  outline:none;
 }
 
 .wily_dropdown_option {
@@ -120,12 +121,16 @@
   color:inherit;
 }
 
+.wily_dropdown_option[disabled] {
+  cursor:default;
+}
+
 .wily_multiselect_checkbox {
   width:20px;
   min-width:20px;
   height:20px;
   min-height:20px;
-  margin-right:5px;
+  margin-right:10px;
   display:flex;
   align-items:center;
   justify-content:center;

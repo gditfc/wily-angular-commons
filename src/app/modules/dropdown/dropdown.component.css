@@ -100,6 +100,7 @@
 .wily_dropdown_list {
   padding:0;
   margin:0;
+  outline:none;
 }
 
 .wily_dropdown_option {
@@ -118,6 +119,10 @@
 .wily_dropdown_option.unselected:not(:focus) {
   background:none;
   color:inherit;
+}
+
+.wily_dropdown_option[disabled] {
+  cursor:default;
 }
 
 @media screen and (max-width: 768px) {

@@ -143,7 +143,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * Placeholder text to display when no option is selected
    */
   @Input()
-  placeholder = 'Make a selection';
+  placeholder = 'Make a selection...';
 
   /**
    * Aria label text
