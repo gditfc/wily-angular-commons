@@ -53,6 +53,44 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 export class DropdownComponent implements ControlValueAccessor, OnInit {
 
   /**
+   * Set the value of the dropdown
+   * @param value the value to set
+   */
+  @Input()
+  set value(value: string | number) {
+    this._value = value;
+    this._internalValue.next(value);
+
+    this.setSelectionIndex();
+  }
+  get value() { return this._value; }
+
+  /**
+   * The dropdown options/option groups
+   */
+  @Input('options')
+  set setOptions(options: DropdownOptionInput) {
+    this._options.next(DropdownComponent.sanitizeOptionInput(options));
+    this.setSelectionIndex();
+  }
+
+  /**
+   * Dependency injection site
+   * @param renderer the Angular renderer
+   * @param changeDetectorRef reference to the Angular change detector
+   */
+  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+
+    for (let i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    this.dropdownId = `dropdown-${result}${new Date().getTime()}`;
+  }
+
+  /**
    * The amount of offset (in pixels) to place between the dropdown
    * and its list overlay
    * @private
@@ -96,32 +134,10 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   template: TemplateRef<HTMLElement>;
 
   /**
-   * Set the value of the dropdown
-   * @param value the value to set
-   */
-  @Input()
-  set value(value: string | number) {
-    this._value = value;
-    this._internalValue.next(value);
-
-    this.setSelectionIndex();
-  }
-  get value() { return this._value; }
-
-  /**
    * Whether or not the dropdown should be disabled
    */
   @Input()
   disabled: boolean;
-
-  /**
-   * The dropdown options/option groups
-   */
-  @Input('options')
-  set setOptions(options: DropdownOptionInput) {
-    this._options.next(DropdownComponent.sanitizeOptionInput(options));
-    this.setSelectionIndex();
-  }
 
   /**
    * Placeholder text to display when no option is selected
@@ -146,16 +162,6 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   @Output()
   change = new EventEmitter<void>();
-
-  /**
-   * Function to call on change
-   */
-  onChange: (value: any) => void = () => {};
-
-  /**
-   * Function to call on touch
-   */
-  onTouched: () => any = () => {};
 
   /**
    * BehaviorSubject tracking the input dropdown options/option groups
@@ -295,20 +301,14 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   * @param changeDetectorRef reference to the Angular change detector
+   * Function to call on change
    */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
+  onChange: (value: any) => void = () => {};
 
-    for (let i = 0; i < 10; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-
-    this.dropdownId = `dropdown-${result}${new Date().getTime()}`;
-  }
+  /**
+   * Function to call on touch
+   */
+  onTouched: () => any = () => {};
 
   /**
    * Init component
@@ -477,7 +477,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         setTimeout(() => {
           this.dropdownOptions.toArray()[this.selectionIndex]
             .nativeElement
-            .focus()
+            .focus();
         });
       }
 
@@ -509,7 +509,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     if ((!!this.value || this.value >= 0) && !!this.dropdownOptions?.length) {
       const dropdownOptionsArray = this.dropdownOptions.toArray();
       const foundIndex = dropdownOptionsArray.findIndex(option => {
-        return String(this.value) === option.nativeElement.getAttribute('data-value')
+        return String(this.value) === option.nativeElement.getAttribute('data-value');
       });
 
       this.selectionIndex = foundIndex > -1 ? foundIndex : null;
