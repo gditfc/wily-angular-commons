@@ -12,8 +12,19 @@
           [attr.aria-label]="ariaLabel"
           [attr.aria-expanded]="opened"
           class="access page_container_color wily_dropdown_input">
-    <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">
-      <ng-container *ngTemplateOutlet="template; context: dataContext"></ng-container>
+    <ng-container *ngIf="hasSelections$ | async else placeholderTemplate">
+      <ng-container *ngIf="dataContextMap$ | async as dataContextMap">
+        <ng-container *ngIf="!!template else noCustomTemplate">
+          <ng-container *ngFor="let value of _internalValue | async">
+            <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + value]"></ng-container>
+          </ng-container>
+        </ng-container>
+        <ng-template #noCustomTemplate>
+          <div *ngFor="let value of _internalValue | async">
+            {{dataContextMap['' + value]['$implicit'] || dataContextMap['' + value]['label']}}
+          </div>
+        </ng-template>
+      </ng-container>
     </ng-container>
     <ng-template #placeholderTemplate>
       <div class="wily_dropdown_placeholder">{{placeholder}}</div>
