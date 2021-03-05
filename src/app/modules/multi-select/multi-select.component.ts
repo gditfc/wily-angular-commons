@@ -176,7 +176,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   /**
    * Observable map of option value (stringified if a number) to data context
    */
-  private readonly dataContextMap$: Observable<{ [value: string]: { [key: string]: unknown } }> = this._options.pipe(
+  readonly dataContextMap$: Observable<{ [value: string]: { [key: string]: unknown } }> = this._options.pipe(
     map(options => {
       let dataContextMap: { [value: string]: { [key: string]: unknown } } = null;
 
@@ -195,26 +195,6 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
       }
 
       return dataContextMap;
-    })
-  );
-
-  /**
-   * The data context of the selected option as an Observable
-   */
-  readonly selectedDataContext$: Observable<{ [key: string]: unknown }> = this._internalValue.pipe(
-    withLatestFrom(this.dataContextMap$),
-    map(([value, dataContextMap]) => {
-      let dataContext: { [key: string]: unknown } = null;
-
-      if (value !== null && dataContextMap !== null) {
-        const entry = dataContextMap[String(value)];
-
-        if (!!entry) {
-          dataContext = JSON.parse(JSON.stringify(entry));
-        }
-      }
-
-      return dataContext;
     })
   );
 
@@ -278,7 +258,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
         for (const groupOption of (option.options ?? [])) {
           if (!!groupOption.label && (!!groupOption.value || (groupOption.value >= 0))) {
             const groupOptionCopy = JSON.parse(JSON.stringify(groupOption));
-            this.addLabelToDataContext(groupOptionCopy.label, groupOptionCopy.dataContext);
+            groupOptionCopy.dataContext = this.addLabelToDataContext(groupOptionCopy.label, groupOptionCopy.dataContext);
 
             validOptions.push(groupOptionCopy);
           }
@@ -290,7 +270,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
       } else if (('label' in option) && ('value' in option)) {
         if (!!option.label && (!!option.value || (option.value >= 0))) {
           const optionCopy = JSON.parse(JSON.stringify(option));
-          this.addLabelToDataContext(optionCopy.label, optionCopy.dataContext);
+          optionCopy.dataContext = this.addLabelToDataContext(optionCopy.label, optionCopy.dataContext);
 
           sanitizedOptions.push(optionCopy);
         }
@@ -308,8 +288,12 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @param dataContext the option data context
    * @private
    */
-  private static addLabelToDataContext(label: string, dataContext: { [key: string]: unknown }) {
-    if (!!label && !!dataContext) {
+  private static addLabelToDataContext(label: string, dataContext: { [key: string]: unknown }): { [key: string]: unknown } {
+    if (!dataContext) {
+      dataContext = {};
+    }
+
+    if (!!label) {
       const implicitValue = dataContext['$implicit'];
 
       if (!!implicitValue || implicitValue >= 0) {
@@ -322,6 +306,8 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
         dataContext['$implicit'] = label;
       }
     }
+
+    return dataContext;
   }
 
   /**
