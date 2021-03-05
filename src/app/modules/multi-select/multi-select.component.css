@@ -6,19 +6,19 @@
 /******* DROPDOWN INPUT STYLING ********/
 
 /* input container styles */
-.wily_dropdown {
+.wily_multiselect {
   width:100%;
   min-width:150px;
   position: relative;
 }
-.wily_dropdown::after {
+.wily_multiselect::after {
   content:"mm/dd/yyyy";
   opacity:0;
   pointer-events:none;
 }
 
 /* dropdown button style */
-.wily_dropdown_input {
+.wily_multiselect_input {
   position:absolute;
   top:0;
   left:0;
@@ -44,13 +44,13 @@
   white-space:nowrap;
   text-overflow:ellipsis;
 }
-.wily_dropdown_input:not([disabled]) {
+.wily_multiselect_input:not([disabled]) {
   cursor:pointer;
 }
-.wily_dropdown_input::-ms-expand {
+.wily_multiselect_input::-ms-expand {
   display: none;
 }
-.wily_dropdown_caret {
+.wily_multiselect_caret {
   position: absolute;
   top: 0.5em;
   right: 1em;
@@ -68,14 +68,14 @@
   display:inline-block;
 }
 
-.wily_dropdown_placeholder {
+.wily_multiselect_placeholder {
   opacity:0.5;
 }
 
 
 /******* LIST PANEL STYLING ********/
 
-.wily_dropdown_overlay {
+.wily_multiselect_overlay {
   position:fixed;
   top:0;
   bottom:0;
@@ -85,7 +85,7 @@
 }
 
 /* options panel */
-.wily_dropdown_options {
+.wily_multiselect_options {
   border-radius: 3px;
   line-height: 1.5;
   overflow:hidden;
@@ -106,20 +106,20 @@
 }
 
 /* heading for groups */
-.wily_dropdown_heading {
+.wily_multiselect_heading {
   font-size:12px;
   font-weight:600;
   opacity:0.8;
   padding: 10px 12px 4px 12px;
 }
 
-.wily_dropdown_list {
+.wily_multiselect_list {
   padding:0;
   margin:0;
   outline:none;
 }
 
-.wily_dropdown_option {
+.wily_multiselect_option {
   font-size:13px;
   padding: 7px 12px;
   cursor:pointer;
@@ -133,13 +133,13 @@
   color:inherit;
 }
 
-.wily_dropdown_option.unselected:focus {
+.wily_multiselect_option.unselected:focus {
   background-color:rgba(128,128,128,0.1);
 }
-.wily_dropdown_option:not(.unselected) {
+.wily_multiselect_option:not(.unselected) {
   background-color:rgba(128,128,128,0.15);
 }
-.wily_dropdown_option:not(.unselected):focus {
+.wily_multiselect_option:not(.unselected):focus {
   background-color:rgba(128,128,128,0.24);
 }
 
@@ -149,7 +149,7 @@
 /*  color:inherit;*/
 /*}*/
 
-.wily_dropdown_option[disabled] {
+.wily_multiselect_option[disabled] {
   cursor:default;
 }
 
@@ -176,7 +176,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .wily_dropdown_overlay {
+  .wily_multiselect_overlay {
     background: rgba(120, 120, 120, 0.4);
   }
 }

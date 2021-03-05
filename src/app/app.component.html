@@ -258,6 +258,24 @@
                 </div>
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
+                    <div class="form_label mar_bot3">Basic MultiSelect</div>
+                    <wily-multi-select
+                      [options]="[
+                         { value: 'a', label: 'Option A' },
+                         { value: 'b', label: 'Disabled Option', disabled: true },
+                         { value: 'c', label: 'Option C' },
+                         {
+                           groupLabel: 'Option Group',
+                           options: [
+                             { value: '1', label: 'Group Option 1' },
+                             { value: '2', label: 'Group Option $' },
+                             { value: '3', label: 'Group Option X' }
+                           ]
+                         }
+                       ]"
+                      [classList]="'form_input page_container_color'" [disabled]="false">
+                    </wily-multi-select>
+                    <div class="pad_10"></div>
                     <div class="form_label mar_bot3">Select one or more options from the dropdown below</div>
                     <wily-multi-select
                       [placeholder]="'Select your favorite foods...'"
@@ -278,6 +296,11 @@
                       <ng-template let-iconClass="iconClass" let-label>
                         <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
                       </ng-template>
+                    </wily-multi-select>
+                    <div class="pad_10"></div>
+                    <div class="form_label mar_bot3">Disabled MultiSelect</div>
+                    <wily-multi-select
+                      [disabled]="true">
                     </wily-multi-select>
                   </div>
                 </div>
