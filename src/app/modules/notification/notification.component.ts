@@ -1,8 +1,17 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { style,
+  animate,
+  animateChild,
+  transition,
+  trigger,
+  query as q,
+  stagger
+} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Notification } from './models/notification.model';
 import { NotificationService } from './services/notification.service';
+
+const query = (s,a,o={optional:true})=>q(s,a,o);
 
 /**
  * Component for displaying notifications
@@ -13,14 +22,27 @@ import { NotificationService } from './services/notification.service';
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css'],
   animations: [
-    trigger('slideInOut', [
+    // nice stagger effect when showing existing elements
+    trigger('list', [
       transition(':enter', [
-        style({transform: 'translateX(100%)'}),
-        animate('200ms ease-in', style({transform: 'translateX(0%)'}))
+        // child animation selector + stagger
+        query('@items',
+          stagger(300, animateChild())
+        )
+      ]),
+    ]),
+    trigger('items', [
+      // cubic-bezier for a tiny bouncing feel
+      transition(':enter', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),
+        animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
+          style({ transform: 'scale(1)', opacity: 1 }))
       ]),
       transition(':leave', [
-        animate('200ms ease-in', style({transform: 'translateX(100%)'}))
-      ])
+        style({ transform: 'scale(1)', opacity: 1, height: '*' }),
+        animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
+          style({ transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px' }))
+      ]),
     ])
   ]
 })
