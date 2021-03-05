@@ -487,6 +487,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
     if (!this.disabled) {
       this.opened = true;
       this.resizeMultiSelectList();
+      this.selectionIndex = null;
 
       setTimeout(() => {
         const option = this.getNextOption();
