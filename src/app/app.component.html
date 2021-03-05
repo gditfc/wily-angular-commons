@@ -176,6 +176,50 @@
 
             <div class="overlay_alt2 hr mar_10 mar_y15"></div>
 
+            <!-- MULTISELECT SECTION -->
+            <div class="mar_10">
+              <div class="header md mar_10 mar_bot5">
+                <i class="far fa-check-square fa-sm mar_right10"></i>MultiSelect
+              </div>
+              <div class="row wrap">
+                <div class="col size_1 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <div class="text sm paragraph">
+                      The MultiSelect component is a dropdown component that supports the selection of multiple options.
+                      <br/><br/>
+                      The look of the MultiSelect can be customized to fit into any form, through custom classes.
+                    </div>
+                  </div>
+                </div>
+                <div class="col size_1 min_w250 mar_10">
+                  <div class="row_block width100">
+                    <wily-dropdown [options]="[
+                                   { value: 'value', label: 'label', dataContext: { 'colorClass': 'bg_red', 'placeholder': 'placeholder value' } },
+                                   { value: 'value2', label: 'label2', disabled: true, dataContext: { 'placeholder': 'placeholder value 2' } },
+                                   { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
+                                   {
+                                     groupLabel: 'This is a Group',
+                                     options: [
+                                       { value: 'value4', label: 'label4', dataContext: { 'placeholder': 'placeholder value 4' } },
+                                       { value: 'value5', label: 'label5', dataContext: { 'placeholder': 'placeholder value 5' } },
+                                       { value: 'value6', label: 'label6', dataContext: { 'placeholder': 'placeholder value 6' } }
+                                     ]
+                                   }
+                                 ]"
+                                   [classList]="'input md overlay_alt2 page_container_color'" [disabled]="false">
+                      <ng-template let-colorClass="colorClass" let-placeholder="placeholder" let-label>
+                        <div class="v_center">
+                          <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{placeholder}} {{label}}
+                        </div>
+                      </ng-template>
+                    </wily-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay_alt2 hr mar_10 mar_y15"></div>
+
             <!-- NOTIFICATION SECTION -->
             <div class="mar_10">
               <div class="header md mar_10 mar_bot5">
