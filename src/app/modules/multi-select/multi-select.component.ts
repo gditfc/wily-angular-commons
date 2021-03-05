@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import {ControlValueAccessor} from '@angular/forms';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {map, withLatestFrom} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {MultiSelectOption} from './models/multi-select-option.model';
 import {MultiSelectOptionGroup} from './models/multi-select-option-group.model';
 
@@ -72,22 +72,6 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   set setOptions(options: DropdownOptionInput) {
     this._options.next(MultiSelectComponent.sanitizeOptionInput(options));
     this.setSelectionIndex();
-  }
-
-  /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   * @param changeDetectorRef reference to the Angular change detector
-   */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-
-    for (let i = 0; i < 10; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-
-    this.dropdownId = `dropdown-${result}${new Date().getTime()}`;
   }
 
   /**
@@ -225,7 +209,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   /**
    * Unique ID to assign to the dropdown
    */
-  readonly dropdownId;
+  readonly multiSelectId;
 
   /**
    * Whether or not the dropdown is open
@@ -321,6 +305,22 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   onTouched: () => any = () => {};
 
   /**
+   * Dependency injection site
+   * @param renderer the Angular renderer
+   * @param changeDetectorRef reference to the Angular change detector
+   */
+  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+
+    for (let i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    this.multiSelectId = `multiselect-${result}${new Date().getTime()}`;
+  }
+
+  /**
    * Init component
    */
   ngOnInit(): void { }
@@ -387,7 +387,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    */
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled) {
+    if (document.activeElement?.id?.includes(this.multiSelectId) && !this.disabled) {
       const { key } = event;
 
       if (MultiSelectComponent.ARROW_KEYS.includes(key)) {
@@ -402,7 +402,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled) {
+    if (document.activeElement?.id?.includes(this.multiSelectId) && !this.disabled) {
       const {key} = event;
 
       if (MultiSelectComponent.ARROW_KEYS.includes(key)) {
