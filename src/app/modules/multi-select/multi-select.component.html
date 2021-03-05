@@ -43,11 +43,11 @@
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           [id]="dropdownId + '-' + groupOption.value"
-                          [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
+                          [ngClass]="(_internalValue | async) === groupOption.value ? '' : 'unselected'"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           [attr.data-value]="groupOption.value"
                           [disabled]="groupOption.disabled"
-                          class="wily_dropdown_option" role="option" tabindex="0">
+                          class="wily_dropdown_option overlay_alt1" role="option" tabindex="0">
                     <!-- TODO: show check icon if selected, replace 'unselected' class with bg_blue -->
                     <div class="wily_multiselect_checkbox overlay_alt2 unselected" aria-hidden="true">
                       <div *ngIf="true"><i class="fas fa-check"></i></div>
@@ -63,11 +63,15 @@
                         (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
                         (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                         [id]="dropdownId + '-' + option.value"
-                        [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
+                        [ngClass]="(_internalValue | async) === option.value ? '' : 'unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         [attr.data-value]="option.value"
                         [disabled]="option.disabled"
-                        class="wily_dropdown_option" role="option" tabindex="0">
+                        class="wily_dropdown_option overlay_alt1" role="option" tabindex="0">
+                  <!-- TODO: show check icon if selected, replace 'unselected' class with bg_blue -->
+                  <div class="wily_multiselect_checkbox overlay_alt2 unselected" aria-hidden="true">
+                    <div *ngIf="true"><i class="fas fa-check"></i></div>
+                  </div>
                   <ng-container *ngTemplateOutlet="template; context: option.dataContext"></ng-container>
                 </button>
               </ng-template>
@@ -85,13 +89,17 @@
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           [id]="dropdownId + '-' + groupOption.value"
-                          [ngClass]="(_internalValue | async) === groupOption.value ? 'bg_blue' : 'overlay_alt1 unselected'"
+                          [ngClass]="(_internalValue | async) === groupOption.value ? '' : 'unselected'"
                           [attr.aria-label]="groupOption.label"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           [attr.data-value]="groupOption.value"
                           [disabled]="groupOption.disabled"
-                          class="wily_dropdown_option"
+                          class="wily_dropdown_option overlay_alt1"
                           role="option" tabindex="0">
+                    <!-- TODO: show check icon if selected, replace 'unselected' class with bg_blue -->
+                    <div class="wily_multiselect_checkbox overlay_alt2 unselected" aria-hidden="true">
+                      <div *ngIf="true"><i class="fas fa-check"></i></div>
+                    </div>
                     {{groupOption.label}}
                   </button>
                 </ng-container>
@@ -103,12 +111,16 @@
                         (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
                         (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                         [id]="dropdownId + '-' + option.value"
-                        [ngClass]="(_internalValue | async) === option.value ? 'bg_blue' : 'overlay_alt1 unselected'"
+                        [ngClass]="(_internalValue | async) === option.value ? '' : 'unselected'"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         [attr.data-value]="option.value"
                         [disabled]="option.disabled"
-                        class="wily_dropdown_option"
+                        class="wily_dropdown_option overlay_alt1"
                         role="option" tabindex="0">
+                  <!-- TODO: show check icon if selected, replace 'unselected' class with bg_blue -->
+                  <div class="wily_multiselect_checkbox overlay_alt2 unselected" aria-hidden="true">
+                    <div *ngIf="true"><i class="fas fa-check"></i></div>
+                  </div>
                   {{option.label}}
                 </button>
               </ng-template>
