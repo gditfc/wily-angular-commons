@@ -14,9 +14,9 @@
     <ng-container *ngIf="hasSelections$ | async else placeholderTemplate">
       <ng-container *ngIf="dataContextMap$ | async as dataContextMap">
         <ng-container *ngIf="!!template else noCustomTemplate">
-          <ng-container *ngFor="let value of _internalValue | async">
+          <div class="wily_multiselect_selection" *ngFor="let value of _internalValue | async">
             <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + value]"></ng-container>
-          </ng-container>
+          </div>
         </ng-container>
         <ng-template #noCustomTemplate>
           <div *ngFor="let value of _internalValue | async">
@@ -58,7 +58,7 @@
                             [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                             [attr.data-value]="groupOption.value"
                             [disabled]="groupOption.disabled"
-                            class="wily_dropdown_option overlay_alt1" role="option" tabindex="0">
+                            class="wily_dropdown_option" role="option" tabindex="0">
                       <div class="wily_multiselect_checkbox overlay_alt2"
                            [ngClass]="selectionValueMap['' + groupOption.value] ? 'bg_blue' : 'unselected'"
                            aria-hidden="true">
@@ -79,7 +79,7 @@
                           [attr.data-value]="option.value"
                           [disabled]="option.disabled"
                           [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
-                          class="wily_dropdown_option overlay_alt1" role="option" tabindex="0">
+                          class="wily_dropdown_option" role="option" tabindex="0">
                     <div class="wily_multiselect_checkbox overlay_alt2"
                          [ngClass]="selectionValueMap['' + option.value] ? 'bg_blue' : 'unselected'"
                          aria-hidden="true">
@@ -109,7 +109,7 @@
                             [attr.data-value]="groupOption.value"
                             [disabled]="groupOption.disabled"
                             [ngClass]="{ 'unselected': !selectionValueMap['' + groupOption.value] }"
-                            class="wily_dropdown_option overlay_alt1"
+                            class="wily_dropdown_option"
                             role="option" tabindex="0">
                       <div class="wily_multiselect_checkbox overlay_alt2"
                            [ngClass]="selectionValueMap['' + groupOption.value] ? 'bg_blue' : 'unselected'"
@@ -131,7 +131,7 @@
                           [attr.data-value]="option.value"
                           [disabled]="option.disabled"
                           [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
-                          class="wily_dropdown_option overlay_alt1"
+                          class="wily_dropdown_option"
                           role="option" tabindex="0">
                     <div class="wily_multiselect_checkbox overlay_alt2 unselected"
                          [ngClass]="selectionValueMap['' + option.value] ? 'bg_blue' : 'unselected'"

@@ -132,24 +132,24 @@
                   <div class="row_block width100">
                     <div class="form_label mar_bot3">Select an option from the dropdown below</div>
                     <wily-dropdown
-                      [placeholder]="'Make a selection...'"
+                      [placeholder]="'Select a color...'"
                       [options]="[
-                           { value: 'value', label: 'label', dataContext: { 'colorClass': 'bg_red', 'placeholder': 'placeholder value' } },
-                           { value: 'value2', label: 'label2', disabled: true, dataContext: { 'placeholder': 'placeholder value 2' } },
-                           { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
+                           { value: 'red', label: 'Red', dataContext: { 'colorClass': 'bg_red' } },
+                           { value: 'green', label: 'Green', disabled: true, dataContext: { 'colorClass': 'bg_green' } },
+                           { value: 'blue', label: 'Blue', dataContext: { 'colorClass': 'bg_blue' } },
                            {
-                             groupLabel: 'This is a Group',
+                             groupLabel: 'Purple Values',
                              options: [
-                               { value: 'value4', label: 'label4', dataContext: { 'placeholder': 'placeholder value 4' } },
-                               { value: 'value5', label: 'label5', dataContext: { 'placeholder': 'placeholder value 5' } },
-                               { value: 'value6', label: 'label6', dataContext: { 'placeholder': 'placeholder value 6' } }
+                               { value: 'darkPurple', label: 'Dark Purple', dataContext: { 'colorClass': 'bg_purple_dark_4' } },
+                               { value: 'purple', label: 'Purple', dataContext: { 'colorClass': 'bg_purple' } },
+                               { value: 'lightPurple', label: 'Light Purple', dataContext: { 'colorClass': 'bg_purple_light_4' } }
                              ]
                            }
                          ]"
                          [classList]="'input md overlay_alt2 page_container_color'" [disabled]="false">
-                      <ng-template let-colorClass="colorClass" let-placeholder="placeholder" let-label>
+                      <ng-template let-colorClass="colorClass" let-label>
                         <div class="v_center">
-                          <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{placeholder}} {{label}}
+                          <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
                         </div>
                       </ng-template>
                     </wily-dropdown>
@@ -232,26 +232,26 @@
                 </div>
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
-                    <div class="form_label mar_bot3">Select at least one option from the dropdown below</div>
+                    <div class="form_label mar_bot3">Select one or more options from the dropdown below</div>
                     <wily-multi-select
+                      [placeholder]="'Select your favorite foods...'"
                       [options]="[
-                         { value: 'value', label: 'label', dataContext: { 'colorClass': 'bg_red', 'placeholder': 'placeholder value' } },
-                         { value: 'value2', label: 'label2', disabled: true, dataContext: { 'placeholder': 'placeholder value 2' } },
-                         { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
+                         { value: 'chicken', label: 'Chicken', dataContext: { 'iconClass': 'fas fa-drumstick-bite' } },
+                         { value: 'apples', label: 'Apples', disabled: true, dataContext: { 'iconClass': 'fas fa-apple-alt' } },
+                         { value: 'cheese', label: 'Cheese', dataContext: { 'iconClass': 'fas fa-cheese' } },
                          {
-                           groupLabel: 'This is a Group',
+                           groupLabel: 'Forbidden Foods',
                            options: [
-                             { value: 'value4', label: 'label4', dataContext: { 'placeholder': 'placeholder value 4' } },
-                             { value: 'value5', label: 'label5', dataContext: { 'placeholder': 'placeholder value 5' } },
-                             { value: 'value6', label: 'label6', dataContext: { 'placeholder': 'placeholder value 6' } }
+                             { value: 'lemon', label: 'Lemon', dataContext: { 'iconClass': 'fas fa-lemon' } },
+                             { value: 'stroopwafel', label: 'Stroopwafel', dataContext: { 'iconClass': 'fas fa-stroopwafel' } },
+                             { value: 'fish', label: 'Fish', dataContext: { 'iconClass': 'fas fa-fish' } }
                            ]
                          }
                        ]"
-                       [classList]="'input md overlay_alt2 page_container_color'" [disabled]="false">
-                      <ng-template let-colorClass="colorClass" let-placeholder="placeholder" let-label>
-                        <div class="v_center">
-                          <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{placeholder}} {{label}}
-                        </div>
+                       [classList]="'input md overlay_alt2 page_container_color'"
+                       [disabled]="false">
+                      <ng-template let-iconClass="iconClass" let-label>
+                        <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
                       </ng-template>
                     </wily-multi-select>
                   </div>

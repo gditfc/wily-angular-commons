@@ -25,6 +25,8 @@
   right:0;
   bottom:0;
   padding:inherit;
+  padding-top:.25em;
+  padding-bottom:.25em;
   width: 100%;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -37,6 +39,9 @@
   background-color:transparent;
   color:inherit;
   margin:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
 }
 .wily_dropdown_input:not([disabled]) {
   cursor:pointer;
@@ -52,6 +57,16 @@
   background: transparent;
   pointer-events:none;
 }
+
+.wily_multiselect_selection {
+  font-size:0.75em;
+  margin-right:5px;
+  border-radius:3px;
+  padding:3px 5px;
+  background-color:rgba(100,100,128,0.1);
+  display:inline-block;
+}
+
 .wily_dropdown_placeholder {
   opacity:0.5;
 }
@@ -113,13 +128,25 @@
   display:flex;
   align-items:center;
   transition:0.2s background-color ease;
-}
-
-/* option hover/focus state */
-.wily_dropdown_option.unselected:not(:focus) {
-  background:none;
+  background-color:transparent;
   color:inherit;
 }
+
+.wily_dropdown_option.unselected:focus {
+  background-color:rgba(128,128,128,0.1);
+}
+.wily_dropdown_option:not(.unselected) {
+  background-color:rgba(128,128,128,0.15);
+}
+.wily_dropdown_option:not(.unselected):focus {
+  background-color:rgba(128,128,128,0.24);
+}
+
+/*!* option hover/focus state *!*/
+/*.wily_dropdown_option.unselected:not(:focus) {*/
+/*  background:none;*/
+/*  color:inherit;*/
+/*}*/
 
 .wily_dropdown_option[disabled] {
   cursor:default;
