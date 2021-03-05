@@ -326,22 +326,26 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   ngOnInit(): void { }
 
   /**
-   * Write value
+   * If the input value is already in the value array, remove it. Otherwise add it
    * @param value the value to write
    */
   writeValue(value: string | number): void {
-    // TODO: refine this logic
     if (!this.value) {
       this.value = [value];
     } else {
-      const newValue = [...this.value];
-      newValue.push(value);
+      const valueCopy = [...this.value];
+      const foundIndex = valueCopy.findIndex(item => item === value);
 
-      this.value = newValue;
+      if (foundIndex > -1) {
+        valueCopy.splice(foundIndex, 1);
+      } else {
+        valueCopy.push(value);
+      }
+
+      this.value = valueCopy;
     }
 
     this.changeDetectorRef.markForCheck();
-
     this.change.emit();
   }
 
