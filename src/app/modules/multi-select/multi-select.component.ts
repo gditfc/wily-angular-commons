@@ -22,12 +22,12 @@ import {MultiSelectOption} from './models/multi-select-option.model';
 import {MultiSelectOptionGroup} from './models/multi-select-option-group.model';
 
 /**
- * Type representing the dropdown component option input
+ * Type representing the multi-select component option input
  */
 declare type DropdownOptionInput = Array<MultiSelectOption | MultiSelectOptionGroup>;
 
 /**
- * Dropdown component
+ * Multi-select component
  * TODO: close animation
  */
 @Component({
@@ -53,7 +53,7 @@ declare type DropdownOptionInput = Array<MultiSelectOption | MultiSelectOptionGr
 export class MultiSelectComponent implements ControlValueAccessor, OnInit {
 
   /**
-   * Set the value of the dropdown
+   * Set the value of the multi-select
    * @param value the value to set
    */
   @Input()
@@ -64,7 +64,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   get value() { return this._value; }
 
   /**
-   * The dropdown options/option groups
+   * The multi-select options/option groups
    */
   @Input('options')
   set setOptions(options: DropdownOptionInput) {
@@ -72,7 +72,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * The amount of offset (in pixels) to place between the dropdown
+   * The amount of offset (in pixels) to place between the multi-select
    * and its list overlay
    * @private
    */
@@ -85,37 +85,37 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   private static readonly ARROW_KEYS = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
 
   /**
-   * ViewChild of the dropdown
+   * ViewChild of the multi-select
    */
-  @ViewChild('dropdown')
-  dropdown: ElementRef<HTMLDivElement>;
+  @ViewChild('multiSelect')
+  multiSelect: ElementRef<HTMLDivElement>;
 
   /**
-   * ViewChild of the dropdown button
+   * ViewChild of the multi-select button
    */
-  @ViewChild('dropdownButton')
-  dropdownButton: ElementRef<HTMLButtonElement>;
+  @ViewChild('multiSelectButton')
+  multiSelectButton: ElementRef<HTMLButtonElement>;
 
   /**
-   * ViewChild of the dropdown list
+   * ViewChild of the multi-select list
    */
-  @ViewChild('dropdownList')
-  dropdownList: ElementRef<HTMLDivElement>;
+  @ViewChild('multiSelectList')
+  multiSelectList: ElementRef<HTMLDivElement>;
 
   /**
-   * QueryList of dropdown option ViewChildren
+   * QueryList of multi-select option ViewChildren
    */
-  @ViewChildren('dropdownOption')
-  dropdownOptions: QueryList<ElementRef<HTMLButtonElement>>;
+  @ViewChildren('multiSelectOption')
+  multiSelectOptions: QueryList<ElementRef<HTMLButtonElement>>;
 
   /**
-   * ContentChild of the dropdown option template
+   * ContentChild of the multi-select option template
    */
   @ContentChild(TemplateRef)
   template: TemplateRef<HTMLElement>;
 
   /**
-   * Whether or not the dropdown should be disabled
+   * Whether or not the multi-select should be disabled
    */
   @Input()
   disabled: boolean;
@@ -133,7 +133,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   ariaLabel = 'Make a selection';
 
   /**
-   * Class list to assign to the dropdown
+   * Class list to assign to the multi-select
    */
   @Input()
   classList: string;
@@ -145,12 +145,12 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   change = new EventEmitter<void>();
 
   /**
-   * BehaviorSubject tracking the input dropdown options/option groups
+   * BehaviorSubject tracking the input multi-select options/option groups
    */
   readonly _options = new BehaviorSubject<DropdownOptionInput>(null);
 
   /**
-   * BehaviorSubject tracking the current value of the dropdown
+   * BehaviorSubject tracking the current value of the multi-select
    */
   readonly _internalValue = new BehaviorSubject<Array<number | string>>(null);
 
@@ -204,22 +204,22 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   );
 
   /**
-   * Unique ID to assign to the dropdown
+   * Unique ID to assign to the multiSelect
    */
   readonly multiSelectId;
 
   /**
-   * Whether or not the dropdown is open
+   * Whether or not the multiSelect is open
    */
   opened = false;
 
   /**
-   * The index of the focused option in the dropdown list
+   * The index of the focused option in the multiSelect list
    */
   selectionIndex: number;
 
   /**
-   * The current value of the dropdown
+   * The current value of the multiSelect
    * @private
    */
   private _value: Array<string | number>;
@@ -372,7 +372,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Reposition and resize the dropdown on window resize
+   * Reposition and resize the multiSelect on window resize
    */
   @HostListener('window:resize')
   onWindowResize(): void {
@@ -398,7 +398,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Close the dropdown list on escape keyup
+   * Close the multi-select list on escape keyup
    * @param event the keyup KeyboardEvent
    */
   @HostListener('window:keyup', ['$event'])
@@ -412,7 +412,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
         if (this.opened) {
           if (key === 'Esc' || key === 'Escape') {
             this.closeDropdown();
-            this.dropdownButton.nativeElement.focus();
+            this.multiSelectButton.nativeElement.focus();
           } else if (key === 'Tab') {
             this.closeDropdown();
           }
@@ -422,7 +422,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Close the dropdown list (if opened) on click if outside the list
+   * Close the multi-select list (if opened) on click if outside the list
    * @param event the click MouseEvent
    */
   @HostListener('window:click', ['$event'])
@@ -431,22 +431,22 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
       const {pageX, pageY} = event;
 
       if (pageX > 0 && pageY > 0) {
-        const { left, right, top, bottom } = this.dropdownList.nativeElement.getBoundingClientRect();
+        const { left, right, top, bottom } = this.multiSelectList.nativeElement.getBoundingClientRect();
         const xPositionValid = pageX >= left && pageX <= right;
         const yPositionValid = pageY >= top && pageY <= bottom;
         const shouldClose = !(xPositionValid && yPositionValid);
 
         if (shouldClose) {
           this.closeDropdown();
-          this.dropdownButton.nativeElement.focus();
+          this.multiSelectButton.nativeElement.focus();
         }
       }
     }
   }
 
   /**
-   * Set focus to dropdown option on mouse enter and update selected index
-   * @param option the dropdown option to focus
+   * Set focus to multi-select option on mouse enter and update selected index
+   * @param option the multiSelect option to focus
    * @param index the index of the option to focus
    */
   onDropdownOptionMouseEnter(option: HTMLButtonElement, index: number): void {
@@ -455,8 +455,8 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Set focus to dropdown option on mouse move and update selected index
-   * @param option the dropdown option to focus
+   * Set focus to multi-select option on mouse move and update selected index
+   * @param option the multiSelect option to focus
    * @param index the index of the option to focus
    */
   onDropdownOptionMouseMove(option: HTMLButtonElement, index: number): void {
@@ -467,7 +467,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Write value and close dropdown on option select
+   * Write value and close multi-select on option select
    * @param value the value to write
    * @param disabled whether or not the selected option is disabled
    */
@@ -478,7 +478,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Open the dropdown list and align it
+   * Open the multi-select list and align it
    * @param event the click MouseEvent
    */
   openDropdown(event: MouseEvent): void {
@@ -496,18 +496,18 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
       });
 
       /*
-        The height of the dropdown list is zero at the point where the above code executes,
+        The height of the multi-select list is zero at the point where the above code executes,
         this is a workaround to align the list after its height is known to avoid a frame
         or two of the list at origin
        */
-      this.renderer.setStyle(this.dropdownList.nativeElement, 'top', '-999px');
-      this.renderer.setStyle(this.dropdownList.nativeElement, 'left', '-999px');
+      this.renderer.setStyle(this.multiSelectList.nativeElement, 'top', '-999px');
+      this.renderer.setStyle(this.multiSelectList.nativeElement, 'left', '-999px');
       setTimeout(() => this.positionDropdownList());
     }
   }
 
   /**
-   * Close the dropdown list
+   * Close the multiSelect list
    */
   closeDropdown(): void {
     this.opened = false;
@@ -515,12 +515,12 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Align the dropdown list with the dropdown
+   * Align the multi-select list with the multiSelect
    * @private
    */
   private positionDropdownList(): void {
-    const {left, top, bottom} = this.dropdown.nativeElement.getBoundingClientRect();
-    const {offsetHeight} = this.dropdownList.nativeElement;
+    const {left, top, bottom} = this.multiSelect.nativeElement.getBoundingClientRect();
+    const {offsetHeight} = this.multiSelectList.nativeElement;
     const datePickerBottomLeftAnchor = bottom;
     const availableBottomSpace = window.innerHeight - datePickerBottomLeftAnchor;
     const availableTopSpace = top;
@@ -544,20 +544,20 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
       transformOrigin = 'top left';
     }
 
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'transform-origin', transformOrigin);
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'left', `${left}px`);
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'top', positionTop);
+    this.renderer.setStyle(this.multiSelectList.nativeElement, 'transform-origin', transformOrigin);
+    this.renderer.setStyle(this.multiSelectList.nativeElement, 'left', `${left}px`);
+    this.renderer.setStyle(this.multiSelectList.nativeElement, 'top', positionTop);
   }
 
   /**
-   * Match the dropdown list width to the dropdown's width
+   * Match the multi-select list width to the multi-select's width
    * @private
    */
   private resizeDropdownList(): void {
-    const { left, right } = this.dropdown.nativeElement.getBoundingClientRect();
+    const { left, right } = this.multiSelect.nativeElement.getBoundingClientRect();
     const width = right - left;
 
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'width', `${width}px`);
+    this.renderer.setStyle(this.multiSelectList.nativeElement, 'width', `${width}px`);
   }
 
   /**
@@ -589,13 +589,13 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Get the next enabled dropdown option (relative to the current selection index).
+   * Get the next enabled multi-select option (relative to the current selection index).
    * If the currently selected option is the final available option, it is
    * returned. If no selection has been made, the first available option is returned
    * @private
    */
   private getNextOption(): HTMLButtonElement {
-    const optionsArray = this.dropdownOptions.toArray();
+    const optionsArray = this.multiSelectOptions.toArray();
 
     const startIndex = this.selectionIndex === null ? 0 : this.selectionIndex + 1;
     for (let i = startIndex; i < optionsArray.length; i++) {
@@ -613,7 +613,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Get the previous enabled dropdown option (relative to the current selection index).
+   * Get the previous enabled multi-select option (relative to the current selection index).
    * If the currently selected option is the first available option, it is
    * returned
    * @private
@@ -622,7 +622,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
     let previousOption: HTMLButtonElement = null;
 
     if (this.selectionIndex !== null) {
-      const optionsArray = this.dropdownOptions.toArray();
+      const optionsArray = this.multiSelectOptions.toArray();
 
       for (let i = this.selectionIndex - 1; i >= 0; i--) {
         const option = optionsArray[i].nativeElement;

@@ -1,8 +1,8 @@
-<div #dropdown class="wily_dropdown" [style.filter]="disabled ? 'brightness(.95)' : ''"
+<div #multiSelect class="wily_dropdown" [style.filter]="disabled ? 'brightness(.95)' : ''"
      style="cursor:default;"
      [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
   <!-- maybe switch this to a div? -->
-  <button #dropdownButton
+  <button #multiSelectButton
           role="combobox"
           aria-haspopup="listbox"
           (click)="openDropdown($event)"
@@ -38,7 +38,7 @@
 <div [style.display]="opened ? '' : 'none'"
      [attr.aria-hidden]="opened"
      class="wily_dropdown_overlay">
-  <div #dropdownList [@openClose]="opened ? 'open' : 'closed'" class="position_absolute">
+  <div #multiSelectList [@openClose]="opened ? 'open' : 'closed'" class="position_absolute">
     <div class="wily_dropdown_options page_container_color">
       <ng-container *ngIf="_options | async as options">
         <div class="wily_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">
@@ -50,10 +50,10 @@
                 <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
                   <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
                   <ng-container *ngFor="let groupOption of option.options; index as j">
-                    <button #dropdownOption
+                    <button #multiSelectOption
                             (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
-                            (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
-                            (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
+                            (mouseenter)="onDropdownOptionMouseEnter(multiSelectOption, i + j)"
+                            (mousemove)="onDropdownOptionMouseMove(multiSelectOption, i + j)"
                             [id]="multiSelectId + '-' + groupOption.value"
                             [ngClass]="{ 'unselected': !selectionValueMap['' + groupOption.value] }"
                             [attr.aria-selected]="(_internalValue | async) === groupOption.value"
