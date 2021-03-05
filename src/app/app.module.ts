@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {WilyDialogLegacyModule} from './modules/dialog-legacy/dialog-legacy.module';
+import { MultiSelectModule } from './modules/multi-select/multi-select.module';
 import {WilyProfilePicModule} from './modules/profile-pic/wily-profile-pic.module';
 import {WilyPaginatorModule} from './modules/paginator/wily-paginator.module';
 import {WilyPushContainerModule} from './modules/push-container/wily-push-container.module';
@@ -22,22 +23,23 @@ import { PopoverModule} from './modules/popover/popover.module';
     AppComponent
   ],
     imports: [
-      BrowserModule,
-      TooltipModule,
-      WilyDialogLegacyModule,
-      WilyDialogModule,
-      WilyProfilePicModule,
-      WilyPaginatorModule,
-      WilyPushContainerModule,
-      WilyRichTextModule,
-      WilyIconsModule,
-      FormsModule,
-      WilyEndpointStateModule,
-      DatePickerModule,
-      DropdownModule,
-      TooltipModule,
-      NotificationModule,
-      PopoverModule
+        BrowserModule,
+        TooltipModule,
+        WilyDialogLegacyModule,
+        WilyDialogModule,
+        WilyProfilePicModule,
+        WilyPaginatorModule,
+        WilyPushContainerModule,
+        WilyRichTextModule,
+        WilyIconsModule,
+        FormsModule,
+        WilyEndpointStateModule,
+        DatePickerModule,
+        DropdownModule,
+        TooltipModule,
+        NotificationModule,
+        PopoverModule,
+        MultiSelectModule
     ],
   providers: [],
   bootstrap: [AppComponent]

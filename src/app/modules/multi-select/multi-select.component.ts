@@ -234,6 +234,12 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   selectionIndex: number;
 
   /**
+   * A map of stringified option values to boolean that tracks
+   * the user's multiple selections
+   */
+  selectionMap: { [key: string]: boolean };
+
+  /**
    * The current value of the dropdown
    * @private
    */

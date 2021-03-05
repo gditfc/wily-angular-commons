@@ -193,7 +193,7 @@
                 </div>
                 <div class="col size_1 min_w250 mar_10">
                   <div class="row_block width100">
-                    <wily-dropdown [options]="[
+                    <wily-multi-select [options]="[
                                    { value: 'value', label: 'label', dataContext: { 'colorClass': 'bg_red', 'placeholder': 'placeholder value' } },
                                    { value: 'value2', label: 'label2', disabled: true, dataContext: { 'placeholder': 'placeholder value 2' } },
                                    { value: 'value3', label: 'label3', dataContext: { 'placeholder': 'placeholder value 3' } },
@@ -212,7 +212,7 @@
                           <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{placeholder}} {{label}}
                         </div>
                       </ng-template>
-                    </wily-dropdown>
+                    </wily-multi-select>
                   </div>
                 </div>
               </div>
