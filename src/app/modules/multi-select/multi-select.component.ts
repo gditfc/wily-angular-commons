@@ -60,8 +60,6 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   set value(value: Array<string | number>) {
     this._value = value;
     this._internalValue.next(value);
-
-    this.setSelectionIndex();
   }
   get value() { return this._value; }
 
@@ -71,7 +69,6 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   @Input('options')
   set setOptions(options: DropdownOptionInput) {
     this._options.next(MultiSelectComponent.sanitizeOptionInput(options));
-    this.setSelectionIndex();
   }
 
   /**
@@ -326,22 +323,26 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   ngOnInit(): void { }
 
   /**
-   * Write value
+   * If the input value is already in the value array, remove it. Otherwise add it
    * @param value the value to write
    */
   writeValue(value: string | number): void {
-    // TODO: refine this logic
     if (!this.value) {
       this.value = [value];
     } else {
-      const newValue = [...this.value];
-      newValue.push(value);
+      const valueCopy = [...this.value];
+      const foundIndex = valueCopy.findIndex(item => item === value);
 
-      this.value = newValue;
+      if (foundIndex > -1) {
+        valueCopy.splice(foundIndex, 1);
+      } else {
+        valueCopy.push(value);
+      }
+
+      this.value = valueCopy;
     }
 
     this.changeDetectorRef.markForCheck();
-
     this.change.emit();
   }
 
@@ -473,8 +474,6 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   onDropdownOptionSelect(value: string | number, disabled: boolean): void {
     if (!disabled) {
       this.writeValue(value);
-      this.closeDropdown();
-      this.dropdownButton.nativeElement.focus();
     }
   }
 
@@ -488,15 +487,13 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
     if (!this.disabled) {
       this.opened = true;
       this.resizeDropdownList();
-      this.setSelectionIndex();
 
-      if (this.selectionIndex !== null) {
-        setTimeout(() => {
-          this.dropdownOptions.toArray()[this.selectionIndex]
-            .nativeElement
-            .focus();
-        });
-      }
+      setTimeout(() => {
+        const option = this.getNextOption();
+        if (!!option) {
+          option.focus();
+        }
+      });
 
       /*
         The height of the dropdown list is zero at the point where the above code executes,
@@ -514,23 +511,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    */
   closeDropdown(): void {
     this.opened = false;
-  }
-
-  /**
-   * Focus on the selected dropdown option on dropdown open
-   * @private
-   */
-  setSelectionIndex(): void {
     this.selectionIndex = null;
-
-    if (!!this.value?.length && !!this.dropdownOptions?.length) {
-      const dropdownOptionsArray = this.dropdownOptions.toArray();
-      const foundIndex = dropdownOptionsArray.findIndex(option => {
-        return String(this.value) === option.nativeElement.getAttribute('data-value');
-      });
-
-      this.selectionIndex = foundIndex > -1 ? foundIndex : null;
-    }
   }
 
   /**
