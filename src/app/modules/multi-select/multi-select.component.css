@@ -120,6 +120,28 @@
   color:inherit;
 }
 
+.wily_multiselect_checkbox {
+  width:20px;
+  min-width:20px;
+  height:20px;
+  min-height:20px;
+  margin-right:5px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  border-radius:2px;
+  transition:background-color 0.2s ease;
+}
+
+.wily_multiselect_checkbox.unselected {
+  background-color:rgba(128,128,128,0.1);
+}
+
+.wily_multiselect_checkbox.unselected:hover {
+  background-color:rgba(128,128,128,0.2);
+}
+
 @media screen and (max-width: 768px) {
   .wily_dropdown_overlay {
     background: rgba(120, 120, 120, 0.4);
