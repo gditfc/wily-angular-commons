@@ -562,7 +562,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
         positionTop = '0px';
       } else {
         const availableSpace = window.innerHeight - offsetHeight;
-        positionTop = String(availableSpace / 2);
+        positionTop = `${String(availableSpace / 2)}px`;
       }
 
       transformOrigin = 'top left';
