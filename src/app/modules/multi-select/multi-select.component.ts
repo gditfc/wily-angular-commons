@@ -57,7 +57,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @param value the value to set
    */
   @Input()
-  set value(value: string | number) {
+  set value(value: Array<string | number>) {
     this._value = value;
     this._internalValue.next(value);
 
@@ -171,7 +171,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   /**
    * BehaviorSubject tracking the current value of the dropdown
    */
-  readonly _internalValue = new BehaviorSubject<number | string>(null);
+  readonly _internalValue = new BehaviorSubject<Array<number | string>>(null);
 
   /**
    * Observable map of option value (stringified if a number) to data context
@@ -237,7 +237,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * The current value of the dropdown
    * @private
    */
-  private _value: string | number;
+  private _value: Array<string | number>;
 
   /**
    * Removes options that do not have both a label and a value,
@@ -320,12 +320,19 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @param value the value to write
    */
   writeValue(value: string | number): void {
-    if (this.value !== value && !this.disabled) {
-      this.value = value;
-      this.changeDetectorRef.markForCheck();
+    // TODO: refine this logic
+    if (!this.value) {
+      this.value = [value];
+    } else {
+      const newValue = [...this.value];
+      newValue.push(value);
 
-      this.change.emit();
+      this.value = newValue;
     }
+
+    this.changeDetectorRef.markForCheck();
+
+    this.change.emit();
   }
 
   /**
@@ -506,7 +513,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   setSelectionIndex(): void {
     this.selectionIndex = null;
 
-    if ((!!this.value || this.value >= 0) && !!this.dropdownOptions?.length) {
+    if (!!this.value?.length && !!this.dropdownOptions?.length) {
       const dropdownOptionsArray = this.dropdownOptions.toArray();
       const foundIndex = dropdownOptionsArray.findIndex(option => {
         return String(this.value) === option.nativeElement.getAttribute('data-value');
