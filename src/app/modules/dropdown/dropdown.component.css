@@ -38,6 +38,9 @@
   background-color:transparent;
   color:inherit;
   margin:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
 }
 .wily_dropdown_input:not([disabled]) {
   cursor:pointer;
@@ -55,6 +58,7 @@
 }
 .wily_dropdown_placeholder {
   opacity:0.5;
+  display:inline;
 }
 
 
@@ -136,10 +140,4 @@
 
 .wily_dropdown_option[disabled] {
   cursor:default;
-}
-
-@media screen and (max-width: 768px) {
-  .wily_dropdown_overlay {
-    background: rgba(120, 120, 120, 0.4);
-  }
 }

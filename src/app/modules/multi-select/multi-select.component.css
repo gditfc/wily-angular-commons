@@ -70,6 +70,7 @@
 
 .wily_multiselect_placeholder {
   opacity:0.5;
+  display:inline;
 }
 
 
@@ -173,10 +174,4 @@
 
 .wily_multiselect_checkbox.unselected:hover {
   background-color:rgba(128,128,128,0.2);
-}
-
-@media screen and (max-width: 768px) {
-  .wily_multiselect_overlay {
-    background: rgba(120, 120, 120, 0.4);
-  }
 }
