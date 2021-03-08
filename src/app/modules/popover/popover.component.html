@@ -1,7 +1,8 @@
 <div *ngIf="render"
      class="wily_popover_overlay">
-  <!-- TODO: position/animate this div -->
-  <div [@openClose]="visible ? 'open' : 'close'"
+  <div [cdkTrapFocus]="render && visible"
+       [cdkTrapFocusAutoCapture]="true"
+       [@openClose]="visible ? 'open' : 'close'"
        [ngStyle]="{ 'width': width, 'height': height }"
        [ngClass]="classList"
        (@openClose.start)="onAnimationStart($event)"
