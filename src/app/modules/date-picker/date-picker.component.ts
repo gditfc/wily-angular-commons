@@ -3,22 +3,22 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   forwardRef,
   Input,
   OnDestroy,
-  OnInit, Output,
+  OnInit,
+  Output,
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {format, isEqual, isValid, isWithinInterval, parse} from 'date-fns';
-import { EventEmitter } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { format, isEqual, isValid, isWithinInterval, parse } from 'date-fns';
 
 /**
  * Component to allow a user to input/select a date
  * TODO: figure out close animation
- * TODO: check fix width-wise clipping
  */
 @Component({
   selector: 'wily-date-picker',
@@ -172,9 +172,14 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   private readonly currentDate = new Date();
 
   /**
-   * Object representing the fixed dimensions of the calendar widget
+   * The fixed height of the calendar widget
    */
   private readonly calendarHeight = 340;
+
+  /**
+   * The fixed width of the calendar widget
+   */
+  private readonly calendarWidth = 300;
 
   /**
    * The amount of padding to apply between the date picker input and the calendar widget
@@ -401,27 +406,32 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     const availableBottomSpace = window.innerHeight - datePickerBottomLeftAnchor;
     const availableTopSpace = top;
     const offsetCalendarHeight = this.calendarHeight + this.calendarPadding;
+    let leftPosition: number, topPosition: number, transformOrigin: string;
 
     if (availableBottomSpace > offsetCalendarHeight) {
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'top left');
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${left}px`);
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${datePickerBottomLeftAnchor + this.calendarPadding}px`);
+      transformOrigin = 'top left';
+      topPosition = datePickerBottomLeftAnchor + this.calendarPadding;
     } else if (availableTopSpace > offsetCalendarHeight) {
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'bottom left');
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${left}px`);
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${top - offsetCalendarHeight}px`);
+      transformOrigin = 'bottom left';
+      topPosition = top - offsetCalendarHeight;
     } else {
-      let topPosition: string;
+      transformOrigin = 'top left';
+
       if (this.calendarHeight > window.innerHeight) {
-        topPosition = '0';
+        topPosition = 0;
       } else {
         const availableSpace = window.innerHeight - this.calendarHeight;
-        topPosition = String(availableSpace / 2);
+        topPosition = availableSpace / 2;
       }
-
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', 'top left');
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${left}px`);
-      this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${topPosition}px`);
     }
+
+    leftPosition = left;
+    if ((left + this.calendarWidth) > window.innerWidth) {
+      leftPosition = left - ((left + this.calendarWidth) - window.innerWidth) - 5;
+    }
+
+    this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', transformOrigin);
+    this.renderer.setStyle(this.calendarDiv.nativeElement, 'left', `${leftPosition}px`);
+    this.renderer.setStyle(this.calendarDiv.nativeElement, 'top', `${topPosition}px`);
   }
 }
