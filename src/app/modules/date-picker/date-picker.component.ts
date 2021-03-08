@@ -18,8 +18,6 @@ import { format, isEqual, isValid, isWithinInterval, parse } from 'date-fns';
 
 /**
  * Component to allow a user to input/select a date
- * TODO: figure out close animation
- * TODO: disable click listener on overlay in IE11
  */
 @Component({
   selector: 'wily-date-picker',

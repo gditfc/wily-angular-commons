@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -55,7 +54,7 @@ declare interface MetaDate {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements AfterViewInit, OnDestroy, OnInit {
+export class CalendarComponent implements OnDestroy, OnInit {
 
   /**
    * ViewChild of the calendar widget parent div element
@@ -347,13 +346,6 @@ export class CalendarComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   /**
-   * Enable click listening and focus on year select
-   */
-  ngAfterViewInit(): void {
-    this.yearSelect.nativeElement.focus();
-  }
-
-  /**
    * Destroy component, unsubscribe from any active subscriptions
    */
   ngOnDestroy() {
@@ -386,7 +378,10 @@ export class CalendarComponent implements AfterViewInit, OnDestroy, OnInit {
 
       const insideX = (pageX >= left) && (pageX <= right);
       const insideY = (pageY >= top) && (pageY <= bottom);
-      const shouldClose = !(insideX && insideY);
+
+      // this check is for IE11 where option values might render outside of the calendar
+      const tagName = (event.target as HTMLElement).tagName;
+      const shouldClose = !(insideX && insideY) && tagName !== 'OPTION';
 
       if (shouldClose) {
         this.closed.emit();
