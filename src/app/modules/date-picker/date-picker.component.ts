@@ -1,4 +1,4 @@
-import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { animate, AnimationEvent, style, transition, trigger } from '@angular/animations';
 import {
   ChangeDetectorRef,
   Component,
@@ -27,17 +27,16 @@ import { format, isEqual, isValid, isWithinInterval, parse } from 'date-fns';
   styleUrls: ['./date-picker.component.css'],
   animations: [
     trigger('openClose', [
-      transition('closed => open', [
-        animate('200ms ease', keyframes([
-          style({
-            opacity: 0,
-            transform: 'scaleY(0.5)',
-            offset: 0
-          }),
-          style({ opacity: 0, offset: .25 }),
-          style({ opacity: 1, transform: 'scaleY(1)', offset: 1 })
-        ]))
-      ])
+      transition('void => open', [
+        style({ transform: 'scaleY(0.5)', opacity: 0 }),
+        animate('200ms ease',
+          style({ transform: 'scaleY(1)', opacity: 1 }))
+      ]),
+      transition('open => close', [
+        style({ transform: 'scaleY(1)', opacity: 1 }),
+        animate('200ms ease',
+          style({ transform: 'scaleY(0.5)', opacity: 0 }))
+      ]),
     ])
   ],
   providers: [
@@ -191,6 +190,11 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * String tracking date picker input
    */
   dateString = '';
+
+  /**
+   * Whether or not the calendar should be rendered
+   */
+  render: boolean;
 
   /**
    * Whether or not to show the calendar
@@ -378,14 +382,34 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   }
 
   /**
+   * Set calendar position on animation start if toState is open
+   * @param event the Angular AnimationEvent
+   */
+  onAnimationStart(event: AnimationEvent): void {
+    if (event.toState === 'open') {
+      this.setCalendarPosition();
+    }
+  }
+
+  /**
+   * Flip render to false on animation done if toState is close
+   * @param event the Angular AnimationEvent
+   */
+  onAnimationDone(event: AnimationEvent): void {
+    if (event.toState === 'close') {
+      this.render = false;
+    }
+  }
+
+  /**
    * Open the calendar widget
    * @param event the click MouseEvent
    */
   openCalendar(event: MouseEvent): void {
     event.stopImmediatePropagation();
 
-    this.setCalendarPosition();
     this.showCalendar = { currentValue: this.value };
+    this.render = true;
   }
 
   /**

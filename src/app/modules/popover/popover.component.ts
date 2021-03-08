@@ -1,4 +1,4 @@
-import { animate, AnimationEvent, keyframes, style, transition, trigger } from '@angular/animations';
+import { animate, AnimationEvent, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output, Renderer2 } from '@angular/core';
 
 /**

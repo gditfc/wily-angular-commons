@@ -33,14 +33,14 @@
 </div>
 
 <!-- calendar widget -->
-<div [style.display]="!!showCalendar ? '' : 'none'"
-     [attr.aria-hidden]="!showCalendar"
+<div *ngIf="render"
      class="wily_datepicker_overlay">
   <div #calendarDiv
-       [@openClose]="!!showCalendar ? 'open' : 'closed'"
+       [@openClose]="!!showCalendar ? 'open' : 'close'"
+       (@openClose.start)="onAnimationStart($event)"
+       (@openClose.done)="onAnimationDone($event)"
        class="position_absolute">
-    <wily-calendar *ngIf="!!showCalendar"
-                   [value]="showCalendar.currentValue"
+    <wily-calendar [value]="showCalendar?.currentValue"
                    [dateRange]="{ minDate: validSelectionInterval?.start, maxDate: validSelectionInterval?.end }"
                    (selected)="writeValue($event)"
                    (closed)="handleCalendarClose()">
