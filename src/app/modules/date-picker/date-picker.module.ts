@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { DatePickerComponent } from './date-picker.component';
 import { OrdinalNumberPipe } from '../ordinal-number-pipe/ordinal-number.pipe';
 import { OrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-number-pipe.module';
-import { FormsModule } from '@angular/forms';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { A11yModule } from '@angular/cdk/a11y';
-import { ObserversModule } from '@angular/cdk/observers';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [DatePickerComponent, CalendarComponent],
@@ -16,7 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
-    ObserversModule,
     OrdinalNumberPipeModule
   ],
   exports: [DatePickerComponent, CalendarComponent],
