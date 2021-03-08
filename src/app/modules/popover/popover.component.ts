@@ -128,7 +128,7 @@ export class PopoverComponent implements OnInit {
       const {pageX, pageY} = event;
 
       if (pageX > 0 && pageY > 0) {
-        const { left, right, top, bottom } = (this.target as HTMLElement).getBoundingClientRect();
+        const { left, right, top, bottom } = this.container.getBoundingClientRect();
         const xPositionValid = pageX >= left && pageX <= right;
         const yPositionValid = pageY >= top && pageY <= bottom;
         const shouldClose = !(xPositionValid && yPositionValid);
