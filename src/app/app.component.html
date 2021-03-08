@@ -56,11 +56,16 @@
                   Date Picker
                 </div>
                 <div class="pad_15">
-                  <div class="form_label mar_bot3">Enter a date below</div>
+                  <div class="form_label mar_bot3">Basic Date Picker</div>
                   <wily-date-picker
                     [disabled]="false"
                     [inputClassList]="'form_input page_container_color'"
                     [calendarButtonClassList]="'overlay border_left brad_0'">
+                  </wily-date-picker>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Disabled date picker</div>
+                  <wily-date-picker
+                    [disabled]="true">
                   </wily-date-picker>
                 </div>
               </div>
