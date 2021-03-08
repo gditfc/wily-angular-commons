@@ -49,7 +49,6 @@ declare interface MetaDate {
 
 /**
  * Component that allows a user to select a date from a calendar
- * TODO: replace observer for click listener with host listener (prevent event immediate propogation in parent)
  */
 @Component({
   selector: 'wily-calendar',
@@ -196,11 +195,6 @@ export class CalendarComponent implements AfterViewInit, OnDestroy, OnInit {
    * The currently selected date
    */
   selectedDate: MetaDate;
-
-  /**
-   * Whether or not the click listener should respond to clicks
-   */
-  listenToClicks = false;
 
   /**
    * Generate a 42 element array representing the input month's days with
@@ -384,20 +378,18 @@ export class CalendarComponent implements AfterViewInit, OnDestroy, OnInit {
    */
   @HostListener('window:click', ['$event'])
   handleClick(event: MouseEvent) {
-    if (this.listenToClicks) {
-      const {pageX, pageY} = event;
+    const {pageX, pageY} = event;
 
-      // this check is to prevent the click event from firing on keypress when focused on a button
-      if (pageX > 0 && pageY > 0) {
-        const {top, bottom, left, right} = this.calendarWidgetDiv.nativeElement.getBoundingClientRect();
+    // this check is to prevent the click event from firing on keypress when focused on a button
+    if (pageX > 0 && pageY > 0) {
+      const {top, bottom, left, right} = this.calendarWidgetDiv.nativeElement.getBoundingClientRect();
 
-        const insideX = (pageX >= left) && (pageX <= right);
-        const insideY = (pageY >= top) && (pageY <= bottom);
-        const shouldClose = !(insideX && insideY);
+      const insideX = (pageX >= left) && (pageX <= right);
+      const insideY = (pageY >= top) && (pageY <= bottom);
+      const shouldClose = !(insideX && insideY);
 
-        if (shouldClose) {
-          this.closed.emit();
-        }
+      if (shouldClose) {
+        this.closed.emit();
       }
     }
   }

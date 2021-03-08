@@ -374,8 +374,11 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
 
   /**
    * Open the calendar widget
+   * @param event the click MouseEvent
    */
-  openCalendar(): void {
+  openCalendar(event: MouseEvent): void {
+    event.stopImmediatePropagation();
+
     this.setCalendarPosition();
     this.showCalendar = { currentValue: this.value };
   }

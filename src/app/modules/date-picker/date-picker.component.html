@@ -10,7 +10,7 @@
            maxlength="10"
            aria-label="Enter a date in the format mm/dd/yyyy"
            class="access wily_datepicker_input" />
-    <button (click)="openCalendar()"
+    <button (click)="openCalendar($event)"
             [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'overlay_alt2 bg_blue_alt brad_3'"
             class="access btn wily_datepicker_button"
             aria-label="Open the calendar" aria-haspopup="dialog">
