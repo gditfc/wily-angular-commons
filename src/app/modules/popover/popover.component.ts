@@ -184,7 +184,7 @@ export class PopoverComponent implements OnInit {
 
     this.target = event.currentTarget ?? event.target;
 
-    if (this.opened) {
+    if (!this.visible) {
       this.open();
     } else {
       this.close();
@@ -238,15 +238,15 @@ export class PopoverComponent implements OnInit {
   private positionPopover(): void {
     const {left, top, bottom} = (this.target as HTMLElement).getBoundingClientRect();
     const {offsetHeight} = this.container;
-    const datePickerBottomLeftAnchor = bottom;
-    const availableBottomSpace = window.innerHeight - datePickerBottomLeftAnchor;
+    const popoverBottomLeftAnchor = bottom;
+    const availableBottomSpace = window.innerHeight - popoverBottomLeftAnchor;
     const availableTopSpace = top;
     const offsetListHeight = offsetHeight + PopoverComponent.POPOVER_OFFSET;
     let transformOrigin: string, positionTop: string;
 
     if (availableBottomSpace > offsetListHeight) {
       transformOrigin = 'top left';
-      positionTop = `${datePickerBottomLeftAnchor + PopoverComponent.POPOVER_OFFSET}px`;
+      positionTop = `${popoverBottomLeftAnchor + PopoverComponent.POPOVER_OFFSET}px`;
     } else if (availableTopSpace > offsetListHeight) {
       transformOrigin = 'bottom left';
       positionTop = `${top - offsetListHeight}px`;

@@ -555,6 +555,9 @@
                     </div>
                     <wily-popover #popover>
                       <div>This is some popover content</div>
+                      <button (click)="popover.toggle($event)" class="access btn overlay sm mar_5">
+                        <i class="fas fa-times mar_right5"></i>Close Popover
+                      </button>
                     </wily-popover>
                   </div>
                 </div>
