@@ -549,12 +549,13 @@
                   <div class="row_block width100">
                     <div class="form_label mar_bot5">Click the button below to see the popover</div>
                     <div class="row wrap v_center" style="margin:0 -5px;">
-                      <!-- TODO: button toggles popover -->
-                      <button class="access btn overlay sm mar_5">
+                      <button (click)="popover.toggle($event)" class="access btn overlay sm mar_5">
                         <i class="fas fa-chevron-down mar_right5"></i>Toggle Popover
                       </button>
                     </div>
-                    <wily-popover></wily-popover>
+                    <wily-popover #popover>
+                      <div>This is some popover content</div>
+                    </wily-popover>
                   </div>
                 </div>
               </div>

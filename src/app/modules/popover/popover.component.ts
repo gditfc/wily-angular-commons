@@ -1,5 +1,5 @@
 import { animate, AnimationEvent, keyframes, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, Renderer2 } from '@angular/core';
 
 /**
  * Component to display a popover with custom content
@@ -113,10 +113,34 @@ export class PopoverComponent implements OnInit {
   ngOnInit(): void { }
 
   /**
+   * Close popover on click
+   * @param event the click MouseEvent
+   */
+  @HostListener('window:click', ['$event'])
+  onClick(event: MouseEvent): void {
+    if (this.visible) {
+      const {pageX, pageY} = event;
+
+      if (pageX > 0 && pageY > 0) {
+        const { left, right, top, bottom } = (this.target as HTMLElement).getBoundingClientRect();
+        const xPositionValid = pageX >= left && pageX <= right;
+        const yPositionValid = pageY >= top && pageY <= bottom;
+        const shouldClose = !(xPositionValid && yPositionValid);
+
+        if (shouldClose) {
+          this.close();
+        }
+      }
+    }
+  }
+
+  /**
    * Toggle the popover from open to closed or closed to open
    * @param event
    */
   toggle(event: Event): void {
+    event.stopImmediatePropagation();
+
     this.target = event.currentTarget ?? event.target;
 
     if (this.opened) {
