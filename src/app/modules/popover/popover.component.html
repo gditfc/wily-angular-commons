@@ -1,13 +1,12 @@
-<!-- TODO: add optional inputs for width/height, default auto -->
-
-<div class="wily_popover_overlay">
+<div *ngIf="render"
+     class="wily_popover_overlay">
   <!-- TODO: position/animate this div -->
-  <div class="position_absolute">
-    <!-- TODO: set width/height here -->
-    <!-- TODO: add input for custom class, replace 'page_container_color' -->
-    <div class="wily_popover page_container_color">
-      <!-- TODO: put content here -->
-      text in popover panel
-    </div>
+  <div [@openClose]="visible ? 'open' : 'close'"
+       [ngStyle]="{ 'width': width, 'height': height }"
+       [ngClass]="classList"
+       (@openClose.start)="onAnimationStart($event)"
+       (@openClose.done)="onAnimationDone($event)"
+       class="position_absolute wily_popover">
+    <ng-content></ng-content>
   </div>
 </div>
