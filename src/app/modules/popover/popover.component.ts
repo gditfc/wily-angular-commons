@@ -36,6 +36,12 @@ export class PopoverComponent implements OnInit {
   private static POPOVER_OFFSET = 5;
 
   /**
+   * The keyboard arrow keys
+   * @private
+   */
+  private static ARROW_KEYS = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
+
+  /**
    * Set the width of the popover in pixels (defaults to auto)
    */
   @Input('width')
@@ -131,6 +137,18 @@ export class PopoverComponent implements OnInit {
           this.close();
         }
       }
+    }
+  }
+
+  /**
+   * Prevent arrow key scrolling while popover is open
+   */
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    const { key } = event;
+
+    if (this.visible && PopoverComponent.ARROW_KEYS.includes(key)) {
+      event.preventDefault();
     }
   }
 
