@@ -9,11 +9,8 @@
 
 .wily_popover {
   border-radius: 3px;
-  line-height: 1.5;
-  overflow:hidden;
-  /*margin: 8px 0 0 1px;*/
-  /* padding: 5px; */
-  list-style-type: none;
+  overflow-x:hidden;
+  overflow-y:auto;
   font-size:12px;
   font-weight: normal;
   z-index: 4;
@@ -25,8 +22,4 @@
     0 2px 4px -1px rgba(0, 0, 0, 0.2),
     0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12);
-}
-
-.overlaypanel_container:hover .overlaypanel {
-  visibility: visible;
 }
