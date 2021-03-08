@@ -10,14 +10,14 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output, Renderer2
   styleUrls: ['./popover.component.css'],
   animations: [
     trigger('openClose', [
-      transition(':enter', [
+      transition('void => open', [
         animate('200ms ease', keyframes([
           style({ opacity: 0, transform: 'scaleY(0.5)', offset: 0 }),
           style({ opacity: 0, offset: .25 }),
           style({ opacity: 1, transform: 'scaleY(1)', offset: 1 })
         ]))
       ]),
-      transition(':leave', [
+      transition('open => close', [
         animate('200ms ease', keyframes([
           style({ opacity: 1, transform: 'scaleY(1)', offset: 0 }),
           style({ opacity: 0, offset: .25 }),
