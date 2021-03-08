@@ -4,12 +4,7 @@ import { MultiSelectComponent } from './multi-select.component';
 
 @NgModule({
   declarations: [MultiSelectComponent],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    MultiSelectComponent
-  ],
-  entryComponents: [MultiSelectComponent]
+  imports: [CommonModule],
+  exports: [MultiSelectComponent]
 })
 export class MultiSelectModule { }
