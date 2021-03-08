@@ -54,36 +54,3 @@
   font-size:inherit;
   margin:-1px;
 }
-
-/*@media screen and (max-width: 768px) {*/
-/*  .wily_datepicker_overlay {*/
-/*    background: rgba(120, 120, 120, 0.4);*/
-/*  }*/
-/*}*/
-
-/*.animate_in {*/
-/*  animation-name: datepicker_in;*/
-/*  animation-duration: 0.3s;*/
-/*  animation-timing-function: ease;*/
-/*  animation-direction: normal;*/
-/*}*/
-/*.animate_out {*/
-/*  animation-name: datepicker_in;*/
-/*  animation-duration: 0.3s;*/
-/*  animation-timing-function: ease;*/
-/*  animation-direction: reverse;*/
-/*}*/
-/*!* The animation code *!*/
-/*@keyframes datepicker_in {*/
-/*  0%   {*/
-/*    opacity: 0;*/
-/*    transform:scaleY(0.5);*/
-/*  }*/
-/*  25% {*/
-/*    opacity:0;*/
-/*  }*/
-/*  100% {*/
-/*    opacity: 1;*/
-/*    transform:scaleY(1);*/
-/*  }*/
-/*}*/
