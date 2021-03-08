@@ -135,6 +135,19 @@ export class PopoverComponent implements OnInit {
   }
 
   /**
+   * Close popover on escape keyup
+   * @param event the keyup KeyboardEvent
+   */
+  @HostListener('window:keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent): void {
+    const { key } = event;
+
+    if (this.visible && (key === 'Esc' || key === 'Escape')) {
+      this.close();
+    }
+  }
+
+  /**
    * Re-position popover on window resize
    */
   @HostListener('window:resize')
