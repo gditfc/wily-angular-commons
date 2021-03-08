@@ -51,8 +51,7 @@
             <!-- DATE PICKER SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_green" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_green mar_right5"><i class="fas fa-calendar-alt"></i></div>
                   Date Picker
                 </div>
@@ -70,18 +69,16 @@
             <!-- EDITOR SECTION -->
             <div class="col size_2 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_orange" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_orange mar_right5"><i class="fas fa-edit"></i></div>
                   Editor
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot3">Enter some formatted text below</div>
-                  <wily-date-picker
-                    [disabled]="false"
-                    [inputClassList]="'form_input page_container_color'"
-                    [calendarButtonClassList]="'overlay border_left brad_0'">
-                  </wily-date-picker>
+                  <wily-rich-text
+                    [(ngModel)]="text"
+                    (textChanged)="handleEditorTextChange($event)">
+                  </wily-rich-text>
                 </div>
               </div>
             </div>
@@ -94,8 +91,7 @@
             <!-- DROPDOWN SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_blue" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_blue mar_right5"><i class="fas fa-caret-square-down"></i></div>
                   Dropdown
                 </div>
@@ -156,8 +152,7 @@
             <!-- MULTI SELECT SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_green" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_green mar_right5"><i class="fas fa-check-square"></i></div>
                   MultiSelect
                 </div>
@@ -218,8 +213,7 @@
             <!-- DIALOG SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_purple" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_purple mar_right5"><i class="far fa-window-restore"></i></div>
                   Dialog
                 </div>
@@ -235,8 +229,7 @@
             <!-- ICON SELECT SECTION -->
             <div class="col size_1 min_w280 page_container_color card_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_blue" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_blue mar_right5"><i class="fas fa-hand-point-up"></i></div>
                   Icon Select
                 </div>
@@ -253,8 +246,7 @@
             <!-- NOTIFICATION SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_grey" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_grey mar_right5"><i class="fas fa-ellipsis-h"></i></div>
                   Popover
                 </div>
@@ -281,8 +273,7 @@
             <!-- NOTIFICATION SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_orange" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_orange mar_right5"><i class="fas fa-exclamation-circle"></i></div>
                   Notification
                 </div>
@@ -313,8 +304,7 @@
             <!-- TOOLTIP SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_red" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_red mar_right5"><i class="fas fa-comment-alt"></i></div>
                   Tooltip
                 </div>
@@ -350,8 +340,7 @@
             <!-- ICONS SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_blue" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_blue mar_right5"><i class="fas fa-icons"></i></div>
                   Icons
                 </div>
@@ -369,8 +358,7 @@
             <!-- PAGINATOR SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_green" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_green mar_right5"><i class="fas fa-arrow-circle-right"></i></div>
                   Paginator
                 </div>
@@ -445,8 +433,7 @@
             <!-- PROFILE PIC SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_grey" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_grey mar_right5"><i class="fas fa-user-circle"></i></div>
                   Profile Picture
                 </div>
@@ -463,8 +450,7 @@
             <!-- PIPES SECTION -->
             <div class="col size_2 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
-                <div class="bg_orange" style="height:3px;"></div>
-                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_orange mar_right5"><i class="fas fa-filter"></i></div>
                   Pipes
                 </div>
@@ -472,6 +458,31 @@
                   <!-- TODO: complete -->
                   <div class="form_label mar_bot5">Pipe example</div>
                   <div class="text md">Input -> Output</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="row wrap">
+
+            <!-- ENDPOINT STATE SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_orange mar_right5"><i class="fas fa-filter"></i></div>
+                  Endpoint State
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">A loading state</div>
+                  <wily-endpoint-state
+                    [loadingOverlay]="false"
+                    [loading]="true"
+                    [loadingOverlayText]="'Please wait while we get things ready for you'"
+                    [loadingOverlaySubtext]="'This may take a few minutes...'"
+                    [loadingIcon]="'bars_vertical'">
+                  </wily-endpoint-state>
                 </div>
               </div>
             </div>
@@ -490,23 +501,10 @@
               <div class="col size_1 overlay_alt2 brad_3 pad_5 mar_3">
                 <div class="row_block width100">
 
-                  <wily-endpoint-state
-                    [loadingOverlay]="false"
-                    [loading]="true"
-                    [loadingOverlayText]="'Please wait while we get things ready for you'"
-                    [loadingOverlaySubtext]="'This may take a few minutes...'"
-                    [loadingIcon]="'bars_vertical'">
-                  </wily-endpoint-state>
+
                 </div>
               </div>
 
-              <!-- rich text -->
-              <div class="col size_1 overlay_alt2 brad_3 pad_5 mar_3">
-                <div class="row_block width100">
-                  <wily-rich-text [(ngModel)]="text" (textChanged)="handleEditorTextChange($event)">
-                  </wily-rich-text>
-                </div>
-              </div>
             </div>
 
             <!-- icons -->
