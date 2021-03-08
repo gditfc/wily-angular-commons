@@ -43,97 +43,67 @@
           </button>
         </div>
         <!-- CONTENT -->
-        <div class="page_container page_container_color">
-          <div class="row_block width100">
+        <div class="row column pad_10">
+
+          <!-- ROW -->
+          <div class="row wrap">
 
             <!-- DATE PICKER SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_purple mar_right10"><i class="fas fa-calendar-alt"></i></div>
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_green" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_green mar_right5"><i class="fas fa-calendar-alt"></i></div>
                   Date Picker
                 </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      The date picker is a component used to select a date. It includes validation on the input, and
-                      a calendar so users can select a date through a more friendly interface.
-                      <br/><br/>
-                      The look of the calendar input can be customized to fit into any form, through custom classes.
-                    </div>
-                  </div>
-                </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot3">Enter a date below</div>
-                    <wily-date-picker
-                      [disabled]="false"
-                      [inputClassList]="'form_input page_container_color'"
-                      [calendarButtonClassList]="'overlay border_left brad_0'">
-                    </wily-date-picker>
-                  </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Enter a date below</div>
+                  <wily-date-picker
+                    [disabled]="false"
+                    [inputClassList]="'form_input page_container_color'"
+                    [calendarButtonClassList]="'overlay border_left brad_0'">
+                  </wily-date-picker>
                 </div>
               </div>
             </div>
 
-            <!-- DIALOG SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_purple_alt mar_right10"><i class="far fa-window-restore"></i></div>
-                  Dialog
+            <!-- EDITOR SECTION -->
+            <div class="col size_2 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_orange" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_orange mar_right5"><i class="fas fa-edit"></i></div>
+                  Editor
                 </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      The dialog can be used to open a window over the page content to perform sub-functions or
-                      display warnings or important information to the user.
-                      <br/><br/>
-                      The dialog is fully accessible and responsive, and supports features such as opening multiple
-                      dialogs on top of each other, trapping focus and close on escape.
-                    </div>
-                  </div>
-                </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot5">Select the button below to preview the dialog</div>
-                    <button class="access btn sm overlay_alt2 bg_blue_alt" (click)="obj2 = {}">
-                      Preview Dialog
-                    </button>
-                  </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Enter some formatted text below</div>
+                  <wily-date-picker
+                    [disabled]="false"
+                    [inputClassList]="'form_input page_container_color'"
+                    [calendarButtonClassList]="'overlay border_left brad_0'">
+                  </wily-date-picker>
                 </div>
               </div>
             </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="row wrap">
 
             <!-- DROPDOWN SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_blue mar_right10"><i class="fas fa-caret-square-down"></i></div>
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_blue" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_blue mar_right5"><i class="fas fa-caret-square-down"></i></div>
                   Dropdown
                 </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      The dropdown component is a customizable component based on the default HTML 'Select'.
-                      It was made to behave similarly to the native select, and is fully accessible.
-                      <br/><br/>
-                      The look of the dropdown can be customized to fit into any form, through custom classes.
-                    </div>
-                  </div>
-                </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot3">Basic Dropdown</div>
-                    <wily-dropdown
-                      [placeholder]="'Select an option...'"
-                      [options]="[
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Basic Dropdown</div>
+                  <wily-dropdown
+                    [placeholder]="'Select an option...'"
+                    [options]="[
                            { value: 'red', label: 'Option A' },
                            { value: 'green', label: 'Disabled Option', disabled: true },
                            { value: 'blue', label: 'Option C' },
@@ -146,13 +116,13 @@
                              ]
                            }
                          ]"
-                      [disabled]="false">
-                    </wily-dropdown>
-                    <div class="pad_10"></div>
-                    <div class="form_label mar_bot3">Dropdown with Templating</div>
-                    <wily-dropdown
-                      [placeholder]="'Select a color...'"
-                      [options]="[
+                    [disabled]="false">
+                  </wily-dropdown>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Dropdown with Templating</div>
+                  <wily-dropdown
+                    [placeholder]="'Select a color...'"
+                    [options]="[
                            { value: 'red', label: 'Red', dataContext: { 'colorClass': 'bg_red' } },
                            { value: 'green', label: 'Green', disabled: true, dataContext: { 'colorClass': 'bg_green' } },
                            { value: 'blue', label: 'Blue', dataContext: { 'colorClass': 'bg_blue' } },
@@ -165,102 +135,36 @@
                              ]
                            }
                          ]"
-                         [classList]="'form_input page_container_color'"
-                         [disabled]="false">
-                      <ng-template let-colorClass="colorClass" let-label>
-                        <div class="v_center">
-                          <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
-                        </div>
-                      </ng-template>
-                    </wily-dropdown>
-                    <div class="pad_10"></div>
-                    <div class="form_label mar_bot3">Disabled Dropdown</div>
-                    <wily-dropdown
-                      [placeholder]="'Select nothing...'"
-                      [disabled]="true">
-                    </wily-dropdown>
-                  </div>
+                    [classList]="'form_input page_container_color'"
+                    [disabled]="false">
+                    <ng-template let-colorClass="colorClass" let-label>
+                      <div class="v_center">
+                        <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
+                      </div>
+                    </ng-template>
+                  </wily-dropdown>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Disabled Dropdown</div>
+                  <wily-dropdown
+                    [placeholder]="'Select nothing...'"
+                    [disabled]="true">
+                  </wily-dropdown>
                 </div>
               </div>
             </div>
 
-            <!-- ICONS SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_blue_alt mar_right10"><i class="fas fa-icons"></i></div>
-                  Icons
-                </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="row_block width100">
-                  <div class="row mar_10">
-                    <div class="text sm paragraph">
-                      These are custom icons that can be used in place of fontawesome icons. Usage for these
-                      icons is similar to fontawesome. Within the 'i' tag, instead of 'fal', 'far' or 'fas', the
-                      prefixes used are 'wil', 'wir', and 'wis' respectively. Below are all of the included icons.
-                      You may hover over an icon to see its name.
-                    </div>
-                  </div>
-                  <div class="mar_10">
-                    <!-- TODO: add icons -->
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- ICON SELECT SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_green mar_right10"><i class="fas fa-hand-point-up"></i></div>
-                  Icon Select
-                </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      The icon select is a dialog that allows a user to choose an icon from a collection of fontawesome
-                      and custom wily icons (shown below). The dialog supports filtering on icons.
-                    </div>
-                  </div>
-                </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot5">Select the button below to open the icon select</div>
-                    <wily-icon-select (opened)="iconSelectOpened()"
-                                      (closed)="iconSelectClosed()"
-                                      (selected)="iconSelected($event)">
-                    </wily-icon-select>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- MULTISELECT SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_green_alt mar_right10"><i class="far fa-check-square"></i></div>
+            <!-- MULTI SELECT SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_green" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_green mar_right5"><i class="fas fa-check-square"></i></div>
                   MultiSelect
                 </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      The MultiSelect component is a dropdown component that supports the selection of multiple options.
-                      <br/><br/>
-                      The look of the MultiSelect can be customized to fit into any form, through custom classes.
-                    </div>
-                  </div>
-                </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot3">Basic MultiSelect</div>
-                    <wily-multi-select
-                      [options]="[
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Basic MultiSelect</div>
+                  <wily-multi-select
+                    [options]="[
                          { value: 'a', label: 'Option A' },
                          { value: 'b', label: 'Disabled Option', disabled: true },
                          { value: 'c', label: 'Option C' },
@@ -273,13 +177,13 @@
                            ]
                          }
                        ]"
-                      [classList]="'form_input page_container_color'" [disabled]="false">
-                    </wily-multi-select>
-                    <div class="pad_10"></div>
-                    <div class="form_label mar_bot3">Select one or more options from the dropdown below</div>
-                    <wily-multi-select
-                      [placeholder]="'Select your favorite foods...'"
-                      [options]="[
+                    [classList]="'form_input page_container_color'" [disabled]="false">
+                  </wily-multi-select>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Select one or more options from the dropdown below</div>
+                  <wily-multi-select
+                    [placeholder]="'Select your favorite foods...'"
+                    [options]="[
                          { value: 'chicken', label: 'Chicken', dataContext: { 'iconClass': 'fas fa-drumstick-bite' } },
                          { value: 'apples', label: 'Apples', disabled: true, dataContext: { 'iconClass': 'fas fa-apple-alt' } },
                          { value: 'cheese', label: 'Cheese', dataContext: { 'iconClass': 'fas fa-cheese' } },
@@ -292,82 +196,186 @@
                            ]
                          }
                        ]"
-                       [disabled]="false">
-                      <ng-template let-iconClass="iconClass" let-label>
-                        <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
-                      </ng-template>
-                    </wily-multi-select>
-                    <div class="pad_10"></div>
-                    <div class="form_label mar_bot3">Disabled MultiSelect</div>
-                    <wily-multi-select
-                      [disabled]="true">
-                    </wily-multi-select>
-                  </div>
+                    [disabled]="false">
+                    <ng-template let-iconClass="iconClass" let-label>
+                      <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
+                    </ng-template>
+                  </wily-multi-select>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Disabled MultiSelect</div>
+                  <wily-multi-select
+                    [disabled]="true">
+                  </wily-multi-select>
                 </div>
               </div>
             </div>
 
-            <!-- NOTIFICATIONS SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_yellow mar_right10"><i class="fas fa-exclamation-circle"></i></div>
+          </div>
+
+          <!-- ROW -->
+          <div class="row wrap">
+
+            <!-- DIALOG SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_purple" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_purple mar_right5"><i class="far fa-window-restore"></i></div>
+                  Dialog
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Select the button below to preview the dialog</div>
+                  <button class="access btn sm overlay_alt2 bg_purple_alt" (click)="obj2 = {}">
+                    Preview Dialog
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ICON SELECT SECTION -->
+            <div class="col size_1 min_w280 page_container_color card_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_blue" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_blue mar_right5"><i class="fas fa-hand-point-up"></i></div>
+                  Icon Select
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Select the button below to open the icon select</div>
+                  <wily-icon-select (opened)="iconSelectOpened()"
+                                    (closed)="iconSelectClosed()"
+                                    (selected)="iconSelected($event)">
+                  </wily-icon-select>
+                </div>
+              </div>
+            </div>
+
+            <!-- NOTIFICATION SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_grey" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_grey mar_right5"><i class="fas fa-ellipsis-h"></i></div>
+                  Popover
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Select the button below to open the popover</div>
+                  <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="popover.toggle($event)">
+                    Preview Popover
+                  </button>
+                  <wily-popover #popover>
+                    <div>This is some popover content</div>
+                    <button (click)="popover.toggle($event)" class="access btn overlay sm mar_5">
+                      <i class="fas fa-times mar_right5"></i>Close Popover
+                    </button>
+                  </wily-popover>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="row wrap">
+
+            <!-- NOTIFICATION SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_orange" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_orange mar_right5"><i class="fas fa-exclamation-circle"></i></div>
                   Notification
                 </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      Notifications are used to display short messages to the user as feedback for an action.
-                      Notifications will stack in the top-right corner of the screen, and will fade out after
-                      a set period of time.
-                    </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Select a button below to preview a notification type</div>
+                  <div class="row wrap v_center" style="margin:0 -5px;">
+                    <button (click)="addNotification('success')"
+                            class="access btn sm overlay_alt2 bg_green_alt mar_5">
+                      Show Success
+                    </button>
+                    <button (click)="addNotification('warn')"
+                            class="access btn sm overlay_alt2 bg_orange_alt mar_5">
+                      Show Warning
+                    </button>
+                    <button (click)="addNotification('error')"
+                            class="access btn sm overlay_alt2 bg_red_alt mar_5">
+                      Show Error
+                    </button>
+                    <button (click)="addNotification('info')"
+                            class="access btn sm overlay_alt2 bg_purple_alt mar_5">
+                      Show Info
+                    </button>
                   </div>
                 </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot5">Select a button below to preview a notification type</div>
-                    <div class="row wrap v_center" style="margin:0 -5px;">
-                      <button (click)="addNotification('success')"
-                              class="access btn sm overlay_alt2 bg_green_alt mar_5">
-                        Show Success
-                      </button>
-                      <button (click)="addNotification('warn')"
-                              class="access btn sm overlay_alt2 bg_orange_alt mar_5">
-                        Show Warning
-                      </button>
-                      <button (click)="addNotification('error')"
-                              class="access btn sm overlay_alt2 bg_red_alt mar_5">
-                        Show Error
-                      </button>
-                      <button (click)="addNotification('info')"
-                              class="access btn sm overlay_alt2 bg_purple_alt mar_5">
-                        Show Info
-                      </button>
+              </div>
+            </div>
+
+            <!-- TOOLTIP SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_red" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_red mar_right5"><i class="fas fa-comment-alt"></i></div>
+                  Tooltip
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Hover a box below to see a tooltip</div>
+                  <div class="row wrap v_center" style="margin:0 -5px;">
+                    <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                         wilyTooltip="I'm left out" tooltipPosition="left">
+                      <i class="fas fa-arrow-left mar_right5"></i>Left Tooltip
+                    </div>
+                    <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                         wilyTooltip="I'm always right" tooltipPosition="right">
+                      <i class="fas fa-arrow-right mar_right5"></i>Right Tooltip
+                    </div>
+                    <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                         wilyTooltip="I'm above it" tooltipPosition="top">
+                      <i class="fas fa-arrow-up mar_right5"></i>Top Tooltip
+                    </div>
+                    <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                         wilyTooltip="I'm feeling down" tooltipPosition="bottom">
+                      <i class="fas fa-arrow-down mar_right5"></i>Bottom Tooltip
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- PAGINATORS SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_yellow_alt mar_right10"><i class="fas fa-arrow-circle-right"></i></div>
-                  Paginator
+          </div>
+
+          <!-- ROW -->
+          <div class="row wrap">
+
+            <!-- ICONS SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_blue" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_blue mar_right5"><i class="fas fa-icons"></i></div>
+                  Icons
+                </div>
+                <div class="pad_15">
+                  <!-- TODO: add icons -->
                 </div>
               </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="row_block width100">
-                  <div class="row mar_10">
-                    <div class="text sm paragraph">
-                      The paginator is a component that makes it easy to split data into multiple 'pages.' The paginator
-                      includes multiple versions with different looks and supported functions.
-                    </div>
-                  </div>
-                  <div class="bg_everyodd mar_10">
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="row wrap">
+
+            <!-- PAGINATOR SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_green" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_green mar_right5"><i class="fas fa-arrow-circle-right"></i></div>
+                  Paginator
+                </div>
+                <div class="pad_15">
+                  <div class="bg_everyodd">
                     <!-- version 1 -->
                     <div class="row wrap brad_3 pad_x5 mar_y10">
                       <div class="col size_1 mar_10 pad_y5">
@@ -429,140 +437,50 @@
               </div>
             </div>
 
-            <!-- TODO: fill out -->
-            <!-- PIPES SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_orange mar_right10"><i class="fas fa-filter"></i></div>
-                  Pipes
-                </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      Description for pipes
-                    </div>
-                  </div>
-                </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot5">Pipe example</div>
-                    <div class="text md">Input -> Output</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          </div>
+
+          <!-- ROW -->
+          <div class="row wrap">
 
             <!-- PROFILE PIC SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_orange_alt mar_right10"><i class="fas fa-user-circle"></i></div>
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_grey" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_grey mar_right5"><i class="fas fa-user-circle"></i></div>
                   Profile Picture
                 </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      This component allows a user to set a profile picture.
-                    </div>
-                  </div>
-                </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot5">Check this guy out</div>
-                    <wily-profile-pic
-                      toolTip="Some Guy"
-                      imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg">
-                    </wily-profile-pic>
-                  </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Check this guy out</div>
+                  <wily-profile-pic
+                    toolTip="Some Guy"
+                    imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg">
+                  </wily-profile-pic>
                 </div>
               </div>
             </div>
 
-            <!-- TOOLTIP SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_red mar_right10"><i class="fas fa-comment-alt"></i></div>
-                  Tooltip
+            <!-- PIPES SECTION -->
+            <div class="col size_2 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="bg_orange" style="height:3px;"></div>
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold">
+                  <div class="circle_20px bg_orange mar_right5"><i class="fas fa-filter"></i></div>
+                  Pipes
                 </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      Tooltips can be added to any element for a short description that appears on hover. Tooltips
-                      can be positioned at any side of the element, and will automatically reposition if there isn't
-                      enough room.
-                    </div>
-                  </div>
-                </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot5">Hover a box below to see a tooltip</div>
-                    <div class="row wrap v_center" style="margin:0 -5px;">
-                      <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
-                           wilyTooltip="I'm left out" tooltipPosition="left">
-                        <i class="fas fa-arrow-left mar_right5"></i>Left Tooltip
-                      </div>
-                      <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
-                           wilyTooltip="I'm always right" tooltipPosition="right">
-                        <i class="fas fa-arrow-right mar_right5"></i>Right Tooltip
-                      </div>
-                      <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
-                           wilyTooltip="I'm above it" tooltipPosition="top">
-                        <i class="fas fa-arrow-up mar_right5"></i>Top Tooltip
-                      </div>
-                      <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
-                           wilyTooltip="I'm feeling down" tooltipPosition="bottom">
-                        <i class="fas fa-arrow-down mar_right5"></i>Bottom Tooltip
-                      </div>
-                    </div>
-                  </div>
+                <div class="pad_15">
+                  <!-- TODO: complete -->
+                  <div class="form_label mar_bot5">Pipe example</div>
+                  <div class="text md">Input -> Output</div>
                 </div>
               </div>
             </div>
 
-            <!-- POPOVER SECTION -->
-            <div style="margin:20px;">
-              <div class="overlay pad_x15 pad_y5" style="border-radius:5px 5px 0 0;">
-                <div class="text xlg bold v_center">
-                  <div class="circle_24px bg_red mar_right10"><i class="fas fa-comment-alt"></i></div>
-                  Popover Panel
-                </div>
-              </div>
-              <div class="row wrap pad_5 overlay_alt2" style="border-width:0 1px 1px 1px; border-radius:0 0 5px 5px;">
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="text sm paragraph">
-                      Tooltips can be added to any element for a short description that appears on hover. Tooltips
-                      can be positioned at any side of the element, and will automatically reposition if there isn't
-                      enough room.
-                    </div>
-                  </div>
-                </div>
-                <div class="col size_1 min_w250 mar_10">
-                  <div class="row_block width100">
-                    <div class="form_label mar_bot5">Click the button below to see the popover</div>
-                    <div class="row wrap v_center" style="margin:0 -5px;">
-                      <button (click)="popover.toggle($event)" class="access btn overlay sm mar_5">
-                        <i class="fas fa-chevron-down mar_right5"></i>Toggle Popover
-                      </button>
-                    </div>
-                    <wily-popover #popover>
-                      <div>This is some popover content</div>
-                      <button (click)="popover.toggle($event)" class="access btn overlay sm mar_5">
-                        <i class="fas fa-times mar_right5"></i>Close Popover
-                      </button>
-                    </wily-popover>
-                  </div>
-                </div>
-              </div>
-            </div>
+          </div>
+
+
+
+
 
 
 
@@ -571,18 +489,6 @@
               <!-- paginators -->
               <div class="col size_1 overlay_alt2 brad_3 pad_5 mar_3">
                 <div class="row_block width100">
-                  <!-- version 1 -->
-
-                  <!-- version 2 -->
-
-                  <!-- version 3 -->
-                  <div class="row mar_5">
-
-                  </div>
-                  <!-- version 4 -->
-                  <div class="row mar_5">
-
-                  </div>
 
                   <wily-endpoint-state
                     [loadingOverlay]="false"
@@ -706,7 +612,7 @@
                 </div>
               </div>
             </div>
-          </div>
+
         </div>
 
         <!-- DIALOG DEMONSTRATION -->
