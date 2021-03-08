@@ -11,19 +11,15 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output, Renderer2
   animations: [
     trigger('openClose', [
       transition('void => open', [
-        animate('200ms ease', keyframes([
-          style({ opacity: 0, transform: 'scaleY(0.5)', offset: 0 }),
-          style({ opacity: 0, offset: .25 }),
-          style({ opacity: 1, transform: 'scaleY(1)', offset: 1 })
-        ]))
+        style({ transform: 'scaleY(0.5)', opacity: 0 }),
+        animate('200ms ease',
+          style({ transform: 'scaleY(1)', opacity: 1 }))
       ]),
       transition('open => close', [
-        animate('200ms ease', keyframes([
-          style({ opacity: 1, transform: 'scaleY(1)', offset: 0 }),
-          style({ opacity: 0, offset: .25 }),
-          style({ opacity: 0, transform: 'scaleY(0.5)', offset: 1 })
-        ]))
-      ])
+        style({ transform: 'scaleY(1)', opacity: 1 }),
+        animate('200ms ease',
+          style({ transform: 'scaleY(0.5)', opacity: 0 }))
+      ]),
     ])
   ]
 })
