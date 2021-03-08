@@ -255,11 +255,13 @@
                   <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="popover.toggle($event)">
                     Preview Popover
                   </button>
-                  <wily-popover #popover>
-                    <div>This is some popover content</div>
-                    <button (click)="popover.toggle($event)" class="access btn overlay sm mar_5">
-                      <i class="fas fa-times mar_right5"></i>Close Popover
-                    </button>
+                  <wily-popover width="500" #popover>
+                    <div class="pad_10">
+                      <div class="mar_bot10">This is some popover content</div>
+                      <button (click)="popover.toggle($event)" class="access btn overlay sm mar_5">
+                        <i class="fas fa-times mar_right5"></i>Close Popover
+                      </button>
+                    </div>
                   </wily-popover>
                 </div>
               </div>
