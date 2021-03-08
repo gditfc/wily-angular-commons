@@ -3,17 +3,18 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   forwardRef,
   Input,
   OnDestroy,
-  OnInit, Output,
+  OnInit,
+  Output,
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {format, isEqual, isValid, isWithinInterval, parse} from 'date-fns';
-import { EventEmitter } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { format, isEqual, isValid, isWithinInterval, parse } from 'date-fns';
 
 /**
  * Component to allow a user to input/select a date
