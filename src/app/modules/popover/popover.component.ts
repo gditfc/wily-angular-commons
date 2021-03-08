@@ -135,6 +135,16 @@ export class PopoverComponent implements OnInit {
   }
 
   /**
+   * Re-position popover on window resize
+   */
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    if (this.visible) {
+      this.positionPopover();
+    }
+  }
+
+  /**
    * Toggle the popover from open to closed or closed to open
    * @param event
    */
