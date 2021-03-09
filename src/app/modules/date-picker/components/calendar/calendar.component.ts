@@ -7,10 +7,12 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  QueryList,
   Renderer2,
-  ViewChild
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
-import {addDays, endOfMonth, Interval, isWithinInterval, subDays} from 'date-fns';
+import { addDays, endOfMonth, Interval, isWithinInterval, subDays } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -48,7 +50,6 @@ declare interface MetaDate {
 
 /**
  * Component that allows a user to select a date from a calendar
- * TODO: keyboard controls on calendar
  */
 @Component({
   selector: 'wily-calendar',
@@ -56,6 +57,12 @@ declare interface MetaDate {
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnDestroy, OnInit {
+
+  /**
+   * The keyboard arrow keys
+   * @private
+   */
+  private static readonly ARROW_KEYS = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
 
   /**
    * ViewChild of the calendar widget parent div element
@@ -68,6 +75,12 @@ export class CalendarComponent implements OnDestroy, OnInit {
    */
   @ViewChild('yearSelect')
   yearSelect: ElementRef<HTMLSelectElement>;
+
+  /**
+   * QueryList of the calendar date buttons for the currently selected month/year
+   */
+  @ViewChildren('calendarDate')
+  calendarDates: QueryList<ElementRef<HTMLButtonElement>>;
 
   /**
    * The selected date value
@@ -360,8 +373,11 @@ export class CalendarComponent implements OnDestroy, OnInit {
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
     const {key} = event;
+
     if (key === 'Esc' || key === 'Escape') {
       this.closed.emit();
+    } else if (CalendarComponent.ARROW_KEYS.includes(key)) {
+      this.onArrowKeyUp(key);
     }
   }
 
@@ -406,5 +422,108 @@ export class CalendarComponent implements OnDestroy, OnInit {
     this.handleDateSelection(this.currentDate);
     this._selectedMonth.next(this.currentDate.month);
     this._selectedYear.next(this.currentDate.year);
+  }
+
+  /**
+   * Handle arrow key navigation for calendar date buttons
+   * @param key the pressed arrow key
+   * @private
+   */
+  private onArrowKeyUp(key: string): void {
+    const { activeElement } = document;
+
+    if (!!activeElement) {
+      const activeDate = activeElement.getAttribute('data-date');
+
+      if (activeDate !== null && activeDate !== '') {
+        if (key === 'ArrowLeft') {
+          this.navigateLeft(Number.parseInt(activeDate, 10));
+        } else if (key === 'ArrowRight') {
+          this.navigateRight(Number.parseInt(activeDate, 10));
+        } else if (key === 'ArrowUp') {
+          this.navigateUp(Number.parseInt(activeDate, 10));
+        } else if (key === 'ArrowDown') {
+          this.navigateDown(Number.parseInt(activeDate, 10));
+        }
+      }
+    }
+  }
+
+  /**
+   * Attempt to focus on date indexed immediately to the left of the input date
+   * @param date the day of the month
+   * @private
+   */
+  private navigateLeft(date: number): void {
+    if (date > 1) {
+      const calendarDates = this.calendarDates.toArray();
+      const foundIndex = calendarDates.findIndex(calendarDate => {
+        return date === Number.parseInt(
+          calendarDate.nativeElement.getAttribute('data-date'),
+          10
+        );
+      });
+
+      if (foundIndex > 0) {
+        calendarDates[foundIndex - 1].nativeElement.focus();
+      }
+    }
+  }
+
+  /**
+   * Attempt to focus on date indexed immediately to the right of the input date
+   * @param date the day of the month
+   * @private
+   */
+  private navigateRight(date: number): void {
+    const calendarDates = this.calendarDates.toArray();
+    const foundIndex = calendarDates.findIndex(calendarDate => {
+      return date === Number.parseInt(
+        calendarDate.nativeElement.getAttribute('data-date'),
+        10
+      );
+    });
+
+    if ((foundIndex > -1) && (foundIndex < (calendarDates.length - 1))) {
+      calendarDates[foundIndex + 1].nativeElement.focus();
+    }
+  }
+
+  /**
+   * Attempt to navigate one week in the past from the input date
+   * @param date the day of the month
+   * @private
+   */
+  private navigateUp(date: number): void {
+    const calendarDates = this.calendarDates.toArray();
+    const foundIndex = calendarDates.findIndex(calendarDate => {
+      return date === Number.parseInt(
+        calendarDate.nativeElement.getAttribute('data-date'),
+        10
+      );
+    });
+
+    if ((foundIndex > -1) && (foundIndex - 7 >= 0)) {
+      calendarDates[foundIndex - 7].nativeElement.focus();
+    }
+  }
+
+  /**
+   * Attempt to navigate one week in the future from the input date
+   * @param date the day of the month
+   * @private
+   */
+  private navigateDown(date: number): void {
+    const calendarDates = this.calendarDates.toArray();
+    const foundIndex = calendarDates.findIndex(calendarDate => {
+      return date === Number.parseInt(
+        calendarDate.nativeElement.getAttribute('data-date'),
+        10
+      );
+    });
+
+    if ((foundIndex > -1) && ((foundIndex + 7) < (calendarDates.length))) {
+      calendarDates[foundIndex + 7].nativeElement.focus();
+    }
   }
 }

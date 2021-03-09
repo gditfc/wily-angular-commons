@@ -58,7 +58,9 @@
           <div [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
                class="wily_datepicker_day">
             <ng-container *ngIf="dayInMonth.selectable else disabledDate">
-              <button (click)="handleDateSelection(dayInMonth)"
+              <button #calendarDate
+                      (click)="handleDateSelection(dayInMonth)"
+                      [attr.data-date]="dayInMonth.date"
                       [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)"
                       [ngClass]="{
                         'bg_blue_alt': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),
