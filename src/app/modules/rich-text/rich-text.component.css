@@ -7,6 +7,7 @@
   padding:5px 3px;
   display:flex;
   flex-wrap:wrap;
+  background-color:inherit;
 }
 
 .wily_richtext_editor {
@@ -20,6 +21,8 @@
   margin:0 5px;
   display:flex;
   align-items:center;
+  color:inherit;
+  background-color:inherit;
 }
 
 .ql-formats button {
@@ -35,6 +38,7 @@
   display:flex;
   align-items:center;
   justify-content:center;
+  color:inherit;
 }
 .ql-formats button svg {
   opacity:0.8;
@@ -48,12 +52,13 @@
   font-size:14px;
   border-radius:3px;
   border:none;
+  background-color:inherit;
 }
 .ql-header:not(:focus), .ql-align:not(:focus) {
   background-color:rgba(128,128,128,0.15);
 }
 .ql-header:not(:hover), .ql-align:not(:hover) {
-  background-color:transparent;
+  background-color:inherit;
 }
 
 .ql-header .h1 {font-size:18px; font-weight:500; }
