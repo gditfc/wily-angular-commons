@@ -108,25 +108,25 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Matches MM/DD/YYYY
    * @private
    */
-  private static readonly FULL_DATE_FORMAT = /^\d\d\/\d\d\/\d\d\d\d$/;
+  private static readonly FULL_DATE_FORMAT = new RegExp('^\\d\\d\\/\\d\\d\\/\\d\\d\\d\\d$');
 
   /**
    * Matches M/D/YYYY
    * @private
    */
-  private static readonly SHORT_DATE_FORMAT = /^\d\/\d\/\d\d\d\d$/;
+  private static readonly SHORT_DATE_FORMAT = new RegExp('^\\d\\/\\d\\/\\d\\d\\d\\d$');
 
   /**
    * Matches M/DD/YYYY
    * @private
    */
-  private static readonly SHORT_MONTH_DATE_FORMAT = /^\d\/\d\d\/\d\d\d\d$/;
+  private static readonly SHORT_MONTH_DATE_FORMAT = new RegExp('^\\d\\/\\d\\d\\/\\d\\d\\d\\d$');
 
   /**
    * Matches MM/D/YYYY
    * @private
    */
-  private static readonly SHORT_DAY_DATE_FORMAT = /^\d\d\/\d\/\d\d\d\d$/;
+  private static readonly SHORT_DAY_DATE_FORMAT = new RegExp('^\\d\\d\\/\\d\\/\\d\\d\\d\\d$');
 
   /**
    * A reference date with all fields set to 0
