@@ -1,17 +1,63 @@
-/* Wily Styles */
+/************** Wily Styles ***************/
 .wily_richtext_container {
   overflow:hidden;
 }
 
 .wily_richtext_toolbar {
-
+  padding:0 3px;
+  display:flex;
 }
 
 .wily_richtext_editor {
-
+  border-top-width:0;
 }
 
-/* Quill Style Overrides */
+/********** Quill Style Overrides *************/
+
+/* TOOLBAR STYLES */
+.ql-formats {
+  margin:5px 8px;
+}
+
+.ql-formats button {
+  border:none;
+  cursor:pointer;
+  background-color:rgba(128,128,128,0.15);
+  border-radius:3px;
+  height:26px;
+  min-height:26px;
+  width:26px;
+  min-width:26px;
+  font-size:14px;
+}
+.ql-formats button:not(:hover) {
+  background-color:transparent;
+}
+
+.ql-header {
+  padding:3px;
+  font-size:14px;
+  border-radius:3px;
+  border:none;
+}
+.ql-header:not(:focus) {
+  background-color:rgba(128,128,128,0.15);
+}
+.ql-header:not(:hover) {
+  background-color:transparent;
+}
+
+.ql-header .h1 {font-size:18px; font-weight:500; }
+.ql-header .h2 {font-size:15px; font-weight:400; }
+
+.ql-align .left {
+  font-family: "Font Awesome\ 5 Free";
+  font-weight:900;
+  font-style:normal;
+  content: "\f036"
+}
+
+/* EDITOR STYLES */
 .ql-editor {
   line-height:1.5;
   overflow-x:hidden;

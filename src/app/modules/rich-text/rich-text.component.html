@@ -1,39 +1,39 @@
 <div class="wily_richtext_container page_container_color brad_3">
   <!-- editor toolbar -->
-  <div class="wily_richtext_toolbar overlay" #toolbar>
+  <div class="wily_richtext_toolbar overlay_alt2" #toolbar>
     <span class="ql-formats">
       <select aria-label="Text Style" class="ql-header">
-        <option value="1" aria-label="Heading">Heading</option>
-        <option value="2" aria-label="Subheading">Subheading</option>
+        <option class="h1" value="1" aria-label="Heading">Heading</option>
+        <option class="h2" value="2" aria-label="Subheading">Subheading</option>
         <option selected aria-label="Normal">Normal</option>
       </select>
     </span>
     <span class="ql-formats">
-      <button class="ql-bold" aria-label="Bold"></button>
-      <button class="ql-italic" aria-label="Italic"></button>
-      <button class="ql-underline" aria-label="Underline"></button>
+      <button class="ql-bold" aria-label="Bold"><i class="fas fa-bold"></i></button>
+      <button class="ql-italic" aria-label="Italic"><i class="fas fa-italic"></i></button>
+      <button class="ql-underline" aria-label="Underline"><i class="fas fa-underline"></i></button>
     </span>
 <!--    <span class="ql-formats">-->
 <!--      <select aria-label="Color" class="ql-color"></select>-->
 <!--      <select aria-label="Background" class="ql-background"></select>-->
 <!--    </span>-->
     <span class="ql-formats">
-      <button class="ql-list" value="ordered" aria-label="Ordered List"></button>
-      <button class="ql-list" value="bullet" aria-label="Unordered List"></button>
+      <button class="ql-list" value="ordered" aria-label="Ordered List"><i class="fas fa-list-ol"></i></button>
+      <button class="ql-list" value="bullet" aria-label="Unordered List"><i class="fas fa-list-ul"></i></button>
       <select aria-label="Alignment" class="ql-align">
-        <option selected></option>
-        <option value="center"></option>
-        <option value="right"></option>
-        <option value="justify"></option>
+        <option class="left" selected><i class="fas fa-align-left"></i></option>
+        <option value="center">&#xf036;</option>
+        <option value="right">&#xf036;</option>
+        <option value="justify">&#xf036;</option>
       </select>
     </span>
     <span class="ql-formats">
-      <button class="ql-link" aria-label="Insert Link"></button>
-      <button class="ql-image" aria-label="Insert Image"></button>
-      <button class="ql-code-block" aria-label="Insert Code Block"></button>
+      <button class="ql-link" aria-label="Insert Link"><i class="fas fa-link"></i></button>
+<!--      <button class="ql-image" aria-label="Insert Image"></button>-->
+<!--      <button class="ql-code-block" aria-label="Insert Code Block"></button>-->
     </span>
     <span class="ql-formats">
-      <button class="ql-clean" aria-label="Remove Styles"></button>
+      <button class="ql-clean" aria-label="Remove Styles"><i class="fas fa-remove-format"></i></button>
     </span>
   </div>
 
