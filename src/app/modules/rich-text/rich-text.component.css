@@ -1,3 +1,17 @@
+/* Wily Styles */
+.wily_richtext_container {
+  overflow:hidden;
+}
+
+.wily_richtext_toolbar {
+
+}
+
+.wily_richtext_editor {
+
+}
+
+/* Quill Style Overrides */
 .ql-editor {
   line-height:1.5;
   overflow-x:hidden;

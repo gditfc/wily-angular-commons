@@ -160,7 +160,7 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
       modules: { toolbar: toolbarElement },
       placeholder: this.placeholder,
       readOnly: this.readonly,
-      theme: 'snow',
+      theme: null,
       formats: null,
       bounds: null,
       debug: null,
