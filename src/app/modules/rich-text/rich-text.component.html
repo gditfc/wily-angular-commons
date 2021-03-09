@@ -1,35 +1,30 @@
-<p-editor #editor
-          [style]="{width: '100%', height: height, fontFamily: 'Montserrat, sans-serif'}"
-          [readonly]="readonly"
-          [placeholder]="placeholder"
-          (onTextChange)="textChanged.emit($event)">
-  <p-header>
-    <div *ngIf="doHideShow" style="float: right;cursor: pointer;color: #585858;" (click)="toolbarVisible = !toolbarVisible;" role="button" aria-label="Expand Menu">
-      <button *ngIf="toolbarVisible" aria-label="Close Toolbar">
-        <i class="fas fa-times"></i>
-      </button>
-      <button *ngIf="!toolbarVisible" aria-label="Reveal Toolbar" style="margin-top:-5px; margin-bottom:-5px;">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-    <div [style.display]="!doHideShow || toolbarVisible ? 'block' : 'none'">
-        <span class="ql-formats">
-          <select aria-label="Text Style" class="ql-header">
-            <option value="1" aria-label="Heading">Heading</option>
-            <option value="2" aria-label="Subheading">Subheading</option>
-            <option selected aria-label="Normal">Normal</option>
-          </select>
-        </span>
-      <span class="ql-formats">
+<div [ngClass]="'p-editor-container'">
+  <div *ngIf="doHideShow" style="float: right;cursor: pointer;color: #585858;" (click)="toolbarVisible = !toolbarVisible;" role="button" aria-label="Expand Menu">
+    <button *ngIf="toolbarVisible" aria-label="Close Toolbar">
+      <i class="fas fa-times"></i>
+    </button>
+    <button *ngIf="!toolbarVisible" aria-label="Reveal Toolbar" style="margin-top:-5px; margin-bottom:-5px;">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  <div #toolbar [style.display]="!doHideShow || toolbarVisible ? 'block' : 'none'">
+    <span class="ql-formats">
+      <select aria-label="Text Style" class="ql-header">
+        <option value="1" aria-label="Heading">Heading</option>
+        <option value="2" aria-label="Subheading">Subheading</option>
+        <option selected aria-label="Normal">Normal</option>
+      </select>
+    </span>
+    <span class="ql-formats">
           <button class="ql-bold" aria-label="Bold"></button>
           <button class="ql-italic" aria-label="Italic"></button>
           <button class="ql-underline" aria-label="Underline"></button>
         </span>
-      <span class="ql-formats">
+    <span class="ql-formats">
           <select aria-label="Color" class="ql-color"></select>
           <select aria-label="Background" class="ql-background"></select>
         </span>
-      <span class="ql-formats">
+    <span class="ql-formats">
           <button class="ql-list" value="ordered" aria-label="Ordered List"></button>
           <button class="ql-list" value="bullet" aria-label="Unordered List"></button>
           <select aria-label="Alignment" class="ql-align">
@@ -39,16 +34,25 @@
             <option value="justify"></option>
           </select>
         </span>
-      <span class="ql-formats">
+    <span class="ql-formats">
           <button class="ql-link" aria-label="Insert Link"></button>
           <button class="ql-image" aria-label="Insert Image"></button>
           <button class="ql-code-block" aria-label="Insert Code Block"></button>
         </span>
-      <span class="ql-formats">
+    <span class="ql-formats">
           <button class="ql-clean" aria-label="Remove Styles"></button>
         </span>
-    </div>
-    <div [style.display]="doHideShow || !toolbarVisible ? 'block' : 'none'">
-    </div>
-  </p-header>
-</p-editor>
+  </div>
+
+  <div #editor [ngStyle]="{width: '100%', height: height, fontFamily: 'Montserrat, sans-serif'}"></div>
+</div>
+
+<!--<p-editor #editor-->
+<!--          [style]="{width: '100%', height: height, fontFamily: 'Montserrat, sans-serif'}"-->
+<!--          [readonly]="readonly"-->
+<!--          [placeholder]="placeholder"-->
+<!--          (onTextChange)="textChanged.emit($event)">-->
+<!--  <p-header>-->
+
+<!--  </p-header>-->
+<!--</p-editor>-->

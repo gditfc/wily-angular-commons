@@ -1,8 +1,17 @@
-import {AfterViewInit, Component, forwardRef, Input, Output, ViewChild} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {Editor} from 'primeng/editor';
-import {DomHandler} from 'primeng/dom';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  forwardRef,
+  Input, OnDestroy,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
+import * as Quill from 'quill';
 
 /**
  * Accessor information for the Rich Text Editor
@@ -14,27 +23,50 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
 };
 
 /**
- * Rich Text Editor that wraps a PrimeNG Editor, which in turn wraps Quill. Allows us to customize.
+ * Rich Text Editor that wraps Quill. Allows us to customize.
  * TODO: Remove formatting on paste (preserve new-lines)
  */
 @Component({
   selector: 'wily-rich-text',
   templateUrl: 'rich-text.component.html',
   styleUrls: ['./rich-text.component.css'],
-  providers: [DomHandler, RICH_TEXT_VALUE_ACCESSOR]
+  providers: [RICH_TEXT_VALUE_ACCESSOR]
 })
-export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
+export class RichTextComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
 
   /**
-   * Toolbar visible?
+   * ViewChild of the editor div
    */
-  toolbarVisible: boolean;
+  @ViewChild('editor')
+  editor: ElementRef<HTMLDivElement>;
+
+  /**
+   * ViewChild of the editor toolbar div
+   */
+  @ViewChild('toolbar')
+  toolbar: ElementRef<HTMLDivElement>;
+
+  /**
+   * Set value
+   * @param value the value to set
+   */
+  @Input('value')
+  set value(value: string) {
+    this._value = value;
+  }
+
+  /**
+   * Get value
+   */
+  get value(): string {
+    return this._value;
+  }
 
   /**
    * Enable hide/show of the Rich Text controls. If false, show them all the time.
    */
   @Input()
-  doHideShow = true;
+  doHideShow = false;
 
   /**
    * Height of the input
@@ -55,63 +87,178 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   placeholder = '';
 
   /**
-   * Event emitted on editor text change. Wrapper around the p-editor onTextChange event,
-   * see PrimeNG documentation for event payload details
+   * Event emitted on editor text change
    */
   @Output()
-  textChanged = new EventEmitter<any>();
+  textChanged = new EventEmitter<{
+    htmlValue: string,
+    textValue: string,
+    delta: any,
+    source: any
+  }>();
 
   /**
-   * Reference to the PrimeNG Editor
+   * Event emitted on selection change
    */
-  @ViewChild('editor', {static: true})
-  editor: Editor;
+  @Output()
+  selectionChanged = new EventEmitter<any>();
+
+  /**
+   * Event emitted when the editor has initialized. Emits the underlying quill instance
+   */
+  @Output()
+  init = new EventEmitter<any>();
+
+  /**
+   * Toolbar visible?
+   */
+  toolbarVisible: boolean;
+
+  /**
+   * The value of the editor
+   * @private
+   */
+  private _value: string;
+
+  /**
+   * Reference to the underlying Quill instance
+   * @private
+   */
+  private quill: any;
+
+  /**
+   * Array of keyup event unlisten functions
+   * @private
+   */
+  private keyupUnlisteners: Array<() => void> = [];
+
+  /**
+   * Function called on change
+   */
+  onChange: (value: string) => void;
+
+  /**
+   * Function called on touch
+   */
+  onTouched: () => void;
+
+  /**
+   * Dependency injection site
+   * @param renderer the Angular renderer
+   * @param changeDetectorRef reference to the Angular change detection service
+   */
+  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
 
   /**
    * Allow a user to point at an image on the internet so that it's not just embedded in the text.
    */
   ngAfterViewInit(): void {
-    this.editor.getQuill().getModule('toolbar').handlers.image = () => {
-      const range = this.editor.getQuill().getSelection();
+    const editorElement = this.editor.nativeElement;
+    const toolbarElement = this.toolbar.nativeElement;
+
+    this.quill = new Quill(editorElement, {
+      modules: { toolbar: toolbarElement },
+      placeholder: this.placeholder,
+      readOnly: this.readonly,
+      theme: 'snow',
+      formats: null,
+      bounds: null,
+      debug: null,
+      scrollingContainer: null
+    });
+
+    if (!!this.value) {
+      this.quill.setContents(this.quill.clipboard.convert(this.value));
+    }
+
+    this.quill.on('text-change', (delta, oldContents, source) => {
+      if (source === 'user') {
+        let html = editorElement.children[0].innerHTML;
+        const text = this.quill.getText().trim();
+        if (html === '<p><br></p>') {
+          html = null;
+        }
+
+        this.textChanged.emit({
+          htmlValue: html,
+          textValue: text,
+          delta: delta,
+          source: source
+        });
+
+        this.onChange(html);
+        this.onTouched();
+      }
+    });
+
+    this.quill.on('selection-change', (range, oldRange, source) => {
+      this.selectionChanged.emit({
+        range: range,
+        oldRange: oldRange,
+        source: source
+      });
+    });
+
+    this.init.emit({
+      editor: this.quill
+    });
+
+    this.quill.getModule('toolbar').handlers.image = () => {
+      const range = this.quill.getSelection();
       const value = prompt('Please enter the image URL');
-      this.editor.getQuill().insertEmbed(range.index, 'image', value, 'user');
+      this.quill.insertEmbed(range.index, 'image', value, 'user');
     };
 
-    this.applyAccessibilityHacks(this.editor.getQuill());
+    this.applyAccessibilityHacks(this.quill);
   }
 
   /**
-   * Pass through function to PrimeNG Editor
-   *
-   * @param fn
+   * Destroy component, invoke keyup unlisten functions
+   */
+  ngOnDestroy(): void {
+    for (const unlistener of this.keyupUnlisteners) {
+      unlistener();
+    }
+
+    this.keyupUnlisteners = [];
+  }
+
+  /**
+   * Register change function
+   * @param fn the function to call on change
    */
   registerOnChange(fn: any): void {
-    this.editor.registerOnChange(fn);
+    this.onChange = fn;
   }
 
   /**
-   * Pass through function to PrimeNG Editor
-   *
-   * @param fn
+   * Register touched function
+   * @param fn the function to call on touch
    */
   registerOnTouched(fn: any): void {
-    this.editor.registerOnTouched(fn);
+    this.onTouched = fn;
   }
 
   /**
-   * Pass through function to PrimeNG Editor
-   *
-   * @param isDisabled
+   * Set disabled state
+   * @param isDisabled whether or not the control is disabled
    */
-  setDisabledState(isDisabled: boolean): void {
-  }
+  setDisabledState(isDisabled: boolean): void { }
 
   /**
-   * Write to the editor. Pass through function.
-   * @param value
+   * Write to the editor
+   * @param value the value to write
    */
   writeValue(value: any): void {
-    this.editor.writeValue(value);
+    this.value = value;
+
+    if (this.quill) {
+      if (!!value) {
+        this.quill.setContents(this.quill.clipboard.convert(value));
+      } else {
+        this.quill.setText('');
+      }
+    }
   }
 
   /**
@@ -191,20 +338,25 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         // Read the css 'content' values and generate aria labels
         const size = window.getComputedStyle(item, ':before').content.replace('\"', '');
         item.setAttribute('aria-label', size);
-        item.addEventListener('keyup', (e) => {
-          if (e.which === 13) {
-            item.click();
-            optionsContainer.setAttribute('aria-hidden', 'true');
-          }
-        });
+
+        this.keyupUnlisteners.push(
+          this.renderer.listen(item, 'keyup', (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+              item.click();
+              optionsContainer.setAttribute('aria-hidden', 'true');
+            }
+          })
+        );
       }
 
-      label.addEventListener('keyup', (e) => {
-        if (e.which === 13) {
-          label.click();
-          optionsContainer.setAttribute('aria-hidden', 'false');
-        }
-      });
+      this.keyupUnlisteners.push(
+        this.renderer.listen(label, 'keyup', (event: KeyboardEvent) => {
+          if (event.key === 'Enter') {
+            label.click();
+            optionsContainer.setAttribute('aria-hidden', 'false');
+          }
+        })
+      );
     }
   }
 }
