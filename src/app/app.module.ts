@@ -1,7 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {WilyDialogLegacyModule} from './modules/dialog-legacy/dialog-legacy.module';
 import { MultiSelectModule } from './modules/multi-select/multi-select.module';
 import {WilyProfilePicModule} from './modules/profile-pic/wily-profile-pic.module';
 import {WilyPaginatorModule} from './modules/paginator/wily-paginator.module';
@@ -25,7 +24,6 @@ import { PopoverModule} from './modules/popover/popover.module';
     imports: [
         BrowserModule,
         TooltipModule,
-        WilyDialogLegacyModule,
         WilyDialogModule,
         WilyProfilePicModule,
         WilyPaginatorModule,
