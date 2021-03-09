@@ -1,5 +1,4 @@
 import {Component, ViewChild} from '@angular/core';
-import {DialogLegacyComponent} from './modules/dialog-legacy/dialog-legacy.component';
 import { Notification } from './modules/notification/models/notification.model';
 import { NotificationService } from './modules/notification/services/notification.service';
 import {PushContainerComponent} from './modules/push-container/push-container.component';
@@ -71,12 +70,6 @@ export class AppComponent {
   obj7: any;
 
   /**
-   * Reference to the dialog component
-   */
-  @ViewChild('dialog')
-  dialog: DialogLegacyComponent;
-
-  /**
    * Push Container component.
    */
   @ViewChild('pushContainerLeft')
@@ -90,14 +83,6 @@ export class AppComponent {
    * Constructor
    */
   constructor(private notificationService: NotificationService) { }
-
-  /**
-   * Open the dialog
-   */
-  showDialog(): void {
-    this.obj = {};
-    this.dialog.open();
-  }
 
   /**
    * Icon Selected event handler.

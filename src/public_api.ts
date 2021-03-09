@@ -5,7 +5,6 @@ export * from './app/modules/profile-pic/wily-profile-pic.module';
 export * from './app/modules/push-container/wily-push-container.module';
 export * from './app/modules/rich-text/wily-rich-text.module';
 export * from './app/modules/safe-pipes/wily-safe-pipes.module';
-export * from './app/modules/dialog-legacy/dialog-legacy.module';
 export * from './app/modules/icons/wily-icons.module';
 export * from './app/modules/endpoint-state/endpoint-state.module';
 export * from './app/modules/dialog/dialog.module';
@@ -17,7 +16,6 @@ export * from './app/modules/paginator/paginator.component';
 export * from './app/modules/profile-pic/profile-pic.component';
 export * from './app/modules/push-container/push-container.component';
 export * from './app/modules/rich-text/rich-text.component';
-export * from './app/modules/dialog-legacy/dialog-legacy.component';
 export * from './app/modules/endpoint-state/components/endpoint-state.component';
 export * from './app/modules/dialog/dialog.component';
 
