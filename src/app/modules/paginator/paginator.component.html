@@ -176,18 +176,18 @@
       </button>
     </ng-template>
     <!-- jump to page -->
-    <p-overlayPanel appendTo="body" styleClass="overlay_alt2 page_container_color brad_3 pad_10" #op>
-      <div class="row_block">
+    <wily-popover #op>
+      <div class="row_block pad_10">
         <div class="text sm">Jump to Page (out of {{getNumberOfPages()}}):</div>
         <div class="center_center mar_top10">
           <input class="access fullwidth_input sm" style="width:50px;" maxlength="4"
                  type="text" aria-label="Page to Jump to" name="pagejump" placeholder="Page" [(ngModel)]="pageJumpInput" />
           <button class="access btn_pulse xsm overlay_alt2" aria-label="Go to page"
-                  (click)="jumpPage();op.hide();">
+                  (click)="jumpPage();op.toggle($event);">
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
       </div>
-    </p-overlayPanel>
+    </wily-popover>
   </div>
 </div>
