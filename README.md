@@ -1,6 +1,6 @@
 # Wily Angular Commons
 
-This package offers a small selection of reusable components that interoperate with the rest of GDIT's Wily offering. Some components are built from scratch, others wrap PrimeNG components to force them to work in a certain manner. If you're interested in contributing or find any bugs, feel free to catch us in GitHub.
+This package offers a small selection of reusable components that interoperate with the rest of GDIT's Wily offering. If you're interested in contributing or find any bugs, feel free to catch us in GitHub.
 
 ## Usage
 

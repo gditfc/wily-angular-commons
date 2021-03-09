@@ -5,8 +5,7 @@ import {map, startWith} from 'rxjs/operators';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 /**
- * Wily Dialog component wraps a PrimeNG dialog to make it behave in the exact way that we want to, along with styles to make it look
- * consistent across all use cases.
+ * Component to display a dialog with dynamic content
  */
 @Component({
   selector: 'wily-dialog',
