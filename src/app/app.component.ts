@@ -22,8 +22,40 @@ export class AppComponent {
   /**
    * List of icons (name/class pairs)
    */
-  readonly icons: Array<{ name: string, class: string }> = [
-    { name: 'fa-address', class: 'fa-address' }
+  readonly icons: Array<{ class: string }> = [
+    { class: 'fa-address' },
+    { class: 'fa-alpha-text' },
+    { class: 'fa-checkbox' },
+    { class: 'fa-date' },
+    { class: 'fa-date-range' },
+    { class: 'fa-divider' },
+    { class: 'fa-document-upload' },
+    { class: 'fa-dropdown' },
+    { class: 'fa-email' },
+    { class: 'fa-existing-license' },
+    { class: 'fa-fein' },
+    { class: 'fa-group-pid' },
+    { class: 'fa-html' },
+    { class: 'fa-icon-header' },
+    { class: 'fa-lab-pid' },
+    { class: 'fa-license' },
+    { class: 'fa-mmis-npi' },
+    { class: 'fa-money' },
+    { class: 'fa-multi-select' },
+    { class: 'fa-npi' },
+    { class: 'fa-numeric-text' },
+    { class: 'fa-person-name' },
+    { class: 'fa-pharmacy-pid' },
+    { class: 'fa-phone' },
+    { class: 'fa-physical-address' },
+    { class: 'fa-physician-pid' },
+    { class: 'fa-pid' },
+    { class: 'fa-radio-buttons' },
+    { class: 'fa-ssn' },
+    { class: 'fa-sidebar-close' },
+    { class: 'fa-sidebar-open' },
+    { class: 'fa-text-area' },
+    { class: 'fa-text-box' }
   ];
 
   /**
