@@ -29,10 +29,14 @@
   </div>
 </div>
 
-<div [style.display]="opened ? '' : 'none'"
-     [attr.aria-hidden]="opened"
+<div [style.display]="render ? '' : 'none'"
+     [attr.aria-hidden]="render"
      class="wily_dropdown_overlay">
-  <div #dropdownList [@openClose]="opened ? 'open' : 'closed'" class="position_absolute">
+  <div #dropdownList
+       [@openClose]="opened ? 'open' : 'close'"
+       (@openClose.start)="onAnimationStart($event)"
+       (@openClose.done)="onAnimationDone($event)"
+       class="position_absolute">
     <div class="wily_dropdown_options page_container_color">
       <ng-container *ngIf="_options | async as options">
         <div class="wily_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">

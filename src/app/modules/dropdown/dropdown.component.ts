@@ -1,4 +1,4 @@
-import {animate, keyframes, style, transition, trigger} from '@angular/animations';
+import { animate, AnimationEvent, style, transition, trigger } from '@angular/animations';
 import {
   ChangeDetectorRef,
   Component,
@@ -28,7 +28,6 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 
 /**
  * Dropdown component
- * TODO: close animation
  */
 @Component({
   selector: 'wily-dropdown',
@@ -36,17 +35,16 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
   styleUrls: ['./dropdown.component.css'],
   animations: [
     trigger('openClose', [
-      transition('closed => open', [
-        animate('200ms ease', keyframes([
-          style({
-            opacity: 0,
-            transform: 'scaleY(0.5)',
-            offset: 0
-          }),
-          style({ opacity: 0, offset: .25 }),
-          style({ opacity: 1, transform: 'scaleY(1)', offset: 1 })
-        ]))
-      ])
+      transition('close => open', [
+        style({ transform: 'scaleY(0.5)', opacity: 0 }),
+        animate('200ms ease',
+          style({ transform: 'scaleY(1)', opacity: 1 }))
+      ]),
+      transition('open => close', [
+        style({ transform: 'scaleY(1)', opacity: 1 }),
+        animate('200ms ease',
+          style({ transform: 'scaleY(0.5)', opacity: 0 }))
+      ]),
     ])
   ],
   providers: [
@@ -229,6 +227,11 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * Unique ID to assign to the dropdown
    */
   readonly dropdownId;
+
+  /**
+   * Whether or not the dropdown should be rendered
+   */
+  render = false;
 
   /**
    * Whether or not the dropdown is open
@@ -482,7 +485,24 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     event.stopImmediatePropagation();
 
     if (!this.disabled) {
+      this.render = true;
       this.opened = true;
+    }
+  }
+
+  /**
+   * Close the dropdown list
+   */
+  closeDropdown(): void {
+    this.opened = false;
+  }
+
+  /**
+   * Position and resize dropdown list on animation start if toState is open
+   * @param event the Angular AnimationEvent
+   */
+  onAnimationStart(event: AnimationEvent): void {
+    if (event.toState === 'open') {
       this.resizeDropdownList();
       this.setSelectionIndex();
 
@@ -506,10 +526,13 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Close the dropdown list
+   * Stop rendering dropdown list on animation done if toState is close
+   * @param event the Angular AnimationEvent
    */
-  closeDropdown(): void {
-    this.opened = false;
+  onAnimationDone(event: AnimationEvent): void {
+    if (event.toState === 'close') {
+      this.render = false;
+    }
   }
 
   /**
