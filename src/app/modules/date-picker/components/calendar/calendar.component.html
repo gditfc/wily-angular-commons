@@ -96,7 +96,7 @@
           </button>
         </ng-template>
       </ng-container>
-      <button (click)="closed.emit()"
+      <button #doneButton (click)="closed.emit()"
               class="access btn sm overlay_alt2 bg_green_alt mar_5 hov_glow"
               aria-label="Save date selection">
         <i class="fas fa-check mar_right5"></i><span class="text bold">Done</span>
