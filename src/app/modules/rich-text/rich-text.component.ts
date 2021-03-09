@@ -167,6 +167,9 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
       scrollingContainer: null
     });
 
+    // disable tabbing in editor
+    delete this.quill.getModule('keyboard').bindings['9'];
+
     if (!!this.value) {
       this.quill.setContents(this.quill.clipboard.convert(this.value));
     }
