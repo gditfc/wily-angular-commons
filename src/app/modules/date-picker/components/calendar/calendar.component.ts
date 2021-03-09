@@ -77,6 +77,12 @@ export class CalendarComponent implements OnDestroy, OnInit {
   yearSelect: ElementRef<HTMLSelectElement>;
 
   /**
+   * ViewChild of the done button
+   */
+  @ViewChild('doneButton')
+  doneButton: ElementRef<HTMLButtonElement>;
+
+  /**
    * QueryList of the calendar date buttons for the currently selected month/year
    */
   @ViewChildren('calendarDate')
@@ -422,6 +428,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
     this.handleDateSelection(this.currentDate);
     this._selectedMonth.next(this.currentDate.month);
     this._selectedYear.next(this.currentDate.year);
+    this.doneButton.nativeElement.focus();
   }
 
   /**
