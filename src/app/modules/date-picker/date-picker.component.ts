@@ -450,7 +450,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
 
     leftPosition = left;
     if ((left + this.calendarWidth) > window.innerWidth) {
-      leftPosition = left - ((left + this.calendarWidth) - window.innerWidth) - 5;
+      leftPosition = left - ((left + this.calendarWidth) - window.innerWidth) - 10;
     }
 
     this.renderer.setStyle(this.calendarDiv.nativeElement, 'transform-origin', transformOrigin);
