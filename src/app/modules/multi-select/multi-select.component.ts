@@ -29,7 +29,6 @@ declare type MultiSelectOptionInput = Array<MultiSelectOption | MultiSelectOptio
 /**
  * Multi-select component
  * TODO: close animation
- * TODO: prevent width-wise clipping (also affects dropdown)
  */
 @Component({
   selector: 'wily-multi-select',

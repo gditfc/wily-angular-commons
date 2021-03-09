@@ -233,7 +233,7 @@ export class PopoverComponent implements OnInit {
    */
   private positionPopover(): void {
     const {left, top, bottom} = (this.target as HTMLElement).getBoundingClientRect();
-    const {offsetHeight} = this.container;
+    const {offsetHeight, offsetWidth} = this.container;
     const popoverBottomLeftAnchor = bottom;
     const availableBottomSpace = window.innerHeight - popoverBottomLeftAnchor;
     const availableTopSpace = top;
@@ -257,8 +257,13 @@ export class PopoverComponent implements OnInit {
       transformOrigin = 'top left';
     }
 
+    let leftPosition = left;
+    if ((left + offsetWidth) > window.innerWidth) {
+      leftPosition = left - ((left + offsetWidth) - window.innerWidth) - 10;
+    }
+
     this.renderer.setStyle(this.container, 'transform-origin', transformOrigin);
-    this.renderer.setStyle(this.container, 'left', `${left}px`);
+    this.renderer.setStyle(this.container, 'left', `${leftPosition}px`);
     this.renderer.setStyle(this.container, 'top', positionTop);
   }
 }
