@@ -20,6 +20,13 @@ export class AppComponent {
   title = 'app';
 
   /**
+   * List of icons (name/class pairs)
+   */
+  readonly icons: Array<{ name: string, class: string }> = [
+    { name: 'fa-address', class: 'fa-address' }
+  ];
+
+  /**
    * Object to be used to pop a dialog
    */
   obj: any;
