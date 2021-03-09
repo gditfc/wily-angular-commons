@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TooltipModule} from 'primeng/tooltip';
 import {DialogComponent} from './dialog.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {ObserversModule} from '@angular/cdk/observers';
@@ -9,12 +8,11 @@ import {ObserversModule} from '@angular/cdk/observers';
   declarations: [
     DialogComponent
   ],
-    imports: [
-      CommonModule,
-      TooltipModule,
-      A11yModule,
-      ObserversModule
-    ],
+  imports: [
+    CommonModule,
+    A11yModule,
+    ObserversModule
+  ],
   exports: [
     DialogComponent
   ]

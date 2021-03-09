@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {DialogService} from '../../shared/services/dialog.service';
-import {fromEvent, Observable} from 'rxjs/index';
+import {fromEvent, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
