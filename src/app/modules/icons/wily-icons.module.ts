@@ -6,7 +6,6 @@ import { WilyIconsLight } from './models/wily-icons-light.model';
 import { WilyIconsSolid } from './models/wily-icons-solid.model';
 import { IconSelectComponent } from './components/icon-select.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { WilyDialogLegacyModule } from '../dialog-legacy/dialog-legacy.module';
 import { WilyDialogModule } from '../dialog/dialog.module';
 
 /**
@@ -23,7 +22,6 @@ const FontAwesome = window['FontAwesome'];
         FormsModule,
         ReactiveFormsModule,
         TooltipModule,
-        WilyDialogLegacyModule,
         WilyDialogModule
     ],
   exports: [
