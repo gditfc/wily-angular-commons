@@ -3,7 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  forwardRef,
+  forwardRef, HostListener,
   Input, OnDestroy,
   Output,
   Renderer2,
@@ -113,6 +113,11 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
    * Toolbar visible?
    */
   toolbarVisible: boolean;
+
+  /**
+   * Whether or not the editor has focus
+   */
+  editorFocus = false;
 
   /**
    * The value of the editor
@@ -261,6 +266,17 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
       } else {
         this.quill.setText('');
       }
+    }
+  }
+
+  /**
+   * Listen for editor focus on tab
+   * @param event
+   */
+  @HostListener('window:keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent): void {
+    if (event.key === 'Tab') {
+      this.editorFocus = document.activeElement.classList.contains('ql-editor');
     }
   }
 
