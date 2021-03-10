@@ -5,18 +5,18 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {PopoverModule} from '../popover/popover.module';
+import {WilyPopoverModule} from '../popover/popover.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        PopoverModule
-    ],
+  imports: [
+    CommonModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    WilyPopoverModule
+  ],
   declarations: [
     PaginatorComponent
   ],
