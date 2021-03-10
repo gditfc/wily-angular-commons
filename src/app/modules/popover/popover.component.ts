@@ -1,5 +1,5 @@
 import { animate, AnimationEvent, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 
 /**
  * Component to display a popover with custom content
@@ -23,7 +23,7 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output, Renderer2
     ])
   ]
 })
-export class PopoverComponent implements OnInit {
+export class PopoverComponent implements OnDestroy, OnInit {
 
   /**
    * The offset of the popover from its target (in pixels)
@@ -104,6 +104,12 @@ export class PopoverComponent implements OnInit {
   private container: HTMLDivElement;
 
   /**
+   * Array of escape keyup unlisten functions
+   * @private
+   */
+  private escapeKeyUpUnlisteners: Array<() => void> = [];
+
+  /**
    * Dependency injection site
    * @param renderer the Angular renderer
    */
@@ -113,6 +119,13 @@ export class PopoverComponent implements OnInit {
    * Init component
    */
   ngOnInit(): void { }
+
+  /**
+   * Destroy component, clean up event listeners
+   */
+  ngOnDestroy(): void {
+    this.removeEventListeners();
+  }
 
   /**
    * Close popover on click
@@ -149,19 +162,6 @@ export class PopoverComponent implements OnInit {
   }
 
   /**
-   * Close popover on escape keyup
-   * @param event the keyup KeyboardEvent
-   */
-  @HostListener('window:keyup', ['$event'])
-  onKeyUp(event: KeyboardEvent): void {
-    const { key } = event;
-
-    if (this.visible && (key === 'Esc' || key === 'Escape')) {
-      this.close();
-    }
-  }
-
-  /**
    * Re-position popover on window resize
    */
   @HostListener('window:resize')
@@ -194,6 +194,7 @@ export class PopoverComponent implements OnInit {
   onAnimationStart(event: AnimationEvent): void {
     if (event.toState === 'open') {
       this.container = event.element;
+      this.addEventListeners();
       this.positionPopover();
       this.opened.emit();
     }
@@ -206,6 +207,7 @@ export class PopoverComponent implements OnInit {
   onAnimationDone(event: AnimationEvent): void {
     if (event.toState === 'close') {
       this.render = false;
+      this.removeEventListeners();
       this.closed.emit();
     }
   }
@@ -265,5 +267,75 @@ export class PopoverComponent implements OnInit {
     this.renderer.setStyle(this.container, 'transform-origin', transformOrigin);
     this.renderer.setStyle(this.container, 'left', `${leftPosition}px`);
     this.renderer.setStyle(this.container, 'top', positionTop);
+  }
+
+  /**
+   * Add escape keyup listeners to all focusable elements to close
+   * the popover
+   * @private
+   */
+  private addEventListeners(): void {
+    const focusableElements = this.getFocusableElements(this.container);
+
+    for (const element of focusableElements) {
+      this.renderer.setAttribute(element, 'data-dialog-close-override', 'true');
+      this.escapeKeyUpUnlisteners.push(
+        this.renderer.listen(element, 'keyup', (event: KeyboardEvent) => {
+          if (this.visible) {
+            event.stopImmediatePropagation();
+
+            const { key } = event;
+
+            if (key === 'Esc' || key === 'Escape') {
+              this.close();
+            }
+          }
+        })
+      );
+    }
+  }
+
+  /**
+   * Get all focusable child elements of the input node
+   * @param node the node to query for focusable children
+   * @param elements the found focusable elements
+   * @private
+   */
+  private getFocusableElements(node: Node, elements: Array<Element> = []): Array<any> {
+    if (node.hasChildNodes()) {
+      node.childNodes.forEach(child => elements.concat(this.getFocusableElements(child, elements)));
+
+      if ('tabIndex' in node) {
+        const { tabIndex } = node as HTMLOrSVGElement;
+
+        if (tabIndex >= 0) {
+          elements.push(node);
+        }
+      }
+
+      return elements;
+    } else {
+      if ('tabIndex' in node) {
+        const { tabIndex } = node as HTMLOrSVGElement;
+
+        if (tabIndex >= 0) {
+          elements.push(node);
+        }
+      }
+
+      return elements;
+    }
+  }
+
+  /**
+   * Invoke escape keyup unlisten functions
+   * @private
+   */
+  private removeEventListeners(): void {
+    for (const unlistener of this.escapeKeyUpUnlisteners) {
+      unlistener();
+    }
+
+    this.escapeKeyUpUnlisteners = [];
   }
 }

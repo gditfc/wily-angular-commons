@@ -1,5 +1,4 @@
-<div *ngIf="render"
-     class="wily_popover_overlay">
+<div *ngIf="render" class="wily_popover_overlay">
   <div [cdkTrapFocus]="render && visible"
        [cdkTrapFocusAutoCapture]="true"
        [@openClose]="visible ? 'open' : 'close'"
