@@ -2,6 +2,7 @@
   <!-- editor toolbar -->
   <div class="wily_richtext_toolbar overlay_alt2" #toolbar>
     <span class="ql-formats">
+      <div *ngIf="!editorFocus" class="ql-header-placeholder">Style</div>
       <select aria-label="Text Style" class="access ql-header">
         <option class="h1" value="1" aria-label="Heading">Heading</option>
         <option class="h2" value="2" aria-label="Subheading">Subheading</option>
@@ -20,6 +21,7 @@
 <!--      <select aria-label="Background" class="ql-background"></select>-->
 <!--    </span>-->
     <span class="ql-formats">
+      <div *ngIf="!editorFocus" class="ql-align-placeholder">Align</div>
       <button class="access ql-list" value="ordered" aria-label="Ordered List"><i class="fas fa-list-ol fa-fw"></i></button>
       <button class="access ql-list" value="bullet" aria-label="Unordered List"><i class="fas fa-list-ul fa-fw"></i></button>
       <select aria-label="Alignment" class="access ql-align">

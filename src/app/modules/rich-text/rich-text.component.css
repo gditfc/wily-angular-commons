@@ -23,6 +23,7 @@
   align-items:center;
   color:inherit;
   background-color:inherit;
+  position:relative;
 }
 
 .ql-formats button {
@@ -49,16 +50,36 @@
 
 .ql-header, .ql-align {
   padding:3px;
-  font-size:14px;
+  font-size:13px;
   border-radius:3px;
   border:none;
   background-color:inherit;
+  font-weight:600;
 }
 .ql-header:not(:focus), .ql-align:not(:focus) {
   background-color:rgba(128,128,128,0.15);
 }
 .ql-header:not(:hover), .ql-align:not(:hover) {
   background-color:inherit;
+}
+
+.ql-header-placeholder {
+  position:absolute;
+  font-size:13px;
+  left:8px;
+  font-weight:600;
+  opacity:0.5;
+}
+/*.ql-editor:focus > .ql-header-placeholder {*/
+/*  color:red;*/
+/*}*/
+
+.ql-align-placeholder {
+  position:absolute;
+  font-size:13px;
+  left:60px;
+  font-weight:600;
+  opacity:0.5;
 }
 
 .ql-header .h1 {font-size:18px; font-weight:500; }
