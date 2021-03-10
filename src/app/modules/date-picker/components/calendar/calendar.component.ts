@@ -127,7 +127,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
 
     const {year} = this.currentDate;
     this._validSelectionInterval.next({
-      start: dateRange?.minDate ?? new Date(year - 50, 0, 1),
+      start: dateRange?.minDate ?? new Date(year - 100, 0, 1),
       end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
     });
   }
@@ -306,7 +306,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
       start = minYear;
       end = maxYear;
     } else {
-      start = currentYear - 50;
+      start = currentYear - 100;
       end = currentYear + 50;
     }
 
@@ -345,7 +345,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
         if (!selectionInterval) {
           const {year} = this.currentDate;
           selectionInterval = {
-            start: new Date(year - 50, 0, 1),
+            start: new Date(year - 100, 0, 1),
             end: new Date(year + 50, 11, 31)
           };
 
