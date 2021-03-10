@@ -117,7 +117,7 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
   /**
    * Whether or not the editor has focus
    */
-  editorFocus = false;
+  editorFocused = false;
 
   /**
    * The value of the editor
@@ -271,13 +271,21 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
 
   /**
    * Listen for editor focus on tab
-   * @param event
+   * @param event the keyup KeyboardEvent
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
     if (event.key === 'Tab') {
-      this.editorFocus = document.activeElement.classList.contains('ql-editor');
+      this.editorFocused = document.activeElement.classList.contains('ql-editor');
     }
+  }
+
+  /**
+   * Listen for editor focus on click
+   */
+  @HostListener('window:click')
+  onClick(): void {
+    this.editorFocused = document.activeElement.classList.contains('ql-editor');
   }
 
   /**
