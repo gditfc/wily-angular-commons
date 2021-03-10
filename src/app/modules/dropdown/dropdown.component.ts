@@ -396,7 +396,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Close the dropdown list on escape keyup
+   * Close the dropdown list on tab and handle arrow key navigation
    * @param event the keyup KeyboardEvent
    */
   @HostListener('window:keyup', ['$event'])

@@ -424,7 +424,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Close the multi-select list on escape keyup
+   * Close the multi-select list on tab and handle arrow key navigation
    * @param event the keyup KeyboardEvent
    */
   @HostListener('window:keyup', ['$event'])
@@ -436,10 +436,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
         this.onArrowKeyUp(key);
       } else {
         if (this.opened) {
-          if (key === 'Esc' || key === 'Escape') {
-            this.closeMultiSelect();
-            this.multiSelectButton.nativeElement.focus();
-          } else if (key === 'Tab') {
+          if (key === 'Tab') {
             this.closeMultiSelect();
           }
         }
@@ -467,6 +464,19 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
           this.multiSelectButton.nativeElement.focus();
         }
       }
+    }
+  }
+
+  /**
+   * Close multi-select on escape keyup and focus on multi-select button
+   * @param event the keyup KeyboardEvent
+   */
+  onEscapeKeyUp(event: KeyboardEvent): void {
+    if (this.opened) {
+      event.stopImmediatePropagation();
+
+      this.closeMultiSelect();
+      this.multiSelect.nativeElement.focus();
     }
   }
 

@@ -12,7 +12,7 @@
           [disabled]="disabled"
           [attr.aria-label]="ariaLabel"
           [attr.aria-expanded]="opened"
-          [attr.data-dialog-close-override]="opened ? true : ''"
+          [attr.data-dialog-close-override]="true"
           class="access page_container_color wily_dropdown_input">
     <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">
       <ng-container *ngIf="!!template else noCustomTemplate">
