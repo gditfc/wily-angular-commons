@@ -406,15 +406,8 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
 
       if (DropdownComponent.ARROW_KEYS.includes(key)) {
         this.onArrowKeyUp(key);
-      } else {
-        if (this.opened) {
-          if (key === 'Esc' || key === 'Escape') {
-            this.closeDropdown();
-            this.dropdownButton.nativeElement.focus();
-          } else if (key === 'Tab') {
-            this.closeDropdown();
-          }
-        }
+      } else if (key === 'Tab') {
+        this.closeDropdown();
       }
     }
   }
@@ -439,6 +432,19 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
           this.dropdownButton.nativeElement.focus();
         }
       }
+    }
+  }
+
+  /**
+   * Close dropdown on escape keyup and focus on dropdown button
+   * @param event the keyup KeyboardEvent
+   */
+  onEscapeKeyUp(event: KeyboardEvent): void {
+    if (this.opened) {
+      event.stopImmediatePropagation();
+
+      this.closeDropdown();
+      this.dropdownButton.nativeElement.focus();
     }
   }
 

@@ -7,10 +7,12 @@
           aria-haspopup="listbox"
           (click)="openDropdown($event)"
           (focus)="setSelectionIndex()"
+          (keyup.escape)="onEscapeKeyUp($event)"
           [id]="dropdownId"
           [disabled]="disabled"
           [attr.aria-label]="ariaLabel"
           [attr.aria-expanded]="opened"
+          [attr.data-dialog-close-override]="opened ? true : ''"
           class="access page_container_color wily_dropdown_input">
     <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">
       <ng-container *ngIf="!!template else noCustomTemplate">
@@ -51,10 +53,12 @@
                           (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
+                          (keyup.escape)="onEscapeKeyUp($event)"
                           [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="{ 'unselected' : (_internalValue | async) !== groupOption.value }"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           [attr.data-value]="groupOption.value"
+                          [attr.data-dialog-close-override]="true"
                           [disabled]="groupOption.disabled"
                           class="wily_dropdown_option" role="option" tabindex="0">
                     <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
@@ -67,10 +71,12 @@
                         (click)="onDropdownOptionSelect(option.value, option.disabled)"
                         (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
                         (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                        (keyup.escape)="onEscapeKeyUp($event)"
                         [id]="dropdownId + '-' + option.value"
                         [ngClass]="{ 'unselected' : (_internalValue | async) !== option.value }"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         [attr.data-value]="option.value"
+                        [attr.data-dialog-close-override]="true"
                         [disabled]="option.disabled"
                         class="wily_dropdown_option" role="option" tabindex="0">
                   <ng-container *ngTemplateOutlet="template; context: option.dataContext"></ng-container>
@@ -89,11 +95,13 @@
                           (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
+                          (keyup.escape)="onEscapeKeyUp($event)"
                           [id]="dropdownId + '-' + groupOption.value"
                           [ngClass]="{ 'unselected' : (_internalValue | async) !== groupOption.value }"
                           [attr.aria-label]="groupOption.label"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           [attr.data-value]="groupOption.value"
+                          [attr.data-dialog-close-override]="true"
                           [disabled]="groupOption.disabled"
                           class="wily_dropdown_option"
                           role="option" tabindex="0">
@@ -107,10 +115,12 @@
                         (click)="onDropdownOptionSelect(option.value, option.disabled)"
                         (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
                         (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                        (keyup.escape)="onEscapeKeyUp($event)"
                         [id]="dropdownId + '-' + option.value"
                         [ngClass]="{ 'unselected' : (_internalValue | async) !== option.value }"
                         [attr.aria-selected]="(_internalValue | async) === option.value"
                         [attr.data-value]="option.value"
+                        [attr.data-dialog-close-override]="true"
                         [disabled]="option.disabled"
                         class="wily_dropdown_option"
                         role="option" tabindex="0">
