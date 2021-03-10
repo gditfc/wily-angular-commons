@@ -20,4 +20,4 @@ import { OrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-number-p
   exports: [DatePickerComponent, CalendarComponent],
   providers: [OrdinalNumberPipe]
 })
-export class DatePickerModule { }
+export class WilyDatePickerModule { }

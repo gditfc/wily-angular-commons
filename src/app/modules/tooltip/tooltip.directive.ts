@@ -188,7 +188,7 @@ export class TooltipDirective implements OnDestroy {
 
             if (this.tooltipOutOfWindow()) {
               this.renderer.removeClass(this.tooltip, 'right');
-              this.renderer.addClass(this.tooltip, 'bottom')
+              this.renderer.addClass(this.tooltip, 'bottom');
               this.alignBottom();
             }
           }
@@ -250,7 +250,7 @@ export class TooltipDirective implements OnDestroy {
           if (this.tooltipOutOfWindow()) {
             this.renderer.removeClass(this.tooltip, 'left');
             this.renderer.addClass(this.tooltip, 'top');
-            this.alignTop()
+            this.alignTop();
 
             if (this.tooltipOutOfWindow()) {
               this.renderer.removeClass(this.tooltip, 'top');
@@ -293,9 +293,9 @@ export class TooltipDirective implements OnDestroy {
    * @private
    */
   private alignTop(): void {
-    let hostOffset = this.getHostOffset();
-    let left = hostOffset.left + (this.element.nativeElement.offsetWidth - this.tooltip.offsetWidth) / 2;
-    let top = hostOffset.top - this.tooltip.offsetHeight - this.TOOLTIP_OFFSET;
+    const hostOffset = this.getHostOffset();
+    const left = hostOffset.left + (this.element.nativeElement.offsetWidth - this.tooltip.offsetWidth) / 2;
+    const top = hostOffset.top - this.tooltip.offsetHeight - this.TOOLTIP_OFFSET;
 
     this.renderer.setStyle(this.tooltip, 'left', `${left}px`);
     this.renderer.setStyle(this.tooltip, 'top', `${top}px`);
@@ -306,9 +306,9 @@ export class TooltipDirective implements OnDestroy {
    * @private
    */
   private alignBottom(): void {
-    let hostOffset = this.getHostOffset();
-    let left = hostOffset.left + (this.element.nativeElement.offsetWidth - this.tooltip.offsetWidth) / 2;
-    let top = hostOffset.top + this.element.nativeElement.offsetHeight + this.TOOLTIP_OFFSET;
+    const hostOffset = this.getHostOffset();
+    const left = hostOffset.left + (this.element.nativeElement.offsetWidth - this.tooltip.offsetWidth) / 2;
+    const top = hostOffset.top + this.element.nativeElement.offsetHeight + this.TOOLTIP_OFFSET;
 
     this.renderer.setStyle(this.tooltip, 'left', `${left}px`);
     this.renderer.setStyle(this.tooltip, 'top', `${top}px`);
@@ -320,8 +320,8 @@ export class TooltipDirective implements OnDestroy {
    */
   private getHostOffset(): { left: number, top: number } {
     const { left, top } = this.element.nativeElement.getBoundingClientRect();
-    let targetLeft = left + TooltipDirective.getWindowScrollLeft();
-    let targetTop = top + TooltipDirective.getWindowScrollTop();
+    const targetLeft = left + TooltipDirective.getWindowScrollLeft();
+    const targetTop = top + TooltipDirective.getWindowScrollTop();
 
     return { left: targetLeft, top: targetTop };
   }
@@ -359,7 +359,7 @@ export class TooltipDirective implements OnDestroy {
     const overflowRegex = /(auto|scroll)/;
     const overflowCheck = (node: any) => {
       overflowRegex.lastIndex = 0;
-      let styleDeclaration = window['getComputedStyle'](node, null);
+      const styleDeclaration = window['getComputedStyle'](node, null);
       return overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) ||
              overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) ||
              overflowRegex.test(styleDeclaration.getPropertyValue('overflowY'));
@@ -367,11 +367,11 @@ export class TooltipDirective implements OnDestroy {
 
     const parents = this.getParentElements(this.element.nativeElement);
     for (const parent of parents) {
-      let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
+      const scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
       if (scrollSelectors) {
-        let selectors = scrollSelectors.split(',');
-        for (let selector of selectors) {
-          let el = parent.querySelector(selector);
+        const selectors = scrollSelectors.split(',');
+        for (const selector of selectors) {
+          const el = parent.querySelector(selector);
           if (el && overflowCheck(el)) {
             this.scrollUnlisteners.push(
               this.renderer.listen(el, 'scroll', () => this.deleteTooltip())

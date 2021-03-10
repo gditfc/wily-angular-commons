@@ -7,4 +7,4 @@ import { MultiSelectComponent } from './multi-select.component';
   imports: [CommonModule],
   exports: [MultiSelectComponent]
 })
-export class MultiSelectModule { }
+export class WilyMultiSelectModule { }

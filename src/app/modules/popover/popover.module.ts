@@ -11,4 +11,4 @@ import { PopoverComponent} from './popover.component';
     ],
   exports: [PopoverComponent]
 })
-export class PopoverModule { }
+export class WilyPopoverModule { }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TooltipModule } from '../tooltip/tooltip.module';
+import { WilyTooltipModule } from '../tooltip/tooltip.module';
 import { WilyIconsRegular } from './models/wily-icons-regular.model';
 import { WilyIconsLight } from './models/wily-icons-light.model';
 import { WilyIconsSolid } from './models/wily-icons-solid.model';
@@ -21,7 +21,7 @@ const FontAwesome = window['FontAwesome'];
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        TooltipModule,
+        WilyTooltipModule,
         WilyDialogModule
     ],
   exports: [

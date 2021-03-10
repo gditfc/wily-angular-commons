@@ -10,4 +10,4 @@ import { TooltipDirective } from './tooltip.directive';
   exports: [TooltipDirective],
   providers: [TooltipDirective]
 })
-export class TooltipModule { }
+export class WilyTooltipModule { }
