@@ -9,4 +9,4 @@ import { NotificationService } from './services/notification.service';
   exports: [NotificationComponent],
   providers: [NotificationService]
 })
-export class NotificationModule { }
+export class WilyNotificationModule { }

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {WilySafePipesModule} from '../safe-pipes/wily-safe-pipes.module';
 import {ProfilePicComponent} from './profile-pic.component';
-import {TooltipModule} from "../tooltip/tooltip.module";
+import {WilyTooltipModule} from "../tooltip/tooltip.module";
 
 @NgModule({
   declarations: [
@@ -11,7 +11,7 @@ import {TooltipModule} from "../tooltip/tooltip.module";
     imports: [
         CommonModule,
         WilySafePipesModule,
-        TooltipModule
+        WilyTooltipModule
     ],
   exports: [
     ProfilePicComponent

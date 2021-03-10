@@ -13,4 +13,4 @@ import { DropdownComponent} from './dropdown.component';
     DropdownComponent
   ]
 })
-export class DropdownModule { }
+export class WilyDropdownModule { }
