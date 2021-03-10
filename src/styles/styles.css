@@ -62,7 +62,7 @@ input[disabled] {
 
 /* TODO: move to wily */
 .wily_tooltip {
-  min-width: 100px;
+  min-width: 75px;
   max-width: 200px;
   background-color: #2f2f2f;
   color: #fff;
