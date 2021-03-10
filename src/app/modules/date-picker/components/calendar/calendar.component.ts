@@ -12,9 +12,17 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { addDays, endOfMonth, Interval, isWithinInterval, subDays } from 'date-fns';
+import { addDays, endOfMonth, isWithinInterval, subDays } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+/**
+ * Interface representing a date interval
+ */
+export declare interface Interval {
+  start: Date | number;
+  end: Date | number;
+}
 
 /**
  * Interface representing a Date broken down by date/month/year
