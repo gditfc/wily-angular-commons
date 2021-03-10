@@ -69,10 +69,9 @@
   left:8px;
   font-weight:600;
   opacity:0.5;
+  user-select:none;
+  z-index:2;
 }
-/*.ql-editor:focus > .ql-header-placeholder {*/
-/*  color:red;*/
-/*}*/
 
 .ql-align-placeholder {
   position:absolute;
@@ -80,6 +79,8 @@
   left:60px;
   font-weight:600;
   opacity:0.5;
+  user-select:none;
+  z-index:2;
 }
 
 .ql-header .h1 {font-size:18px; font-weight:500; }
