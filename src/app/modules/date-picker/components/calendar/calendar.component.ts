@@ -373,16 +373,14 @@ export class CalendarComponent implements OnDestroy, OnInit {
   }
 
   /**
-   * Emit closed event on escape keyup
+   * Handle window keyup events
    * @param event the keyup KeyboardEvent
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
     const {key} = event;
 
-    if (key === 'Esc' || key === 'Escape') {
-      this.closed.emit();
-    } else if (CalendarComponent.ARROW_KEYS.includes(key)) {
+    if (CalendarComponent.ARROW_KEYS.includes(key)) {
       this.onArrowKeyUp(key);
     }
   }

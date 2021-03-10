@@ -9,7 +9,9 @@
       <div class="col size_1 mar_5">
         <select #yearSelect
                 [ngModel]="_selectedYear | async"
+                [attr.data-dialog-close-override]="true"
                 (change)="_selectedYear.next(+yearSelect.value)"
+                (keyup.escape)="closed.emit()"
                 class="access input sm page_container_color"
                 aria-label="Select a year">
           <option *ngFor="let year of validYearRange$ | async"
@@ -22,6 +24,8 @@
         <select #monthSelect
                 [ngModel]="_selectedMonth | async"
                 (change)="_selectedMonth.next(+monthSelect.value)"
+                (keyup.escape)="closed.emit()"
+                [attr.data-dialog-close-override]="true"
                 class="access input sm page_container_color"
                 aria-label="Select a month">
           <option value="0">January</option>
@@ -60,7 +64,9 @@
             <ng-container *ngIf="dayInMonth.selectable else disabledDate">
               <button #calendarDate
                       (click)="handleDateSelection(dayInMonth)"
+                      (keyup.escape)="closed.emit()"
                       [attr.data-date]="dayInMonth.date"
+                      [attr.data-dialog-close-override]="true"
                       [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)"
                       [ngClass]="{
                         'bg_blue_alt': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),
@@ -89,14 +95,19 @@
             <span class="text bold">Select Today</span>
           </button>
         <ng-template #selectTodayButton>
-          <button (click)="selectToday()"
+          <button (keyup.escape)="closed.emit()"
+                  (click)="selectToday()"
+                  [attr.data-dialog-close-override]="true"
                   class="access btn sm overlay_alt1 hov_bg mar_5"
                   aria-label="Reset date selection to today's date">
             <span class="text bold">Select Today</span>
           </button>
         </ng-template>
       </ng-container>
-      <button #doneButton (click)="closed.emit()"
+      <button #doneButton
+              (keyup.escape)="closed.emit()"
+              (click)="closed.emit()"
+              [attr.data-dialog-close-override]="true"
               class="access btn sm overlay_alt2 bg_green_alt mar_5 hov_glow"
               aria-label="Save date selection">
         <i class="fas fa-check mar_right5"></i><span class="text bold">Done</span>

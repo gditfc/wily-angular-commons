@@ -11,14 +11,22 @@ export class DialogService {
   private escapeListener: (event) => void = event => {
     if (event.key === 'Esc' || event.key === 'Escape') {
       if (this.dialogs && this.dialogs.length) {
-        const topDialog = this.dialogs.pop();
-        topDialog.close();
-        event.stopPropagation();
+        let closeOverride = null;
+        if ('getAttribute' in event.target) {
+          closeOverride = (event.target as HTMLElement).getAttribute(
+            'data-dialog-close-override'
+          );
+        }
+
+        if (closeOverride === null || closeOverride === '') {
+          const topDialog = this.dialogs.pop();
+          topDialog.close();
+          event.stopPropagation();
+        }
       }
     }
   }
 
-  // TODO: Figure out how to intercept escape listeners from calendar/dropdown to prevent dialog closing
   registerDialog(dialog: DialogComponent): void {
     if (dialog) {
       if (this.dialogs.length === 0) {
