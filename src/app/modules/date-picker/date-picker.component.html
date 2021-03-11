@@ -2,15 +2,13 @@
 <div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md overlay_alt2 page_container_color'"
      class="wily_datepicker" [style.filter]="disabled ? 'brightness(.95)' : ''">
   <ng-container *ngIf="!disabled else disabledDatePicker">
-    <!-- TODO: update aria label to accept input, insert input: '%input%, enter in format mm/dd/yyyy' -->
-    <!-- TODO: default input to 'Date' -->
     <input [(ngModel)]="dateString"
            (keydown)="filterInput($event)"
            (input)="handleInput()"
            (blur)="onTouched(); handleBlur()"
            type="text" placeholder="mm/dd/yyyy"
            maxlength="10"
-           [attr.aria-label]="'%input%' + ', enter in format mm/dd/yyyy'"
+           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
            class="access wily_datepicker_input" />
     <button (click)="openCalendar($event)"
             [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'overlay_alt2 bg_blue_alt'"
@@ -20,12 +18,11 @@
     </button>
   </ng-container>
   <ng-template #disabledDatePicker>
-    <!-- TODO: update aria label here as well -->
     <input disabled
            [ngModel]="dateString"
            type="text" placeholder="mm/dd/yyyy"
            maxlength="10"
-           [attr.aria-label]="'%input%' + ', enter in format mm/dd/yyyy'"
+           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
            class="access wily_datepicker_input" />
     <button disabled class="access btn wily_datepicker_button"
             [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'overlay_alt2 bg_blue_alt'"
