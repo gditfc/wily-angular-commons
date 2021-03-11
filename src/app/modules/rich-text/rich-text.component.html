@@ -3,7 +3,7 @@
   <div class="wily_richtext_toolbar overlay_alt2" #toolbar>
     <span class="ql-formats">
       <div *ngIf="!editorFocused" class="ql-header-placeholder">Style</div>
-      <select aria-label="Text Style" class="access ql-header">
+      <select aria-label="Text Style" class="access ql-header" wilyTooltip="Text Style" tooltipPosition="top">
         <option class="h1" value="1" aria-label="Heading">Heading</option>
         <option class="h2" value="2" aria-label="Subheading">Subheading</option>
         <option selected aria-label="Normal">Normal</option>
@@ -11,9 +11,15 @@
     </span>
     <div class="overlay_alt2 vr mar_x5"></div>
     <span class="ql-formats">
-      <button class="access ql-bold" aria-label="Bold"><i class="fas fa-bold fa-fw"></i></button>
-      <button class="access ql-italic" aria-label="Italic"><i class="fas fa-italic fa-fw"></i></button>
-      <button class="access ql-underline" aria-label="Underline"><i class="fas fa-underline fa-fw"></i></button>
+      <button class="access ql-bold" aria-label="Bold" wilyTooltip="Bold" tooltipPosition="top">
+        <i class="fas fa-bold fa-fw"></i>
+      </button>
+      <button class="access ql-italic" aria-label="Italic" wilyTooltip="Italic" tooltipPosition="top">
+        <i class="fas fa-italic fa-fw"></i>
+      </button>
+      <button class="access ql-underline" aria-label="Underline" wilyTooltip="Underline" tooltipPosition="top">
+        <i class="fas fa-underline fa-fw"></i>
+      </button>
     </span>
     <div class="overlay_alt2 vr mar_x5"></div>
 <!--    <span class="ql-formats">-->
@@ -22,9 +28,15 @@
 <!--    </span>-->
     <span class="ql-formats">
       <div *ngIf="!editorFocused" class="ql-align-placeholder">Align</div>
-      <button class="access ql-list" value="ordered" aria-label="Ordered List"><i class="fas fa-list-ol fa-fw"></i></button>
-      <button class="access ql-list" value="bullet" aria-label="Unordered List"><i class="fas fa-list-ul fa-fw"></i></button>
-      <select aria-label="Alignment" class="access ql-align">
+      <button class="access ql-list" value="ordered" aria-label="Ordered List"
+              wilyTooltip="Ordered List" tooltipPosition="top">
+        <i class="fas fa-list-ol fa-fw"></i>
+      </button>
+      <button class="access ql-list" value="bullet" aria-label="Unordered List"
+              wilyTooltip="Unordered List" tooltipPosition="top">
+        <i class="fas fa-list-ul fa-fw"></i>
+      </button>
+      <select aria-label="Alignment" class="access ql-align" wilyTooltip="Alignment" tooltipPosition="top">
         <option selected>Left</option>
         <option value="center">Center</option>
         <option value="right">Right</option>
@@ -33,14 +45,19 @@
     </span>
     <div class="overlay_alt2 vr mar_x5"></div>
     <span class="ql-formats">
-      <button class="access ql-link" aria-label="Insert Link"><i class="fas fa-link fa-fw"></i></button>
+      <button class="access ql-link" aria-label="Insert Link" wilyTooltip="Insert Link" tooltipPosition="top">
+        <i class="fas fa-link fa-fw"></i>
+      </button>
 <!--      <button class="ql-image" aria-label="Insert Image"></button>-->
 <!--      <button class="ql-code-block" aria-label="Insert Code Block"></button>-->
     </span>
     <div class="overlay_alt2 vr mar_x5"></div>
     <span class="ql-formats">
-      <button class="access ql-clean" aria-label="Remove Styles"><i class="fas fa-remove-format fa-fw"></i></button>
+      <button class="access ql-clean" aria-label="Remove Styles" wilyTooltip="Remove Styles" tooltipPosition="top">
+        <i class="fas fa-remove-format fa-fw"></i>
+      </button>
     </span>
+    <div class="overlay_alt2 toolbar_wrap_separator"></div>
   </div>
 
   <div class="wily_richtext_editor overlay_alt2" #editor [ngStyle]="{height: height}"></div>

@@ -4,10 +4,20 @@
 }
 
 .wily_richtext_toolbar {
-  padding:5px 3px;
+  padding:0 3px;
   display:flex;
   flex-wrap:wrap;
   background-color:inherit;
+  overflow:hidden;
+  position:relative;
+}
+
+.toolbar_wrap_separator {
+  width:100%;
+  border-width:1px 0 0 0;
+  position:absolute;
+  left:0;
+  top:36px;
 }
 
 .wily_richtext_editor {
@@ -18,7 +28,7 @@
 
 /* TOOLBAR STYLES */
 .ql-formats {
-  margin:0 5px;
+  margin:5px 3px;
   display:flex;
   align-items:center;
   color:inherit;
@@ -40,6 +50,7 @@
   align-items:center;
   justify-content:center;
   color:inherit;
+  margin:0 2px;
 }
 .ql-formats button svg {
   opacity:0.8;
@@ -47,6 +58,10 @@
 .ql-formats button:not(:hover) {
   background-color:transparent;
 }
+.ql-formats button.ql-active {
+  background-color:rgba(128,128,128,0.15);
+}
+
 
 .ql-header, .ql-align {
   padding:3px;
@@ -71,16 +86,18 @@
   opacity:0.5;
   user-select:none;
   z-index:2;
+  pointer-events:none;
 }
 
 .ql-align-placeholder {
   position:absolute;
   font-size:13px;
-  left:60px;
+  left:68px;
   font-weight:600;
   opacity:0.5;
   user-select:none;
   z-index:2;
+  pointer-events:none;
 }
 
 .ql-header .h1 {font-size:18px; font-weight:500; }
