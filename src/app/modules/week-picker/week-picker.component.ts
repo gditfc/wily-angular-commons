@@ -19,7 +19,7 @@ export class WeekPickerComponent implements OnInit {
    * Class list to apply to the week picker button
    */
   @Input()
-  calendarButtonClassList = 'overlay_alt2 bg_blue_alt';
+  calendarButtonClassList = 'overlay_alt2 bg_blue_alt brad_3';
 
   /**
    * Whether or not the week picker is disabled

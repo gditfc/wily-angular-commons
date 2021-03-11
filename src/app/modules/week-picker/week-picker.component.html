@@ -1,28 +1,49 @@
-<!-- date picker input -->
-<div #datePickerDiv [ngClass]="inputClassList"
-     class="wily_datepicker" [style.filter]="disabled ? 'brightness(.95)' : ''">
-  <ng-container *ngIf="!disabled else disabledDatePicker">
-    <input type="text" placeholder="mm/dd/yyyy"
-           maxlength="10"
-           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
-           class="access wily_datepicker_input" />
-    <button class="access btn wily_datepicker_button"
-            aria-label="Open the calendar" aria-haspopup="dialog">
-      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
-    </button>
-  </ng-container>
-  <ng-template #disabledDatePicker>
-    <input disabled
-           type="text" placeholder="mm/dd/yyyy"
-           maxlength="10"
-           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
-           class="access wily_datepicker_input" />
-    <button disabled class="access btn wily_datepicker_button"
-            [ngClass]="calendarButtonClassList"
-            aria-label="Open the calendar" aria-haspopup="dialog">
-      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
-    </button>
-  </ng-template>
+<!-- week picker input -->
+<div class="wily_datepicker" style="cursor:default;"
+     [ngClass]="inputClassList"
+     [style.filter]="disabled ? 'brightness(.95)' : ''">
+  <!-- TODO: hook up aria-expanded when opened -->
+  <button aria-haspopup="dialog"
+          [disabled]="disabled"
+          [attr.aria-label]="ariaLabel + ', open calendar to select week'"
+          [attr.aria-expanded]="false"
+          [attr.data-dialog-close-override]="true"
+          class="access page_container_color wily_datepicker_input">
+    <ng-container *ngIf="true else placeholderTemplate">
+      mm/dd/yyyy - mm/dd/yyyy
+    </ng-container>
+    <ng-template #placeholderTemplate>
+      <div class="wily_dropdown_placeholder">Select a week...</div>
+    </ng-template>
+  </button>
+  <div class="wily_datepicker_button"
+       [ngClass]="calendarButtonClassList"
+       aria-label="Open the calendar" aria-haspopup="dialog">
+    <i class="fas fa-calendar-day"></i>
+  </div>
+<!--  <ng-container *ngIf="!disabled else disabledDatePicker">-->
+<!--    <input type="text" placeholder="mm/dd/yyyy"-->
+<!--           maxlength="10"-->
+<!--           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"-->
+<!--           class="access wily_datepicker_input" />-->
+<!--    <button class="access btn wily_datepicker_button"-->
+<!--            [ngClass]="calendarButtonClassList"-->
+<!--            aria-label="Open the calendar" aria-haspopup="dialog">-->
+<!--      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>-->
+<!--    </button>-->
+<!--  </ng-container>-->
+<!--  <ng-template #disabledDatePicker>-->
+<!--    <input disabled-->
+<!--           type="text" placeholder="mm/dd/yyyy"-->
+<!--           maxlength="10"-->
+<!--           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"-->
+<!--           class="access wily_datepicker_input" />-->
+<!--    <button disabled class="access btn wily_datepicker_button"-->
+<!--            [ngClass]="calendarButtonClassList"-->
+<!--            aria-label="Open the calendar" aria-haspopup="dialog">-->
+<!--      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>-->
+<!--    </button>-->
+<!--  </ng-template>-->
 </div>
 
 <!-- calendar widget -->
