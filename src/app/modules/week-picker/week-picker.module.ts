@@ -12,6 +12,7 @@ import { WeekPickerComponent } from './week-picker.component';
     OrdinalNumberPipeModule,
     FormsModule,
     A11yModule
-  ]
+  ],
+  exports: [WeekPickerComponent]
 })
 export class WilyWeekPickerModule { }
