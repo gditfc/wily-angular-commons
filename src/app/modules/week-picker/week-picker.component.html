@@ -3,22 +3,23 @@
      [ngClass]="inputClassList"
      [style.filter]="disabled ? 'brightness(.95)' : ''">
   <!-- TODO: hook up aria-expanded when opened -->
+  <!-- TODO: open calendar when clicking this -->
   <button aria-haspopup="dialog"
           [disabled]="disabled"
           [attr.aria-label]="ariaLabel + ', open calendar to select week'"
           [attr.aria-expanded]="false"
           [attr.data-dialog-close-override]="true"
           class="access page_container_color wily_datepicker_input">
+    <!-- TODO: show this when dates selected -->
     <ng-container *ngIf="true else placeholderTemplate">
       mm/dd/yyyy - mm/dd/yyyy
     </ng-container>
+    <!-- TODO: show placeholder when empty -->
     <ng-template #placeholderTemplate>
       <div class="wily_dropdown_placeholder">Select a week...</div>
     </ng-template>
   </button>
-  <div class="wily_datepicker_button"
-       [ngClass]="calendarButtonClassList"
-       aria-label="Open the calendar" aria-haspopup="dialog">
+  <div class="wily_datepicker_button" [ngClass]="calendarButtonClassList">
     <i class="fas fa-calendar-day"></i>
   </div>
 <!--  <ng-container *ngIf="!disabled else disabledDatePicker">-->
