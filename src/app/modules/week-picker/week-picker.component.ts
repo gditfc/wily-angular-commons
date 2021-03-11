@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/index';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'wily-week-picker',
@@ -51,8 +51,14 @@ export class WeekPickerComponent implements OnInit {
     'Saturday',
   ];
 
+  /**
+   * BehaviorSubject tracking the currently selected month
+   */
   readonly _selectedMonth = new BehaviorSubject(0);
 
+  /**
+   * BehaviorSubject tracking the currently selected year
+   */
   readonly _selectedYear = new BehaviorSubject(1970);
 
   readonly fullMonth$: any;
