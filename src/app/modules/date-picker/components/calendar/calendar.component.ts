@@ -202,7 +202,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
   );
 
   /**
-   * The range of selectable years
+   * The range of selectable years as an Observable
    */
   readonly validYearRange$: Observable<Array<number>> = this._validSelectionInterval.pipe(
     map(selectionInterval => CalendarComponent.generateYearRange(

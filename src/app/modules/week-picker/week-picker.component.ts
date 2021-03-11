@@ -1,9 +1,8 @@
 import { AnimationEvent } from '@angular/animations';
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { getWeek, isWithinInterval } from 'date-fns';
-import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
-import { Observable } from 'rxjs/index';
+import { add, getWeek, getWeeksInMonth, sub } from 'date-fns';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 /**
@@ -41,6 +40,27 @@ declare interface MetaDate {
    * Whether or not the day is selectable
    */
   selectable: boolean;
+}
+
+/**
+ * Interface representing a week of the year with metadata
+ */
+declare interface MetaWeek {
+
+  /**
+   * The week of the year (starting at 1)
+   */
+  week: number;
+
+  /**
+   * Whether or not the week can be selected in the week picker
+   */
+  selectable: boolean;
+
+  /**
+   * The numeric dates of the days in the week
+   */
+  dates: Array<number>;
 }
 
 /**
@@ -171,7 +191,42 @@ export class WeekPickerComponent implements OnInit {
     })
   );
 
-  readonly fullMonth$: any;
+  /**
+   * The range of selectable years as an Observable
+   */
+  readonly validYearRange$: Observable<Array<number>> = this._validSelectionInterval.pipe(
+    map(selectionInterval => WeekPickerComponent.generateYearRange(
+      selectionInterval?.start?.getFullYear() ?? null,
+      selectionInterval?.end?.getFullYear() ?? null,
+      this.currentDate.year
+    ))
+  );
+
+  /**
+   * An array of MetaWeeks representing a month as an Observable
+   */
+  readonly fullMonth$: Observable<Array<MetaWeek>> = combineLatest([
+    this._selectedMonth,
+    this._selectedYear,
+    this._validSelectionInterval
+  ]).pipe(
+    map(([month, year, selectionInterval]) => {
+      let fullMonth: Array<MetaWeek> = null;
+
+      if (selectionInterval) {
+        fullMonth = WeekPickerComponent.generateMonth(
+          month,
+          year,
+          {
+            startWeek: getWeek(selectionInterval.start),
+            endWeek: getWeek(selectionInterval.end)
+          }
+        );
+      }
+
+      return fullMonth;
+    })
+  );
 
   /**
    * Whether or not to render the week picker
@@ -228,16 +283,67 @@ export class WeekPickerComponent implements OnInit {
     return range;
   }
 
-  constructor() {
-    const currentDate = new Date();
-    this.currentDate = {
-      day: currentDate.getDay(),
-      date: currentDate.getDate(),
-      week: getWeek(currentDate),
-      month: currentDate.getMonth(),
-      year: currentDate.getFullYear(),
-      selectable: false
+  /**
+   * Generate a month with week and selectable status metadata
+   * @param month the month to generate
+   * @param year the year of the month to generate
+   * @param selectionWeekInterval the interval representing the
+   *                              minimum to the maximum week of the year
+   * @private
+   */
+  private static generateMonth(
+    month: number,
+    year: number,
+    selectionWeekInterval: { startWeek: number, endWeek: number }
+  ): Array<{ week: number, selectable: boolean, dates: Array<number> }> {
+    const metaMonth: Array<{ week: number, selectable: boolean, dates: Array<number> }> = [];
+    const weeksInMonth = getWeeksInMonth(month);
+    const startOfMonth = new Date(year, month, 1);
+    let scrollDate = sub(startOfMonth, { days: startOfMonth.getDay() });
+
+    for (let i = 0; i < 6; i++) {
+      const { date, week } = this.getMetaDate(scrollDate);
+      metaMonth.push({
+        week,
+        selectable: ((i + 1) <= weeksInMonth) &&
+                    (week >= selectionWeekInterval.startWeek) &&
+                    (week <= selectionWeekInterval.endWeek),
+        dates: []
+      });
+
+      for (let j = 0; j <= 7; j++) {
+        metaMonth[i].dates.push(date + j);
+      }
+
+      scrollDate = add(scrollDate, { weeks: 1 });
+    }
+
+
+    return metaMonth;
+  }
+
+  /**
+   * Get the input date as a MetaDate
+   * @param date the date to transform
+   * @param selectable whether or not the date is selectable
+   * @private
+   */
+  private static getMetaDate(date: Date, selectable = false): MetaDate {
+    return {
+      day: date.getDay(),
+      date: date.getDate(),
+      week: getWeek(date),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+      selectable: selectable
     };
+  }
+
+  /**
+   * Dependency injection site
+   */
+  constructor() {
+    this.currentDate = WeekPickerComponent.getMetaDate(new Date(), false);
   }
 
   /**
