@@ -1,6 +1,9 @@
 :host {
   width:100%;
 }
+
+/************* WEEK PICKER CSS ***************/
+
 .wily_datepicker_overlay {
   position:fixed;
   top:0;
@@ -72,4 +75,75 @@
 }
 .wily_datepicker:hover .wily_datepicker_button > svg {
   transform:scale(1.2);
+}
+
+
+/*********** CALENDAR CSS *************/
+
+.wily_datepicker_options {
+  border-radius: 3px;
+  line-height: 1.5;
+  overflow:hidden;
+  /*margin: 8px 0 0 1px;*/
+  /* padding: 5px; */
+  list-style-type: none;
+  font-weight: normal;
+  z-index: 4;
+  width: 300px;
+  background: rgba(255,255,255,0);
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  /*transform-origin: top left;*/
+}
+
+.wily_datepicker_weekday {
+  font-size:12px;
+  font-weight:700;
+  min-width:30px;
+  height:32px;
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content:center;
+  opacity:0.8;
+  user-select:none;
+}
+
+.wily_datepicker_day {
+  font-size:12px;
+  font-weight:400;
+  min-width:14%;
+  height:32px;
+  display:flex;
+  flex:1;
+  border-radius:3px;
+  /*overflow:hidden;*/
+  user-select:none;
+  background-color:transparent;
+}
+.wily_datepicker_day.today {
+  background-color:rgba(128,128,128,0.1);
+}
+/* styles clickable days */
+.wily_datepicker_day .day_button {
+  cursor:pointer;
+  user-select:none;
+  border:none;
+  display:flex;
+  flex:1;
+  width:100%;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  border-radius:3px;
+}
+/* styles unclickable days from other months */
+.wily_datepicker_day .day_disabled {
+  opacity:0.3;
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content:center;
 }
