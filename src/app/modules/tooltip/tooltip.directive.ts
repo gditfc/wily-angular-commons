@@ -2,6 +2,7 @@ import {Directive, ElementRef, HostListener, Input, OnDestroy, Renderer2} from '
 
 /**
  * Directive to create a tooltip around the host element
+ * TODO: Open/Close animation with AnimationFactory
  */
 @Directive({
   selector: '[wilyTooltip]'

@@ -87,6 +87,12 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   }
 
   /**
+   * Value to use as the date picker input's aria label
+   */
+  @Input()
+  ariaLabel = 'Date';
+
+  /**
    * Dependency injection site
    * @param renderer the Angular renderer
    * @param changeDetectorRef the Angular change detector
