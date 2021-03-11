@@ -51,9 +51,6 @@
 <div *ngIf="render"
      class="wily_datepicker_overlay">
   <div #calendarDiv
-       [@openClose]="!!showCalendar ? 'open' : 'close'"
-       (@openClose.start)="onAnimationStart($event)"
-       (@openClose.done)="onAnimationDone($event)"
        class="position_absolute">
     <div #calendarWidgetDiv
          cdkTrapFocus
@@ -116,25 +113,24 @@
             <div class="wily_datepicker_weekday">Sa</div>
           </div>
           <!-- days -->
-          <div class="row wrap space_between">
-            <ng-container *ngFor="let dayInMonth of fullMonth$ | async">
-              <div [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
-                   class="wily_datepicker_day">
-                <ng-container *ngIf="dayInMonth.selectable else disabledDate">
-                  <button #calendarDate
-                          [attr.data-date]="dayInMonth.date"
-                          [attr.data-dialog-close-override]="true"
-                          [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)"
-                          [ngClass]="{
-                        'bg_blue_alt': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),
-                        'overlay_alt1 hov_bg': (dayInMonth.date !== selectedDate?.date || dayInMonth.month !== selectedDate?.month || dayInMonth.year !== selectedDate?.year)
-                      }"
-                          class="access day_button">
-                    {{dayInMonth.date}}
-                  </button>
+          <ng-container *ngFor="let number of [0,1,2,3,4,5]">
+            <button class="access list_btn width100 row v_center">
+              <ng-container *ngFor="let number of [0,1,2,3,4,5,6]">
+                <div class="wily_datepicker_day">
+                  <div class="day_button">2</div>
+                </div>
+              </ng-container>
+            </button>
+          </ng-container>
+
+
+
+
+<!--            <ng-container *ngFor="let dayInMonth of fullMonth$ | async">-->
+<!--              <div [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"-->
+<!--                   class="wily_datepicker_day">-->
+<!--                <ng-container *ngIf="dayInMonth.selectable else disabledDate">-->
 <!--                  <button #calendarDate-->
-<!--                          (click)="handleDateSelection(dayInMonth)"-->
-<!--                          (keyup.escape)="closed.emit()"-->
 <!--                          [attr.data-date]="dayInMonth.date"-->
 <!--                          [attr.data-dialog-close-override]="true"-->
 <!--                          [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)"-->
@@ -145,37 +141,53 @@
 <!--                          class="access day_button">-->
 <!--                    {{dayInMonth.date}}-->
 <!--                  </button>-->
-                </ng-container>
-                <ng-template #disabledDate>
-                  <div class="day_disabled">
-                    {{dayInMonth.date}}
-                  </div>
-                </ng-template>
-              </div>
-            </ng-container>
-          </div>
+<!--&lt;!&ndash;                  <button #calendarDate&ndash;&gt;-->
+<!--&lt;!&ndash;                          (click)="handleDateSelection(dayInMonth)"&ndash;&gt;-->
+<!--&lt;!&ndash;                          (keyup.escape)="closed.emit()"&ndash;&gt;-->
+<!--&lt;!&ndash;                          [attr.data-date]="dayInMonth.date"&ndash;&gt;-->
+<!--&lt;!&ndash;                          [attr.data-dialog-close-override]="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                          [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)"&ndash;&gt;-->
+<!--&lt;!&ndash;                          [ngClass]="{&ndash;&gt;-->
+<!--&lt;!&ndash;                        'bg_blue_alt': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),&ndash;&gt;-->
+<!--&lt;!&ndash;                        'overlay_alt1 hov_bg': (dayInMonth.date !== selectedDate?.date || dayInMonth.month !== selectedDate?.month || dayInMonth.year !== selectedDate?.year)&ndash;&gt;-->
+<!--&lt;!&ndash;                      }"&ndash;&gt;-->
+<!--&lt;!&ndash;                          class="access day_button">&ndash;&gt;-->
+<!--&lt;!&ndash;                    {{dayInMonth.date}}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </button>&ndash;&gt;-->
+<!--                </ng-container>-->
+<!--                <ng-template #disabledDate>-->
+<!--                  <div class="day_disabled">-->
+<!--                    {{dayInMonth.date}}-->
+<!--                  </div>-->
+<!--                </ng-template>-->
+<!--              </div>-->
+<!--            </ng-container>-->
         </div>
         <div class="overlay_alt2 hr mar_5"></div>
         <div class="row space_between">
+          <button [attr.data-dialog-close-override]="true"
+                  class="access btn sm overlay_alt2 mar_5 hov_glow"
+                  aria-label="Select last week">
+            <span class="text bold">Last Week</span>
+          </button>
           <ng-container *ngIf="currentDate.selectable">
             <button disabled
                     class="access btn sm overlay_alt1 hov_bg mar_5"
                     aria-label="Reset date selection to today's date">
-              <span class="text bold">Select Today</span>
+              <span class="text bold">Reset</span>
             </button>
             <ng-template #selectTodayButton>
               <button [attr.data-dialog-close-override]="true"
                       class="access btn sm overlay_alt1 hov_bg mar_5"
                       aria-label="Reset date selection to today's date">
-                <span class="text bold">Select Today</span>
+                <span class="text bold">Reset</span>
               </button>
             </ng-template>
           </ng-container>
-          <button #doneButton
-                  [attr.data-dialog-close-override]="true"
-                  class="access btn sm overlay_alt2 bg_green_alt mar_5 hov_glow"
-                  aria-label="Save date selection">
-            <i class="fas fa-check mar_right5"></i><span class="text bold">Done</span>
+          <button [attr.data-dialog-close-override]="true"
+                  class="access btn sm overlay_alt2 mar_5 hov_glow"
+                  aria-label="Select next week">
+            <span class="text bold">Next Week</span>
           </button>
         </div>
       </div>
