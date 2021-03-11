@@ -2,12 +2,12 @@
 <div class="wily_datepicker" style="cursor:default;"
      [ngClass]="inputClassList"
      [style.filter]="disabled ? 'brightness(.95)' : ''">
-  <!-- TODO: hook up aria-expanded when opened -->
   <!-- TODO: open calendar when clicking this -->
-  <button aria-haspopup="dialog"
+  <button (click)="openCalendar()"
+          aria-haspopup="dialog"
           [disabled]="disabled"
           [attr.aria-label]="ariaLabel + ', open calendar to select week'"
-          [attr.aria-expanded]="false"
+          [attr.aria-expanded]="render && showCalendar"
           [attr.data-dialog-close-override]="true"
           class="access page_container_color wily_datepicker_input">
     <!-- TODO: show this when dates selected -->

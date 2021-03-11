@@ -1,13 +1,110 @@
 import { AnimationEvent } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { getWeek, isWithinInterval } from 'date-fns';
+import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
+import { Observable } from 'rxjs/index';
+import { map } from 'rxjs/operators';
 
+/**
+ * Interface representing a Date broken down by day/date/week/month/year
+ * with extended metadata
+ */
+declare interface MetaDate {
+
+  /**
+   * The day of the week (starting at 0)
+   */
+  day: number;
+
+  /**
+   * The day of the month (starting at 1)
+   */
+  date: number;
+
+  /**
+   * The week of the year
+   */
+  week: number;
+
+  /**
+   * The month (starting at 0)
+   */
+  month: number;
+
+  /**
+   * The full year
+   */
+  year: number;
+
+  /**
+   * Whether or not the day is selectable
+   */
+  selectable: boolean;
+}
+
+/**
+ * Component to allow a user to select a week
+ */
 @Component({
   selector: 'wily-week-picker',
   templateUrl: './week-picker.component.html',
-  styleUrls: ['./week-picker.component.css']
+  styleUrls: ['./week-picker.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => WeekPickerComponent),
+      multi: true
+    }
+  ]
 })
 export class WeekPickerComponent implements OnInit {
+
+  /**
+   * Set the value of the week picker
+   * @param value the value to set
+   */
+  @Input('value')
+  set value(value: { start: Date, end: Date }) {
+    if (value?.start && value?.end) {
+      const startWeek = getWeek(value.start);
+      const endWeek = getWeek(value.end);
+
+      if (startWeek !== endWeek) {
+        throw new Error('Start and end must be part of the same week of the year');
+      } else if (value.start.getDay() !== 0 || value.end.getDay() !== 6) {
+        throw new Error('Start must be the beginning of its week and end must be the end of its week');
+      }
+
+      this._internalValue.next(value);
+    } else {
+      this._internalValue.next(null);
+    }
+
+    this._value = value;
+  }
+
+  /**
+   * Whether or not the week picker is disabled
+   */
+  @Input()
+  disabled = false;
+
+  /**
+   * Set the valid date boundary for the week picker
+   * @param dateRange
+   */
+  @Input('dateRange')
+  set dateRange(dateRange: { start?: Date, end?: Date }) {
+    if (dateRange?.start > dateRange?.end) {
+      throw new Error('Start date must be less than end date');
+    }
+
+    this._validSelectionInterval.next({
+      start: dateRange?.start ?? new Date(this.currentDate.year - 100, 0, 1),
+      end: dateRange?.end ?? new Date(this.currentDate.year + 50, 11, 31)
+    });
+  }
 
   /**
    * Class list to apply to the date range input
@@ -22,12 +119,6 @@ export class WeekPickerComponent implements OnInit {
   calendarButtonClassList = 'overlay_alt2 bg_blue_alt brad_3';
 
   /**
-   * Whether or not the week picker is disabled
-   */
-  @Input()
-  disabled = false;
-
-  /**
    * The aria label to apply to the date range input
    */
   @Input()
@@ -36,7 +127,7 @@ export class WeekPickerComponent implements OnInit {
   /**
    * The current date
    */
-  readonly currentDate: any = { selectable: true };
+  readonly currentDate: MetaDate;
 
   /**
    * Array of days of the week
@@ -52,6 +143,16 @@ export class WeekPickerComponent implements OnInit {
   ];
 
   /**
+   * BehaviorSubject tracking the value of the week picker
+   */
+  readonly _internalValue = new BehaviorSubject<{ start: Date, end: Date }>(null);
+
+  /**
+   * BehaviorSubject tracking the selectable date range
+   */
+  readonly _validSelectionInterval = new BehaviorSubject<{ start: Date, end: Date }>(null);
+
+  /**
    * BehaviorSubject tracking the currently selected month
    */
   readonly _selectedMonth = new BehaviorSubject(0);
@@ -60,6 +161,15 @@ export class WeekPickerComponent implements OnInit {
    * BehaviorSubject tracking the currently selected year
    */
   readonly _selectedYear = new BehaviorSubject(1970);
+
+  /**
+   * The selected week of the year as an Observable
+   */
+  readonly selectedWeek$: Observable<number> = this._internalValue.pipe(
+    map(value => {
+      return !value?.start ? 0 : getWeek(value.start);
+    })
+  );
 
   readonly fullMonth$: any;
 
@@ -73,14 +183,121 @@ export class WeekPickerComponent implements OnInit {
    */
   showCalendar = false;
 
+  // TODO: Delete
   selectedDate: any;
 
-  constructor() { }
+  /**
+   * Subscription for the combination of value and valid selection interval
+   * @private
+   */
+  private readonly subscription = new Subscription();
 
+  /**
+   * The value of the week picker
+   * @private
+   */
+  private _value;
+
+  /**
+   * Generate an Array of numbers representing the span of years between the input
+   * @param minYear the start of the range
+   * @param maxYear the end of the range
+   * @param currentYear the current year
+   */
+  private static generateYearRange(minYear, maxYear, currentYear): Array<number> {
+    let start: number, end: number;
+    if (!minYear && maxYear) {
+      start = maxYear = 50;
+      end = maxYear;
+    } else if (minYear && !maxYear) {
+      start = minYear;
+      end = minYear + 50;
+    } else if (minYear && maxYear) {
+      start = minYear;
+      end = maxYear;
+    } else {
+      start = currentYear - 100;
+      end = currentYear + 50;
+    }
+
+    const range: Array<number> = [];
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+
+    return range;
+  }
+
+  constructor() {
+    const currentDate = new Date();
+    this.currentDate = {
+      day: currentDate.getDay(),
+      date: currentDate.getDate(),
+      week: getWeek(currentDate),
+      month: currentDate.getMonth(),
+      year: currentDate.getFullYear(),
+      selectable: false
+    };
+  }
+
+  /**
+   * Get the value of the week picker
+   */
+  get value(): { start: Date, end: Date } {
+    return this._value;
+  }
+
+  /**
+   * Init component, set up subscription to compare the week picker value
+   * with the valid selection interval
+   */
   ngOnInit(): void {
+    this.subscription.add(
+      combineLatest([this._internalValue, this._validSelectionInterval]).subscribe(
+        ([value, validSelectionInterval]) => {
+          let selectionInterval = validSelectionInterval;
+
+          if (!selectionInterval) {
+            const {year} = this.currentDate;
+            selectionInterval = {
+              start: new Date(year - 100, 0, 1),
+              end: new Date(year + 50, 11, 31)
+            };
+          }
+
+          const minimumWeek = getWeek(selectionInterval.start);
+          const maximumWeek = getWeek(selectionInterval.end);
+          const currentWeek = this.currentDate.week;
+
+          this.currentDate.selectable = (currentWeek >= minimumWeek) && (currentWeek <= maximumWeek);
+
+          if (value) {
+            const valueWeek = getWeek(value.start);
+
+            if (valueWeek) {
+              this._selectedMonth.next(value.start.getMonth());
+              this._selectedYear.next(value.start.getFullYear());
+            } else {
+              this._value.next(null);
+              this.selectedDate = null;
+            }
+          } else {
+            this._selectedMonth.next(this.currentDate.month);
+            this._selectedYear.next(this.currentDate.year);
+          }
+        })
+    );
   }
 
   onAnimationStart(event: AnimationEvent): void { }
 
   onAnimationDone(event: AnimationEvent): void { }
+
+  /**
+   * Open the week picker calendar
+   */
+  openCalendar(): void {
+    this.render = true;
+    this.showCalendar = true;
+  }
 }
