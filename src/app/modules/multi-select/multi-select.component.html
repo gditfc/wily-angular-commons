@@ -14,20 +14,24 @@
           [attr.data-dialog-close-override]="true"
           class="access page_container_color wily_multiselect_input">
     <ng-container *ngIf="selectionCount$ | async as selectionCount else placeholderTemplate">
-      <div class="pill text xsm brad_3 bg_grey mar_right10" style="display:inline-block">
+      <div class="pill brad_3 bg_grey" style="margin-right:1em; font-size:0.75em; padding:0.3em 0.65em;">
         {{selectionCount}}
       </div>
       <ng-container *ngIf="dataContextMap$ | async as dataContextMap">
-        <ng-container *ngIf="!!template else noCustomTemplate">
-          <div class="wily_multiselect_selection" *ngFor="let value of _internalValue | async">
-            <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + value]"></ng-container>
-          </div>
-        </ng-container>
-        <ng-template #noCustomTemplate>
-          <div class="wily_multiselect_selection" *ngFor="let value of _internalValue | async">
-            {{dataContextMap['' + value]['$implicit'] || dataContextMap['' + value]['label']}}
-          </div>
-        </ng-template>
+        <div style="display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+          <ng-container *ngIf="!!template else noCustomTemplate">
+            <div class="wily_multiselect_selection" *ngFor="let value of _internalValue | async">
+              <div class="v_center">
+                <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + value]"></ng-container>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #noCustomTemplate>
+            <div class="wily_multiselect_selection" *ngFor="let value of _internalValue | async">
+              {{dataContextMap['' + value]['$implicit'] || dataContextMap['' + value]['label']}}
+            </div>
+          </ng-template>
+        </div>
       </ng-container>
     </ng-container>
     <ng-template #placeholderTemplate>

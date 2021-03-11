@@ -140,9 +140,7 @@
                     [classList]="'form_input page_container_color'"
                     [disabled]="false">
                     <ng-template let-colorClass="colorClass" let-label>
-                      <div class="v_center">
-                        <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
-                      </div>
+                      <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
                     </ng-template>
                   </wily-dropdown>
                   <div class="pad_10"></div>
@@ -197,7 +195,7 @@
                            ]
                          }
                        ]"
-                    [disabled]="false">
+                    [disabled]="false" [classList]="'input md overlay_alt2 page_container_color'">
                     <ng-template let-iconClass="iconClass" let-label>
                       <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
                     </ng-template>

@@ -19,6 +19,8 @@
 
 /* dropdown button style */
 .wily_multiselect_input {
+  display:flex;
+  align-items:center;
   position:absolute;
   top:0;
   left:0;
@@ -63,7 +65,7 @@
   font-size:0.75em;
   margin-right:5px;
   border-radius:3px;
-  padding:3px 5px;
+  padding:0.3em 0.5em;
   background-color:rgba(100,100,128,0.1);
   display:inline-block;
 }
