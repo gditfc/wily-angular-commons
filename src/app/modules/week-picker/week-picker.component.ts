@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   add,
@@ -13,6 +13,7 @@ import {
 } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, shareReplay, withLatestFrom } from 'rxjs/operators';
+import { PopoverComponent } from '../popover/popover.component';
 
 /**
  * Interface representing a Date broken down by day/date/week/month/year
@@ -155,6 +156,12 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    */
   @Input()
   ariaLabel = 'Date';
+
+  /**
+   * ViewChild of the calendar popover
+   */
+  @ViewChild('calendarPopover')
+  calendarPopover: PopoverComponent;
 
   /**
    * The current date
@@ -475,9 +482,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Open the week picker calendar
+   * Open the week picker popover
+   * @param event the event to pass to the popover
    */
-  openCalendar(): void {
+  openCalendar(event: Event): void {
     this.render = true;
     this.showCalendar = true;
 
@@ -495,6 +503,8 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       this._selectedMonth.next(this.value.start.getMonth());
       this._selectedMonth.next(this.value.start.getFullYear());
     }
+
+    this.calendarPopover.toggle(event);
   }
 
   /**
