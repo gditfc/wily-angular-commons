@@ -1,7 +1,7 @@
 import { AnimationEvent } from '@angular/animations';
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { add, getWeek, getWeeksInMonth, sub } from 'date-fns';
+import { add, getWeek, getWeeksInMonth, isWithinInterval, sub } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -218,8 +218,8 @@ export class WeekPickerComponent implements OnInit {
           month,
           year,
           {
-            startWeek: getWeek(selectionInterval.start),
-            endWeek: getWeek(selectionInterval.end)
+            start: selectionInterval.start,
+            end: selectionInterval.end
           }
         );
       }
@@ -287,14 +287,14 @@ export class WeekPickerComponent implements OnInit {
    * Generate a month with week and selectable status metadata
    * @param month the month to generate
    * @param year the year of the month to generate
-   * @param selectionWeekInterval the interval representing the
+   * @param selectionInterval the interval representing the
    *                              minimum to the maximum week of the year
    * @private
    */
   private static generateMonth(
     month: number,
     year: number,
-    selectionWeekInterval: { startWeek: number, endWeek: number }
+    selectionInterval: { start: Date, end: Date }
   ): Array<{ week: number, selectable: boolean, dates: Array<number> }> {
     const metaMonth: Array<{ week: number, selectable: boolean, dates: Array<number> }> = [];
     const weeksInMonth = getWeeksInMonth(month);
@@ -302,20 +302,21 @@ export class WeekPickerComponent implements OnInit {
     let scrollDate = sub(startOfMonth, { days: startOfMonth.getDay() });
 
     for (let i = 0; i < 6; i++) {
-      const { date, week } = this.getMetaDate(scrollDate);
+      const startOfWeek = sub(scrollDate, { days: scrollDate.getDay() });
+      const endOfWeek = add(scrollDate, { days: 6 - scrollDate.getDay() });
+
       metaMonth.push({
-        week,
+        week: getWeek(scrollDate),
         selectable: ((i + 1) <= weeksInMonth) &&
-                    (week >= selectionWeekInterval.startWeek) &&
-                    (week <= selectionWeekInterval.endWeek),
+                    isWithinInterval(startOfWeek, selectionInterval) &&
+                    isWithinInterval(endOfWeek, selectionInterval),
         dates: []
       });
 
-      for (let j = 0; j <= 7; j++) {
-        metaMonth[i].dates.push(date + j);
+      for (let j = 0; j < 7; j++) {
+        metaMonth[i].dates.push(scrollDate.getDate());
+        scrollDate = add(scrollDate, { days: 1 });
       }
-
-      scrollDate = add(scrollDate, { weeks: 1 });
     }
 
 
@@ -344,6 +345,10 @@ export class WeekPickerComponent implements OnInit {
    */
   constructor() {
     this.currentDate = WeekPickerComponent.getMetaDate(new Date(), false);
+    this._validSelectionInterval.next({
+      start: new Date(this.currentDate.year - 100, 0, 1),
+      end: new Date(this.currentDate.year + 50, 11, 31)
+    });
   }
 
   /**
@@ -371,11 +376,11 @@ export class WeekPickerComponent implements OnInit {
             };
           }
 
-          const minimumWeek = getWeek(selectionInterval.start);
-          const maximumWeek = getWeek(selectionInterval.end);
-          const currentWeek = this.currentDate.week;
+          const startOfCurrentWeek = sub(selectionInterval.start, { days: this.currentDate.day });
+          const endOfCurrentWeek = add(selectionInterval.start, { days: 6 - this.currentDate.day });
 
-          this.currentDate.selectable = (currentWeek >= minimumWeek) && (currentWeek <= maximumWeek);
+          this.currentDate.selectable = isWithinInterval(startOfCurrentWeek, selectionInterval) &&
+                                        isWithinInterval(endOfCurrentWeek, selectionInterval);
 
           if (value) {
             const valueWeek = getWeek(value.start);

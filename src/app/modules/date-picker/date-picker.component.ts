@@ -48,58 +48,6 @@ import { format, isEqual, isValid, isWithinInterval, parse } from 'date-fns';
 export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnInit {
 
   /**
-   * Value input getter
-   */
-  @Input()
-  get value(): Date {
-    return DatePickerComponent.parseDateString(this.dateString);
-  }
-
-  /**
-   * Value input setter
-   */
-  set value(value: Date) {
-    if (!isEqual(value, this._value)) {
-      this._value = value;
-    }
-  }
-
-  /**
-   * Disabled input
-   */
-  @Input()
-  get disabled(): boolean { return this._disabled; }
-  set disabled(disabled: boolean) {
-    this._disabled = coerceBooleanProperty(disabled);
-  }
-
-  @Input('dateRange')
-  set setDateRange(dateRange: { minDate: Date, maxDate: Date }) {
-    if (dateRange?.minDate > dateRange?.maxDate) {
-      throw new Error('Min date must be less than max date');
-    }
-
-    const year = this.currentDate.getFullYear();
-    this.validSelectionInterval = {
-      start: dateRange?.minDate ?? new Date(year - 50, 0, 1),
-      end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
-    };
-  }
-
-  /**
-   * Value to use as the date picker input's aria label
-   */
-  @Input()
-  ariaLabel = 'Date';
-
-  /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   * @param changeDetectorRef the Angular change detector
-   */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
-
-  /**
    * Allowed keys for date input
    */
   private static readonly ALLOWED_KEYS = [
@@ -139,6 +87,52 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @private
    */
   private static readonly referenceDate = new Date(0, 0, 0, 0, 0, 0, 0);
+
+
+  /**
+   * Value input getter
+   */
+  @Input()
+  get value(): Date {
+    return DatePickerComponent.parseDateString(this.dateString);
+  }
+
+  /**
+   * Value input setter
+   */
+  set value(value: Date) {
+    if (!isEqual(value, this._value)) {
+      this._value = value;
+    }
+  }
+
+  /**
+   * Disabled input
+   */
+  @Input()
+  get disabled(): boolean { return this._disabled; }
+  set disabled(disabled: boolean) {
+    this._disabled = coerceBooleanProperty(disabled);
+  }
+
+  @Input('dateRange')
+  set setDateRange(dateRange: { minDate: Date, maxDate: Date }) {
+    if (dateRange?.minDate > dateRange?.maxDate) {
+      throw new Error('Min date must be less than max date');
+    }
+
+    const year = this.currentDate.getFullYear();
+    this.validSelectionInterval = {
+      start: dateRange?.minDate ?? new Date(year - 100, 0, 1),
+      end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
+    };
+  }
+
+  /**
+   * Value to use as the date picker input's aria label
+   */
+  @Input()
+  ariaLabel = 'Date';
 
   /**
    * ViewChild of the date picker div
@@ -210,7 +204,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @private
    */
   validSelectionInterval = {
-    start: new Date(this.currentDate.getFullYear() - 50, 0, 1),
+    start: new Date(this.currentDate.getFullYear() - 100, 0, 1),
     end: new Date(this.currentDate.getFullYear() + 50, 0, 1)
   };
 
@@ -290,6 +284,13 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Function to call on touch
    */
   onTouched: () => any = () => {};
+
+  /**
+   * Dependency injection site
+   * @param renderer the Angular renderer
+   * @param changeDetectorRef the Angular change detector
+   */
+  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
 
   /**
    * Init component, set up window resize listener
