@@ -67,11 +67,7 @@
                     (change)="_selectedYear.next(+yearSelect.value)"
                     class="access input sm page_container_color"
                     aria-label="Select a year">
-<!--              <option *ngFor="let year of validYearRange$ | async"-->
-<!--                      [value]="year">-->
-<!--                {{year}}-->
-<!--              </option>-->
-              <option *ngFor="let year of [1970, 1971, 1973, 1973]"
+              <option *ngFor="let year of validYearRange$ | async"
                       [value]="year">
                 {{year}}
               </option>
@@ -113,18 +109,18 @@
             <div class="wily_datepicker_weekday">Sa</div>
           </div>
           <!-- days -->
-          <ng-container *ngFor="let number of [0,1,2,3,4,5]">
-            <button class="access list_btn width100 row v_center">
-              <ng-container *ngFor="let number of [0,1,2,3,4,5,6]">
-                <div class="wily_datepicker_day">
-                  <div class="day_button">2</div>
-                </div>
-              </ng-container>
-            </button>
+          <ng-container *ngIf="fullMonth$ | async as fullMonth">
+            <ng-container *ngFor="let week of fullMonth">
+              <button [disabled]="!week.selectable"
+                      class="access list_btn width100 row v_center">
+                <ng-container *ngFor="let date of week.dates">
+                  <div class="wily_datepicker_day">
+                    <div class="day_button">{{date}}</div>
+                  </div>
+                </ng-container>
+              </button>
+            </ng-container>
           </ng-container>
-
-
-
 
 <!--            <ng-container *ngFor="let dayInMonth of fullMonth$ | async">-->
 <!--              <div [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"-->
