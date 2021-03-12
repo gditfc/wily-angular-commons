@@ -2,7 +2,6 @@
 <div class="wily_datepicker" style="cursor:default;"
      [ngClass]="inputClassList"
      [style.filter]="disabled ? 'brightness(.95)' : ''">
-  <!-- TODO: open calendar when clicking this -->
   <button (click)="openCalendar()"
           aria-haspopup="dialog"
           [disabled]="disabled"
@@ -10,11 +9,9 @@
           [attr.aria-expanded]="render && showCalendar"
           [attr.data-dialog-close-override]="true"
           class="access page_container_color wily_datepicker_input">
-    <!-- TODO: show this when dates selected -->
-    <ng-container *ngIf="true else placeholderTemplate">
-      mm/dd/yyyy - mm/dd/yyyy
+    <ng-container *ngIf="_internalValue | async as internalValue else placeholderTemplate">
+      {{internalValue.start | date: 'MM/dd/yyyy'}} - {{internalValue.end | date: 'MM/dd/yyyy'}}
     </ng-container>
-    <!-- TODO: show placeholder when empty -->
     <ng-template #placeholderTemplate>
       <div class="wily_dropdown_placeholder">Select a week...</div>
     </ng-template>
