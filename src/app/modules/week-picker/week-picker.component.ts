@@ -62,6 +62,11 @@ declare interface MetaWeek {
   week: number;
 
   /**
+   * The year of the week
+   */
+  year: number;
+
+  /**
    * Whether or not the week can be selected in the week picker
    */
   selectable: boolean;
@@ -190,11 +195,21 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   readonly _selectedYear = new BehaviorSubject(1970);
 
   /**
-   * The selected week of the year as an Observable
+   * The selected week of the year of the start of the selection as an Observable
    */
   readonly selectedWeek$: Observable<number> = this._internalValue.pipe(
     map(value => {
       return !value?.start ? 0 : getWeek(value.start);
+    }),
+    shareReplay()
+  );
+
+  /**
+   * The year of the start of the selected week as an Observable
+   */
+  readonly selectedYear$: Observable<number> = this._internalValue.pipe(
+    map(value => {
+      return !value?.start ? 0 : value.start.getFullYear();
     }),
     shareReplay()
   );
@@ -352,12 +367,8 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    *                              minimum to the maximum week of the year
    * @private
    */
-  private static generateMonth(
-    month: number,
-    year: number,
-    selectionInterval: { start: Date, end: Date }
-  ): Array<{ week: number, selectable: boolean, dates: Array<number> }> {
-    const metaMonth: Array<{ week: number, selectable: boolean, dates: Array<number> }> = [];
+  private static generateMonth(month: number, year: number, selectionInterval: { start: Date, end: Date }): Array<MetaWeek> {
+    const metaMonth: Array<MetaWeek> = [];
     const weeksInMonth = getWeeksInMonth(month);
     const startOfMonth = new Date(year, month, 1);
     let scrollDate = sub(startOfMonth, { days: startOfMonth.getDay() });
@@ -368,6 +379,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
 
       metaMonth.push({
         week: getWeek(scrollDate),
+        year: sundayOfWeek.getFullYear(),
         selectable: ((i + 1) <= weeksInMonth) &&
                     isWithinInterval(sundayOfWeek, selectionInterval) &&
                     isWithinInterval(saturdayOfWeek, selectionInterval),
@@ -534,6 +546,20 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       this._selectedMonth.next(lastWeekStart.getMonth());
       this._selectedYear.next(lastWeekStart.getFullYear());
     }
+  }
+
+  /**
+   * Select the current week
+   */
+  selectCurrentWeek(): void {
+    const thisWeekDate = new Date(this.currentDate.year, this.currentDate.month, this.currentDate.date);
+    const thisWeekStart = startOfWeek(thisWeekDate);
+    const thisWeekEnd = endOfDay(endOfWeek(thisWeekDate));
+
+    this.writeValue({ start: thisWeekStart, end: thisWeekEnd });
+
+    this._selectedMonth.next(this.currentDate.month);
+    this._selectedYear.next(this.currentDate.year);
   }
 
   /**

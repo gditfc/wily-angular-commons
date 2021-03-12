@@ -108,11 +108,14 @@
           <!-- days -->
           <ng-container *ngIf="fullMonth$ | async as fullMonth">
             <ng-container *ngFor="let week of fullMonth">
-              <div [ngClass]="{ 'today': week.week === currentDate.week }"
+              <div [ngClass]="{ 'today': week.week === currentDate.week && week.year === currentDate.year }"
                    class="wily_weekpicker_week">
                 <button (click)="onWeekSelect(week.week, week.selectable)"
                         [disabled]="!week.selectable"
-                        [ngClass]="(selectedWeek$ | async) === week.week ? 'bg_blue' : 'overlay_alt1 hov_bg'"
+                        [ngClass]="((selectedWeek$ | async) === week.week) && ((selectedYear$ | async) === week.year)
+                                    ? 'bg_blue'
+                                    : 'overlay_alt1 hov_bg'
+                                  "
                         class="access week_button">
                   <ng-container *ngFor="let date of week.dates">
                     <div class="wily_datepicker_day">
@@ -140,15 +143,16 @@
               <span class="text bold">Last Week</span>
             </button>
           </ng-template>
-          <!-- TODO: hook up reset button to set to current week -->
           <ng-container *ngIf="currentDate.selectable">
-            <button disabled
+            <button *ngIf="((selectedWeek$ | async) === currentDate.week) && ((selectedYear$ | async) === currentDate.year) else selectCurrentWeekButton"
+                    disabled
                     class="access btn sm overlay_alt1 hov_bg mar_5"
                     aria-label="Reset date selection to today's date">
               <span class="text bold">Reset</span>
             </button>
-            <ng-template #selectTodayButton>
-              <button [attr.data-dialog-close-override]="true"
+            <ng-template #selectCurrentWeekButton>
+              <button (click)="selectCurrentWeek()"
+                      [attr.data-dialog-close-override]="true"
                       class="access btn sm overlay_alt1 hov_bg mar_5"
                       aria-label="Reset date selection to today's date">
                 <span class="text bold">Reset</span>
