@@ -6,7 +6,7 @@
           aria-haspopup="dialog"
           [disabled]="disabled"
           [attr.aria-label]="ariaLabel + ', open calendar to select week'"
-          [attr.aria-expanded]="render && showCalendar"
+          [attr.aria-expanded]="calendarPopover.visible"
           class="access page_container_color wily_datepicker_input">
     <ng-container *ngIf="_internalValue | async as internalValue else placeholderTemplate">
       {{internalValue.start | date: 'MM/dd/yyyy'}} - {{internalValue.end | date: 'MM/dd/yyyy'}}
@@ -18,29 +18,6 @@
   <div class="wily_datepicker_button" [ngClass]="calendarButtonClassList">
     <i class="fas fa-calendar-week"></i>
   </div>
-<!--  <ng-container *ngIf="!disabled else disabledDatePicker">-->
-<!--    <input type="text" placeholder="mm/dd/yyyy"-->
-<!--           maxlength="10"-->
-<!--           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"-->
-<!--           class="access wily_datepicker_input" />-->
-<!--    <button class="access btn wily_datepicker_button"-->
-<!--            [ngClass]="calendarButtonClassList"-->
-<!--            aria-label="Open the calendar" aria-haspopup="dialog">-->
-<!--      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>-->
-<!--    </button>-->
-<!--  </ng-container>-->
-<!--  <ng-template #disabledDatePicker>-->
-<!--    <input disabled-->
-<!--           type="text" placeholder="mm/dd/yyyy"-->
-<!--           maxlength="10"-->
-<!--           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"-->
-<!--           class="access wily_datepicker_input" />-->
-<!--    <button disabled class="access btn wily_datepicker_button"-->
-<!--            [ngClass]="calendarButtonClassList"-->
-<!--            aria-label="Open the calendar" aria-haspopup="dialog">-->
-<!--      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>-->
-<!--    </button>-->
-<!--  </ng-template>-->
 </div>
 
 <!-- calendar widget -->
@@ -165,136 +142,3 @@
     </div>
   </div>
 </wily-popover>
-<!--<div *ngIf="render"-->
-<!--     class="wily_datepicker_overlay">-->
-<!--  <div #calendarDiv-->
-<!--       class="position_absolute">-->
-<!--    <div #calendarWidgetDiv-->
-<!--         cdkTrapFocus-->
-<!--         cdkTrapFocusAutoCapture-->
-<!--         class="wily_datepicker_options"-->
-<!--         role="dialog">-->
-<!--      &lt;!&ndash; month / year select &ndash;&gt;-->
-<!--      <div class="page_container_color pad_5 pad_bot0">-->
-<!--        <div class="row space_between">-->
-<!--          <div class="col size_1 mar_5">-->
-<!--            <select #yearSelect-->
-<!--                    [ngModel]="_selectedYear | async"-->
-<!--                    [attr.data-dialog-close-override]="true"-->
-<!--                    (change)="_selectedYear.next(+yearSelect.value)"-->
-<!--                    class="access input sm page_container_color"-->
-<!--                    aria-label="Select a year">-->
-<!--              <option *ngFor="let year of validYearRange$ | async"-->
-<!--                      [value]="year">-->
-<!--                {{year}}-->
-<!--              </option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <div class="col size_2 mar_5">-->
-<!--            <select #monthSelect-->
-<!--                    [ngModel]="_selectedMonth | async"-->
-<!--                    (change)="_selectedMonth.next(+monthSelect.value)"-->
-<!--                    [attr.data-dialog-close-override]="true"-->
-<!--                    class="access input sm page_container_color"-->
-<!--                    aria-label="Select a month">-->
-<!--              <option value="0">January</option>-->
-<!--              <option value="1">February</option>-->
-<!--              <option value="2">March</option>-->
-<!--              <option value="3">April</option>-->
-<!--              <option value="4">May</option>-->
-<!--              <option value="5">June</option>-->
-<!--              <option value="6">July</option>-->
-<!--              <option value="7">August</option>-->
-<!--              <option value="8">September</option>-->
-<!--              <option value="9">October</option>-->
-<!--              <option value="10">November</option>-->
-<!--              <option value="11">December</option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="page_container_color pad_5">-->
-<!--        &lt;!&ndash; weekdays &ndash;&gt;-->
-<!--        <div class="mar_5 mar_bot10">-->
-<!--          <div class="row wrap space_between body_color brad_3 mar_bot5">-->
-<!--            <div class="wily_datepicker_weekday">Su</div>-->
-<!--            <div class="wily_datepicker_weekday">Mo</div>-->
-<!--            <div class="wily_datepicker_weekday">Tu</div>-->
-<!--            <div class="wily_datepicker_weekday">We</div>-->
-<!--            <div class="wily_datepicker_weekday">Th</div>-->
-<!--            <div class="wily_datepicker_weekday">Fr</div>-->
-<!--            <div class="wily_datepicker_weekday">Sa</div>-->
-<!--          </div>-->
-<!--          &lt;!&ndash; days &ndash;&gt;-->
-<!--          <ng-container *ngIf="fullMonth$ | async as fullMonth">-->
-<!--            <ng-container *ngFor="let week of fullMonth">-->
-<!--              <div [ngClass]="{ 'today': week.week === currentDate.week && week.year === currentDate.year }"-->
-<!--                   class="wily_weekpicker_week">-->
-<!--                <button (click)="onWeekSelect(week.week, week.selectable)"-->
-<!--                        [disabled]="!week.selectable"-->
-<!--                        [ngClass]="((selectedWeek$ | async) === week.week) && ((selectedYear$ | async) === week.year)-->
-<!--                                    ? 'bg_blue'-->
-<!--                                    : 'overlay_alt1 hov_bg'-->
-<!--                                  "-->
-<!--                        class="access week_button">-->
-<!--                  <ng-container *ngFor="let date of week.dates">-->
-<!--                    <div class="wily_datepicker_day">-->
-<!--                      <div class="day_button">{{date}}</div>-->
-<!--                    </div>-->
-<!--                  </ng-container>-->
-<!--                </button>-->
-<!--              </div>-->
-<!--            </ng-container>-->
-<!--          </ng-container>-->
-<!--        </div>-->
-<!--        <div class="overlay_alt2 hr mar_5"></div>-->
-<!--        <div class="row space_between">-->
-<!--          <button *ngIf="canSelectLastWeek$ | async else disabledLastWeekButton"-->
-<!--                  (click)="selectLastWeek()"-->
-<!--                  [attr.data-dialog-close-override]="true"-->
-<!--                  class="access btn sm overlay_alt2 mar_5 hov_glow"-->
-<!--                  aria-label="Select last week">-->
-<!--            <span class="text bold">Last Week</span>-->
-<!--          </button>-->
-<!--          <ng-template #disabledLastWeekButton>-->
-<!--            <button disabled-->
-<!--                    class="access btn sm overlay_alt2 mar_5 hov_glow"-->
-<!--                    aria-label="Select last week">-->
-<!--              <span class="text bold">Last Week</span>-->
-<!--            </button>-->
-<!--          </ng-template>-->
-<!--          <ng-container *ngIf="currentDate.selectable">-->
-<!--            <button *ngIf="((selectedWeek$ | async) === currentDate.week) && ((selectedYear$ | async) === currentDate.year) else selectCurrentWeekButton"-->
-<!--                    disabled-->
-<!--                    class="access btn sm overlay_alt1 hov_bg mar_5"-->
-<!--                    aria-label="Reset date selection to today's date">-->
-<!--              <span class="text bold">Reset</span>-->
-<!--            </button>-->
-<!--            <ng-template #selectCurrentWeekButton>-->
-<!--              <button (click)="selectCurrentWeek()"-->
-<!--                      [attr.data-dialog-close-override]="true"-->
-<!--                      class="access btn sm overlay_alt1 hov_bg mar_5"-->
-<!--                      aria-label="Reset date selection to today's date">-->
-<!--                <span class="text bold">Reset</span>-->
-<!--              </button>-->
-<!--            </ng-template>-->
-<!--          </ng-container>-->
-<!--          <button *ngIf="canSelectNextWeek$ | async else disabledNextWeekButton"-->
-<!--                  (click)="selectNextWeek()"-->
-<!--                  [attr.data-dialog-close-override]="true"-->
-<!--                  class="access btn sm overlay_alt2 mar_5 hov_glow"-->
-<!--                  aria-label="Select next week">-->
-<!--            <span class="text bold">Next Week</span>-->
-<!--          </button>-->
-<!--          <ng-template #disabledNextWeekButton>-->
-<!--            <button disabled-->
-<!--                    class="access btn sm overlay_alt2 mar_5 hov_glow"-->
-<!--                    aria-label="Select next week">-->
-<!--              <span class="text bold">Next Week</span>-->
-<!--            </button>-->
-<!--          </ng-template>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
