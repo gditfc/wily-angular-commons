@@ -378,7 +378,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    */
   private static generateMonth(month: number, year: number, selectionInterval: { start: Date, end: Date }): Array<MetaWeek> {
     const metaMonth: Array<MetaWeek> = [];
-    const weeksInMonth = getWeeksInMonth(month);
     const startOfMonth = new Date(year, month, 1);
     let scrollDate = sub(startOfMonth, { days: startOfMonth.getDay() });
 
@@ -389,9 +388,9 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       metaMonth.push({
         week: getWeek(scrollDate),
         year: sundayOfWeek.getFullYear(),
-        selectable: ((i + 1) <= weeksInMonth) &&
-                    isWithinInterval(sundayOfWeek, selectionInterval) &&
-                    isWithinInterval(saturdayOfWeek, selectionInterval),
+        selectable: sundayOfWeek.getMonth() === month &&
+          isWithinInterval(sundayOfWeek, selectionInterval) &&
+          isWithinInterval(saturdayOfWeek, selectionInterval),
         dates: []
       });
 
@@ -566,7 +565,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
 
     this.writeValue({ start: lastWeekStart, end: lastWeekEnd });
 
-    if (lastWeekEnd.getMonth() !== currentMonth) {
+    if (lastWeekStart.getMonth() !== currentMonth) {
       this._selectedMonth.next(lastWeekStart.getMonth());
       this._selectedYear.next(lastWeekStart.getFullYear());
     }
