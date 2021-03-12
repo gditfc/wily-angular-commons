@@ -1,9 +1,19 @@
 import { AnimationEvent } from '@angular/animations';
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { add, getWeek, getWeeksInMonth, isWithinInterval, sub } from 'date-fns';
+import { ChangeDetectorRef, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  add,
+  endOfDay,
+  endOfWeek,
+  getWeek,
+  getWeeksInMonth,
+  isWithinInterval,
+  setWeek,
+  startOfWeek,
+  sub
+} from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 /**
  * Interface representing a Date broken down by day/date/week/month/year
@@ -78,7 +88,7 @@ declare interface MetaWeek {
     }
   ]
 })
-export class WeekPickerComponent implements OnInit {
+export class WeekPickerComponent implements ControlValueAccessor, OnInit {
 
   /**
    * Set the value of the week picker
@@ -105,10 +115,12 @@ export class WeekPickerComponent implements OnInit {
   }
 
   /**
-   * Whether or not the week picker is disabled
+   * Set disabled
    */
-  @Input()
-  disabled = false;
+  @Input('disabled')
+  set disabled(disabled: boolean) {
+    this._disabled = disabled;
+  }
 
   /**
    * Set the valid date boundary for the week picker
@@ -188,7 +200,8 @@ export class WeekPickerComponent implements OnInit {
   readonly selectedWeek$: Observable<number> = this._internalValue.pipe(
     map(value => {
       return !value?.start ? 0 : getWeek(value.start);
-    })
+    }),
+    shareReplay()
   );
 
   /**
@@ -238,9 +251,6 @@ export class WeekPickerComponent implements OnInit {
    */
   showCalendar = false;
 
-  // TODO: Delete
-  selectedDate: any;
-
   /**
    * Subscription for the combination of value and valid selection interval
    * @private
@@ -252,6 +262,22 @@ export class WeekPickerComponent implements OnInit {
    * @private
    */
   private _value;
+
+  /**
+   * Whether or not the control is disabled
+   * @private
+   */
+  private _disabled;
+
+  /**
+   * Function to call on change
+   */
+  onChange: () => void;
+
+  /**
+   * Function to call on touch
+   */
+  onTouch: () => void;
 
   /**
    * Generate an Array of numbers representing the span of years between the input
@@ -302,14 +328,14 @@ export class WeekPickerComponent implements OnInit {
     let scrollDate = sub(startOfMonth, { days: startOfMonth.getDay() });
 
     for (let i = 0; i < 6; i++) {
-      const startOfWeek = sub(scrollDate, { days: scrollDate.getDay() });
-      const endOfWeek = add(scrollDate, { days: 6 - scrollDate.getDay() });
+      const sundayOfWeek = sub(scrollDate, { days: scrollDate.getDay() });
+      const saturdayOfWeek = add(scrollDate, { days: 6 - scrollDate.getDay() });
 
       metaMonth.push({
         week: getWeek(scrollDate),
         selectable: ((i + 1) <= weeksInMonth) &&
-                    isWithinInterval(startOfWeek, selectionInterval) &&
-                    isWithinInterval(endOfWeek, selectionInterval),
+                    isWithinInterval(sundayOfWeek, selectionInterval) &&
+                    isWithinInterval(saturdayOfWeek, selectionInterval),
         dates: []
       });
 
@@ -342,8 +368,9 @@ export class WeekPickerComponent implements OnInit {
 
   /**
    * Dependency injection site
+   * @param changeDetectorRef the Angular ChangeDetectorRef
    */
-  constructor() {
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
     this.currentDate = WeekPickerComponent.getMetaDate(new Date(), false);
     this._validSelectionInterval.next({
       start: new Date(this.currentDate.year - 100, 0, 1),
@@ -356,6 +383,13 @@ export class WeekPickerComponent implements OnInit {
    */
   get value(): { start: Date, end: Date } {
     return this._value;
+  }
+
+  /**
+   * Get whether or not the control is disabled
+   */
+  get disabled(): boolean {
+    return this._disabled;
   }
 
   /**
@@ -389,8 +423,7 @@ export class WeekPickerComponent implements OnInit {
               this._selectedMonth.next(value.start.getMonth());
               this._selectedYear.next(value.start.getFullYear());
             } else {
-              this._value.next(null);
-              this.selectedDate = null;
+              this._internalValue.next(null);
             }
           } else {
             this._selectedMonth.next(this.currentDate.month);
@@ -398,6 +431,55 @@ export class WeekPickerComponent implements OnInit {
           }
         })
     );
+  }
+
+  /**
+   * Write value
+   * @param value the value to write
+   */
+  writeValue(value: { start: Date, end: Date }): void {
+    this.value = value;
+    this.changeDetectorRef.markForCheck();
+  }
+
+  /**
+   * Register function on change
+   * @param fn the function to change
+   */
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  /**
+   * Register function on touch
+   * @param fn the function to register
+   */
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+
+  /**
+   * Set disabled state
+   * @param isDisabled whether or not the control is disabled
+   */
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.changeDetectorRef.markForCheck();
+  }
+
+  /**
+   * Handle week select
+   * @param week the week of the year
+   * @param selectable whether or not the week is selectable
+   */
+  onWeekSelect(week: number, selectable: boolean): void {
+    if (selectable) {
+      const weekDate = setWeek(new Date(), week);
+      const weekStart = startOfWeek(weekDate);
+      const weekEnd = endOfDay(endOfWeek(weekDate));
+
+      this.writeValue({ start: weekStart, end: weekEnd });
+    }
   }
 
   onAnimationStart(event: AnimationEvent): void { }

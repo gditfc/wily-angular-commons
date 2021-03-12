@@ -108,11 +108,12 @@
           <!-- days -->
           <ng-container *ngIf="fullMonth$ | async as fullMonth">
             <ng-container *ngFor="let week of fullMonth">
-              <!-- TODO: add 'today' class here if current week -->
-              <div class="wily_weekpicker_week">
-                <!-- TODO: replace 'overlay_alt1 hov_bg' with 'bg_blue' when selected -->
-                <button [disabled]="!week.selectable"
-                        class="access week_button overlay_alt1 hov_bg">
+              <div [ngClass]="{ 'today': week.week === currentDate.week }"
+                   class="wily_weekpicker_week">
+                <button (click)="onWeekSelect(week.week, week.selectable)"
+                        [disabled]="!week.selectable"
+                        [ngClass]="(selectedWeek$ | async) === week.week ? 'bg_blue' : 'overlay_alt1'"
+                        class="access week_button hov_bg">
                   <ng-container *ngFor="let date of week.dates">
                     <div class="wily_datepicker_day">
                       <div class="day_button">{{date}}</div>
