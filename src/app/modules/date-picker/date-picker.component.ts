@@ -135,18 +135,6 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   ariaLabel = 'Date';
 
   /**
-   * ViewChild of the date picker div
-   */
-  @ViewChild('datePickerDiv')
-  datePickerDiv: ElementRef<HTMLDivElement>;
-
-  /**
-   * ViewChild of the calendar div
-   */
-  @ViewChild('calendarDiv')
-  calendarDiv: ElementRef<HTMLDivElement>;
-
-  /**
    * Optional class-list to add to the date picker input
    */
   @Input()
@@ -163,6 +151,24 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   @Output()
   input = new EventEmitter<void>();
+
+  /**
+   * Event emitted on valid date selection/input
+   */
+  @Output()
+  dateSelected = new EventEmitter<Date>();
+
+  /**
+   * ViewChild of the date picker div
+   */
+  @ViewChild('datePickerDiv')
+  datePickerDiv: ElementRef<HTMLDivElement>;
+
+  /**
+   * ViewChild of the calendar div
+   */
+  @ViewChild('calendarDiv')
+  calendarDiv: ElementRef<HTMLDivElement>;
 
   /**
    * The current date
@@ -318,6 +324,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
       this.value = value;
       this.dateString = DatePickerComponent.parseDate(value);
+      this.dateSelected.emit(value);
     } else {
       this.value = null;
       this.dateString = null;

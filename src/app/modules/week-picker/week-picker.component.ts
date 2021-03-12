@@ -341,12 +341,12 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   /**
    * Function to call on change
    */
-  onChange: () => void;
+  onChange: (value: { start: Date, end: Date }) => void;
 
   /**
    * Function to call on touch
    */
-  onTouch: () => void;
+  onTouch: VoidFunction;
 
   /**
    * Generate an Array of numbers representing the span of years between the input
@@ -466,6 +466,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   writeValue(value: { start: Date, end: Date }): void {
     this.value = value;
     this.weekSelected.emit(value);
+    this.onChange(this.value);
     this.changeDetectorRef.markForCheck();
   }
 
