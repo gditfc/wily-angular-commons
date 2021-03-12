@@ -305,16 +305,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   );
 
   /**
-   * Whether or not to render the week picker
-   */
-  render = false;
-
-  /**
-   * Whether or not to show the week picker
-   */
-  showCalendar = false;
-
-  /**
    * The value of the week picker
    * @private
    */
@@ -486,9 +476,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * @param event the event to pass to the popover
    */
   openCalendar(event: Event): void {
-    this.render = true;
-    this.showCalendar = true;
-
     const selectionInterval = this._validSelectionInterval.getValue();
     if (!selectionInterval) {
       this.setSelectionInterval(null);
@@ -500,8 +487,9 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       this._selectedMonth.next(this.currentDate.month);
       this._selectedYear.next(this.currentDate.year);
     } else {
+      this._internalValue.next(this.value);
       this._selectedMonth.next(this.value.start.getMonth());
-      this._selectedMonth.next(this.value.start.getFullYear());
+      this._selectedYear.next(this.value.start.getFullYear());
     }
 
     this.calendarPopover.toggle(event);
