@@ -13,11 +13,11 @@
       {{internalValue.start | date: 'MM/dd/yyyy'}} - {{internalValue.end | date: 'MM/dd/yyyy'}}
     </ng-container>
     <ng-template #placeholderTemplate>
-      <div class="wily_dropdown_placeholder">Select a week...</div>
+      <div class="wily_datepicker_placeholder">Select a week...</div>
     </ng-template>
   </button>
   <div class="wily_datepicker_button" [ngClass]="calendarButtonClassList">
-    <i class="fas fa-calendar-day"></i>
+    <i class="fas fa-calendar-week"></i>
   </div>
 <!--  <ng-container *ngIf="!disabled else disabledDatePicker">-->
 <!--    <input type="text" placeholder="mm/dd/yyyy"-->
@@ -108,14 +108,18 @@
           <!-- days -->
           <ng-container *ngIf="fullMonth$ | async as fullMonth">
             <ng-container *ngFor="let week of fullMonth">
-              <button [disabled]="!week.selectable"
-                      class="access list_btn width100 row v_center">
-                <ng-container *ngFor="let date of week.dates">
-                  <div class="wily_datepicker_day">
-                    <div class="day_button">{{date}}</div>
-                  </div>
-                </ng-container>
-              </button>
+              <!-- TODO: add 'today' class here if current week -->
+              <div class="wily_weekpicker_week">
+                <!-- TODO: replace 'overlay_alt1 hov_bg' with 'bg_blue' when selected -->
+                <button [disabled]="!week.selectable"
+                        class="access week_button overlay_alt1 hov_bg">
+                  <ng-container *ngFor="let date of week.dates">
+                    <div class="wily_datepicker_day">
+                      <div class="day_button">{{date}}</div>
+                    </div>
+                  </ng-container>
+                </button>
+              </div>
             </ng-container>
           </ng-container>
 

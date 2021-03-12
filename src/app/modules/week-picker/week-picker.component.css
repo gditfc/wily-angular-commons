@@ -77,6 +77,11 @@
   transform:scale(1.2);
 }
 
+.wily_datepicker_placeholder {
+  opacity:0.5;
+  display:inline;
+}
+
 
 /*********** CALENDAR CSS *************/
 
@@ -123,7 +128,7 @@
   user-select:none;
   background-color:transparent;
 }
-.wily_datepicker_day.today {
+.wily_weekpicker_week.today {
   background-color:rgba(128,128,128,0.1);
 }
 /* styles clickable days */
@@ -146,4 +151,11 @@
   flex:1;
   align-items:center;
   justify-content:center;
+}
+
+.week_button {
+  display:flex;
+  align-items:center;
+  width:100%;
+  border:none;
 }
