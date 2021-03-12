@@ -503,6 +503,40 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Select next week (relative to the week of the current selection)
+   */
+  selectNextWeek(): void {
+    const nextWeekDate = add(this.value.start, { weeks: 1 });
+    const nextWeekStart = startOfWeek(nextWeekDate);
+    const nextWeekEnd = endOfDay(endOfWeek(nextWeekDate));
+    const currentMonth = this.value.start.getMonth();
+
+    this.writeValue({ start: nextWeekStart, end: nextWeekEnd });
+
+    if (nextWeekStart.getMonth() !== currentMonth) {
+      this._selectedMonth.next(nextWeekStart.getMonth());
+      this._selectedYear.next(nextWeekStart.getFullYear());
+    }
+  }
+
+  /**
+   * Select last week (relative to the week of the current selection)
+   */
+  selectLastWeek(): void {
+    const lastWeekDate = sub(this.value.start, { weeks: 1 });
+    const lastWeekStart = startOfWeek(lastWeekDate);
+    const lastWeekEnd = endOfDay(endOfWeek(lastWeekDate));
+    const currentMonth = this.value.end.getMonth();
+
+    this.writeValue({ start: lastWeekStart, end: lastWeekEnd });
+
+    if (lastWeekEnd.getMonth() !== currentMonth) {
+      this._selectedMonth.next(lastWeekStart.getMonth());
+      this._selectedYear.next(lastWeekStart.getFullYear());
+    }
+  }
+
+  /**
    * Set the selection interval
    * @param interval the input selection interval
    * @private
