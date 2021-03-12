@@ -9,7 +9,7 @@
           [attr.aria-expanded]="calendarPopover.visible"
           class="access page_container_color wily_datepicker_input">
     <ng-container *ngIf="_internalValue | async as internalValue else placeholderTemplate">
-      {{internalValue.start | date: 'MM/dd/yyyy'}} - {{internalValue.end | date: 'MM/dd/yyyy'}}
+      {{internalValue.start | date: dateFormat}} - {{internalValue.end | date: dateFormat}}
     </ng-container>
     <ng-template #placeholderTemplate>
       <div class="wily_datepicker_placeholder">Select a week...</div>

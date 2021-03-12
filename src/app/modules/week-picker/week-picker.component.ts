@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   add,
@@ -156,6 +165,19 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    */
   @Input()
   ariaLabel = 'Date';
+
+  /**
+   * Format for the selected date range in the selection preview. Must
+   * be a valid Angular DatePipe format
+   */
+  @Input()
+  dateFormat = 'MM/dd/y';
+
+  /**
+   * Event emitted on week select
+   */
+  @Output()
+  weekSelected = new EventEmitter<{ start: Date, end: Date }>();
 
   /**
    * ViewChild of the calendar popover
@@ -443,6 +465,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    */
   writeValue(value: { start: Date, end: Date }): void {
     this.value = value;
+    this.weekSelected.emit(value);
     this.changeDetectorRef.markForCheck();
   }
 
@@ -476,23 +499,25 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * @param event the event to pass to the popover
    */
   openCalendar(event: Event): void {
-    const selectionInterval = this._validSelectionInterval.getValue();
-    if (!selectionInterval) {
-      this.setSelectionInterval(null);
+    if (!this.disabled) {
+      const selectionInterval = this._validSelectionInterval.getValue();
+      if (!selectionInterval) {
+        this.setSelectionInterval(null);
+      }
+
+      this.setCurrentDateSelectable();
+
+      if (!this.value) {
+        this._selectedMonth.next(this.currentDate.month);
+        this._selectedYear.next(this.currentDate.year);
+      } else {
+        this._internalValue.next(this.value);
+        this._selectedMonth.next(this.value.start.getMonth());
+        this._selectedYear.next(this.value.start.getFullYear());
+      }
+
+      this.calendarPopover.toggle(event);
     }
-
-    this.setCurrentDateSelectable();
-
-    if (!this.value) {
-      this._selectedMonth.next(this.currentDate.month);
-      this._selectedYear.next(this.currentDate.year);
-    } else {
-      this._internalValue.next(this.value);
-      this._selectedMonth.next(this.value.start.getMonth());
-      this._selectedYear.next(this.value.start.getFullYear());
-    }
-
-    this.calendarPopover.toggle(event);
   }
 
   /**
