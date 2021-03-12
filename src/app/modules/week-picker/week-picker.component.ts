@@ -475,9 +475,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * @private
    */
   private setCurrentDateSelectable(): void {
+    const today = new Date();
     const selectionInterval = this._validSelectionInterval.getValue();
-    const startOfCurrentWeek = sub(selectionInterval.start, { days: this.currentDate.day });
-    const endOfCurrentWeek = add(selectionInterval.start, { days: 6 - this.currentDate.day });
+    const startOfCurrentWeek = sub(today, { days: this.currentDate.day });
+    const endOfCurrentWeek = add(today, { days: 6 - this.currentDate.day });
 
     this.currentDate.selectable = isWithinInterval(startOfCurrentWeek, selectionInterval) &&
       isWithinInterval(endOfCurrentWeek, selectionInterval);
