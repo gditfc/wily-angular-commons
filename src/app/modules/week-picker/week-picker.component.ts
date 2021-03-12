@@ -229,7 +229,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     map(([selectedWeek, selectionInterval, selectedYear]) => {
       let canSelect = false;
 
-      if (selectedWeek > 0) {
+      if (selectedWeek > 0 && selectionInterval) {
         const selectedYearStart = new Date(selectedYear, 0, 1);
         const weekDate = setWeek(selectedYearStart, selectedWeek);
         const nextWeekDate = add(weekDate, { weeks: 1 });
@@ -252,7 +252,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     map(([selectedWeek, selectionInterval, selectedYear]) => {
       let canSelect = false;
 
-      if (selectedWeek > 0) {
+      if (selectedWeek > 0 && selectionInterval) {
         const selectedYearStart = new Date(selectedYear, 0, 1);
         const weekDate = setWeek(selectedYearStart, selectedWeek);
         const lastWeekDate = sub(weekDate, { weeks: 1 });
