@@ -1,4 +1,3 @@
-import { AnimationEvent } from '@angular/animations';
 import { ChangeDetectorRef, Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
@@ -12,7 +11,7 @@ import {
   startOfWeek,
   sub
 } from 'date-fns';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 /**
@@ -109,6 +108,8 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       this._internalValue.next(value);
     } else {
       this._internalValue.next(null);
+      this._selectedMonth.next(this.currentDate.month);
+      this._selectedYear.next(this.currentDate.year);
     }
 
     this._value = value;
@@ -128,14 +129,8 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    */
   @Input('dateRange')
   set dateRange(dateRange: { start?: Date, end?: Date }) {
-    if (dateRange?.start > dateRange?.end) {
-      throw new Error('Start date must be less than end date');
-    }
-
-    this._validSelectionInterval.next({
-      start: dateRange?.start ?? new Date(this.currentDate.year - 100, 0, 1),
-      end: dateRange?.end ?? new Date(this.currentDate.year + 50, 11, 31)
-    });
+    this.setSelectionInterval(dateRange);
+    this.setCurrentDateSelectable();
   }
 
   /**
@@ -252,12 +247,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   showCalendar = false;
 
   /**
-   * Subscription for the combination of value and valid selection interval
-   * @private
-   */
-  private readonly subscription = new Subscription();
-
-  /**
    * The value of the week picker
    * @private
    */
@@ -372,10 +361,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    */
   constructor(private changeDetectorRef: ChangeDetectorRef) {
     this.currentDate = WeekPickerComponent.getMetaDate(new Date(), false);
-    this._validSelectionInterval.next({
-      start: new Date(this.currentDate.year - 100, 0, 1),
-      end: new Date(this.currentDate.year + 50, 11, 31)
-    });
   }
 
   /**
@@ -393,45 +378,9 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Init component, set up subscription to compare the week picker value
-   * with the valid selection interval
+   * Init component
    */
-  ngOnInit(): void {
-    this.subscription.add(
-      combineLatest([this._internalValue, this._validSelectionInterval]).subscribe(
-        ([value, validSelectionInterval]) => {
-          let selectionInterval = validSelectionInterval;
-
-          if (!selectionInterval) {
-            const {year} = this.currentDate;
-            selectionInterval = {
-              start: new Date(year - 100, 0, 1),
-              end: new Date(year + 50, 11, 31)
-            };
-          }
-
-          const startOfCurrentWeek = sub(selectionInterval.start, { days: this.currentDate.day });
-          const endOfCurrentWeek = add(selectionInterval.start, { days: 6 - this.currentDate.day });
-
-          this.currentDate.selectable = isWithinInterval(startOfCurrentWeek, selectionInterval) &&
-                                        isWithinInterval(endOfCurrentWeek, selectionInterval);
-
-          if (value) {
-            const valueWeek = getWeek(value.start);
-
-            if (valueWeek) {
-              this._selectedMonth.next(value.start.getMonth());
-              this._selectedYear.next(value.start.getFullYear());
-            } else {
-              this._internalValue.next(null);
-            }
-          } else {
-            this._selectedMonth.next(this.currentDate.month);
-            this._selectedYear.next(this.currentDate.year);
-          }
-        })
-    );
-  }
+  ngOnInit(): void { }
 
   /**
    * Write value
@@ -468,6 +417,29 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Open the week picker calendar
+   */
+  openCalendar(): void {
+    this.render = true;
+    this.showCalendar = true;
+
+    const selectionInterval = this._validSelectionInterval.getValue();
+    if (!selectionInterval) {
+      this.setSelectionInterval(null);
+    }
+
+    this.setCurrentDateSelectable();
+
+    if (!this.value) {
+      this._selectedMonth.next(this.currentDate.month);
+      this._selectedYear.next(this.currentDate.year);
+    } else {
+      this._selectedMonth.next(this.value.start.getMonth());
+      this._selectedMonth.next(this.value.start.getFullYear());
+    }
+  }
+
+  /**
    * Handle week select
    * @param week the week of the year
    * @param selectable whether or not the week is selectable
@@ -482,15 +454,32 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  onAnimationStart(event: AnimationEvent): void { }
+  /**
+   * Set the selection interval
+   * @param interval the input selection interval
+   * @private
+   */
+  private setSelectionInterval(interval: { start?: Date, end?: Date }): void {
+    if (interval?.start > interval?.end) {
+      throw new Error('Start date must be less than end date');
+    }
 
-  onAnimationDone(event: AnimationEvent): void { }
+    this._validSelectionInterval.next({
+      start: interval?.start ?? new Date(this.currentDate.year - 100, 0, 1),
+      end: interval?.end ?? new Date(this.currentDate.year + 50, 11, 31)
+    });
+  }
 
   /**
-   * Open the week picker calendar
+   * Set the selectable status of the current date
+   * @private
    */
-  openCalendar(): void {
-    this.render = true;
-    this.showCalendar = true;
+  private setCurrentDateSelectable(): void {
+    const selectionInterval = this._validSelectionInterval.getValue();
+    const startOfCurrentWeek = sub(selectionInterval.start, { days: this.currentDate.day });
+    const endOfCurrentWeek = add(selectionInterval.start, { days: 6 - this.currentDate.day });
+
+    this.currentDate.selectable = isWithinInterval(startOfCurrentWeek, selectionInterval) &&
+      isWithinInterval(endOfCurrentWeek, selectionInterval);
   }
 }
