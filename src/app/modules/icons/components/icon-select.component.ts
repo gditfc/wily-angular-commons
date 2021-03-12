@@ -9,7 +9,8 @@ import {WilyIconsSolid} from '../models/wily-icons-solid.model';
  */
 @Component({
   selector: 'wily-icon-select',
-  templateUrl: 'icon-select.component.html'
+  templateUrl: 'icon-select.component.html',
+  styleUrls: ['./icon-select.component.css']
 })
 export class IconSelectComponent {
 
@@ -125,7 +126,7 @@ export class IconSelectComponent {
    * Color class of the button
    */
   @Input()
-  buttonColorClass = 'overlay_alt2 bg_blue_alt';
+  buttonColorClass = 'overlay_alt2 page_container_color';
 
   /**
    * Icon select opened event emitter

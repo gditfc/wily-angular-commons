@@ -1,0 +1,42 @@
+.wis_button {
+  width:40px;
+  min-width:40px;
+  height:40px;
+  min-height:40px;
+
+  cursor:pointer;
+}
+.wis_button:hover {
+  filter:brightness(1.05);
+}
+.wis_button svg {
+  transition:transform 0.1s ease;
+  width:75%;
+  height:75%;
+}
+.wis_button:hover svg {
+  transform:scale(1.15);
+}
+
+.wis_search {
+  position:relative;
+}
+.wis_search input {
+  padding-right:40px !important;
+}
+.wis_search .wis_search_btn {
+  position:absolute;
+  right:0;
+  top:0;
+  z-index:1;
+  border-top-left-radius:0;
+  border-bottom-left-radius:0;
+  height:100%;
+  width:32px;
+}
+.wis_search .wis_clear_btn {
+  position:absolute;
+  right:40px;
+  top:7px;
+  z-index:1;
+}
