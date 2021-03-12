@@ -162,11 +162,13 @@
         </div>
         <div class="overlay_alt2 hr mar_5"></div>
         <div class="row space_between">
+          <!-- TODO: go back a week -->
           <button [attr.data-dialog-close-override]="true"
                   class="access btn sm overlay_alt2 mar_5 hov_glow"
                   aria-label="Select last week">
             <span class="text bold">Last Week</span>
           </button>
+          <!-- TODO: hook up reset button to set to current week -->
           <ng-container *ngIf="currentDate.selectable">
             <button disabled
                     class="access btn sm overlay_alt1 hov_bg mar_5"
@@ -181,6 +183,7 @@
               </button>
             </ng-template>
           </ng-container>
+          <!-- TODO: go forward a week -->
           <button [attr.data-dialog-close-override]="true"
                   class="access btn sm overlay_alt2 mar_5 hov_glow"
                   aria-label="Select next week">
