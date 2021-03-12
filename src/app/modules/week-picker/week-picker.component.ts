@@ -339,16 +339,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   private _disabled;
 
   /**
-   * Function to call on change
-   */
-  onChange: (value: { start: Date, end: Date }) => void;
-
-  /**
-   * Function to call on touch
-   */
-  onTouch: VoidFunction;
-
-  /**
    * Generate an Array of numbers representing the span of years between the input
    * @param minYear the start of the range
    * @param maxYear the end of the range
@@ -433,6 +423,16 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Function to call on change
+   */
+  onChange: (value: any) => void = () => {};
+
+  /**
+   * Function to call on touch
+   */
+  onTouched: () => any = () => {};
+
+  /**
    * Dependency injection site
    * @param changeDetectorRef the Angular ChangeDetectorRef
    */
@@ -483,7 +483,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * @param fn the function to register
    */
   registerOnTouched(fn: any): void {
-    this.onTouch = fn;
+    this.onTouched = fn;
   }
 
   /**
