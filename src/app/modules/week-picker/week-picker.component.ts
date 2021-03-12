@@ -12,7 +12,7 @@ import {
   sub
 } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
 /**
  * Interface representing a Date broken down by day/date/week/month/year
@@ -197,6 +197,52 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       return !value?.start ? 0 : getWeek(value.start);
     }),
     shareReplay()
+  );
+
+  /**
+   * Observable boolean representing if next week (relative to the current selection) is selectable
+   */
+  readonly canSelectNextWeek$: Observable<boolean> = this.selectedWeek$.pipe(
+    withLatestFrom(this._validSelectionInterval, this._selectedYear),
+    map(([selectedWeek, selectionInterval, selectedYear]) => {
+      let canSelect = false;
+
+      if (selectedWeek > 0) {
+        const selectedYearStart = new Date(selectedYear, 0, 1);
+        const weekDate = setWeek(selectedYearStart, selectedWeek);
+        const nextWeekDate = add(weekDate, { weeks: 1 });
+        const nextWeekStartDate = startOfWeek(nextWeekDate);
+        const nextWeekEndDate = endOfWeek(nextWeekDate);
+
+        canSelect = isWithinInterval(nextWeekStartDate, selectionInterval) &&
+          isWithinInterval(nextWeekEndDate, selectionInterval);
+      }
+
+      return canSelect;
+    })
+  );
+
+  /**
+   * Observable boolean representing if last week (relative to the current selection) is selectable
+   */
+  readonly canSelectLastWeek$: Observable<boolean> = this.selectedWeek$.pipe(
+    withLatestFrom(this._validSelectionInterval, this._selectedYear),
+    map(([selectedWeek, selectionInterval, selectedYear]) => {
+      let canSelect = false;
+
+      if (selectedWeek > 0) {
+        const selectedYearStart = new Date(selectedYear, 0, 1);
+        const weekDate = setWeek(selectedYearStart, selectedWeek);
+        const lastWeekDate = sub(weekDate, { weeks: 1 });
+        const lastWeekStartDate = startOfWeek(lastWeekDate);
+        const lastWeekEndDate = endOfWeek(lastWeekDate);
+
+        canSelect = isWithinInterval(lastWeekStartDate, selectionInterval) &&
+          isWithinInterval(lastWeekEndDate, selectionInterval);
+      }
+
+      return canSelect;
+    })
   );
 
   /**
@@ -445,8 +491,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * @param selectable whether or not the week is selectable
    */
   onWeekSelect(week: number, selectable: boolean): void {
+    const selectedYear = this._selectedYear.getValue();
+
     if (selectable) {
-      const weekDate = setWeek(new Date(), week);
+      const weekDate = setWeek(new Date(selectedYear, 0, 1), week);
       const weekStart = startOfWeek(weekDate);
       const weekEnd = endOfDay(endOfWeek(weekDate));
 
