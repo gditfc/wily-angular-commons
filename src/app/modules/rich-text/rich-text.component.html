@@ -1,6 +1,6 @@
-<div class="wily_richtext_container page_container_color brad_3">
+<div class="wily_richtext_container brad_3">
   <!-- editor toolbar -->
-  <div class="wily_richtext_toolbar overlay_alt2" #toolbar>
+  <div class="wily_richtext_toolbar overlay_alt2" [ngClass]="toolbarClassList" #toolbar>
     <span class="ql-formats">
       <div *ngIf="!editorFocused" class="ql-header-placeholder">Style</div>
       <select aria-label="Text Style" class="access ql-header" wilyTooltip="Text Style" tooltipPosition="top">
@@ -60,7 +60,8 @@
     <div class="overlay_alt2 toolbar_wrap_separator"></div>
   </div>
 
-  <div class="wily_richtext_editor overlay_alt2" #editor [ngStyle]="{height: height}"></div>
+  <div class="wily_richtext_editor overlay_alt2" #editor
+       [ngClass]="editorClassList" [ngStyle]="{height: height}"></div>
 </div>
 
 <!--<p-editor #editor-->

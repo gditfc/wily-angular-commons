@@ -87,6 +87,18 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
   placeholder = '';
 
   /**
+   * Toolbar background color
+   */
+  @Input()
+  toolbarClassList = 'page_container_color';
+
+  /**
+   * Editor background color
+   */
+  @Input()
+  editorClassList = 'page_container_color';
+
+  /**
    * Event emitted on editor text change
    */
   @Output()

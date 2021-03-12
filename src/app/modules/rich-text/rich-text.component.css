@@ -7,9 +7,9 @@
   padding:0 3px;
   display:flex;
   flex-wrap:wrap;
-  background-color:inherit;
   overflow:hidden;
   position:relative;
+  border-radius:3px 3px 0 0;
 }
 
 .toolbar_wrap_separator {
@@ -39,7 +39,7 @@
 .ql-formats button {
   border:none;
   cursor:pointer;
-  background-color:rgba(128,128,128,0.15);
+  background-color:rgba(0,0,0,0.2);
   border-radius:3px;
   height:26px;
   min-height:26px;
@@ -52,15 +52,12 @@
   color:inherit;
   margin:0 2px;
 }
-.ql-formats button svg {
-  opacity:0.8;
-}
-.ql-formats button:not(:hover) {
+.ql-formats button:not(:hover, .ql-active) {
   background-color:transparent;
 }
-.ql-formats button.ql-active {
-  background-color:rgba(128,128,128,0.15);
-}
+/*.ql-formats button.ql-active {*/
+/*  background-color:rgba(128,128,128,0.15);*/
+/*}*/
 
 
 .ql-header, .ql-align {
@@ -72,7 +69,7 @@
   font-weight:600;
 }
 .ql-header:not(:focus), .ql-align:not(:focus) {
-  background-color:rgba(128,128,128,0.15);
+  background-color:rgba(0,0,0,0.2);
 }
 .ql-header:not(:hover), .ql-align:not(:hover) {
   background-color:inherit;
@@ -85,7 +82,7 @@
   font-weight:600;
   opacity:0.5;
   user-select:none;
-  z-index:2;
+  /*z-index:2;*/
   pointer-events:none;
 }
 
@@ -96,7 +93,7 @@
   font-weight:600;
   opacity:0.5;
   user-select:none;
-  z-index:2;
+  /*z-index:2;*/
   pointer-events:none;
 }
 
