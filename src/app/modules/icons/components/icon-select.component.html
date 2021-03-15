@@ -11,11 +11,14 @@
         [tooltipDisabled]="!(_internalValue | async)"
         class="access wis_button"
         aria-label="Choose Icon">
-  <ng-container *ngIf="!showDialog">
+  <ng-container *ngIf="!showDialog else placeholderIcon">
     <div *ngIf="_internalValue | async as selectedIcon">
       <i class="{{selectedIcon.prefix}} {{selectedIcon.name}}"></i>
     </div>
   </ng-container>
+  <ng-template #placeholderIcon>
+    <div><i class="fas fa-spinner"></i></div>
+  </ng-template>
 </button>
 
 <!-- picker dialog -->
