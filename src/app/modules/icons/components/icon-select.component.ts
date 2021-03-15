@@ -21,16 +21,16 @@ export class IconSelectComponent {
   private static readonly PAGE_SIZE = 50;
 
   /**
-   * Reference to the dialog component
-   */
-  @ViewChild('faDialog')
-  faDialog: DialogComponent;
-
-  /**
    * Color class of the button
    */
   @Input()
   buttonColorClass = 'overlay_alt2 page_container_color';
+
+  /**
+   * The value to set to the button's width, min-width, height and min-height
+   */
+  @Input()
+  buttonSizing = '40px';
 
   /**
    * Icon select opened event emitter
@@ -167,4 +167,32 @@ export class IconSelectComponent {
    * @param service the IconsService
    */
   constructor(private service: IconsService) { }
+
+  /**
+   * Open the icon select dialog
+   */
+  openDialog(): void {
+    this.reset();
+    this.showDialog = {};
+    this.opened.emit();
+  }
+
+  /**
+   * Close the icon select dialog
+   */
+  closeDialog(): void {
+    this.showDialog = null;
+    this.closed.emit();
+  }
+
+  /**
+   * Reset filtering/pagination BehaviorSubject values
+   * @private
+   */
+  private reset(): void {
+    this._wilyFilter.next('all');
+    this._fontawesomeFilter.next('all');
+    this._searchText.next('');
+    this._activePage.next(0);
+  }
 }

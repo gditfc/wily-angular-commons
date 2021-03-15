@@ -1,159 +1,152 @@
 <!-- choose button -->
-<!-- TODO: add input for button size, set css width,min-width,height and min-height properties -->
 <!-- TODO: add icon name to tooltip -->
-<button class="access wis_button"
+<button *ngIf="!showDialog"
         [ngClass]="buttonColorClass"
-        (click)="doShowDialog()"
+        [ngStyle]="{
+                     'width': buttonSizing,
+                     'min-width': buttonSizing,
+                     'height': buttonSizing,
+                     'min-height': buttonSizing
+                   }"
+        (click)="openDialog()"
+        class="access wis_button"
         aria-label="Choose Icon">
   <!-- TODO: insert selected icon -->
   <i class="fas fa-car"></i>
 </button>
 
 <!-- picker dialog -->
-<wily-dialog
+<wily-dialog [title]="'Select an Icon'"
   [object]="showDialog"
-  [title]="'Select an Icon'"
-  [width]="'800px'" [height]="'500px'"
-  (closed)="closed.emit()"
-  #faDialog>
-  <div class="row height100">
-
-    <!-- FILTERS -->
-    <div class="col min_w250 overlay_alt2 border_right">
-      <div class="row_block width100">
-        <!-- fontawesome icons -->
-        <div class="mar_5">
-          <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Font Awesome Icons</div>
+  [width]="'800px'"
+  [height]="'500px'"
+  (closed)="closeDialog()">
+    <div class="row height100">
+      <!-- FILTERS -->
+      <div class="col min_w250 overlay_alt2 border_right">
+        <div class="row_block width100">
+          <!-- fontawesome icons -->
           <div class="mar_5">
-            <!-- TODO: remove hov_bg on buttons when selected -->
-            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
-              <div class="text md">All</div>
-              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
-            </button>
-          </div>
-          <div class="mar_5">
-            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
-              <div class="text md">Solid</div>
-              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
-            </button>
-          </div>
-          <div class="mar_5">
-            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
-              <div class="text md">Regular</div>
-              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
-            </button>
-          </div>
-          <div class="mar_5">
-            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
-              <div class="text md">Brands</div>
-              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
-            </button>
-          </div>
-        </div>
-        <div class="overlay_alt2 hr mar_10"></div>
-        <!-- custom icons -->
-        <div class="mar_5">
-          <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Custom Icons</div>
-          <div class="mar_5">
-            <!-- TODO: remove hov_bg on buttons when selected -->
-            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
-              <div class="text md">All</div>
-              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
-            </button>
-          </div>
-          <div class="mar_5">
-            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
-              <div class="text md">Solid</div>
-              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
-            </button>
-          </div>
-          <div class="mar_5">
-            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
-              <div class="text md">Regular</div>
-              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
-            </button>
-          </div>
-          <div class="mar_5">
-            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
-              <div class="text md">Light</div>
-              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ICONS -->
-    <div class="col size_2 column">
-      <div class="col overlay_alt2 dialog_body_color_dark_1 border_bottom pad_x5">
-        <!-- paginator -->
-        <div class="col v_center mar_10">
-          <button class="access btn square_24px overlay_alt2 bg_blue_alt"
-                  aria-label="Previous Page">
-            <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
-          </button>
-          <div class="text sm bolder center" style="min-width:65px;">12 / 24</div>
-          <button class="access btn square_24px overlay_alt2 bg_blue_alt"
-                  aria-label="Next Page">
-            <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
-          </button>
-        </div>
-        <!-- search -->
-        <div class="col size_1 wis_search mar_10">
-          <input class="access input md overlay_alt2 page_container_color"
-                 aria-label="Search icons" placeholder="Search icons..." />
-          <button class="access btn square_28px overlay_alt2 bg_blue_alt brad_3 wis_search_btn"
-                  aria-label="Submit Search" type="submit">
-            <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
-          </button>
-          <!-- TODO: show clear button only when text entered -->
-          <!-- TODO: empty text and clear search -->
-          <button class="access btn circle_18px overlay wis_clear_btn">
-            <span class="icon grow"><i class="fas fa-times fa-sm"></i></span>
-          </button>
-        </div>
-      </div>
-      <!-- icons -->
-      <div class="col size_1 top_left scroll_y pad_5">
-        <div class="row wrap top_left">
-          <ng-container *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]">
-            <div class="col size_1 column center_center min_w75 mar_x5 mar_y10">
-              <!-- TODO: replace "overlay hov_bg" with "bg_blue" when selected -->
-              <!-- TODO: hook up icon name, add to aria label -->
-              <button class="access wis_icon_btn square_50px brad_3 overlay_alt2 overlay hov_bg mar_bot5"
-                      aria-label="Select fa-ethernet">
-                <i class="fas fa-ethernet"></i>
+            <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Font Awesome Icons</div>
+            <div class="mar_5">
+              <!-- TODO: remove hov_bg on buttons when selected -->
+              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+                <div class="text md">All</div>
+                <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
-              <div class="text sm center faded">fa-ethernet</div>
             </div>
-          </ng-container>
+            <div class="mar_5">
+              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+                <div class="text md">Solid</div>
+                <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+              </button>
+            </div>
+            <div class="mar_5">
+              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+                <div class="text md">Regular</div>
+                <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+              </button>
+            </div>
+            <div class="mar_5">
+              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+                <div class="text md">Brands</div>
+                <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+              </button>
+            </div>
+          </div>
+          <div class="overlay_alt2 hr mar_10"></div>
+          <!-- custom icons -->
+          <div class="mar_5">
+            <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Custom Icons</div>
+            <div class="mar_5">
+              <!-- TODO: remove hov_bg on buttons when selected -->
+              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+                <div class="text md">All</div>
+                <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+              </button>
+            </div>
+            <div class="mar_5">
+              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+                <div class="text md">Solid</div>
+                <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+              </button>
+            </div>
+            <div class="mar_5">
+              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+                <div class="text md">Regular</div>
+                <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+              </button>
+            </div>
+            <div class="mar_5">
+              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+                <div class="text md">Light</div>
+                <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col space_between overlay_alt2 border_top pad_x5">
-        <div class="col v_center text md mar_10">
-          <span class="text bold mar_right10">Selected:</span>
-          <i class="fas fa-egg fa-fw mar_right5" style="font-size:16px;"></i>
-          fas fa-egg
+
+      <!-- ICONS -->
+      <div class="col size_2 column">
+        <div class="col overlay_alt2 dialog_body_color_dark_1 border_bottom pad_x5">
+          <!-- paginator -->
+          <div class="col v_center mar_10">
+            <button class="access btn square_24px overlay_alt2 bg_blue_alt"
+                    aria-label="Previous Page">
+              <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
+            </button>
+            <div class="text sm bolder center" style="min-width:65px;">12 / 24</div>
+            <button class="access btn square_24px overlay_alt2 bg_blue_alt"
+                    aria-label="Next Page">
+              <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
+            </button>
+          </div>
+          <!-- search -->
+          <div class="col size_1 wis_search mar_10">
+            <input class="access input md overlay_alt2 page_container_color"
+                   aria-label="Search icons" placeholder="Search icons..." />
+            <button class="access btn square_28px overlay_alt2 bg_blue_alt brad_3 wis_search_btn"
+                    aria-label="Submit Search" type="submit">
+              <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
+            </button>
+            <!-- TODO: show clear button only when text entered -->
+            <!-- TODO: empty text and clear search -->
+            <button class="access btn circle_18px overlay wis_clear_btn">
+              <span class="icon grow"><i class="fas fa-times fa-sm"></i></span>
+            </button>
+          </div>
         </div>
-        <div class="col mar_10">
-          <button class="access btn md icon_right overlay_alt2 bg_green_alt">
-            Confirm<span class="icon grow"><i class="fas fa-check"></i></span>
-          </button>
+        <!-- icons -->
+        <div class="col size_1 top_left scroll_y pad_5">
+          <div class="row wrap top_left">
+            <ng-container *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]">
+              <div class="col size_1 column center_center min_w75 mar_x5 mar_y10">
+                <!-- TODO: replace "overlay hov_bg" with "bg_blue" when selected -->
+                <!-- TODO: hook up icon name, add to aria label -->
+                <button class="access wis_icon_btn square_50px brad_3 overlay_alt2 overlay hov_bg mar_bot5"
+                        aria-label="Select fa-ethernet">
+                  <i class="fas fa-ethernet"></i>
+                </button>
+                <div class="text sm center faded">fa-ethernet</div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="col space_between overlay_alt2 border_top pad_x5">
+          <div class="col v_center text md mar_10">
+            <span class="text bold mar_right10">Selected:</span>
+            <i class="fas fa-egg fa-fw mar_right5" style="font-size:16px;"></i>
+            fas fa-egg
+          </div>
+          <div class="col mar_10">
+            <button class="access btn md icon_right overlay_alt2 bg_green_alt">
+              Confirm<span class="icon grow"><i class="fas fa-check"></i></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-
-  </div>
-
-
-
-
-
-
-
-
-
-
 
 <!--  <div class="row column height100 page_container_color_dark_1">-->
 <!--    &lt;!&ndash; inputs &ndash;&gt;-->
