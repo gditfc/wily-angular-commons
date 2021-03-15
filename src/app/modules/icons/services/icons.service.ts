@@ -80,7 +80,7 @@ export class IconsService {
    * @param fontawesomeFilter the type of Fontawesome icon to fetch
    * @param searchText the search text to filter icons by
    */
-  getIconsByType(
+  getIcons(
     wilyFilter: WilyIconFilterOption,
     fontawesomeFilter: FontawesomeIconFilterOption,
     searchText = ''
