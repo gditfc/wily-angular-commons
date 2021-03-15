@@ -26,29 +26,36 @@
       <div class="col min_w250 overlay_alt2 border_right">
         <div class="row_block width100">
           <!-- fontawesome icons -->
-          <div class="mar_5">
+          <div *ngIf="_fontawesomeFilter | async as fontawesomeFilter" class="mar_5">
             <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Font Awesome Icons</div>
             <div class="mar_5">
-              <!-- TODO: remove hov_bg on buttons when selected -->
-              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <button (click)="_fontawesomeFilter.next('all')"
+                      [ngClass]="{ 'hov_bg': fontawesomeFilter !== 'all' }"
+                      class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                 <div class="text md">All</div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
-              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <button (click)="_fontawesomeFilter.next('solid')"
+                      [ngClass]="{ 'hov_bg': fontawesomeFilter !== 'solid' }"
+                      class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                 <div class="text md">Solid</div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
-              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <button (click)="_fontawesomeFilter.next('regular')"
+                      [ngClass]="{ 'hov_bg': fontawesomeFilter !== 'regular' }"
+                      class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                 <div class="text md">Regular</div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
-              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <button (click)="_fontawesomeFilter.next('brands')"
+                      [ngClass]="{ 'hov_bg': fontawesomeFilter !== 'brands' }"
+                      class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                 <div class="text md">Brands</div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
@@ -56,29 +63,36 @@
           </div>
           <div class="overlay_alt2 hr mar_10"></div>
           <!-- custom icons -->
-          <div class="mar_5">
+          <div *ngIf="_wilyFilter | async as wilyFilter" class="mar_5">
             <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Custom Icons</div>
             <div class="mar_5">
-              <!-- TODO: remove hov_bg on buttons when selected -->
-              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <button (click)="_wilyFilter.next('all')"
+                      [ngClass]="{ 'hov_bg': wilyFilter !== 'all' }"
+                      class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                 <div class="text md">All</div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
-              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <button (click)="_wilyFilter.next('solid')"
+                      [ngClass]="{ 'hov_bg': wilyFilter !== 'solid' }"
+                      class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                 <div class="text md">Solid</div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
-              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <button (click)="_wilyFilter.next('regular')"
+                      [ngClass]="{ 'hov_bg': wilyFilter !== 'regular' }"
+                      class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                 <div class="text md">Regular</div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
-              <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <button (click)="_wilyFilter.next('light')"
+                      [ngClass]="{ 'hov_bg': wilyFilter !== 'light' }"
+                      class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                 <div class="text md">Light</div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
@@ -110,9 +124,9 @@
                     aria-label="Submit Search" type="submit">
               <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
             </button>
-            <!-- TODO: show clear button only when text entered -->
-            <!-- TODO: empty text and clear search -->
-            <button class="access btn circle_18px overlay wis_clear_btn">
+            <button *ngIf="canSearch$ | async"
+                    (click)="_searchText.next('')"
+                    class="access btn circle_18px overlay wis_clear_btn">
               <span class="icon grow"><i class="fas fa-times fa-sm"></i></span>
             </button>
           </div>
@@ -120,17 +134,22 @@
         <!-- icons -->
         <div class="col size_1 top_left scroll_y pad_5">
           <div class="row wrap top_left">
-            <ng-container *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]">
-              <div class="col size_1 column center_center min_w75 mar_x5 mar_y10">
-                <!-- TODO: replace "overlay hov_bg" with "bg_blue" when selected -->
-                <!-- TODO: hook up icon name, add to aria label -->
-                <button class="access wis_icon_btn square_50px brad_3 overlay_alt2 overlay hov_bg mar_bot5"
-                        aria-label="Select fa-ethernet">
-                  <i class="fas fa-ethernet"></i>
-                </button>
-                <div class="text sm center faded">fa-ethernet</div>
-              </div>
+            <ng-container *ngIf="paginatedIcons$ | async as icons else noResults">
+              <ng-container *ngFor="let icon of paginatedIcons$ | async">
+                <div class="col size_1 column center_center min_w75 mar_x5 mar_y10">
+                  <!-- TODO: replace "overlay hov_bg" with "bg_blue" when selected -->
+                  <!-- TODO: hook up icon name, add to aria label -->
+                  <button class="access wis_icon_btn square_50px brad_3 overlay_alt2 overlay hov_bg mar_bot5"
+                          [attr.aria-label]="'Select ' + icon">
+                    <i class="fas {{icon}}"></i>
+                  </button>
+                  <div class="text sm center faded">{{icon}}</div>
+                </div>
+              </ng-container>
             </ng-container>
+            <ng-template #noResults>
+              No Results
+            </ng-template>
           </div>
         </div>
         <div class="col space_between overlay_alt2 border_top pad_x5">
