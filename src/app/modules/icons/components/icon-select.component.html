@@ -106,15 +106,35 @@
         <div class="col overlay_alt2 dialog_body_color_dark_1 border_bottom pad_x5">
           <!-- paginator -->
           <div class="col v_center mar_10">
-            <button class="access btn square_24px overlay_alt2 bg_blue_alt"
+            <button *ngIf="canPaginatePrevious$ | async else disabledPreviousButton"
+                    (click)="paginatePrevious()"
+                    class="access btn square_24px overlay_alt2 bg_blue_alt"
                     aria-label="Previous Page">
               <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
             </button>
-            <div class="text sm bolder center" style="min-width:65px;">12 / 24</div>
-            <button class="access btn square_24px overlay_alt2 bg_blue_alt"
+            <ng-template #disabledPreviousButton>
+              <button disabled class="access btn square_24px overlay_alt2 bg_blue_alt"
+                      aria-label="Previous Page">
+                <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
+              </button>
+            </ng-template>
+            <div *ngIf="totalPages$ | async as totalPages"
+                 class="text sm bolder center"
+                 style="min-width:65px;">
+              {{(_activePage | async) + 1}} / {{totalPages}}
+            </div>
+            <button *ngIf="canPaginateNext$ | async else disabledNextButton"
+                    (click)="paginateNext()"
+                    class="access btn square_24px overlay_alt2 bg_blue_alt"
                     aria-label="Next Page">
               <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
             </button>
+            <ng-template #disabledNextButton>
+              <button disabled class="access btn square_24px overlay_alt2 bg_blue_alt"
+                      aria-label="Next Page">
+                <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
+              </button>
+            </ng-template>
           </div>
           <!-- search -->
           <div class="col size_1 wis_search mar_10">

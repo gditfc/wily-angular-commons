@@ -186,6 +186,20 @@ export class IconSelectComponent {
   }
 
   /**
+   * Go to the next pagination page
+   */
+  paginateNext(): void {
+    this._activePage.next(this._activePage.getValue() + 1);
+  }
+
+  /**
+   * Go to the previous pagination page
+   */
+  paginatePrevious(): void {
+    this._activePage.next(this._activePage.getValue() - 1);
+  }
+
+  /**
    * Reset filtering/pagination BehaviorSubject values
    * @private
    */
