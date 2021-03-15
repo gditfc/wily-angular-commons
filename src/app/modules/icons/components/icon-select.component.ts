@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
-import { DialogComponent } from '../../dialog/dialog.component';
 import { IconsService } from '../services/icons.service';
 
 /**
@@ -51,14 +50,12 @@ export class IconSelectComponent {
   closed = new EventEmitter<any>();
 
   /**
-   * BehaviorSubject tracking the current filter value selection for Wily icons
+   * BehaviorSubject tracking the current filter value selection for icons
    */
-  readonly _wilyFilter = new BehaviorSubject<'all' | 'solid' | 'regular' | 'light'>('all');
-
-  /**
-   * BehaviorSubject tracking the current filter value selection for Fontawesome icons
-   */
-  readonly _fontawesomeFilter = new BehaviorSubject<'all' | 'solid' | 'regular' | 'brands'>('all');
+  readonly _filter = new BehaviorSubject< {
+    style: 'all' | 'solid' | 'regular' | 'light' | 'brands',
+    type: 'all' | 'wily' | 'fontawesome'
+  }>({ style: 'all', type: 'all' });
 
   /**
    * BehaviorSubject tracking the current icon search text value
@@ -68,7 +65,7 @@ export class IconSelectComponent {
   /**
    * BehaviorSubject that emits when search button has been clicked
    */
-  readonly _searchClick = new BehaviorSubject<void>(null);
+  readonly _searchClick = new BehaviorSubject('');
 
   /**
    * BehaviorSubject tracking the active pagination page
@@ -80,14 +77,12 @@ export class IconSelectComponent {
    * @private
    */
   private readonly icons$: Observable<Array<{ prefix: string, name: string }>> = combineLatest([
-    this._wilyFilter,
-    this._fontawesomeFilter,
+    this._filter,
     this._searchClick
   ]).pipe(
-    withLatestFrom(this._searchText),
-    map(([[wilyFilter, fontawesomeFilter], searchText]) => this.service.getIcons(
-      wilyFilter,
-      fontawesomeFilter,
+    map(([filter, searchText]) => this.service.getIcons(
+      filter.type,
+      filter.style,
       searchText
     ))
   );
@@ -207,8 +202,7 @@ export class IconSelectComponent {
    * @private
    */
   private reset(): void {
-    this._wilyFilter.next('all');
-    this._fontawesomeFilter.next('all');
+    this._filter.next({ style: 'all', type: 'all' });
     this._searchText.next('');
     this._activePage.next(0);
   }

@@ -76,25 +76,31 @@ export class IconsService {
   /**
    * Get a list of icons (as strings) containing both Wily icons
    * and Fontawesome icons that match their respective filter criteria
-   * @param wilyFilter the type of Wily icon to fetch
-   * @param fontawesomeFilter the type of Fontawesome icon to fetch
+   * @param iconType the type of icon, or all icons
+   * @param filter the icon styling to filter by
    * @param searchText the search text to filter icons by
    */
   getIcons(
-    wilyFilter: WilyIconFilterOption,
-    fontawesomeFilter: FontawesomeIconFilterOption,
+    iconType: 'all' | 'wily' | 'fontawesome',
+    filter: WilyIconFilterOption | FontawesomeIconFilterOption,
     searchText = ''
   ): Array<{ prefix: string, name: string }> {
     let icons: Array<{ prefix: string, name: string }> = [];
-    const wilyIcons = IconsService.getWilyIcons(wilyFilter);
-    const fontawesomeIcons = IconsService.getFontawesomeIcons(fontawesomeFilter);
 
-    if (wilyIcons.length) {
-      icons.push(...wilyIcons);
+    if (iconType === 'all' || iconType === 'wily') {
+      const wilyIcons = IconsService.getWilyIcons(filter as WilyIconFilterOption);
+
+      if (wilyIcons.length) {
+        icons.push(...wilyIcons);
+      }
     }
 
-    if (fontawesomeIcons.length) {
-      icons.push(...fontawesomeIcons);
+    if (iconType === 'all' || iconType === 'fontawesome') {
+      const fontawesomeIcons = IconsService.getFontawesomeIcons(filter as FontawesomeIconFilterOption);
+
+      if (fontawesomeIcons.length) {
+        icons.push(...fontawesomeIcons);
+      }
     }
 
     const trimmedSearchText = searchText.trim().toLowerCase();
