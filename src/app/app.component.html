@@ -244,7 +244,8 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot5">Select the button below to open the icon select</div>
-                  <wily-icon-select (opened)="iconSelectOpened()"
+                  <wily-icon-select [(ngModel)]="icon"
+                                    (opened)="iconSelectOpened()"
                                     (closed)="iconSelectClosed()"
                                     (selected)="iconSelected($event)">
                   </wily-icon-select>

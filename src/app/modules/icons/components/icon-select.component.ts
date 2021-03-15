@@ -38,6 +38,7 @@ export class IconSelectComponent implements ControlValueAccessor {
     if (value)  {
       const [prefix, name] = value.split(' ');
       this._internalValue.next({ prefix, name });
+      this.showIconSelectionPreview = true;
     }
   }
 
@@ -235,6 +236,10 @@ export class IconSelectComponent implements ControlValueAccessor {
     this.reset();
     this.showDialog = {};
     this.opened.emit();
+
+    if (this.value) {
+      this.showIconSelectionPreview = true;
+    }
   }
 
   /**
@@ -273,6 +278,7 @@ export class IconSelectComponent implements ControlValueAccessor {
   handleIconSelectConfirm(): void {
     const icon = this._internalValue.getValue();
     this.writeValue(`${icon.prefix} ${icon.name}`);
+    this.closeDialog();
   }
 
   /**
@@ -296,6 +302,7 @@ export class IconSelectComponent implements ControlValueAccessor {
   private reset(): void {
     this._filter.next({ style: 'all', type: 'all' });
     this._searchText.next('');
+    this._searchClick.next('');
     this._activePage.next(0);
   }
 }

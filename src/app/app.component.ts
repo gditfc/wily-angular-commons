@@ -79,6 +79,8 @@ export class AppComponent {
 
   value = ['value', 'value6', 'value4'];
 
+  icon = 'fas fa-car';
+
   /**
    * Constructor
    */

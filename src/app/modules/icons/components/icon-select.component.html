@@ -9,10 +9,14 @@
                      'min-height': buttonSizing
                    }"
         (click)="openDialog()"
+        [wilyTooltip]="(_internalValue | async)?.prefix + ' ' + (_internalValue | async)?.name"
+        [tooltipDisabled]="!(_internalValue | async)"
         class="access wis_button"
         aria-label="Choose Icon">
   <!-- TODO: insert selected icon -->
-  <i class="fas fa-car"></i>
+  <div *ngIf="_internalValue | async as selectedIcon">
+    <i class="{{selectedIcon.prefix}} {{selectedIcon.name}}"></i>
+  </div>
 </button>
 
 <!-- picker dialog -->
