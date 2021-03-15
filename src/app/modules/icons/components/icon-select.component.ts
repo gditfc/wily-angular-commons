@@ -184,6 +184,18 @@ export class IconSelectComponent {
   }
 
   /**
+   * Handle filter select
+   * @param filter the selected filter
+   */
+  handleFilterSelect(
+    filter: { style: 'all' | 'solid' | 'regular' | 'light' | 'brands',
+    type: 'all' | 'wily' | 'fontawesome' }
+  ): void {
+    this._filter.next(filter);
+    this._activePage.next(0);
+  }
+
+  /**
    * Go to the next pagination page
    */
   paginateNext(): void {

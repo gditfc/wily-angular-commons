@@ -28,7 +28,7 @@
           <ng-container *ngIf="_filter | async as filter">
             <!-- all icons -->
             <div class="mar_5 pad_5">
-              <button (click)="_filter.next({ style: 'all', type: 'all' })"
+              <button (click)="handleFilterSelect({ style: 'all', type: 'all' })"
                       [ngClass]="{ 'hov_bg': filter.type === 'all' && filter.style === 'all' }"
                       class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                 <div class="text md">All Icons</div>
@@ -40,7 +40,7 @@
             <div class="mar_5">
               <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Font Awesome Icons</div>
               <div class="mar_5">
-                <button (click)="_filter.next({ style: 'all', type: 'fontawesome' })"
+                <button (click)="handleFilterSelect({ style: 'all', type: 'fontawesome' })"
                         [ngClass]="{ 'hov_bg': filter.type === 'fontawesome' && filter.style === 'all' }"
                         class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                   <div class="text md">All</div>
@@ -48,7 +48,7 @@
                 </button>
               </div>
               <div class="mar_5">
-                <button (click)="_filter.next({ style: 'solid', type: 'fontawesome' })"
+                <button (click)="handleFilterSelect({ style: 'solid', type: 'fontawesome' })"
                         [ngClass]="{ 'hov_bg': filter.type === 'fontawesome' &&  filter.style === 'solid' }"
                         class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                   <div class="text md">Solid</div>
@@ -56,7 +56,7 @@
                 </button>
               </div>
               <div class="mar_5">
-                <button (click)="_filter.next({ style: 'regular', type: 'fontawesome' })"
+                <button (click)="handleFilterSelect({ style: 'regular', type: 'fontawesome' })"
                         [ngClass]="{ 'hov_bg': filter.type === 'fontawesome' &&  filter.style === 'regular' }"
                         class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                   <div class="text md">Regular</div>
@@ -64,7 +64,7 @@
                 </button>
               </div>
               <div class="mar_5">
-                <button (click)="_filter.next({ style: 'brands', type: 'fontawesome' })"
+                <button (click)="handleFilterSelect({ style: 'brands', type: 'fontawesome' })"
                         [ngClass]="{ 'hov_bg': filter.type === 'fontawesome' &&  filter.style === 'brands' }"
                         class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                   <div class="text md">Brands</div>
@@ -77,7 +77,7 @@
             <div class="mar_5">
               <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Custom Icons</div>
               <div class="mar_5">
-                <button (click)="_filter.next({ style: 'all', type: 'wily' })"
+                <button (click)="handleFilterSelect({ style: 'all', type: 'wily' })"
                         [ngClass]="{ 'hov_bg': filter.type === 'wily' && filter.style === 'all' }"
                         class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                   <div class="text md">All</div>
@@ -85,7 +85,7 @@
                 </button>
               </div>
               <div class="mar_5">
-                <button (click)="_filter.next({ style: 'solid', type: 'wily' })"
+                <button (click)="handleFilterSelect({ style: 'solid', type: 'wily' })"
                         [ngClass]="{ 'hov_bg': filter.type === 'wily' && filter.style === 'solid' }"
                         class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                   <div class="text md">Solid</div>
@@ -93,7 +93,7 @@
                 </button>
               </div>
               <div class="mar_5">
-                <button (click)="_filter.next({ style: 'regular', type: 'wily' })"
+                <button (click)="handleFilterSelect({ style: 'regular', type: 'wily' })"
                         [ngClass]="{ 'hov_bg': filter.type === 'wily' && filter.style === 'regular' }"
                         class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                   <div class="text md">Regular</div>
@@ -101,7 +101,7 @@
                 </button>
               </div>
               <div class="mar_5">
-                <button (click)="_filter.next({ style: 'light', type: 'wily' })"
+                <button (click)="handleFilterSelect({ style: 'light', type: 'wily' })"
                         [ngClass]="{ 'hov_bg': filter.type === 'wily' && filter.style === 'light' }"
                         class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
                   <div class="text md">Light</div>
@@ -157,7 +157,7 @@
                    class="access input md overlay_alt2 page_container_color"
                    aria-label="Search icons" placeholder="Search icons..." />
             <button *ngIf="canSearch$ | async else disabledSearchButton"
-                    (click)="_searchClick.next(iconSearchInput.value)"
+                    (click)="_searchClick.next(iconSearchInput.value); _activePage.next(0)"
                     class="access btn square_28px overlay_alt2 bg_blue_alt brad_3 wis_search_btn"
                     aria-label="Submit Search" type="submit">
               <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
@@ -170,7 +170,7 @@
               </button>
             </ng-template>
             <button *ngIf="(canSearch$ | async) && (_searchClick | async)"
-                    (click)="_searchText.next(''); _searchClick.next('')"
+                    (click)="_searchText.next(''); _searchClick.next(''); _activePage.next(0)"
                     class="access btn circle_18px overlay wis_clear_btn">
               <span class="icon grow"><i class="fas fa-times fa-sm"></i></span>
             </button>
