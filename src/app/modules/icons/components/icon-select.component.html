@@ -25,6 +25,15 @@
       <!-- FILTERS -->
       <div class="col min_w250 overlay_alt2 border_right">
         <div class="row_block width100">
+          <!-- all icons -->
+          <div class="mar_5 pad_5">
+            <button
+                    class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3">
+              <div class="text md">All Icons</div>
+              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+            </button>
+          </div>
+          <div class="overlay_alt2 hr mar_10"></div>
           <!-- fontawesome icons -->
           <div *ngIf="_fontawesomeFilter | async as fontawesomeFilter" class="mar_5">
             <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Font Awesome Icons</div>
@@ -103,7 +112,7 @@
 
       <!-- ICONS -->
       <div class="col size_2 column">
-        <div class="col overlay_alt2 dialog_body_color_dark_1 border_bottom pad_x5">
+        <div class="col dialog_body_color_dark_1 pad_x5">
           <!-- paginator -->
           <div class="col v_center mar_10">
             <button *ngIf="canPaginatePrevious$ | async else disabledPreviousButton"
@@ -151,6 +160,14 @@
             </button>
           </div>
         </div>
+        <div class="color_bar">
+          <div class="color_stripes">
+            <div class="bg_blue_light_3"></div>
+            <div class="bg_purple_light_3"></div>
+            <div class="bg_yellow_light_8"></div>
+            <div class="bg_red_light_3"></div>
+          </div>
+        </div>
         <!-- icons -->
         <div class="col size_1 top_left scroll_y pad_5">
           <div class="row wrap top_left">
@@ -171,7 +188,9 @@
             </ng-template>
           </div>
         </div>
-        <div class="col space_between overlay_alt2 border_top pad_x5">
+        <!-- TODO: only show this when an icon is selected -->
+        <div class="col space_between overlay_alt2 border_top pad_x5"
+             style="box-shadow: 0 -6px 10px -8px rgba(0,0,0,0.25);">
           <div class="col v_center text md mar_10">
             <span class="text bold mar_right10">Selected:</span>
             <i class="fas fa-egg fa-fw mar_right5" style="font-size:16px;"></i>
