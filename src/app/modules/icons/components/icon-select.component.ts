@@ -173,6 +173,11 @@ export class IconSelectComponent implements ControlValueAccessor {
   showDialog: any;
 
   /**
+   * Whether or not to show the icon selection preview
+   */
+  showIconSelectionPreview = false;
+
+  /**
    * The value of the icon select
    * @private
    */
@@ -258,6 +263,8 @@ export class IconSelectComponent implements ControlValueAccessor {
    */
   handleIconSelect(icon: { prefix: string, name: string }): void {
     this._internalValue.next(icon);
+    this.showIconSelectionPreview = false;
+    setTimeout(() => this.showIconSelectionPreview = true);
   }
 
   /**

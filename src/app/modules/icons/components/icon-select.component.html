@@ -210,7 +210,7 @@
         <div *ngIf="_internalValue | async as selectedIcon"
              class="col space_between overlay_alt2 border_top pad_x5"
              style="box-shadow: 0 -6px 10px -8px rgba(0,0,0,0.25);">
-          <div class="col v_center text md mar_10">
+          <div *ngIf="showIconSelectionPreview" class="col v_center text md mar_10">
             <span class="text bold mar_right10">Selected:</span>
             <i class="{{selectedIcon.prefix}} {{selectedIcon.name}} fa-fw mar_right5" style="font-size:16px;"></i>
             {{selectedIcon.prefix}} {{selectedIcon.name}}
