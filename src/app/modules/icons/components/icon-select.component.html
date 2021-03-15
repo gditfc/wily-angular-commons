@@ -1,6 +1,5 @@
 <!-- choose button -->
-<button *ngIf="!showDialog"
-        [ngClass]="buttonColorClass"
+<button [ngClass]="buttonColorClass"
         [ngStyle]="{
                      'width': buttonSizing,
                      'min-width': buttonSizing,
@@ -12,9 +11,11 @@
         [tooltipDisabled]="!(_internalValue | async)"
         class="access wis_button"
         aria-label="Choose Icon">
-  <div *ngIf="_internalValue | async as selectedIcon">
-    <i class="{{selectedIcon.prefix}} {{selectedIcon.name}}"></i>
-  </div>
+  <ng-container *ngIf="!showDialog">
+    <div *ngIf="_internalValue | async as selectedIcon">
+      <i class="{{selectedIcon.prefix}} {{selectedIcon.name}}"></i>
+    </div>
+  </ng-container>
 </button>
 
 <!-- picker dialog -->
@@ -187,7 +188,7 @@
           </div>
         </div>
         <!-- icons -->
-        <div class="col size_1 top_left scroll_y pad_5">
+        <div #iconScrollContainer class="col size_1 top_left scroll_y pad_5">
           <ng-container *ngIf="paginatedIcons$ | async as icons else noResults">
             <div class="row wrap top_left">
               <ng-container *ngFor="let icon of paginatedIcons$ | async">

@@ -1,7 +1,16 @@
-import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { IconsService } from '../services/icons.service';
 
 /**
@@ -71,6 +80,12 @@ export class IconSelectComponent implements ControlValueAccessor {
    */
   @Output()
   closed = new EventEmitter<any>();
+
+  /**
+   * The scrollable icon container
+   */
+  @ViewChild('iconScrollContainer')
+  iconScrollContainer: ElementRef<HTMLDivElement>;
 
   /**
    * BehaviorSubject tracking the input value destructed into its prefix and class name
@@ -165,6 +180,11 @@ export class IconSelectComponent implements ControlValueAccessor {
       }
 
       return paginatedIcons;
+    }),
+    tap(() => {
+      if (this.iconScrollContainer) {
+        this.iconScrollContainer.nativeElement.scrollTop = 0;
+      }
     })
   );
 
@@ -246,6 +266,13 @@ export class IconSelectComponent implements ControlValueAccessor {
    * Close the icon select dialog
    */
   closeDialog(): void {
+    let internalValue = null;
+    if (this._value) {
+      const [prefix, name] = this._value.split(' ');
+      internalValue = { prefix, name };
+    }
+
+    this._internalValue.next(internalValue);
     this.showDialog = null;
     this.closed.emit();
   }
