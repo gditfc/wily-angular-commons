@@ -323,6 +323,15 @@ export class IconSelectComponent implements ControlValueAccessor {
   }
 
   /**
+   * Clear search text and reset paginator
+   */
+  clearSearch(): void {
+    this._searchText.next('');
+    this._searchClick.next('');
+    this._activePage.next(0);
+  }
+
+  /**
    * Reset filtering/pagination BehaviorSubject values
    * @private
    */

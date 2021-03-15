@@ -176,7 +176,7 @@
               </button>
             </ng-template>
             <button *ngIf="(canSearch$ | async) && (_searchClick | async)"
-                    (click)="_searchText.next(''); _searchClick.next(''); _activePage.next(0)"
+                    (click)="clearSearch()"
                     class="access btn circle_18px overlay wis_clear_btn">
               <span class="icon grow"><i class="fas fa-times fa-sm"></i></span>
             </button>
@@ -215,8 +215,10 @@
                 [emptyText]="'We couldn\'t find anything'"
                 [emptySubtext]="'Please try modifying your search criteria'">
               </wily-endpoint-state>
-              <!-- TODO: hook up clear search button -->
-              <button class="access btn sm overlay mar_top15">Clear Search</button>
+              <button (click)="clearSearch()"
+                      class="access btn sm overlay mar_top15">
+                Clear Search
+              </button>
             </div>
           </ng-template>
         </div>
