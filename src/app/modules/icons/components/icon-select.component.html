@@ -12,14 +12,74 @@
 <wily-dialog
   [object]="showDialog"
   [title]="'Select an Icon'"
-  [width]="'745px'" [height]="'500px'"
+  [width]="'800px'" [height]="'500px'"
   (closed)="closed.emit()"
   #faDialog>
   <div class="row height100">
 
     <!-- FILTERS -->
-    <div class="col size_1 overlay_alt2 border_right">
-
+    <div class="col min_w250 overlay_alt2 border_right">
+      <div class="row_block width100">
+        <!-- fontawesome icons -->
+        <div class="mar_5">
+          <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Font Awesome Icons</div>
+          <div class="mar_5">
+            <!-- TODO: remove hov_bg on buttons when selected -->
+            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <div class="text md">All</div>
+              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+            </button>
+          </div>
+          <div class="mar_5">
+            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <div class="text md">Solid</div>
+              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+            </button>
+          </div>
+          <div class="mar_5">
+            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <div class="text md">Regular</div>
+              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+            </button>
+          </div>
+          <div class="mar_5">
+            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <div class="text md">Brands</div>
+              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+            </button>
+          </div>
+        </div>
+        <div class="overlay_alt2 hr mar_10"></div>
+        <!-- custom icons -->
+        <div class="mar_5">
+          <div class="text sm bolder" style="padding:10px 10px 5px 15px;">Custom Icons</div>
+          <div class="mar_5">
+            <!-- TODO: remove hov_bg on buttons when selected -->
+            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <div class="text md">All</div>
+              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+            </button>
+          </div>
+          <div class="mar_5">
+            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <div class="text md">Solid</div>
+              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+            </button>
+          </div>
+          <div class="mar_5">
+            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <div class="text md">Regular</div>
+              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+            </button>
+          </div>
+          <div class="mar_5">
+            <button class="access list_btn width100 row space_between pad_y5 pad_x10 brad_3 hov_bg">
+              <div class="text md">Light</div>
+              <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ICONS -->
@@ -48,7 +108,7 @@
           <!-- TODO: show clear button only when text entered -->
           <!-- TODO: empty text and clear search -->
           <button class="access btn circle_18px overlay wis_clear_btn">
-            <i class="fas fa-times"></i>
+            <span class="icon grow"><i class="fas fa-times fa-sm"></i></span>
           </button>
         </div>
       </div>
