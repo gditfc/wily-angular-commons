@@ -1,5 +1,4 @@
 <!-- choose button -->
-<!-- TODO: add icon name to tooltip -->
 <button *ngIf="!showDialog"
         [ngClass]="buttonColorClass"
         [ngStyle]="{
@@ -13,7 +12,6 @@
         [tooltipDisabled]="!(_internalValue | async)"
         class="access wis_button"
         aria-label="Choose Icon">
-  <!-- TODO: insert selected icon -->
   <div *ngIf="_internalValue | async as selectedIcon">
     <i class="{{selectedIcon.prefix}} {{selectedIcon.name}}"></i>
   </div>
@@ -194,7 +192,6 @@
             <ng-container *ngIf="paginatedIcons$ | async as icons else noResults">
               <ng-container *ngFor="let icon of paginatedIcons$ | async">
                 <div class="col size_1 column center_center min_w75 mar_x5 mar_y10">
-                  <!-- TODO: replace "overlay hov_bg" with "bg_blue" when selected -->
                   <button (click)="handleIconSelect(icon)"
                           [ngClass]="((_internalValue | async)?.prefix === icon.prefix) && ((_internalValue | async)?.name === icon.name) ? 'bg_blue' : 'overlay hov_bg'"
                           class="access wis_icon_btn square_50px brad_3 overlay_alt2 mar_bot5"
@@ -210,7 +207,6 @@
             </ng-template>
           </div>
         </div>
-        <!-- TODO: only show this when an icon is selected -->
         <div *ngIf="_internalValue | async as selectedIcon"
              class="col space_between overlay_alt2 border_top pad_x5"
              style="box-shadow: 0 -6px 10px -8px rgba(0,0,0,0.25);">
