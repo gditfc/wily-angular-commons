@@ -18,7 +18,7 @@
 <!-- picker dialog -->
 <wily-dialog [title]="'Select an Icon'"
   [object]="showDialog"
-  [width]="'800px'"
+  [width]="'850px'"
   [height]="'500px'"
   (closed)="closeDialog()">
     <div class="row height100">
@@ -186,8 +186,8 @@
         </div>
         <!-- icons -->
         <div class="col size_1 top_left scroll_y pad_5">
-          <div class="row wrap top_left">
-            <ng-container *ngIf="paginatedIcons$ | async as icons else noResults">
+          <ng-container *ngIf="paginatedIcons$ | async as icons else noResults">
+            <div class="row wrap top_left">
               <ng-container *ngFor="let icon of paginatedIcons$ | async">
                 <div class="col size_1 column center_center min_w75 mar_x5 mar_y10">
                   <!-- TODO: replace "overlay hov_bg" with "bg_blue" when selected -->
@@ -200,22 +200,33 @@
                   <div class="text sm center faded">{{icon.name}}</div>
                 </div>
               </ng-container>
-            </ng-container>
-            <ng-template #noResults>
-              No Results
-            </ng-template>
-          </div>
+            </div>
+          </ng-container>
+          <ng-template #noResults>
+            <div class="row column min_h300 center_center">
+              <wily-endpoint-state
+                [empty]="true"
+                [emptyIcon]="'fas fa-search fa-3x mar_bot5'"
+                [emptyText]="'We couldn\'t find anything'"
+                [emptySubtext]="'Please try modifying your search criteria'">
+              </wily-endpoint-state>
+              <!-- TODO: hook up clear search button -->
+              <button class="access btn sm overlay mar_top15">Clear Search</button>
+            </div>
+          </ng-template>
         </div>
         <!-- TODO: only show this when an icon is selected -->
         <div *ngIf="_internalValue | async as selectedIcon"
              class="col space_between overlay_alt2 border_top pad_x5"
              style="box-shadow: 0 -6px 10px -8px rgba(0,0,0,0.25);">
-          <div *ngIf="showIconSelectionPreview" class="col v_center text md mar_10">
-            <span class="text bold mar_right10">Selected:</span>
-            <i class="{{selectedIcon.prefix}} {{selectedIcon.name}} fa-fw mar_right5" style="font-size:16px;"></i>
-            {{selectedIcon.prefix}} {{selectedIcon.name}}
+          <div class="col v_center mar_10">
+            <div class="text md faded mar_right10">Selection:</div>
+            <div class="v_center" *ngIf="showIconSelectionPreview">
+              <i class="{{selectedIcon.prefix}} {{selectedIcon.name}} fa-fw mar_right5" style="font-size:16px;"></i>
+              <div class="text md bold">{{selectedIcon.prefix}} {{selectedIcon.name}}</div>
+            </div>
           </div>
-          <div class="col mar_10">
+          <div class="col v_center mar_10">
             <button (click)="handleIconSelectConfirm()"
                     class="access btn md icon_right overlay_alt2 bg_green_alt">
               Confirm<span class="icon grow"><i class="fas fa-check"></i></span>

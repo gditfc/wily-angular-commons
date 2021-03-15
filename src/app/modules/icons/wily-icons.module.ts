@@ -8,6 +8,7 @@ import { IconSelectComponent } from './components/icon-select.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WilyDialogModule } from '../dialog/dialog.module';
 import { IconsService } from './services/icons.service';
+import {WilyEndpointStateModule} from '../endpoint-state/endpoint-state.module';
 
 /**
  * Reference to the Font Awesome variable to add icons
@@ -18,13 +19,14 @@ const FontAwesome = window['FontAwesome'];
   declarations: [
     IconSelectComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    WilyTooltipModule,
-    WilyDialogModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        WilyTooltipModule,
+        WilyDialogModule,
+        WilyEndpointStateModule
+    ],
   exports: [
     IconSelectComponent
   ],
