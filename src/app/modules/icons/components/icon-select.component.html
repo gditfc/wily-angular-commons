@@ -191,7 +191,9 @@
               <ng-container *ngFor="let icon of paginatedIcons$ | async">
                 <div class="col size_1 column center_center min_w75 mar_x5 mar_y10">
                   <!-- TODO: replace "overlay hov_bg" with "bg_blue" when selected -->
-                  <button class="access wis_icon_btn square_50px brad_3 overlay_alt2 overlay hov_bg mar_bot5"
+                  <button (click)="handleIconSelect(icon)"
+                          [ngClass]="((_internalValue | async)?.prefix === icon.prefix) && ((_internalValue | async)?.name === icon.name) ? 'bg_blue' : 'overlay hov_bg'"
+                          class="access wis_icon_btn square_50px brad_3 overlay_alt2 mar_bot5"
                           [attr.aria-label]="'Select ' + icon.name">
                     <i class="{{icon.prefix}} {{icon.name}}"></i>
                   </button>
@@ -205,15 +207,17 @@
           </div>
         </div>
         <!-- TODO: only show this when an icon is selected -->
-        <div class="col space_between overlay_alt2 border_top pad_x5"
+        <div *ngIf="_internalValue | async as selectedIcon"
+             class="col space_between overlay_alt2 border_top pad_x5"
              style="box-shadow: 0 -6px 10px -8px rgba(0,0,0,0.25);">
           <div class="col v_center text md mar_10">
             <span class="text bold mar_right10">Selected:</span>
-            <i class="fas fa-egg fa-fw mar_right5" style="font-size:16px;"></i>
-            fas fa-egg
+            <i class="{{selectedIcon.prefix}} {{selectedIcon.name}} fa-fw mar_right5" style="font-size:16px;"></i>
+            {{selectedIcon.prefix}} {{selectedIcon.name}}
           </div>
           <div class="col mar_10">
-            <button class="access btn md icon_right overlay_alt2 bg_green_alt">
+            <button (click)="handleIconSelectConfirm()"
+                    class="access btn md icon_right overlay_alt2 bg_green_alt">
               Confirm<span class="icon grow"><i class="fas fa-check"></i></span>
             </button>
           </div>

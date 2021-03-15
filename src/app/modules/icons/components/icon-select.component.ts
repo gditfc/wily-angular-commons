@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { IconsService } from '../services/icons.service';
@@ -9,15 +10,36 @@ import { IconsService } from '../services/icons.service';
 @Component({
   selector: 'wily-icon-select',
   templateUrl: 'icon-select.component.html',
-  styleUrls: ['./icon-select.component.css']
+  styleUrls: ['./icon-select.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => IconSelectComponent),
+      multi: true
+    }
+  ]
 })
-export class IconSelectComponent {
+export class IconSelectComponent implements ControlValueAccessor {
 
   /**
    * The number of items to display per page
    * @private
    */
   private static readonly PAGE_SIZE = 50;
+
+  /**
+   * Set the value of the icon select
+   * @param value the value to set
+   */
+  @Input('value')
+  set value(value: string) {
+    this._value = value;
+
+    if (value)  {
+      const [prefix, name] = value.split(' ');
+      this._internalValue.next({ prefix, name });
+    }
+  }
 
   /**
    * Color class of the button
@@ -48,6 +70,11 @@ export class IconSelectComponent {
    */
   @Output()
   closed = new EventEmitter<any>();
+
+  /**
+   * BehaviorSubject tracking the input value destructed into its prefix and class name
+   */
+  readonly _internalValue = new BehaviorSubject<{ prefix: string, name: string }>(null);
 
   /**
    * BehaviorSubject tracking the current filter value selection for icons
@@ -146,25 +173,55 @@ export class IconSelectComponent {
   showDialog: any;
 
   /**
-   * Filter input for the icon picker.
+   * The value of the icon select
+   * @private
    */
-  filter = '';
+  private _value: string;
 
   /**
-   * List of icons as an object to make lookups easier.
+   * Function to call on change
    */
-  icons = {};
+  onChange: (value: any) => void = () => {};
 
   /**
-   * Class being hovered over
+   * Function to call on touch
    */
-  hoveredClass: string;
+  onTouched: () => any = () => {};
 
   /**
    * Dependency injection site
    * @param service the IconsService
+   * @param changeDetectorRef the Angular ChangeDetectorRef
    */
-  constructor(private service: IconsService) { }
+  constructor(private service: IconsService, private changeDetectorRef: ChangeDetectorRef) { }
+
+  /**
+   * Write the input value
+   * @param value the value to write
+   */
+  writeValue(value: string): void {
+    this.value = value;
+    this.onChange(value);
+    this.selected.emit({ value });
+
+    this.changeDetectorRef.markForCheck();
+  }
+
+  /**
+   * Register onChange function
+   * @param fn the function to register
+   */
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  /**
+   * Register onTouched function
+   * @param fn the function to register
+   */
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
 
   /**
    * Open the icon select dialog
@@ -193,6 +250,22 @@ export class IconSelectComponent {
   ): void {
     this._filter.next(filter);
     this._activePage.next(0);
+  }
+
+  /**
+   * Update internal value on icon select
+   * @param icon the selected icon
+   */
+  handleIconSelect(icon: { prefix: string, name: string }): void {
+    this._internalValue.next(icon);
+  }
+
+  /**
+   * Write value on confirm
+   */
+  handleIconSelectConfirm(): void {
+    const icon = this._internalValue.getValue();
+    this.writeValue(`${icon.prefix} ${icon.name}`);
   }
 
   /**
