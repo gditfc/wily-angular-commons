@@ -160,6 +160,7 @@
             <input #iconSearchInput
                    [ngModel]="_searchText | async"
                    (input)="_searchText.next(iconSearchInput.value)"
+                   (keyup.enter)="_searchInputEnterKeyup.next()"
                    class="access input md overlay_alt2 page_container_color"
                    aria-label="Search icons" placeholder="Search icons..." />
             <button *ngIf="canSearch$ | async else disabledSearchButton"

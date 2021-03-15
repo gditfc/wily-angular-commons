@@ -5,11 +5,12 @@ import {
   EventEmitter,
   forwardRef,
   Input,
+  OnDestroy,
   Output,
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { IconsService } from '../services/icons.service';
 
@@ -28,7 +29,7 @@ import { IconsService } from '../services/icons.service';
     }
   ]
 })
-export class IconSelectComponent implements ControlValueAccessor {
+export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
 
   /**
    * The number of items to display per page
@@ -116,6 +117,11 @@ export class IconSelectComponent implements ControlValueAccessor {
   readonly _activePage = new BehaviorSubject(0);
 
   /**
+   * Subject that emits on search input enter keyup
+   */
+  readonly _searchInputEnterKeyup = new Subject<void>();
+
+  /**
    * An array of all icons (as strings) that meet the current filter/search criteria as an Observable
    * @private
    */
@@ -199,6 +205,12 @@ export class IconSelectComponent implements ControlValueAccessor {
   showIconSelectionPreview = false;
 
   /**
+   * Subscription object to store search input enter keyup subscription
+   * @private
+   */
+  private readonly subscription: Subscription;
+
+  /**
    * The value of the icon select
    * @private
    */
@@ -219,7 +231,22 @@ export class IconSelectComponent implements ControlValueAccessor {
    * @param service the IconsService
    * @param changeDetectorRef the Angular ChangeDetectorRef
    */
-  constructor(private service: IconsService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private service: IconsService, private changeDetectorRef: ChangeDetectorRef) {
+    this.subscription = this._searchInputEnterKeyup.pipe(
+      withLatestFrom(this.canSearch$)
+    ).subscribe(([___, canSearch]) => {
+      if (canSearch) {
+        this._searchClick.next(this._searchText.getValue());
+      }
+    });
+  }
+
+  /**
+   * Destroy component, unsubscribe from search input enter keyup subscription
+   */
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   /**
    * Write the input value
