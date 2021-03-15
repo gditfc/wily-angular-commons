@@ -35,11 +35,11 @@ export class IconsService {
     }
 
     if (filter === 'all' || filter === 'regular') {
-      icons.push(...FontawesomeIconsRegular.ICONS.map(icon => ({ prefix: FontawesomeIconsSolid.PREFIX, name: icon })));
+      icons.push(...FontawesomeIconsRegular.ICONS.map(icon => ({ prefix: FontawesomeIconsRegular.PREFIX, name: icon })));
     }
 
     if (filter === 'all' || filter === 'brands') {
-      icons.push(...FontawesomeIconsBrands.ICONS.map(icon => ({ prefix: FontawesomeIconsSolid.PREFIX, name: icon })));
+      icons.push(...FontawesomeIconsBrands.ICONS.map(icon => ({ prefix: FontawesomeIconsBrands.PREFIX, name: icon })));
     }
 
     return icons;
