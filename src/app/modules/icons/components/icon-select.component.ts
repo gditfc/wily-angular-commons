@@ -237,6 +237,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
     ).subscribe(([___, canSearch]) => {
       if (canSearch) {
         this._searchClick.next(this._searchText.getValue());
+        this._activePage.next(0);
       }
     });
   }
