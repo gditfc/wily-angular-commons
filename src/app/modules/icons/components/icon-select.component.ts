@@ -35,7 +35,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * The number of items to display per page
    * @private
    */
-  private static readonly PAGE_SIZE = 50;
+  private static readonly PAGE_SIZE = 48;
 
   /**
    * Set the value of the icon select

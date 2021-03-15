@@ -1,3 +1,4 @@
+/* BUTTON STYLES */
 .wis_button {
   width:40px;
   min-width:40px;
@@ -18,6 +19,7 @@
   transform:scale(1.15);
 }
 
+/* SEARCH BAR STYLES */
 .wis_search {
   position:relative;
 }
@@ -41,6 +43,33 @@
   z-index:1;
 }
 
+.wis_filter_btn {
+  width:100%;
+  padding:5px 10px;
+  border-radius:3px;
+}
+.wis_filter_btn:not(:hover):not(.selected) {
+  background:transparent;
+}
+
+/* ICON GRID STYLES */
 .wis_icon_btn {
   cursor:pointer;
+  transition:all 0.1s ease;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  /*justify-content:center;*/
+  border:none;
+  border-radius:3px;
+  padding:5px 2px;
+  background-color:transparent;
+}
+.wis_icon_btn:hover {
+  background-color:rgba(120,120,120,0.1);
+}
+.wis_icon_btn_preview {
+  transition:all 0.1s ease;
 }
