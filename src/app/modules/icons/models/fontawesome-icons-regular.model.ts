@@ -6,7 +6,7 @@ export class FontawesomeIconsRegular {
   /**
    * The regular icon prefix
    */
-  static readonly PREFIX = '';
+  static readonly PREFIX = 'far';
 
   /**
    * Icon classes

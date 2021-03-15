@@ -6,7 +6,7 @@ export class FontawesomeIconsSolid {
   /**
    * The solid icon prefix
    */
-  static readonly PREFIX = 'fas-';
+  static readonly PREFIX = 'fas';
 
   /**
    * Icon classes

@@ -27,19 +27,19 @@ export class IconsService {
    * @param filter the icon type to filter by
    * @private
    */
-  private static getFontawesomeIcons(filter: FontawesomeIconFilterOption): Array<string> {
-    const icons: Array<string> = [];
+  private static getFontawesomeIcons(filter: FontawesomeIconFilterOption): Array<{ prefix: string, name: string }> {
+    const icons: Array<{ prefix: string, name: string }> = [];
 
     if (filter === 'all' || filter === 'solid') {
-      icons.push(...FontawesomeIconsSolid.ICONS.map(icon => FontawesomeIconsSolid.PREFIX + icon));
+      icons.push(...FontawesomeIconsSolid.ICONS.map(icon => ({ prefix: FontawesomeIconsSolid.PREFIX, name: icon })));
     }
 
     if (filter === 'all' || filter === 'regular') {
-      icons.push(...FontawesomeIconsRegular.ICONS.map(icon => FontawesomeIconsRegular.PREFIX + icon));
+      icons.push(...FontawesomeIconsRegular.ICONS.map(icon => ({ prefix: FontawesomeIconsSolid.PREFIX, name: icon })));
     }
 
     if (filter === 'all' || filter === 'brands') {
-      icons.push(...FontawesomeIconsBrands.ICONS.map(icon => FontawesomeIconsBrands.PREFIX + icon));
+      icons.push(...FontawesomeIconsBrands.ICONS.map(icon => ({ prefix: FontawesomeIconsSolid.PREFIX, name: icon })));
     }
 
     return icons;
@@ -50,19 +50,19 @@ export class IconsService {
    * @param filter the icon type to filter by
    * @private
    */
-  private static getWilyIcons(filter: WilyIconFilterOption): Array<string> {
-    const icons: Array<string> = [];
+  private static getWilyIcons(filter: WilyIconFilterOption): Array<{ prefix: string, name: string }> {
+    const icons: Array<{ prefix: string, name: string }> = [];
 
     if (filter === 'all' || filter === 'solid') {
-      icons.push(...WilyIconsSolid.icons.map(icon => `${icon.prefix}-${icon.iconName}`));
+      icons.push(...WilyIconsSolid.icons.map(icon => ({ prefix: icon.prefix, name: `fa-${icon.iconName}` })));
     }
 
     if (filter === 'all' || filter === 'regular') {
-      icons.push(...WilyIconsRegular.icons.map(icon => `${icon.prefix}-${icon.iconName}`));
+      icons.push(...WilyIconsRegular.icons.map(icon => ({ prefix: icon.prefix, name: `fa-${icon.iconName}` })));
     }
 
     if (filter === 'all' || filter === 'light') {
-      icons.push(...WilyIconsLight.icons.map(icon => `${icon.prefix}-${icon.iconName}`));
+      icons.push(...WilyIconsLight.icons.map(icon => ({ prefix: icon.prefix, name: `fa-${icon.iconName}` })));
     }
 
     return icons;
@@ -84,8 +84,8 @@ export class IconsService {
     wilyFilter: WilyIconFilterOption,
     fontawesomeFilter: FontawesomeIconFilterOption,
     searchText = ''
-  ): Array<string> {
-    let icons: Array<string> = [];
+  ): Array<{ prefix: string, name: string }> {
+    let icons: Array<{ prefix: string, name: string }> = [];
     const wilyIcons = IconsService.getWilyIcons(wilyFilter);
     const fontawesomeIcons = IconsService.getFontawesomeIcons(fontawesomeFilter);
 
@@ -99,7 +99,7 @@ export class IconsService {
 
     const trimmedSearchText = searchText.trim().toLowerCase();
     if (trimmedSearchText) {
-      icons = icons.filter(icon => icon.includes(trimmedSearchText));
+      icons = icons.filter(icon => icon.name.includes(trimmedSearchText));
     }
 
     return icons;

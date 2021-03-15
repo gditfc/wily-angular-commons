@@ -6,7 +6,7 @@ export class FontawesomeIconsBrands {
   /**
    * The brands icon prefix
    */
-  static readonly PREFIX = 'fab-';
+  static readonly PREFIX = 'fab';
 
   /**
    * Icon classes

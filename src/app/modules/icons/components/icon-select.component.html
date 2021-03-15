@@ -158,12 +158,11 @@
               <ng-container *ngFor="let icon of paginatedIcons$ | async">
                 <div class="col size_1 column center_center min_w75 mar_x5 mar_y10">
                   <!-- TODO: replace "overlay hov_bg" with "bg_blue" when selected -->
-                  <!-- TODO: hook up icon name, add to aria label -->
                   <button class="access wis_icon_btn square_50px brad_3 overlay_alt2 overlay hov_bg mar_bot5"
-                          [attr.aria-label]="'Select ' + icon">
-                    <i class="fas {{icon}}"></i>
+                          [attr.aria-label]="'Select ' + icon.name">
+                    <i class="{{icon.prefix}} {{icon.name}}"></i>
                   </button>
-                  <div class="text sm center faded">{{icon}}</div>
+                  <div class="text sm center faded">{{icon.name}}</div>
                 </div>
               </ng-container>
             </ng-container>

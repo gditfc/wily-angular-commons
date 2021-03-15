@@ -79,7 +79,7 @@ export class IconSelectComponent {
    * An array of all icons (as strings) that meet the current filter/search criteria as an Observable
    * @private
    */
-  private readonly icons$: Observable<Array<string>> = combineLatest([
+  private readonly icons$: Observable<Array<{ prefix: string, name: string }>> = combineLatest([
     this._wilyFilter,
     this._fontawesomeFilter,
     this._searchClick
@@ -127,9 +127,12 @@ export class IconSelectComponent {
   /**
    * Paginated icons array as an Observable
    */
-  readonly paginatedIcons$: Observable<Array<string>> = combineLatest([this._activePage, this.icons$]).pipe(
+  readonly paginatedIcons$: Observable<Array<{ prefix: string, name: string }>> = combineLatest([
+    this._activePage,
+    this.icons$
+  ]).pipe(
     map(([activePage, icons]) => {
-      let paginatedIcons: Array<string> = null;
+      let paginatedIcons: Array<{ prefix: string, name: string }> = null;
 
       if (activePage >= 0 && icons.length) {
         paginatedIcons = icons.slice(
