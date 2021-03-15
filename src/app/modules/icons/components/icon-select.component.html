@@ -112,7 +112,22 @@
           </button>
         </div>
       </div>
-      <div class="col size_1 scroll_y"></div>
+      <!-- icons -->
+      <div class="col size_1 top_left scroll_y pad_5">
+        <div class="row wrap top_left">
+          <ng-container *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]">
+            <div class="col size_1 column center_center min_w75 mar_x5 mar_y10">
+              <!-- TODO: replace "overlay hov_bg" with "bg_blue" when selected -->
+              <!-- TODO: hook up icon name, add to aria label -->
+              <button class="access wis_icon_btn square_50px brad_3 overlay_alt2 overlay hov_bg mar_bot5"
+                      aria-label="Select fa-ethernet">
+                <i class="fas fa-ethernet"></i>
+              </button>
+              <div class="text sm center faded">fa-ethernet</div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
       <div class="col space_between overlay_alt2 border_top pad_x5">
         <div class="col v_center text md mar_10">
           <span class="text bold mar_right10">Selected:</span>
