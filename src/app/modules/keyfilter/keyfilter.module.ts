@@ -5,7 +5,6 @@ import { KeyfilterDirective } from './keyfilter.directive';
 @NgModule({
   declarations: [KeyfilterDirective],
   imports: [CommonModule],
-  exports: [KeyfilterDirective],
-  providers: [KeyfilterDirective]
+  exports: [KeyfilterDirective]
 })
 export class WilyKeyfilterModule { }
