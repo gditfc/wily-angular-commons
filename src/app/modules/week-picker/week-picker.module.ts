@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { OrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-number-pipe.module';
 import { WilyPopoverModule } from '../popover/popover.module';
 import { WeekPickerComponent } from './week-picker.component';
+import {WilyTooltipModule} from '../tooltip/tooltip.module';
 
 @NgModule({
   declarations: [WeekPickerComponent],
@@ -13,7 +14,8 @@ import { WeekPickerComponent } from './week-picker.component';
         OrdinalNumberPipeModule,
         FormsModule,
         A11yModule,
-        WilyPopoverModule
+        WilyPopoverModule,
+        WilyTooltipModule
     ],
   exports: [WeekPickerComponent]
 })

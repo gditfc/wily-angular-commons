@@ -133,3 +133,7 @@ input[disabled] {
   border-style: solid;
   border-color: transparent #2f2f2f transparent transparent;
 }
+
+.hov_bg:disabled:hover {
+  background:none;
+}

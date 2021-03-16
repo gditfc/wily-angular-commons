@@ -249,7 +249,7 @@
           </div>
         </div>
         <!-- icons -->
-        <div #iconScrollContainer class="col size_1 top_left scroll_y pad_5">
+        <div #iconScrollContainer class="col size_1 top_left scroll_y pad_5" style="scroll-behavior: smooth">
           <ng-container *ngIf="paginatedIcons$ | async as icons else noResults">
             <div class="row wrap top_left" style="align-items:stretch;">
               <ng-container *ngFor="let icon of paginatedIcons$ | async">
