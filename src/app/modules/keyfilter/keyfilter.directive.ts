@@ -56,7 +56,7 @@ export class KeyfilterDirective {
    * @private
    */
   private static keyIsAlpha(key: string): boolean {
-    return this.ALPHA_KEYS.includes(key.toLowerCase());
+    return KeyfilterDirective.ALPHA_KEYS.includes(key.toLowerCase());
   }
 
   /**
