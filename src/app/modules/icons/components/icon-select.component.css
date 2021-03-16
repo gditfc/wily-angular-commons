@@ -15,7 +15,7 @@
   width:75%;
   height:75%;
 }
-.wis_button:hover svg {
+.wis_button:hover .wis_icon {
   transform:scale(1.15);
 }
 

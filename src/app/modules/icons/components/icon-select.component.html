@@ -12,9 +12,12 @@
         class="access wis_button"
         aria-label="Choose Icon">
   <ng-container *ngIf="!showDialog else placeholderIcon">
-    <div *ngIf="_internalValue | async as selectedIcon">
-      <i class="{{selectedIcon.prefix}} {{selectedIcon.name}}"></i>
+    <div *ngIf="_internalValue | async as selectedIcon else noSelection">
+      <i class="{{selectedIcon.prefix}} {{selectedIcon.name}} wis_icon"></i>
     </div>
+    <ng-template #noSelection>
+      <div><i class="fas fa-icons opacity_20"></i></div>
+    </ng-template>
   </ng-container>
   <ng-template #placeholderIcon>
     <div><i class="fas fa-spinner fa-spin"></i></div>
