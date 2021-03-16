@@ -12,11 +12,17 @@
 }
 .wis_button svg {
   transition:transform 0.1s ease;
-  width:75%;
-  height:75%;
 }
 .wis_button:hover .wis_icon {
   transform:scale(1.15);
+}
+
+/* only set if NOT IE */
+@supports not (-ms-high-contrast:none) {
+  .wis_button svg {
+    width:75%;
+    height:75%;
+  }
 }
 
 /* SEARCH BAR STYLES */
