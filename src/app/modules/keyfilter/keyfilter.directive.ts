@@ -56,7 +56,7 @@ export class KeyfilterDirective {
    * @private
    */
   private static keyIsAlpha(key: string): boolean {
-    return this.ALPHA_KEYS.includes(key);
+    return this.ALPHA_KEYS.includes(key.toLowerCase());
   }
 
   /**
@@ -77,7 +77,7 @@ export class KeyfilterDirective {
 
       if (KeyfilterDirective.ALLOWED_KEYS.includes(key)) {
         preventDefault = false;
-      } else if (this.allowSpaces && key === '\s') {
+      } else if (this.allowSpaces && key === ' ') {
         preventDefault = false;
       } else if (this.filterType === 'alpha') {
         preventDefault = !KeyfilterDirective.keyIsAlpha(key);
@@ -87,7 +87,7 @@ export class KeyfilterDirective {
         const isNumeric = KeyfilterDirective.keyIsNumeric(key);
         const isAlpha = KeyfilterDirective.keyIsAlpha(key);
 
-        preventDefault = !(isNumeric && isAlpha);
+        preventDefault = !(isNumeric || isAlpha);
       }
 
       if (preventDefault) {
