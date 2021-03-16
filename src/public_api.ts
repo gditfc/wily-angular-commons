@@ -15,9 +15,11 @@ export * from './app/modules/multi-select/multi-select.module';
 export * from './app/modules/ordinal-number-pipe/ordinal-number-pipe.module';
 export * from './app/modules/popover/popover.module';
 export * from './app/modules/tooltip/tooltip.module';
+export * from './app/modules/keyfilter/keyfilter.module';
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
+export * from './app/modules/keyfilter/keyfilter.directive';
 
 /** COMPONENTS */
 export * from './app/modules/icons/components/icon-select.component';
