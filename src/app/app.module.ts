@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { WilyKeyfilterModule } from './modules/keyfilter/keyfilter.module';
 import { WilyMultiSelectModule } from './modules/multi-select/multi-select.module';
 import { WilyProfilePicModule } from './modules/profile-pic/wily-profile-pic.module';
 import { WilyPaginatorModule } from './modules/paginator/wily-paginator.module';
@@ -22,24 +23,25 @@ import { WilyPopoverModule } from './modules/popover/popover.module';
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    WilyTooltipModule,
-    WilyDialogModule,
-    WilyProfilePicModule,
-    WilyPaginatorModule,
-    WilyPushContainerModule,
-    WilyRichTextModule,
-    WilyIconsModule,
-    WilyEndpointStateModule,
-    WilyDatePickerModule,
-    WilyWeekPickerModule,
-    WilyDropdownModule,
-    WilyNotificationModule,
-    WilyPopoverModule,
-    WilyMultiSelectModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        WilyTooltipModule,
+        WilyDialogModule,
+        WilyProfilePicModule,
+        WilyPaginatorModule,
+        WilyPushContainerModule,
+        WilyRichTextModule,
+        WilyIconsModule,
+        WilyEndpointStateModule,
+        WilyDatePickerModule,
+        WilyWeekPickerModule,
+        WilyDropdownModule,
+        WilyNotificationModule,
+        WilyPopoverModule,
+        WilyMultiSelectModule,
+        WilyKeyfilterModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

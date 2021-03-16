@@ -466,11 +466,15 @@
                 <div class="pad_15">
                   <!-- alpha text -->
                   <div class="form_label mar_bot5">Alpha Text Only</div>
-                  <input class="access input md" />
+                  <input wilyKeyfilter="alpha" class="access input md" />
                   <div class="pad_10"></div>
                   <!-- numeric text -->
                   <div class="form_label mar_bot5">Numeric Text Only</div>
-                  <input class="access input md" />
+                  <input wilyKeyfilter="numeric" class="access input md" />
+                  <div class="pad_10"></div>
+                  <!-- alphanumeric text with spaces -->
+                  <div class="form_label mar_bot5">Alphanumeric Text Only (with spaces)</div>
+                  <input wilyKeyfilter="alphanumeric" [allowSpaces]="true" class="access input md" />
                 </div>
               </div>
             </div>
