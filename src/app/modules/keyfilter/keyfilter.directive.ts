@@ -9,15 +9,17 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 export class KeyfilterDirective {
 
   /**
-   * Keyboard arrow key names
+   * Array of keyboard key names that are always allowed
+   * (arrow keys, backspace, delete, tab, escape)
    * @private
    */
-  private static readonly ARROW_KEYS = [
-    'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'
+  private static readonly ALLOWED_KEYS = [
+    'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown',
+    'Backspace', 'Delete', 'Tab', 'Esc', 'Escape'
   ];
 
   /**
-   * Keyboard alpha key names
+   * Array of keyboard alpha key names
    * @private
    */
   private static readonly ALPHA_KEYS = [
@@ -30,7 +32,7 @@ export class KeyfilterDirective {
    * The type of filtering to apply
    */
   @Input('wilyKeyfilter')
-  filterType: 'numeric' | 'alphanumeric';
+  filterType: 'alpha' | 'numeric' | 'alphanumeric';
 
   /**
    * Whether or not to allow spaces (default false)
@@ -44,7 +46,7 @@ export class KeyfilterDirective {
    * @private
    */
   private static keyIsNumeric(key: string): boolean {
-    return new RegExp('^\d&', 'g').test(key);
+    return new RegExp('^\\d$', 'g').test(key);
   }
 
   /**
@@ -73,17 +75,19 @@ export class KeyfilterDirective {
       let preventDefault = true;
       const { key } = event;
 
-      if (this.allowSpaces && key === '\s') {
+      if (KeyfilterDirective.ALLOWED_KEYS.includes(key)) {
         preventDefault = false;
-      } else if (KeyfilterDirective.ARROW_KEYS.includes(key)) {
+      } else if (this.allowSpaces && key === '\s') {
         preventDefault = false;
+      } else if (this.filterType === 'alpha') {
+        preventDefault = !KeyfilterDirective.keyIsAlpha(key);
       } else if (this.filterType === 'numeric') {
         preventDefault = !KeyfilterDirective.keyIsNumeric(key);
       } else if (this.filterType === 'alphanumeric') {
         const isNumeric = KeyfilterDirective.keyIsNumeric(key);
         const isAlpha = KeyfilterDirective.keyIsAlpha(key);
 
-        preventDefault = isNumeric && isAlpha;
+        preventDefault = !(isNumeric && isAlpha);
       }
 
       if (preventDefault) {
