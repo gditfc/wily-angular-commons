@@ -26,16 +26,16 @@ import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output
 export class PopoverComponent implements OnDestroy, OnInit {
 
   /**
-   * The offset of the popover from its target (in pixels)
-   * @private
-   */
-  private static POPOVER_OFFSET = 5;
-
-  /**
    * The keyboard arrow keys
    * @private
    */
   private static ARROW_KEYS = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
+
+  /**
+   * The offset of the popover from its target (in pixels)
+   */
+  @Input()
+  offset = 5;
 
   /**
    * Set the width of the popover in pixels (defaults to auto)
@@ -239,12 +239,12 @@ export class PopoverComponent implements OnDestroy, OnInit {
     const popoverBottomLeftAnchor = bottom;
     const availableBottomSpace = window.innerHeight - popoverBottomLeftAnchor;
     const availableTopSpace = top;
-    const offsetListHeight = offsetHeight + PopoverComponent.POPOVER_OFFSET;
+    const offsetListHeight = offsetHeight + this.offset;
     let transformOrigin: string, positionTop: string;
 
     if (availableBottomSpace > offsetListHeight) {
       transformOrigin = 'top left';
-      positionTop = `${popoverBottomLeftAnchor + PopoverComponent.POPOVER_OFFSET}px`;
+      positionTop = `${popoverBottomLeftAnchor + this.offset}px`;
     } else if (availableTopSpace > offsetListHeight) {
       transformOrigin = 'bottom left';
       positionTop = `${top - offsetListHeight}px`;
