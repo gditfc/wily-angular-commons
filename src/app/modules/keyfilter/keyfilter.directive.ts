@@ -82,7 +82,7 @@ export class KeyfilterDirective {
       } else if (this.filterType === 'alpha') {
         preventDefault = !KeyfilterDirective.keyIsAlpha(key);
       } else if (this.filterType === 'numeric') {
-        preventDefault = !KeyfilterDirective.keyIsNumeric(key);
+        preventDefault = !event.ctrlKey && !KeyfilterDirective.keyIsNumeric(key);
       } else if (this.filterType === 'alphanumeric') {
         const isNumeric = KeyfilterDirective.keyIsNumeric(key);
         const isAlpha = KeyfilterDirective.keyIsAlpha(key);
@@ -92,6 +92,43 @@ export class KeyfilterDirective {
 
       if (preventDefault) {
         event.preventDefault();
+      }
+    }
+  }
+
+  /**
+   * Prevent paste if input contains forbidden characters
+   * @param event the paste ClipboardEvent
+   */
+  @HostListener('paste', ['$event'])
+  onPaste(event: ClipboardEvent): void {
+    if (this.filterType) {
+      let clipboardData: DataTransfer;
+
+      if (event.clipboardData) {
+        clipboardData = event.clipboardData;
+      } else if ('clipboardData' in window) {
+        clipboardData = (window as any).clipboardData.getData('text');
+      }
+
+      if (clipboardData) {
+        const pastedText = clipboardData.getData('text');
+
+        for (const char of pastedText.toString()) {
+          const isSpace = char === ' ';
+          const isAlpha = KeyfilterDirective.keyIsAlpha(char);
+          const isNumeric = KeyfilterDirective.keyIsNumeric(char);
+          const isAlphaNumeric = isAlpha || isNumeric;
+
+          const charIsValid = (isSpace && this.allowSpaces) ||
+            (this.filterType === 'alpha' && isAlpha) ||
+            (this.filterType === 'numeric' && isNumeric) ||
+            (this.filterType === 'alphanumeric' && isAlphaNumeric)
+
+          if (!charIsValid) {
+            event.preventDefault();
+          }
+        }
       }
     }
   }
