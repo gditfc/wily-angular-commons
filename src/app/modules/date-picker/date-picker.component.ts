@@ -129,6 +129,12 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   }
 
   /**
+   * The ID to set on the input
+   */
+  @Input()
+  inputId: string;
+
+  /**
    * Value to use as the date picker input's aria label
    */
   @Input()

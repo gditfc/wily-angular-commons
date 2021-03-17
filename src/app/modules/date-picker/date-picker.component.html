@@ -3,6 +3,7 @@
      class="wily_datepicker" [style.filter]="disabled ? 'brightness(.95)' : ''">
   <ng-container *ngIf="!disabled else disabledDatePicker">
     <input [(ngModel)]="dateString"
+           [id]="inputId"
            (keydown)="filterInput($event)"
            (input)="handleInput()"
            (blur)="onTouched(); handleBlur()"
