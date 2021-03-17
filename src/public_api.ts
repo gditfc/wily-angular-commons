@@ -16,6 +16,7 @@ export * from './app/modules/ordinal-number-pipe/ordinal-number-pipe.module';
 export * from './app/modules/popover/popover.module';
 export * from './app/modules/tooltip/tooltip.module';
 export * from './app/modules/keyfilter/keyfilter.module';
+export * from './app/modules/notification/notification.module';
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
@@ -34,6 +35,7 @@ export * from './app/modules/date-picker/components/calendar/calendar.component'
 export * from './app/modules/dropdown/dropdown.component';
 export * from './app/modules/multi-select/multi-select.component';
 export * from './app/modules/popover/popover.component';
+export * from './app/modules/notification/notification.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
@@ -45,6 +47,7 @@ export * from './app/shared/services/local-storage.service';
 export * from './app/shared/services/cognito-auth.service';
 export * from './app/shared/services/dialog.service';
 export * from './app/modules/user-idle/services/user-idle.service';
+export * from './app/modules/notification/services/notification.service';
 
 /** PIPES */
 export * from './app/modules/ordinal-number-pipe/ordinal-number.pipe';
@@ -67,6 +70,7 @@ export * from './app/modules/dropdown/models/dropdown-option.model';
 export * from './app/modules/dropdown/models/dropdown-option-group.model';
 export * from './app/modules/multi-select/models/multi-select-option.model';
 export * from './app/modules/multi-select/models/multi-select-option-group.model';
+export * from './app/modules/notification/models/notification.model';
 
 /** ENUMS */
 export * from './app/shared/enums/endpoint-status.enum';
