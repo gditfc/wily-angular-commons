@@ -12,9 +12,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   add,
   endOfDay,
+  endOfMonth,
   endOfWeek,
   getWeek,
-  getWeeksInMonth,
   isWithinInterval,
   setWeek,
   startOfWeek,
@@ -379,6 +379,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   private static generateMonth(month: number, year: number, selectionInterval: { start: Date, end: Date }): Array<MetaWeek> {
     const metaMonth: Array<MetaWeek> = [];
     const startOfMonth = new Date(year, month, 1);
+    const monthInterval = { start: startOfMonth, end: endOfMonth(startOfMonth) };
     let scrollDate = sub(startOfMonth, { days: startOfMonth.getDay() });
 
     for (let i = 0; i < 6; i++) {
@@ -388,7 +389,8 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       metaMonth.push({
         week: getWeek(scrollDate),
         year: sundayOfWeek.getFullYear(),
-        selectable: sundayOfWeek.getMonth() === month &&
+        selectable: (isWithinInterval(sundayOfWeek, monthInterval) ||
+          isWithinInterval(saturdayOfWeek, monthInterval)) &&
           isWithinInterval(sundayOfWeek, selectionInterval) &&
           isWithinInterval(saturdayOfWeek, selectionInterval),
         dates: []
@@ -565,7 +567,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
 
     this.writeValue({ start: lastWeekStart, end: lastWeekEnd });
 
-    if (lastWeekStart.getMonth() !== currentMonth) {
+    if (lastWeekEnd.getMonth() !== currentMonth) {
       this._selectedMonth.next(lastWeekStart.getMonth());
       this._selectedYear.next(lastWeekStart.getFullYear());
     }
