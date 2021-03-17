@@ -5,7 +5,9 @@ import { Notification } from '../models/notification.model';
 /**
  * Service for adding/deleting notifications
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NotificationService {
 
   /**
