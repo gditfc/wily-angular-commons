@@ -466,7 +466,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    */
   writeValue(value: { start: Date, end: Date }): void {
     this.value = value;
-    this.weekSelected.emit(value);
     this.onChange(this.value);
     this.changeDetectorRef.markForCheck();
   }
@@ -534,8 +533,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       const weekDate = setWeek(new Date(selectedYear, 0, 1), week);
       const weekStart = startOfWeek(weekDate);
       const weekEnd = endOfDay(endOfWeek(weekDate));
+      const selectedWeek = { start: weekStart, end: weekEnd };
 
-      this.writeValue({ start: weekStart, end: weekEnd });
+      this.writeValue(selectedWeek);
+      this.weekSelected.emit(selectedWeek);
     }
   }
 
@@ -547,8 +548,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     const nextWeekStart = startOfWeek(nextWeekDate);
     const nextWeekEnd = endOfDay(endOfWeek(nextWeekDate));
     const currentMonth = this.value.start.getMonth();
+    const selectedWeek = { start: nextWeekStart, end: nextWeekEnd };
 
-    this.writeValue({ start: nextWeekStart, end: nextWeekEnd });
+    this.writeValue(selectedWeek);
+    this.weekSelected.emit(selectedWeek);
 
     if (nextWeekStart.getMonth() !== currentMonth) {
       this._selectedMonth.next(nextWeekStart.getMonth());
@@ -564,8 +567,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     const lastWeekStart = startOfWeek(lastWeekDate);
     const lastWeekEnd = endOfDay(endOfWeek(lastWeekDate));
     const currentMonth = this.value.end.getMonth();
+    const selectedWeek = { start: lastWeekStart, end: lastWeekEnd };
 
-    this.writeValue({ start: lastWeekStart, end: lastWeekEnd });
+    this.writeValue(selectedWeek);
+    this.weekSelected.emit(selectedWeek);
 
     if (lastWeekEnd.getMonth() !== currentMonth) {
       this._selectedMonth.next(lastWeekStart.getMonth());
