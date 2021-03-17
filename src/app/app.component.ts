@@ -147,6 +147,6 @@ export class AppComponent {
         break;
     }
 
-    this.notificationService.addNotification(notification);
+    this.notificationService.add(notification);
   }
 }

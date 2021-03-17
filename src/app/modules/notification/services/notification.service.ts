@@ -50,7 +50,7 @@ export class NotificationService {
    * Add a notification
    * @param notification the notification to add
    */
-  addNotification(notification: Notification): void {
+  add(notification: Notification): void {
     notification.id = NotificationService.generateId();
 
     const notifications = this._notifications.getValue();
