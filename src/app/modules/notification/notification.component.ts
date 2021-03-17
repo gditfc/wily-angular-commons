@@ -1,21 +1,19 @@
-import { style,
+import {
   animate,
   animateChild,
+  query,
+  stagger,
+  style,
   transition,
-  trigger,
-  query as q,
-  stagger
+  trigger
 } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Notification } from './models/notification.model';
 import { NotificationService } from './services/notification.service';
 
-const query = (s, a, o= {optional: true}) => q(s, a, o);
-
 /**
  * Component for displaying notifications
- * // TODO: Finalize animation
  */
 @Component({
   selector: 'wily-notification',
@@ -26,8 +24,10 @@ const query = (s, a, o= {optional: true}) => q(s, a, o);
     trigger('list', [
       transition(':enter', [
         // child animation selector + stagger
-        query('@items',
-          stagger(300, animateChild())
+        query(
+          '@items',
+          stagger(300, animateChild()),
+          { optional: true }
         )
       ]),
     ]),
