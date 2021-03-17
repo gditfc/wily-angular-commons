@@ -21,5 +21,5 @@ export interface Notification {
   /**
    * The notification detail
    */
-  detail: string;
+  detail?: string;
 }
