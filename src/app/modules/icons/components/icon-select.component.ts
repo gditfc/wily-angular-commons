@@ -53,6 +53,15 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
   }
 
   /**
+   * Set disabled
+   * @param disabled whether or not the icon picker should be disabled
+   */
+  @Input('disabled')
+  set disabled(disabled: boolean) {
+    this._disabled = disabled;
+  }
+
+  /**
    * Color class of the button
    */
   @Input()
@@ -217,6 +226,12 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
   private _value: string;
 
   /**
+   * Whether or not the icon picker is disabled
+   * @private
+   */
+  private _disabled: boolean;
+
+  /**
    * Function to call on change
    */
   onChange: (value: any) => void = () => {};
@@ -240,6 +255,13 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
         this._activePage.next(0);
       }
     });
+  }
+
+  /**
+   * Get disabled
+   */
+  get disabled(): boolean {
+    return this._disabled;
   }
 
   /**
@@ -278,15 +300,26 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
   }
 
   /**
+   * Set disabled state
+   * @param isDisabled whether or not the icon picker should be disabled
+   */
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+    this.changeDetectorRef.markForCheck();
+  }
+
+  /**
    * Open the icon select dialog
    */
   openDialog(): void {
-    this.reset();
-    this.showDialog = {};
-    this.opened.emit();
+    if (!this.disabled) {
+      this.reset();
+      this.showDialog = {};
+      this.opened.emit();
 
-    if (this.value) {
-      this.showIconSelectionPreview = true;
+      if (this.value) {
+        this.showIconSelectionPreview = true;
+      }
     }
   }
 

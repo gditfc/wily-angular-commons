@@ -9,6 +9,7 @@
         (click)="openDialog()"
         [wilyTooltip]="(_internalValue | async)?.prefix + ' ' + (_internalValue | async)?.name"
         [tooltipDisabled]="!(_internalValue | async)"
+        [disabled]="disabled"
         class="access wis_button"
         aria-label="Choose Icon">
   <ng-container *ngIf="!showDialog else placeholderIcon">
