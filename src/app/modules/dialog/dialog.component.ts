@@ -149,10 +149,8 @@ export class DialogComponent {
   onAnimationDone(event: AnimationEvent): void {
     if (event.fromState === 'void') {
       this.opened.emit();
-      console.log('opened');
     } else if (event.toState === 'void') {
       this.closed.emit();
-      console.log('closed');
     }
   }
 }
