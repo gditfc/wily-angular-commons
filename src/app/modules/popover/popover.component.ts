@@ -173,14 +173,19 @@ export class PopoverComponent implements OnDestroy, OnInit {
 
   /**
    * Toggle the popover from open to closed or closed to open
-   * @param event
+   * @param event the event whose target element will act as
+   *              the popover target. If an event is not provided,
+   *              the popover will close
    */
-  toggle(event: Event): void {
-    event.stopImmediatePropagation();
+  toggle(event?: Event): void {
+    if (event) {
+      this.target = event.currentTarget ?? event.target;
+      event.stopImmediatePropagation();
+    } else {
+      this.target = null;
+    }
 
-    this.target = event.currentTarget ?? event.target;
-
-    if (!this.visible) {
+    if (!this.visible && this.target) {
       this.open();
     } else {
       this.close();
