@@ -4,16 +4,19 @@
   min-width:40px;
   height:40px;
   min-height:40px;
-
   cursor:pointer;
 }
-.wis_button:hover {
+.wis_button:disabled {
+  cursor:default;
+  opacity:1 !important; /* override normal disabled effect */
+}
+.wis_button:hover:not(:disabled) {
   filter:brightness(1.05);
 }
 .wis_button svg {
   transition:transform 0.1s ease;
 }
-.wis_button:hover .wis_icon {
+.wis_button:hover:not(:disabled) .wis_icon {
   transform:scale(1.15);
 }
 
@@ -55,7 +58,8 @@
   border-radius:3px;
 }
 .wis_filter_btn:not(:hover):not(.selected) {
-  background:transparent;
+  background-color:inherit;
+  color:inherit;
 }
 
 /* ICON GRID STYLES */
@@ -71,7 +75,8 @@
   border:none;
   border-radius:3px;
   padding:5px 2px;
-  background-color:transparent;
+  background-color:inherit;
+  color:inherit;
 }
 .wis_icon_btn:hover {
   background-color:rgba(120,120,120,0.1);
