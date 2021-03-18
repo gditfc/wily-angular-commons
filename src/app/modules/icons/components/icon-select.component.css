@@ -5,6 +5,7 @@
   height:40px;
   min-height:40px;
   cursor:pointer;
+  transition:all 0.1s ease;
 }
 .wis_button:disabled {
   cursor:default;

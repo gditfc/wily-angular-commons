@@ -42,14 +42,14 @@
             <!-- all icons -->
             <div class="mar_5 pad_5">
               <button (click)="handleFilterSelect({ style: 'all', type: 'all' })"
-                      [ngClass]="{ 'selected overlay_alt1': filter.type === 'all' && filter.style === 'all' }"
-                      class="access list_btn row space_between wis_filter_btn"
+                      [ngClass]="{ 'selected': filter.type === 'all' && filter.style === 'all' }"
+                      class="access list_btn row space_between wis_filter_btn overlay_alt1"
                       aria-label="Show All Icons">
                 <div class="v_center">
                   <div class="circle_16px overlay_alt1 mar_right10">
                     <div *ngIf="filter.type === 'all' && filter.style === 'all'" class="circle_8px bg_blue"></div>
                   </div>
-                  <div class="text md">All Icons</div>
+                  <div class="text md">See All Icons</div>
                 </div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
@@ -60,8 +60,8 @@
               <div class="text md bolder" style="padding:10px 10px 5px 15px;">Font Awesome Icons</div>
               <div class="mar_5">
                 <button (click)="handleFilterSelect({ style: 'all', type: 'fontawesome' })"
-                        [ngClass]="{ 'selected overlay_alt1': filter.type === 'fontawesome' && filter.style === 'all' }"
-                        class="access list_btn row space_between wis_filter_btn"
+                        [ngClass]="{ 'selected': filter.type === 'fontawesome' && filter.style === 'all' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
                         aria-label="Filter by Font Awesome Icons">
                   <div class="v_center">
                     <div class="circle_16px overlay_alt1 mar_right10">
@@ -74,8 +74,8 @@
               </div>
               <div class="mar_5">
                 <button (click)="handleFilterSelect({ style: 'solid', type: 'fontawesome' })"
-                        [ngClass]="{ 'selected overlay_alt1': filter.type === 'fontawesome' &&  filter.style === 'solid' }"
-                        class="access list_btn row space_between wis_filter_btn"
+                        [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'solid' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
                         aria-label="Filter by Solid Font Awesome Icons">
                   <div class="v_center">
                     <div class="circle_16px overlay_alt1 mar_right10">
@@ -88,8 +88,8 @@
               </div>
               <div class="mar_5">
                 <button (click)="handleFilterSelect({ style: 'regular', type: 'fontawesome' })"
-                        [ngClass]="{ 'selected overlay_alt1': filter.type === 'fontawesome' &&  filter.style === 'regular' }"
-                        class="access list_btn row space_between wis_filter_btn"
+                        [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'regular' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
                         aria-label="Filter by Regular Font Awesome Icons">
                   <div class="v_center">
                     <div class="circle_16px overlay_alt1 mar_right10">
@@ -102,8 +102,8 @@
               </div>
               <div class="mar_5">
                 <button (click)="handleFilterSelect({ style: 'brands', type: 'fontawesome' })"
-                        [ngClass]="{ 'selected overlay_alt1': filter.type === 'fontawesome' &&  filter.style === 'brands' }"
-                        class="access list_btn row space_between wis_filter_btn"
+                        [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'brands' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
                         aria-label="Filter by Brand Font Awesome Icons">
                   <div class="v_center">
                     <div class="circle_16px overlay_alt1 mar_right10">
@@ -121,8 +121,8 @@
               <div class="text md bolder" style="padding:10px 10px 5px 15px;">Custom Icons</div>
               <div class="mar_5">
                 <button (click)="handleFilterSelect({ style: 'all', type: 'wily' })"
-                        [ngClass]="{ 'selected overlay_alt1': filter.type === 'wily' && filter.style === 'all' }"
-                        class="access list_btn row space_between wis_filter_btn"
+                        [ngClass]="{ 'selected': filter.type === 'wily' && filter.style === 'all' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
                         aria-label="Filter by All Custom Icons">
                   <div class="v_center">
                     <div class="circle_16px overlay_alt1 mar_right10">
@@ -135,8 +135,8 @@
               </div>
               <div class="mar_5">
                 <button (click)="handleFilterSelect({ style: 'solid', type: 'wily' })"
-                        [ngClass]="{ 'selected overlay_alt1': filter.type === 'wily' && filter.style === 'solid' }"
-                        class="access list_btn row space_between wis_filter_btn"
+                        [ngClass]="{ 'selected': filter.type === 'wily' && filter.style === 'solid' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
                         aria-label="Filter by Solid Custom Icons">
                   <div class="v_center">
                     <div class="circle_16px overlay_alt1 mar_right10">
@@ -149,8 +149,8 @@
               </div>
               <div class="mar_5">
                 <button (click)="handleFilterSelect({ style: 'regular', type: 'wily' })"
-                        [ngClass]="{ 'selected overlay_alt1': filter.type === 'wily' && filter.style === 'regular' }"
-                        class="access list_btn row space_between wis_filter_btn"
+                        [ngClass]="{ 'selected': filter.type === 'wily' && filter.style === 'regular' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
                         aria-label="Filter by Regular Custom Icons">
                   <div class="v_center">
                     <div class="circle_16px overlay_alt1 mar_right10">
@@ -163,8 +163,8 @@
               </div>
               <div class="mar_5">
                 <button (click)="handleFilterSelect({ style: 'light', type: 'wily' })"
-                        [ngClass]="{ 'selected overlay_alt1': filter.type === 'wily' && filter.style === 'light' }"
-                        class="access list_btn row space_between wis_filter_btn"
+                        [ngClass]="{ 'selected': filter.type === 'wily' && filter.style === 'light' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
                         aria-label="Filter by Light Custom Icons">
                   <div class="v_center">
                     <div class="circle_16px overlay_alt1 mar_right10">
