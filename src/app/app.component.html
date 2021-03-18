@@ -598,6 +598,7 @@
           </div>
           <!-- CHILD DIALOG -->
           <wily-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null"
+                       [allowClose]="false"
                        width="350px" height="250px">
             <div class="pad_10">
               <div class="form_label mar_bot3">Basic Date Picker</div>
@@ -607,6 +608,7 @@
                 [calendarButtonClassList]="'overlay border_left brad_0'">
               </wily-date-picker>
               <button class="access btn md overlay_alt2 bg_blue_alt mar_10" (click)="obj4 = {}">Open Child</button>
+              <button class="access btn md overlay_alt2 bg_blue_alt mar_10" (click)="obj3 = null">Close</button>
             </div>
             <!-- SECOND CHILD DIALOG -->
             <wily-dialog title="Child of Child of Parent Dialog" [object]="obj4" (closed)="obj4 = null"
