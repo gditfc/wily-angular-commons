@@ -1,5 +1,5 @@
 <!-- choose button -->
-<button [ngClass]="buttonColorClass"
+<button [ngClass]="buttonColorClass ? buttonColorClass : 'page_container_color'"
         [ngStyle]="{
                      'width': buttonSizing,
                      'min-width': buttonSizing,

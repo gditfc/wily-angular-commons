@@ -65,7 +65,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * Color class of the button
    */
   @Input()
-  buttonColorClass = 'overlay_alt2 page_container_color';
+  buttonColorClass: string;
 
   /**
    * The value to set to the button's width, min-width, height and min-height
