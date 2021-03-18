@@ -1,5 +1,9 @@
 <div [ngClass]="{'wily_dialog_overlay' : object}">
-  <div [@dialog] class="wily_dialog_container" *ngIf="object" cdkTrapFocus>
+  <div *ngIf="object"
+       [@dialog] class="wily_dialog_container"
+       (@dialog.done)="onAnimationDone($event)"
+       [cdkTrapFocus]="true"
+       [cdkTrapFocusAutoCapture]="true">
     <div class="col shadow wily_dialog_box"
          *ngIf="effectiveWidth$ | async as effectiveWidth"
          [ngStyle]="{'width': effectiveWidth, 'height': height}">
@@ -15,7 +19,6 @@
           <ng-container *ngIf="allowClose">
             <button #closeButton
                     (click)="close()"
-                    (cdkObserveContent)="focusCloseButton()"
                     class="access btn_pulse sm"
                     [attr.aria-label]="'Close ' + title + ' Dialog'">
               <i class="fas fa-times"></i>

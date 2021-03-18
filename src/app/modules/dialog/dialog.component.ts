@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@an
 import {DialogService} from '../../shared/services/dialog.service';
 import {fromEvent, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 
 /**
  * Component to display a dialog with dynamic content
@@ -90,7 +90,6 @@ export class DialogComponent {
   /**
    * Whether to show close button and allow escape to close
    */
-    // TODO: prevent close on escape when false
   @Input()
   allowClose = true;
 
@@ -119,6 +118,12 @@ export class DialogComponent {
   closed: EventEmitter<any> = new EventEmitter();
 
   /**
+   * Event emitted when dialog has finished opening
+   */
+  @Output()
+  opened = new EventEmitter<void>();
+
+  /**
    * Dependency injection site
    * @param dialogService the dialog service
    */
@@ -130,18 +135,24 @@ export class DialogComponent {
   close(): void {
     this.object = null;
     this.dialogService.unregisterDialog(this);
-    this.closed.emit({});
-  }
-
-  /**
-   * Method to focus on the dialog close button
-   */
-  focusCloseButton(): void {
-    this.closeButton.nativeElement.focus();
   }
 
   /**
    * Method for compatibility with legacy dialog API. Method does nothing.
    */
   open(): void { }
+
+  /**
+   * Emit closed/opened events based on state when dialog animation ends
+   * @param event
+   */
+  onAnimationDone(event: AnimationEvent): void {
+    if (event.fromState === 'void') {
+      this.opened.emit();
+      console.log('opened');
+    } else if (event.toState === 'void') {
+      this.closed.emit();
+      console.log('closed');
+    }
+  }
 }
