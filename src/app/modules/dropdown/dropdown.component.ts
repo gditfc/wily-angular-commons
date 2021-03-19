@@ -163,10 +163,10 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   classList: string;
 
   /**
-   * Event emitted on value change
+   * Event emitted on value change, emits the new value
    */
   @Output()
-  change = new EventEmitter<void>();
+  change = new EventEmitter<string | number>();
 
   /**
    * BehaviorSubject tracking the input dropdown options/option groups
@@ -339,8 +339,6 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     if (this.value !== value && !this.disabled) {
       this.value = value;
       this.changeDetectorRef.markForCheck();
-
-      this.change.emit();
     }
   }
 
@@ -477,7 +475,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    */
   onDropdownOptionSelect(value: string | number, disabled: boolean): void {
     if (!disabled) {
-      this.writeValue(value);
+      this.handleDropdownOptionSelect(value);
       this.closeDropdown();
       this.dropdownButton.nativeElement.focus();
     }
@@ -559,6 +557,20 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Update internal value and emit change events if input value differs from current value
+   * @param value the selected value
+   * @private
+   */
+  private handleDropdownOptionSelect(value: string | number): void {
+    if (this.value !== value && !this.disabled) {
+      this.value = value;
+
+      this.onChange(value);
+      this.change.emit(value);
+    }
+  }
+
+  /**
    * Align the dropdown list with the dropdown
    * @private
    */
@@ -616,7 +628,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         if (this.opened) {
           previousOption.focus();
         } else {
-          this.writeValue(previousOption.getAttribute('data-value'));
+          this.handleDropdownOptionSelect(previousOption.getAttribute('data-value'));
         }
       }
     } else if (key === 'ArrowRight' || key === 'ArrowDown') {
@@ -626,7 +638,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         if (this.opened) {
           nextOption.focus();
         } else {
-          this.writeValue(nextOption.getAttribute('data-value'));
+          this.handleDropdownOptionSelect(nextOption.getAttribute('data-value'));
         }
       }
     }
