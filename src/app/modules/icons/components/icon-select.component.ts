@@ -276,9 +276,9 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * @param value the value to write
    */
   writeValue(value: string): void {
-    this.value = value;
-    this.onChange(value);
-    this.selected.emit({ value });
+    if (!this.disabled) {
+      this.value = value;
+    }
 
     this.changeDetectorRef.markForCheck();
   }
@@ -365,7 +365,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    */
   handleIconSelectConfirm(): void {
     const icon = this._internalValue.getValue();
-    this.writeValue(`${icon.prefix} ${icon.name}`);
+    this.updateModel(`${icon.prefix} ${icon.name}`);
     this.closeDialog();
   }
 
@@ -390,6 +390,25 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
     this._searchText.next('');
     this._searchClick.next('');
     this._activePage.next(0);
+  }
+
+  /**
+   * Update model
+   * @param value the new value of the model
+   * @private
+   */
+  private updateModel(value: string): void {
+    const valueBeforeUpdate = this._value;
+
+    if (!this.disabled) {
+      this.value = value;
+
+      if (valueBeforeUpdate !== this._value) {
+        this.onChange(this._value);
+      }
+
+      this.selected.emit({ value: this._value });
+    }
   }
 
   /**
