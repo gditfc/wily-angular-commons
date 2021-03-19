@@ -348,7 +348,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   ngOnInit(): void { }
 
   /**
-   * If the input value is already in the value array, remove it. Otherwise add it
+   * Write value
    * @param value the value to write
    */
   writeValue(value: Array<string | number>): void {
@@ -559,8 +559,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Add input value to selected values if not already present, otherwise
-   * remove value from selected values
+   * If the input value is already in the value array, remove it. Otherwise add it
    * @param value the selected value
    * @private
    */
