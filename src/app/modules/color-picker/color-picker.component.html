@@ -1,3 +1,6 @@
 <ng-container *ngIf="render">
-  <input type="color" />
+  <input type="text"
+         (keydown)="handleKeyDown($event)"
+         (input)="handleInput($event)"
+         (change)="handleChange($event)" />
 </ng-container>
