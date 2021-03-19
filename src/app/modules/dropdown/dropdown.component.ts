@@ -336,10 +336,11 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * @param value the value to write
    */
   writeValue(value: string | number): void {
-    if (this.value !== value && !this.disabled) {
+    if (!this.disabled) {
       this.value = value;
-      this.changeDetectorRef.markForCheck();
     }
+
+    this.changeDetectorRef.markForCheck();
   }
 
   /**
