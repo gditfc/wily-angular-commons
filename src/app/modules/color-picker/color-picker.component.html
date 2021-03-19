@@ -1,0 +1,8 @@
+<ng-container *ngIf="render">
+  <ng-container *ngIf="colorPickerSupported else colorPickerNotSupported">
+    <input type="color" />
+  </ng-container>
+  <ng-template #colorPickerNotSupported>
+    <input type="text" />
+  </ng-template>
+</ng-container>
