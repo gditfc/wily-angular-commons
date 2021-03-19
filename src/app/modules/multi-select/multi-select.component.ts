@@ -63,7 +63,6 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    */
   @Input('value')
   set value(value: Array<string | number>) {
-    // ngModel apparently boxes array input into another array, so this unwraps it
     let valueToSet: Array<string | number> = null;
     if (Array.isArray(value)) {
       valueToSet = [];
@@ -160,10 +159,10 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   classList: string;
 
   /**
-   * Event emitted on value change
+   * Event emitted on value change, emits the new value
    */
   @Output()
-  change = new EventEmitter<void>();
+  change = new EventEmitter<Array<string | number>>();
 
   /**
    * BehaviorSubject tracking the input multi-select options/option groups
@@ -352,24 +351,9 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * If the input value is already in the value array, remove it. Otherwise add it
    * @param value the value to write
    */
-  writeValue(value: string | number): void {
-    if (!this.value) {
-      this.value = [value];
-    } else {
-      const valueCopy = [...this.value];
-      const foundIndex = valueCopy.findIndex(item => item === value);
-
-      if (foundIndex > -1) {
-        valueCopy.splice(foundIndex, 1);
-      } else {
-        valueCopy.push(value);
-      }
-
-      this.value = valueCopy;
-    }
-
+  writeValue(value: Array<string | number>): void {
+    this.value = value;
     this.changeDetectorRef.markForCheck();
-    this.change.emit();
   }
 
   /**
@@ -509,7 +493,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    */
   onMultiSelectOptionSelect(value: string | number, disabled: boolean): void {
     if (!disabled) {
-      this.writeValue(value);
+      this.handleMultiSelectOptionSelect(value);
     }
   }
 
@@ -569,6 +553,32 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
     if (event.toState === 'close') {
       this.render = false;
     }
+  }
+
+  /**
+   * Add input value to selected values if not already present, otherwise
+   * remove value from selected values
+   * @param value the selected value
+   * @private
+   */
+  private handleMultiSelectOptionSelect(value: string | number): void {
+    if (!this.value) {
+      this.value = [value];
+    } else {
+      const valueCopy = [...this.value];
+      const foundIndex = valueCopy.findIndex(item => item === value);
+
+      if (foundIndex > -1) {
+        valueCopy.splice(foundIndex, 1);
+      } else {
+        valueCopy.push(value);
+      }
+
+      this.value = valueCopy;
+    }
+
+    this.onChange(this.value);
+    this.change.emit(this.value);
   }
 
   /**
