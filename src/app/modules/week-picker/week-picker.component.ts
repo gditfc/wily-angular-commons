@@ -15,6 +15,7 @@ import {
   endOfMonth,
   endOfWeek,
   getWeek,
+  isEqual,
   isWithinInterval,
   setWeek,
   startOfWeek,
@@ -465,8 +466,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * @param value the value to write
    */
   writeValue(value: { start: Date, end: Date }): void {
-    this.value = value;
-    this.onChange(this.value);
+    if (!this.disabled) {
+      this.value = value;
+    }
+
     this.changeDetectorRef.markForCheck();
   }
 
@@ -535,8 +538,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       const weekEnd = endOfDay(endOfWeek(weekDate));
       const selectedWeek = { start: weekStart, end: weekEnd };
 
-      this.writeValue(selectedWeek);
-      this.weekSelected.emit(selectedWeek);
+      this.updateModel(selectedWeek);
     }
   }
 
@@ -550,8 +552,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     const currentMonth = this.value.start.getMonth();
     const selectedWeek = { start: nextWeekStart, end: nextWeekEnd };
 
-    this.writeValue(selectedWeek);
-    this.weekSelected.emit(selectedWeek);
+    this.updateModel(selectedWeek);
 
     if (nextWeekStart.getMonth() !== currentMonth) {
       this._selectedMonth.next(nextWeekStart.getMonth());
@@ -569,8 +570,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     const currentMonth = this.value.end.getMonth();
     const selectedWeek = { start: lastWeekStart, end: lastWeekEnd };
 
-    this.writeValue(selectedWeek);
-    this.weekSelected.emit(selectedWeek);
+    this.updateModel(selectedWeek);
 
     if (lastWeekEnd.getMonth() !== currentMonth) {
       this._selectedMonth.next(lastWeekStart.getMonth());
@@ -586,10 +586,29 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     const thisWeekStart = startOfWeek(thisWeekDate);
     const thisWeekEnd = endOfDay(endOfWeek(thisWeekDate));
 
-    this.writeValue({ start: thisWeekStart, end: thisWeekEnd });
+    this.updateModel({ start: thisWeekStart, end: thisWeekEnd });
 
     this._selectedMonth.next(this.currentDate.month);
     this._selectedYear.next(this.currentDate.year);
+  }
+
+  /**
+   * Update model
+   * @param value the new value of the model
+   * @private
+   */
+  private updateModel(value: { start: Date, end: Date }): void {
+    const valueBeforeUpdate = this.value;
+
+    if (!this.disabled) {
+      this.value = value;
+
+      if (!isEqual(valueBeforeUpdate.start, this.value.start) &&
+        !isEqual(valueBeforeUpdate.end, this.value.end)) {
+        this.onChange(this.value);
+        this.weekSelected.emit(this.value);
+      }
+    }
   }
 
   /**
