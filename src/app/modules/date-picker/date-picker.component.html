@@ -43,7 +43,7 @@
        class="position_absolute">
     <wily-calendar [value]="showCalendar?.currentValue"
                    [dateRange]="{ minDate: validSelectionInterval?.start, maxDate: validSelectionInterval?.end }"
-                   (selected)="writeValue($event)"
+                   (selected)="updateModel($event)"
                    (closed)="handleCalendarClose()">
     </wily-calendar>
   </div>

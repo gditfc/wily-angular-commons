@@ -101,8 +101,12 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Value input setter
    */
   set value(value: Date) {
-    if (!isEqual(value, this._value)) {
+    if (!value) {
+      this._value = null;
+      this.dateString = null;
+    } else if (!isEqual(value, this._value)) {
       this._value = value;
+      this.dateString = this.dateString = DatePickerComponent.parseDate(value);
     }
   }
 
@@ -327,18 +331,15 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @param value the value to write
    */
   writeValue(value: Date): void {
-    if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
-      this.value = value;
-      this.dateString = DatePickerComponent.parseDate(value);
-      this.dateSelected.emit(value);
-    } else {
-      this.value = null;
-      this.dateString = null;
+    if (!this.disabled) {
+      if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
+        this.value = value;
+      } else {
+        this.value = null;
+      }
     }
 
-    this.onChange(this.value);
     this.changeDetectorRef.markForCheck();
-    this.input.emit();
   }
 
   /**
@@ -379,24 +380,50 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Clear value if no input, write parsed date if input requirements fulfilled
    */
-  handleBlur() {
+  handleBlur(): void {
     try {
-      this.writeValue(DatePickerComponent.parseDateString(this.dateString));
+      this.updateModel(DatePickerComponent.parseDateString(this.dateString));
     } catch (e) {
-      this.writeValue(null);
+      this.updateModel(null);
     }
   }
 
   /**
    * Write on input if valid date within interval
    */
-  handleInput() {
+  handleInput(): void {
     try {
       const parsedDate = DatePickerComponent.parseDateString(this.dateString);
       if (parsedDate !== null && isWithinInterval(parsedDate, this.validSelectionInterval)) {
-        this.writeValue(parsedDate);
+        this.updateModel(parsedDate);
       }
     } catch (e) { }
+
+    this.input.emit();
+  }
+
+  /**
+   * Update the model value
+   * @param value the value to update the model to
+   */
+  updateModel(value: Date): void {
+    const valueBeforeUpdate = this._value;
+
+    if (!this.disabled) {
+      if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
+        this.value = value;
+
+        if (!isEqual(this.value, valueBeforeUpdate)) {
+          this.dateSelected.emit(value);
+        }
+      } else {
+        this.value = null;
+      }
+
+      if (!isEqual(this.value, valueBeforeUpdate)) {
+        this.onChange(value);
+      }
+    }
   }
 
   /**
