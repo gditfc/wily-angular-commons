@@ -149,7 +149,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   private static expandShortHexString(hexString: string): string {
     let fullHexString = '';
 
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 0; i <= 2; i++) {
       fullHexString += `${hexString[i]}${hexString[i]}`;
     }
 
@@ -269,11 +269,16 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * @param value the value to check
    */
   handleBlur(value: string): void {
-    if (!ColorPickerComponent.FULL_HEX_REGEX.test(value)) {
+    ColorPickerComponent.SHORT_HEX_REGEX.lastIndex = 0;
+    ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
+
+    if (ColorPickerComponent.SHORT_HEX_REGEX.test(value)) {
+      this.updateModel(ColorPickerComponent.expandShortHexString(value));
+    } else if (ColorPickerComponent.FULL_HEX_REGEX.test(value)) {
+      this.updateModel(value);
+    } else {
       this.value = null;
       this.onChange(null);
-    } else {
-      this.updateModel(value);
     }
   }
 
