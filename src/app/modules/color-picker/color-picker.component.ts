@@ -139,7 +139,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * Whether or not the color picker is disabled
    * @private
    */
-  private _disabled = false;
+  _disabled = false;
 
   /**
    * Expand a short hex string (#abc) into its full form (#aabbcc)
