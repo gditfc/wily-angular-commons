@@ -1,3 +1,4 @@
+<!-- TODO: add aria-label input and apply to both fields -->
 <ng-container *ngIf="render">
   <input #colorPicker
          *ngIf="colorPickerSupported else colorSwatch"
@@ -8,6 +9,7 @@
   <ng-template #colorSwatch>
     <div [style.background-color]="_value"></div>
   </ng-template>
+  <!-- TODO: add classlist input and apply to this field -->
   <input #colorInput
          type="text"
          [value]="_value"
