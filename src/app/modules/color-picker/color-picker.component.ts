@@ -245,10 +245,10 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   /**
    * Update model
    * @param value the new value of the model
-   * @param colorInput whether or not the model update is sourced from the color input
+   * @param emitColorSelected whether or not emit the color selected event
    * @private
    */
-  updateModel(value: string, colorInput = false): void {
+  updateModel(value: string, emitColorSelected = false): void {
     ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
     let updateValue = value;
 
@@ -263,7 +263,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
       if (valueBeforeUpdate !== this._value) {
         this.onChange(`#${updateValue}`);
 
-        if (colorInput) {
+        if (emitColorSelected) {
           this.colorSelected.emit(`#${updateValue}`);
         }
       }
@@ -282,9 +282,9 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
     ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
 
     if (ColorPickerComponent.SHORT_HEX_REGEX.test(value)) {
-      this.updateModel(ColorPickerComponent.expandShortHexString(value));
+      this.updateModel(ColorPickerComponent.expandShortHexString(value), true);
     } else if (ColorPickerComponent.FULL_HEX_REGEX.test(value)) {
-      this.updateModel(value);
+      this.updateModel(value, true);
     } else {
       this.value = null;
       this.onChange(null);
