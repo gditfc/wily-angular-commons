@@ -33,19 +33,19 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * Regex to match a hexadecimal string (#000000)
    * @private
    */
-  private static readonly FULL_HEX_REGEX = new RegExp('^#[0-9A-Fa-f]{6}$');
+  private static readonly FULL_HEX_REGEX = new RegExp('^[0-9A-Fa-f]{6}$');
 
   /**
    * Regex to match a short hexadecimal string (#000)
    * @private
    */
-  private static readonly SHORT_HEX_REGEX = new RegExp('^#[0-9A-Fa-f]{3}$');
+  private static readonly SHORT_HEX_REGEX = new RegExp('^[0-9A-Fa-f]{3}$');
 
   /**
    * Regex to match a valid hex character (#, A-F, a-f, 0-9)
    * @private
    */
-  private static readonly HEX_CHARACTER_REGEX = new RegExp('^[#0-9A-Fa-f]$');
+  private static readonly HEX_CHARACTER_REGEX = new RegExp('^[0-9A-Fa-f]$');
 
   /**
    * Navigation keys
@@ -63,23 +63,21 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    */
   @Input('value')
   set value(value: string) {
-    let hexString = value;
+    let hexString = value ?? '';
 
     if (hexString) {
       ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
       ColorPickerComponent.SHORT_HEX_REGEX.lastIndex = 0;
 
-      hexString = (hexString.startsWith('#') ? hexString : `#${hexString}`).toLowerCase();
+      hexString = hexString.replace('#', '').toLowerCase();
 
       if (ColorPickerComponent.SHORT_HEX_REGEX.test(hexString)) {
         hexString = ColorPickerComponent.expandShortHexString(hexString);
       }
 
       if (!ColorPickerComponent.FULL_HEX_REGEX.test(hexString)) {
-        hexString = '#000000';
+        hexString = '';
       }
-    } else {
-      hexString = '#';
     }
 
     this._value = hexString;
@@ -135,7 +133,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   /**
    * The value of the color picker
    */
-  _value = '#';
+  _value = '';
 
   /**
    * Whether or not the color picker is disabled
@@ -155,7 +153,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
       fullHexString += `${hexString[i]}${hexString[i]}`;
     }
 
-    return `#${fullHexString}`;
+    return fullHexString;
   }
 
   /**
@@ -226,14 +224,13 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    */
   handleKeyDown(event: KeyboardEvent): void {
     const { key } = event;
-    const { selectionStart, selectionEnd } = event.target as HTMLInputElement;
+    const { selectionStart, selectionEnd, value } = event.target as HTMLInputElement;
 
     if (!ColorPickerComponent.NAVIGATION_KEYS.includes(key) && !event.ctrlKey) {
       ColorPickerComponent.HEX_CHARACTER_REGEX.lastIndex = 0;
 
       const preventDefault = !ColorPickerComponent.HEX_CHARACTER_REGEX.test(key) ||
-        (key === '#' && selectionStart > 0) ||
-        (event.target['value'].length >= 7 && (selectionStart === selectionEnd));
+        (value.length >= 6 && (selectionStart === selectionEnd));
 
       if (preventDefault) {
         event.preventDefault();
@@ -248,13 +245,18 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    */
   updateModel(value: string): void {
     ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
+    let updateValue = value;
 
-    if (!this._disabled && ColorPickerComponent.FULL_HEX_REGEX.test(value)) {
+    if (updateValue) {
+      updateValue = updateValue.replace('#', '');
+    }
+
+    if (!this._disabled && ColorPickerComponent.FULL_HEX_REGEX.test(updateValue)) {
       const valueBeforeUpdate = this._value;
-      this.value = value;
+      this.value = updateValue;
 
       if (valueBeforeUpdate !== this._value) {
-        this.onChange(value);
+        this.onChange(`#${value}`);
       }
     } else if (!value) {
       this.value = null;
