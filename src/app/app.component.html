@@ -59,6 +59,13 @@
                   <div class="form_label mar_bot3">Basic Color Picker</div>
                   <wily-color-picker [(ngModel)]="colorPickerValue" (ngModelChange)="console.log(colorPickerValue); console.log('Color picker model change')"></wily-color-picker>
                   <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Styled Color Picker</div>
+                  <wily-color-picker
+                    [classList]="'form_input'"
+                    [(ngModel)]="colorPickerValue"
+                    (ngModelChange)="console.log(colorPickerValue); console.log('Color picker model change')">
+                  </wily-color-picker>
+                  <div class="pad_10"></div>
                   <div class="form_label mar_bot3">Disabled Color Picker</div>
                   <wily-color-picker [disabled]="true"></wily-color-picker>
                 </div>
