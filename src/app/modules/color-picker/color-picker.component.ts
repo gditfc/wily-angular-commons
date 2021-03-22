@@ -58,16 +58,10 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
       ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
       ColorPickerComponent.SHORT_HEX_REGEX.lastIndex = 0;
 
-      hexString = hexString.startsWith('#') ? hexString : `#${hexString}`;
+      hexString = (hexString.startsWith('#') ? hexString : `#${hexString}`).toLowerCase();
 
       if (ColorPickerComponent.SHORT_HEX_REGEX.test(hexString)) {
-        let fullHexString = '';
-
-        for (let i = 1; i <= 3; i++) {
-          fullHexString += `${hexString[i]}${hexString[i]}`;
-        }
-
-        hexString = `#${fullHexString}`;
+        hexString = ColorPickerComponent.expandShortHexString(hexString);
       }
 
       if (!ColorPickerComponent.FULL_HEX_REGEX.test(hexString)) {
@@ -100,13 +94,28 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   /**
    * The value of the color picker
    */
-  _value: string;
+  _value = '#000000';
 
   /**
    * Whether or not the color picker is disabled
    * @private
    */
   private _disabled = false;
+
+  /**
+   * Expand a short hex string (#abc) into its full form (#aabbcc)
+   * @param hexString the short hex string to expand
+   * @private
+   */
+  private static expandShortHexString(hexString: string): string {
+    let fullHexString = '';
+
+    for (let i = 1; i <= 3; i++) {
+      fullHexString += `${hexString[i]}${hexString[i]}`;
+    }
+
+    return `#${fullHexString}`;
+  }
 
   /**
    * Function to call on change
@@ -176,13 +185,14 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    */
   handleKeyDown(event: KeyboardEvent): void {
     const { key } = event;
+    const { selectionStart, selectionEnd } = event.target as HTMLInputElement;
 
     if (!ColorPickerComponent.NAVIGATION_KEYS.includes(key)) {
       ColorPickerComponent.HEX_CHARACTER_REGEX.lastIndex = 0;
 
       const preventDefault = !ColorPickerComponent.HEX_CHARACTER_REGEX.test(key) ||
-        (key === '#' && (event.target as HTMLInputElement).selectionStart > 0) ||
-        event.target['value'].length >= 7;
+        (key === '#' && selectionStart > 0) ||
+        (event.target['value'].length >= 7 && (selectionStart === selectionEnd));
 
       if (preventDefault) {
         event.preventDefault();
@@ -191,28 +201,14 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Update model on input
-   * @param event
-   */
-  handleInput(event: Event): void {
-    this.updateModel(event.target['value']);
-  }
-
-  /**
-   * Update model on paste
-   * @param event
-   */
-  handleChange(event: Event): void {
-    this.updateModel(event.target['value']);
-  }
-
-  /**
    * Update model
    * @param value the new value of the model
    * @private
    */
-  private updateModel(value: string): void {
-    if (!this._disabled) {
+  updateModel(value: string): void {
+    ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
+
+    if (!this._disabled && ColorPickerComponent.FULL_HEX_REGEX.test(value)) {
       const valueBeforeUpdate = this._value;
       this.value = value;
 
@@ -222,6 +218,9 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
     }
   }
 
+  handleBlur(): void {
+
+  }
 
   /**
    * Determine if the browser supports the HTML5 color picker
