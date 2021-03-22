@@ -276,10 +276,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * @param value the value to write
    */
   writeValue(value: string): void {
-    if (!this.disabled) {
-      this.value = value;
-    }
-
+    this.value = value;
     this.changeDetectorRef.markForCheck();
   }
 
