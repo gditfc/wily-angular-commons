@@ -30,6 +30,10 @@
   color:inherit;
 }
 
+.wcp_color:disabled {
+  cursor:not-allowed;
+}
+
 .wcp_caret {
   position:absolute;
   left:2.75em;
@@ -41,9 +45,9 @@
 
 .wcp_swatch {
   width:4em;
-  padding:3px;
+  padding:5px;
   height:inherit;
-
+  border-radius:inherit;
   position:absolute;
   top:0;
   left:0;
@@ -66,7 +70,7 @@
 
 .wcp_hashtag {
   position:absolute;
-  left:calc(4em + 1em);
+  left:calc(4em + 0.8em);
 }
 
 .wcp_input {
@@ -76,7 +80,7 @@
   right:0;
   bottom:0;
   padding:inherit;
-  padding-left:2em;
+  padding-left:1.8em;
   border:none;
   width: calc(100% - 4em);
   -moz-appearance: none;
