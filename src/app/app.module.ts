@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { WilyColorPickerModule } from './modules/color-picker/wily-color-picker.module';
+import { WilyColorPickerModule } from './modules/color-picker/color-picker.module';
 import { WilyKeyfilterModule } from './modules/keyfilter/keyfilter.module';
 import { WilyMultiSelectModule } from './modules/multi-select/multi-select.module';
 import { WilyProfilePicModule } from './modules/profile-pic/wily-profile-pic.module';
