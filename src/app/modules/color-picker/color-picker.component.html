@@ -1,25 +1,22 @@
 <div class="v_center" style="align-items:stretch;" *ngIf="render">
-  <input #colorPicker
-         *ngIf="colorPickerSupported else colorSwatch"
+  <input *ngIf="colorPickerSupported else colorSwatch"
          type="color"
          class="access wcp_color mar_right5"
          [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'"
-         [value]="_value"
+         [ngModel]="_value"
          [attr.aria-label]="ariaLabel + ' , choose a color'"
-         (input)="updateModel(colorPicker.value)"
-         (change)="updateModel(colorPicker.value)" />
+         (ngModelChange)="updateModel($event)" />
   <ng-template #colorSwatch>
     <div [style.background-color]="_value"></div>
   </ng-template>
   <input #colorInput
          type="text"
-         [value]="_value"
+         [ngModel]="_value"
          class="access wcp_input"
          [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'"
          [attr.aria-label]="ariaLabel + ' , enter hex color'"
          (paste)="handlePaste($event)"
          (keydown)="handleKeyDown($event)"
-         (input)="updateModel(colorInput.value)"
-         (change)="updateModel(colorInput.value)"
+         (ngModelChange)="updateModel($event)"
          (blur)="handleBlur(colorInput.value)" />
 </div>
