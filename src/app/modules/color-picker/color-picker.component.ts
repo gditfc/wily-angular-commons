@@ -115,6 +115,13 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   input = new EventEmitter<string>();
 
   /**
+   * Event emitted on color selection from color picker (color picker widget dismissed)
+   * or valid hex string typed in input. Emits the current value of the input
+   */
+  @Output()
+  colorSelected = new EventEmitter<string>();
+
+  /**
    * ViewChild of the color input element
    */
   @ViewChild('colorInput')
@@ -241,9 +248,10 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   /**
    * Update model
    * @param value the new value of the model
+   * @param colorInput whether or not the model update is sourced from the color input
    * @private
    */
-  updateModel(value: string): void {
+  updateModel(value: string, colorInput = false): void {
     ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
     let updateValue = value;
 
@@ -257,6 +265,10 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
 
       if (valueBeforeUpdate !== this._value) {
         this.onChange(`#${updateValue}`);
+
+        if (colorInput) {
+          this.colorSelected.emit(`#${updateValue}`);
+        }
       }
     } else if (!value) {
       this.value = null;

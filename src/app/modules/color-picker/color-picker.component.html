@@ -9,7 +9,7 @@
            [disabled]="_disabled"
            [attr.aria-label]="ariaLabel + ' , choose a color'"
            (input)="updateModel(colorPicker.value)"
-           (change)="updateModel(colorPicker.value)" />
+           (change)="updateModel(colorPicker.value); colorSelected.emit(colorPicker.value)" />
     <i class="fas fa-caret-down wcp_caret"></i>
   </ng-container>
   <ng-template #colorSwatch>
@@ -31,6 +31,6 @@
          (input)="input.emit(colorInput.value)"
          (paste)="handlePaste($event)"
          (keydown)="handleKeyDown($event)"
-         (ngModelChange)="updateModel($event)"
+         (ngModelChange)="updateModel($event, true)"
          (blur)="handleBlur(colorInput.value)" />
 </div>
