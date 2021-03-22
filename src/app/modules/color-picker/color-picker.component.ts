@@ -30,19 +30,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class ColorPickerComponent implements ControlValueAccessor, OnInit {
 
   /**
-   * Regex to match a hexadecimal string (#000000)
+   * Regex to match a hexadecimal string (000000)
    * @private
    */
   private static readonly FULL_HEX_REGEX = new RegExp('^[0-9A-Fa-f]{6}$');
 
   /**
-   * Regex to match a short hexadecimal string (#000)
+   * Regex to match a short hexadecimal string (000)
    * @private
    */
   private static readonly SHORT_HEX_REGEX = new RegExp('^[0-9A-Fa-f]{3}$');
 
   /**
-   * Regex to match a valid hex character (#, A-F, a-f, 0-9)
+   * Regex to match a valid hex character (A-F, a-f, 0-9)
    * @private
    */
   private static readonly HEX_CHARACTER_REGEX = new RegExp('^[0-9A-Fa-f]$');
@@ -282,6 +282,8 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * @param event the paste ClipboardEvent
    */
   handlePaste(event: ClipboardEvent): void {
+    event.preventDefault();
+
     if (!this._disabled) {
       let clipboardData: DataTransfer;
 
@@ -293,10 +295,11 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
 
       if (clipboardData) {
         ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
-        const pastedText = clipboardData.getData('text');
+        const pastedText = clipboardData.getData('text')
+          .replace('#', '');
 
-        if (!ColorPickerComponent.FULL_HEX_REGEX.test(pastedText)) {
-          event.preventDefault();
+        if (ColorPickerComponent.FULL_HEX_REGEX.test(pastedText)) {
+          this.updateModel(pastedText);
         }
       }
     }
@@ -315,6 +318,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
       inputElement.value = '!';
 
       colorPickerSupported = inputElement.type === 'color' && inputElement.value !== '!';
+      inputElement.remove();
     } catch (e) { }
 
     return colorPickerSupported;
