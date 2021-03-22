@@ -1,9 +1,11 @@
-<ng-container *ngIf="render">
+<div class="v_center" style="align-items:stretch;" *ngIf="render">
   <input #colorPicker
          *ngIf="colorPickerSupported else colorSwatch"
          type="color"
+         class="access wcp_color mar_right5"
+         [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'"
          [value]="_value"
-         [attr.aria-label]="ariaLabel"
+         [attr.aria-label]="ariaLabel + ' , choose a color'"
          (input)="updateModel(colorPicker.value)"
          (change)="updateModel(colorPicker.value)" />
   <ng-template #colorSwatch>
@@ -12,11 +14,12 @@
   <input #colorInput
          type="text"
          [value]="_value"
-         [ngClass]="classList"
-         [attr.aria-label]="ariaLabel"
+         class="access wcp_input"
+         [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'"
+         [attr.aria-label]="ariaLabel + ' , enter hex color'"
          (paste)="handlePaste($event)"
          (keydown)="handleKeyDown($event)"
          (input)="updateModel(colorInput.value)"
          (change)="updateModel(colorInput.value)"
          (blur)="handleBlur(colorInput.value)" />
-</ng-container>
+</div>

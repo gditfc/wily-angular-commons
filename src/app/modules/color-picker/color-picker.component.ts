@@ -85,7 +85,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * Aria label input
    */
   @Input()
-  ariaLabel = 'Enter hex string';
+  ariaLabel = 'Color picker';
 
   /**
    * Class list to apply to the hex string input

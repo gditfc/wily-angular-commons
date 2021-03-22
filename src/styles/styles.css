@@ -137,3 +137,7 @@ input[disabled] {
 .hov_bg:disabled:hover {
   background:none;
 }
+
+.input.md {
+  min-height:32px;
+}
