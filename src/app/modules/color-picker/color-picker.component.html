@@ -17,13 +17,12 @@
   <div class="overlay_alt2 vr height100" style="position:absolute; left:3.5em; top:0; width:1px;"></div>
   <input #colorInput
          type="text"
-         [value]="_value"
+         [ngModel]="_value"
          class="access wcp_input"
          [attr.aria-label]="ariaLabel + ' , enter hex color'"
          placeholder="#000000"
          (paste)="handlePaste($event)"
          (keydown)="handleKeyDown($event)"
-         (input)="updateModel(colorInput.value)"
-         (change)="updateModel(colorInput.value)"
+         (ngModelChange)="updateModel($event)"
          (blur)="handleBlur(colorInput.value)" />
 </div>

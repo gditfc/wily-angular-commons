@@ -67,6 +67,8 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
       if (!ColorPickerComponent.FULL_HEX_REGEX.test(hexString)) {
         hexString = '#000000';
       }
+    } else {
+      hexString = '#';
     }
 
     this._value = hexString;
@@ -106,7 +108,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   /**
    * The value of the color picker
    */
-  _value = '#000000';
+  _value = '#';
 
   /**
    * Whether or not the color picker is disabled
@@ -227,16 +229,18 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
       if (valueBeforeUpdate !== this._value) {
         this.onChange(value);
       }
+    } else if (!value) {
+      this.value = null;
+      this.onChange(null);
     }
   }
 
   /**
    * Null out value on blur if not valid hex string, otherwise update model
-   * TODO: fix
    * @param value the value to check
    */
   handleBlur(value: string): void {
-    if (!ColorPickerComponent.FULL_HEX_REGEX.test(this._value)) {
+    if (!ColorPickerComponent.FULL_HEX_REGEX.test(value)) {
       this.value = null;
       this.onChange(null);
     } else {
