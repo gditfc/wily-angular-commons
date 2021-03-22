@@ -13,6 +13,7 @@
   <input #colorInput
          type="text"
          [value]="_value"
+         (paste)="handlePaste($event)"
          (keydown)="handleKeyDown($event)"
          (input)="updateModel(colorInput.value)"
          (change)="updateModel(colorInput.value)"

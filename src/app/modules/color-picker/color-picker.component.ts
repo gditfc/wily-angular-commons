@@ -187,7 +187,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
     const { key } = event;
     const { selectionStart, selectionEnd } = event.target as HTMLInputElement;
 
-    if (!ColorPickerComponent.NAVIGATION_KEYS.includes(key)) {
+    if (!ColorPickerComponent.NAVIGATION_KEYS.includes(key) && !event.ctrlKey) {
       ColorPickerComponent.HEX_CHARACTER_REGEX.lastIndex = 0;
 
       const preventDefault = !ColorPickerComponent.HEX_CHARACTER_REGEX.test(key) ||
@@ -220,6 +220,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
 
   /**
    * Null out value on blur if not valid hex string, otherwise update model
+   * TODO: fix
    * @param value the value to check
    */
   handleBlur(value: string): void {
@@ -228,6 +229,31 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
       this.onChange(null);
     } else {
       this.updateModel(value);
+    }
+  }
+
+  /**
+   * Prevent pasting a non-hex string
+   * @param event the paste ClipboardEvent
+   */
+  handlePaste(event: ClipboardEvent): void {
+    if (!this._disabled) {
+      let clipboardData: DataTransfer;
+
+      if (event.clipboardData) {
+        clipboardData = event.clipboardData;
+      } else if ('clipboardData' in window) {
+        clipboardData = (window as any).clipboardData.getData('text');
+      }
+
+      if (clipboardData) {
+        ColorPickerComponent.FULL_HEX_REGEX.lastIndex = 0;
+        const pastedText = clipboardData.getData('text');
+
+        if (!ColorPickerComponent.FULL_HEX_REGEX.test(pastedText)) {
+          event.preventDefault();
+        }
+      }
     }
   }
 
