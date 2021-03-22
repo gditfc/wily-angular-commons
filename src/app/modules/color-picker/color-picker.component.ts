@@ -256,7 +256,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
       this.value = updateValue;
 
       if (valueBeforeUpdate !== this._value) {
-        this.onChange(`#${value}`);
+        this.onChange(`#${updateValue}`);
       }
     } else if (!value) {
       this.value = null;

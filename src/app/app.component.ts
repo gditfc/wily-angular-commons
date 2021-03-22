@@ -1,4 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
+import { endOfWeek, startOfWeek } from 'date-fns';
 import { Notification } from './modules/notification/models/notification.model';
 import { NotificationService } from './modules/notification/services/notification.service';
 import {PushContainerComponent} from './modules/push-container/push-container.component';
@@ -12,6 +13,8 @@ import {PushContainerComponent} from './modules/push-container/push-container.co
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  readonly console = console;
 
   /**
    * App Title
@@ -80,6 +83,18 @@ export class AppComponent {
   value = ['value', 'value6', 'value4'];
 
   icon = 'fas fa-car';
+
+  dropdownValue = 'lightPurple';
+
+  multiSelectValue = ['chicken', 'cheese', 'fish'];
+
+  datePickerValue = new Date();
+
+  weekPickerValue = { start: startOfWeek(new Date()), end: endOfWeek(new Date()) };
+
+  textEditorValue = '<p>This is some rich text</p>';
+
+  colorPickerValue = '#44ff55';
 
   /**
    * Constructor

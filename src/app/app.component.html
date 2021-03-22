@@ -57,7 +57,7 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot3">Basic Color Picker</div>
-                  <wily-color-picker></wily-color-picker>
+                  <wily-color-picker [(ngModel)]="colorPickerValue" (ngModelChange)="console.log(colorPickerValue); console.log('Color picker model change')"></wily-color-picker>
                   <div class="pad_10"></div>
                   <div class="form_label mar_bot3">Disabled Color Picker</div>
                   <wily-color-picker [disabled]="true"></wily-color-picker>
@@ -105,14 +105,20 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot3">Basic Date Picker</div>
-                  <wily-date-picker
-                    [disabled]="false"
-                    [inputClassList]="'form_input page_container_color'"
-                    [calendarButtonClassList]="'overlay border_left brad_0'">
+                  <wily-date-picker [(ngModel)]="datePickerValue"
+                                    (ngModelChange)="console.log(datePickerValue); console.log('Date picker model change')"
+                                    (dateSelected)="console.log($event); console.log('Date selected')"
+                                    (input)="console.log('Date picker input')"
+                                    [disabled]="false"
+                                    [inputClassList]="'form_input page_container_color'"
+                                    [calendarButtonClassList]="'overlay border_left brad_0'">
                   </wily-date-picker>
                   <div class="pad_10"></div>
                   <div class="form_label mar_bot3">Week Picker</div>
                   <wily-week-picker
+                    [(ngModel)]="weekPickerValue"
+                    (ngModelChange)="console.log(weekPickerValue); console.log('Week picker model change')"
+                    (weekSelected)="console.log($event); console.log('Week selected')"
                     [disabled]="false">
                   </wily-week-picker>
                   <div class="pad_10"></div>
@@ -135,7 +141,8 @@
                   <div class="form_label mar_bot3">Enter some formatted text below</div>
                   <wily-rich-text
                     [placeholder]="'Some placeholder text...'"
-                    [(ngModel)]="text"
+                    [(ngModel)]="textEditorValue"
+                    (ngModelChange)="console.log(textEditorValue); console.log('text editor model change')"
                     (textChanged)="handleEditorTextChange($event)">
                   </wily-rich-text>
                 </div>
@@ -157,6 +164,9 @@
                 <div class="pad_15">
                   <div class="form_label mar_bot3">Basic Dropdown</div>
                   <wily-dropdown
+                    [(ngModel)]="dropdownValue"
+                    (ngModelChange)="console.log(dropdownValue); console.log('dropdown model changed')"
+                    (change)="console.log(dropdownValue); console.log('dropdown value changed')"
                     [placeholder]="'Select an option...'"
                     [options]="[
                            { value: 'red', label: 'Option A' },
@@ -234,6 +244,9 @@
                   <div class="pad_10"></div>
                   <div class="form_label mar_bot3">Select one or more options from the dropdown below</div>
                   <wily-multi-select
+                    [(ngModel)]="multiSelectValue"
+                    (ngModelChange)="console.log(multiSelectValue); console.log('Multi-select model change')"
+                    (change)="console.log(multiSelectValue); console.log('Multi-select value change')"
                     [placeholder]="'Select your favorite foods...'"
                     [options]="[
                          { value: 'chicken', label: 'Chicken', dataContext: { 'iconClass': 'fas fa-drumstick-bite' } },
@@ -295,7 +308,8 @@
                   <wily-icon-select [(ngModel)]="icon"
                                     (opened)="iconSelectOpened()"
                                     (closed)="iconSelectClosed()"
-                                    (selected)="iconSelected($event)">
+                                    (selected)="iconSelected($event); console.log('icon selected')"
+                                    (ngModelChange)="console.log(icon); console.log('icon select model change')">
                   </wily-icon-select>
                 </div>
               </div>
