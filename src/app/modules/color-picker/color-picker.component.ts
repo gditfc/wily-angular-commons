@@ -82,6 +82,18 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Aria label input
+   */
+  @Input()
+  ariaLabel = 'Enter hex string';
+
+  /**
+   * Class list to apply to the hex string input
+   */
+  @Input()
+  classList: string;
+
+  /**
    * Whether or not to render the component
    */
   render: boolean;
