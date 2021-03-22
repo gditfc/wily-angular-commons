@@ -466,10 +466,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * @param value the value to write
    */
   writeValue(value: { start: Date, end: Date }): void {
-    if (!this.disabled) {
-      this.value = value;
-    }
-
+    this.value = value;
     this.changeDetectorRef.markForCheck();
   }
 

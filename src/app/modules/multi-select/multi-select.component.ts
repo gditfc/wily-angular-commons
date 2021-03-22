@@ -352,10 +352,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @param value the value to write
    */
   writeValue(value: Array<string | number>): void {
-    if (!this.disabled) {
-      this.value = value;
-    }
-
+    this.value = value;
     this.changeDetectorRef.markForCheck();
   }
 

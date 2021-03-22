@@ -331,12 +331,10 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @param value the value to write
    */
   writeValue(value: Date): void {
-    if (!this.disabled) {
-      if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
-        this.value = value;
-      } else {
-        this.value = null;
-      }
+    if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
+      this.value = value;
+    } else {
+      this.value = null;
     }
 
     this.changeDetectorRef.markForCheck();
