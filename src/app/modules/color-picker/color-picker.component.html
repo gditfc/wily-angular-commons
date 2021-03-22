@@ -1,14 +1,18 @@
 <ng-container *ngIf="render">
   <input #colorPicker
-         *ngIf="colorPickerSupported"
+         *ngIf="colorPickerSupported else colorSwatch"
          type="color"
          [value]="_value"
          (input)="updateModel(colorPicker.value)"
          (change)="updateModel(colorPicker.value)" />
+  <ng-template #colorSwatch>
+    <div [style.background-color]="_value"></div>
+  </ng-template>
   <input #colorInput
          type="text"
          [value]="_value"
          (keydown)="handleKeyDown($event)"
          (input)="updateModel(colorInput.value)"
-         (change)="updateModel(colorInput.value)" />
+         (change)="updateModel(colorInput.value)"
+         (blur)="handleBlur(colorInput.value)" />
 </ng-container>

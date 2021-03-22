@@ -218,8 +218,17 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  handleBlur(): void {
-
+  /**
+   * Null out value on blur if not valid hex string, otherwise update model
+   * @param value the value to check
+   */
+  handleBlur(value: string): void {
+    if (!ColorPickerComponent.FULL_HEX_REGEX.test(this._value)) {
+      this.value = null;
+      this.onChange(null);
+    } else {
+      this.updateModel(value);
+    }
   }
 
   /**
