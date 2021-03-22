@@ -39,6 +39,23 @@
   opacity:0.8;
 }
 
+.wcp_swatch {
+  width:4em;
+  padding:3px;
+  height:inherit;
+
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  border:none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline:none;
+}
+
 .wcp_divider {
   position:absolute;
   left:4em;
