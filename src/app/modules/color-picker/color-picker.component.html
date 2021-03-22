@@ -18,6 +18,7 @@
          placeholder="#000000"
          [attr.aria-label]="ariaLabel + ' , enter hex color'"
          [ngModel]="_value"
+         (input)="input.emit(colorInput.value)"
          (paste)="handlePaste($event)"
          (keydown)="handleKeyDown($event)"
          (ngModelChange)="updateModel($event)"

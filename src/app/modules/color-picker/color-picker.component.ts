@@ -2,9 +2,11 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   forwardRef,
   Input,
   OnInit,
+  Output,
   Renderer2,
   ViewChild
 } from '@angular/core';
@@ -107,6 +109,12 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    */
   @Input()
   classList: string;
+
+  /**
+   * Event emitted on hex string input event. Emits the current value of the input
+   */
+  @Output()
+  input = new EventEmitter<string>();
 
   /**
    * ViewChild of the color input element
