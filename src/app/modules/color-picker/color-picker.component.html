@@ -5,10 +5,9 @@
          *ngIf="colorPickerSupported else colorSwatch"
          type="color"
          class="access wcp_color"
-         [value]="_value"
+         [ngModel]="_value"
          [attr.aria-label]="ariaLabel + ' , choose a color'"
-         (input)="updateModel(colorPicker.value)"
-         (change)="updateModel(colorPicker.value)" />
+         (ngModelChange)="updateModel($event)" />
   <i class="fas fa-caret-down"
      style="position:absolute; left:calc(3.5em - 1em); top:50%; margin-top:-0.5em; pointer-events:none; opacity:0.8;"></i>
   <ng-template #colorSwatch>
@@ -17,10 +16,10 @@
   <div class="overlay_alt2 vr height100" style="position:absolute; left:3.5em; top:0; width:1px;"></div>
   <input #colorInput
          type="text"
-         [ngModel]="_value"
          class="access wcp_input"
-         [attr.aria-label]="ariaLabel + ' , enter hex color'"
          placeholder="#000000"
+         [attr.aria-label]="ariaLabel + ' , enter hex color'"
+         [ngModel]="_value"
          (paste)="handlePaste($event)"
          (keydown)="handleKeyDown($event)"
          (ngModelChange)="updateModel($event)"

@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Component, forwardRef, Input, OnInit, Renderer2 } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
@@ -72,6 +81,10 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
     }
 
     this._value = hexString;
+
+    if (this.colorInput) {
+      this.colorInput.nativeElement.value = this._value;
+    }
   }
 
   /**
@@ -94,6 +107,12 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    */
   @Input()
   classList: string;
+
+  /**
+   * ViewChild of the color input element
+   */
+  @ViewChild('colorInput')
+  colorInput: ElementRef<HTMLInputElement>;
 
   /**
    * Whether or not to render the component
