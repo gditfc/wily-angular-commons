@@ -1,19 +1,17 @@
 <div *ngIf="render"
      class="wcp_container"
      [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
-  <input #colorPicker
-         *ngIf="colorPickerSupported else colorSwatch"
+  <input *ngIf="colorPickerSupported else colorSwatch"
          type="color"
          class="access wcp_color"
          [ngModel]="_value"
          [attr.aria-label]="ariaLabel + ' , choose a color'"
          (ngModelChange)="updateModel($event)" />
-  <i class="fas fa-caret-down"
-     style="position:absolute; left:calc(3.5em - 1em); top:50%; margin-top:-0.5em; pointer-events:none; opacity:0.8;"></i>
+  <i class="fas fa-caret-down wcp_caret"></i>
   <ng-template #colorSwatch>
     <div [style.background-color]="_value"></div>
   </ng-template>
-  <div class="overlay_alt2 vr height100" style="position:absolute; left:3.5em; top:0; width:1px;"></div>
+  <div class="overlay_alt2 vr wcp_divider"></div>
   <input #colorInput
          type="text"
          class="access wcp_input"
