@@ -45,6 +45,11 @@
   color:inherit;
 }
 
+.wcp_hashtag {
+  position:absolute;
+  left:calc(3.5em + 1em);
+}
+
 .wcp_input {
   position:absolute;
   top:0;
@@ -52,6 +57,7 @@
   right:0;
   bottom:0;
   padding:inherit;
+  padding-left:2em;
   border:none;
   width: calc(100% - 3.5em);
   -moz-appearance: none;
