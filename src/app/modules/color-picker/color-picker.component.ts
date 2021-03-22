@@ -323,7 +323,6 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
       inputElement.value = '!';
 
       colorPickerSupported = inputElement.type === 'color' && inputElement.value !== '!';
-      inputElement.remove();
     } catch (e) { }
 
     return colorPickerSupported;
