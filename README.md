@@ -46,6 +46,26 @@ The calendar accepts a Date object through its `value` input. To read in the val
 - selected: event emitted on calendar date selection, emits the selected date
 - closed: event emitted when the user clicks outside of the widget, triggers a keyup.escape event or clicks the done button. It is the parent component's responsibility to hide the calendar, the event is merely a signal that action should be taken.
 
+## WilyDialogModule
+### DialogComponent
+The dialog component displays dynamic content within a dialog and supports nested dialogs within that dynamic content.
+#### Usage
+The dialog component essentially just wraps an `ng-content` block. It is the responsibility of the parent component to show/hide the dialog based on its `object` input and `closed` event. The dialog listens for `keyup.escape` events (if enabled) to trigger a dialog close. If you have components in the dynamic dialog content that also rely on escape events to close, those components must listen for keyups on its own focusable elements (as opposed to listening for `window.keyup`) and either stop immediate propagation, or those focusable elements must have the `data-dialog-close-override` attribute on them, or else the escape event will close both the child component and the parent dialog.
+#### Selector: wily-dialog
+#### Inputs
+- object: an input of type `any` where that input becoming truthy will show the dialog and falsy will hide
+- title: the title of the dialog. Note: always use the Angular input syntax (`[title]="'Title'"`) to avoid IE11 triggering a native tooltip of the dialog title
+- titleClass: CSS class to apply to the title section of the dialog
+- bodyClass: CSS class to apply to the body section of the dialog
+- showTitle: whether to show the title section of the dialog (default `true`)
+- allowClose: whether to show the dialog close button and enable escape to close (default `true`)
+- height: the height of dialog (can be any valid CSS measurement)
+- width: the width of dialog (can be any valid CSS measurement)
+#### Outputs
+- opened: event emitted on dialog open
+- closed: event emitted on dialog close
+
+
 ## Usage
 
 `npm install wily-angular-commons`
