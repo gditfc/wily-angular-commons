@@ -143,6 +143,16 @@ The icon select accepts an icon class through either its `value` input or throug
 - selected: event emitted on icon dialog confirmation, emits selected icon in the form of `{ value: string }`
 - closed: event emitted on icon dialog close
 
+## WilyKeyfilterModule
+### KeyfilterDirective
+Directive to apply to HTML input elements to filter out certain input.
+#### Usage
+Supported filter types are `alpha` (English alphabet only), `numeric` (digits only) and `alphanumeric` (English alphabet and digits).
+#### Selector: wilyKeyfilter
+#### Inputs
+- wilyKeyfilter: the filter type to apply to the host input
+- allowSpaces: whether to allow spaces in input (default `false`)
+
 ## Usage
 
 `npm install wily-angular-commons`
