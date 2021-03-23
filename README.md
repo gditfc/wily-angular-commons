@@ -246,6 +246,19 @@ The popover component is a wrapper around an `ng-content` block and has no conte
 - opened: event emitted on popover open
 - closed: event emitted on popover close
 
+## WilyProfilePicModule
+### ProfilePicComponent
+The profile pic component displays a round image with a tooltip description to act as a profile picture.
+#### Usage
+The profile pic component accepts an image URL and displays it.
+#### Selector: wily-profile-pic
+#### Inputs
+- size: the size of the picture
+- margin: the CSS margin
+- width: the width of the picture
+- height: the height of the picture
+- toolTip: text to pass as the content of the image tooltip
+
 ## Usage
 
 `npm install wily-angular-commons`
