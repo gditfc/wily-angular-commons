@@ -6,7 +6,7 @@ This package offers a small selection of reusable components that interoperate w
 ### ColorPickerComponent
 The color picker component is a simple way to choose/input a color in hexadecimal format. It offers a text input that allows for free entry in hexadecimal format along with a color picker for supported browsers. If the browser does not support the HTML5 color picker, it is replaced with a simple color swatch that acts as a preview of the contents of the text input.
 #### Usage
-The color picker accepts a hexadecimal color string (either in short or full form, leading `#` optional, case is ignored) through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the color picker, you can listen for its `ngModelChange` event (if using `ngModel`) or its `colorSelected` event. The value emitted from the component is a full hexadecimal color string (ex: #0a50d3). Model updates on every color picker input, every valid text input entry and when the contents of the text input are deleted by the user.
+The color picker accepts a hexadecimal color string (either in short or full form, leading `#` optional, case is ignored) through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the color picker, you can listen for its `ngModelChange` event (if using `ngModel`) or its `colorSelected` event. The value emitted from the component is a full hexadecimal color string (ex: `#0a50d3`). Model updates on every color picker input, every valid text input entry and when the contents of the text input are deleted by the user.
 #### Selector: wily-color-picker
 #### Inputs
 - `value` setter for the internal value of the component
