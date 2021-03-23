@@ -88,18 +88,10 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   private static readonly referenceDate = new Date(0, 0, 0, 0, 0, 0, 0);
 
-
-  /**
-   * Value input getter
-   */
-  @Input()
-  get value(): Date {
-    return DatePickerComponent.parseDateString(this.dateString);
-  }
-
   /**
    * Value input setter
    */
+  @Input('value')
   set value(value: Date) {
     if (!value) {
       this._value = null;
@@ -110,11 +102,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     }
   }
 
-  /**
-   * Disabled input
-   */
-  @Input()
-  get disabled(): boolean { return this._disabled; }
+  @Input('disabled')
   set disabled(disabled: boolean) {
     this._disabled = coerceBooleanProperty(disabled);
   }
@@ -307,6 +295,18 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @param changeDetectorRef the Angular change detector
    */
   constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
+
+  /**
+   * Value getter
+   */
+  get value(): Date {
+    return DatePickerComponent.parseDateString(this.dateString);
+  }
+
+  /**
+   * Disabled getter
+   */
+  get disabled(): boolean { return this._disabled; }
 
   /**
    * Init component, set up window resize listener
