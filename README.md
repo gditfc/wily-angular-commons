@@ -50,7 +50,7 @@ The calendar accepts a Date object through its `value` input. To read in the val
 ### DialogComponent
 The dialog component displays dynamic content within a dialog and supports nested dialogs within that dynamic content.
 #### Usage
-The dialog component essentially just wraps an `ng-content` block. It is the responsibility of the parent component to show/hide the dialog based on its `object` input and `closed` event. The dialog listens for `keyup.escape` events (if enabled) to trigger a dialog close. If you have components in the dynamic dialog content that also rely on escape events to close, those components must listen for keyups on its own focusable elements (as opposed to listening for `window.keyup`) and either stop immediate propagation, or those focusable elements must have the `data-dialog-close-override` attribute on them, or else the escape event will close both the child component and the parent dialog.
+The dialog component essentially wraps an `ng-content` block. It is the responsibility of the parent component to show/hide the dialog based on its `object` input and `closed` event. The dialog listens for `keyup.escape` events (if enabled) to trigger a dialog close. If you have components in the dynamic dialog content that also rely on escape events to close, those components must listen for keyups on its own focusable elements (as opposed to listening for `window.keyup`) and either stop immediate propagation, or those focusable elements must have the `data-dialog-close-override` attribute on them, or else the escape event will close both the child component and the parent dialog.
 #### Selector: wily-dialog
 #### Inputs
 - object: an input of type `any` where that input becoming truthy will show the dialog and falsy will hide
@@ -64,6 +64,46 @@ The dialog component essentially just wraps an `ng-content` block. It is the res
 #### Outputs
 - opened: event emitted on dialog open
 - closed: event emitted on dialog close
+
+## WilyDropdownModule
+### DropdownComponent
+The dropdown component acts as an enhanced HTML select. It supports both regular dropdown options (only the label being displayed) and templated options (options for which you can supply a ng-template to act as a template for each dropdown option). The dropdown is fully accessible as well, and supports all the accessibility options that a native select would (such as arrow key controls for option selection).
+#### Usage
+The dropdown accepts a string or number through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the dropdown, you can listen for its `ngModelChange` event (if using `ngModel`) or its `change` event. The value emitted from the component is a string or number representing the value of the user's selected option. Model updates every option change, whether it be triggered by clicking on an option or using arrow key controls.
+#### Using Dropdown Options
+The dropdown supports both flat options or option groups, and the options for a single dropdown can be a mix of the two. A dropdown option has a value (string or number), a label, disabled indicator, and an optional data context object (the data context object is not needed if you're not planning to use templating). Whether data context is passed in or not for an option, each option internally will have a data context object which will minimally contain the option's label (inserted into the `$implicit` property if not already taken, or the `label` property if `$implicit` is already present in the object). Dropdown option groups contain a group label, and an array of dropdown options.
+#### Using Dropdown Option Templating
+Dropdown option templating relies on Angular's `ng-template` syntax. To provide an option template to the dropdown, you simply define a `ng-template` as the content of the dropdown. If you do not wish to use templating, pass nothing into the content between the dropdown tags. To display data from an option's data context within the option template, you use Angular's `ng-template` `let-var` syntax. This allows you to define variables within the option template that will then be filled by the corresponding property in an option's data context. As mentioned in the previous section, the option's label is automatically added to each option's data context, so to display the label in the template, you can just define a variable without a value, and it will be filled by the `$implicit` entry. Here's an example of how a typical use case of the dropdown with templating would look:
+
+```html
+  <wily-dropdown [options]="[
+                    { value: 'red', label: 'Red', dataContext: { 'colorClass': 'bg_red' } },
+                    { value: 'green', label: 'Green', disabled: true, dataContext: { 'colorClass': 'bg_green' } },
+                    { value: 'blue', label: 'Blue', dataContext: { 'colorClass': 'bg_blue' } },
+                    { groupLabel: 'Purple Values', options: [
+                        { value: 'darkPurple', label: 'Dark Purple', dataContext: { 'colorClass': 'bg_purple_dark_4' } },
+                        { value: 'purple', label: 'Purple', dataContext: { 'colorClass': 'bg_purple' } },
+                        { value: 'lightPurple', label: 'Light Purple', dataContext: { 'colorClass': 'bg_purple_light_4' } }
+                    ]}
+                 ]">
+    <ng-template let-colorClass="colorClass" let-label>
+      <div class="circle_14px mar_right5"
+           [ngClass]="colorClass">
+      </div> {{label}}
+    </ng-template>
+  </wily-dropdown>
+```
+Notice how, in the `ng-template`, the variable definition value (in quotes) for `colorClass` matches up with the property of the same name in the data context objects for each option. Also notice how the variable definition for `label` has no value assigned, that's because the dropdown component will automatically put an option's label into the `$implicit` property, which Angular uses to fill in the value for any referenced variables that do not have a specified value. You can of course choose to explicitly add the label to the option's data context and use that value in the label variable assignment as well.
+#### Selector: wily-dropdown
+#### Inputs
+- value: string or number representing the value of the selected option
+- options: array of `DropdownOption | DropdownOptionGroup` acting as the options to populate the dropdown
+- disabled: whether the dropdown should be disabled or not
+- placeholder: placeholder text to show in the dropdown when no option is selected
+- ariaLabel: aria label to assign to the dropdown
+- classList: CSS class list to apply to the dropdown
+#### Outputs
+- change: event emitted on dropdown option selection if selection has changed from the previous value, emits the selected value
 
 
 ## Usage

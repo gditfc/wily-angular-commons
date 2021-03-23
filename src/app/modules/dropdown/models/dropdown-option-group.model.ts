@@ -1,4 +1,4 @@
-import {DropdownOption} from "./dropdown-option.model";
+import {DropdownOption} from './dropdown-option.model';
 
 /**
  * Interface representing an array of dropdown options
