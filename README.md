@@ -259,6 +259,27 @@ The profile pic component accepts an image URL and displays it.
 - height: the height of the picture
 - toolTip: text to pass as the content of the image tooltip
 
+## WilyPushContainerModule
+### PushContainerComponent
+The push container component serves as a side menu (left or right) which display dynamic content
+#### Usage
+The push container component accepts dynamic content in between its tags and displays it.
+#### Selector: wily-push-container
+#### Inputs
+- width: the number of pixels wide
+- showSidePanel: whether to be open on page load (default `false`)
+- mainContentId: the ID of the main content that will be pushed when the component opens
+- side: open from the left or the right
+- topOffset: top offset to account for a nav bar
+- closeOnResize: whether to close the component on window resize (default `false`)
+- backgroundColorClass: the CSS class to apply to the background of the component
+- breakpoint: the breakpoint passed which the push container will fill the entire view
+- hideCloseButton: whether to hide the push container close button (default `false`)
+- alwaysShowClose: whether to show the close button in desktop view (default `false`)
+#### Outputs
+- opened: event emitted on push container open
+- closed: event emitted on push container close
+
 ## Usage
 
 `npm install wily-angular-commons`
