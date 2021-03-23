@@ -9,13 +9,13 @@ The color picker component is a simple way to choose/input a color in hexadecima
 The color picker accepts a hexadecimal color string (either in short or full form, leading `#` optional, case is ignored) through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the color picker, you can listen for its `ngModelChange` event (if using `ngModel`) or its `colorSelected` event. The value emitted from the component is a full hexadecimal color string (ex: #0a50d3). Model updates on every color picker input, every valid text input entry and when the contents of the text input are deleted by the user.
 #### Selector: wily-color-picker
 #### Inputs
-- value: setter for the internal value of the component
-- disabled: whether the component should be disabled
-- ariaLabel: the aria label to set for the color picker/text input
-- classList: CSS class list to apply to the text input
+- `value`: setter for the internal value of the component
+- `disabled`: whether the component should be disabled
+- `ariaLabel`: the aria label to set for the color picker/text input
+- `classList`: CSS class list to apply to the text input
 #### Outputs
-- input: event emitted on text input, emits the current value of the component
-- colorSelected: event emitted on color picker close or on valid hexadecimal string input from the text input, emits the selected color as a hexadecimal string
+- `input`: event emitted on text input, emits the current value of the component
+- `colorSelected`: event emitted on color picker close or on valid hexadecimal string input from the text input, emits the selected color as a hexadecimal string
 
 ## WilyDatePickerModule
 ### DatePickerComponent
@@ -24,27 +24,27 @@ The date picker component allows the user to enter a date via a text input (in t
 The date picker accepts a Date object through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the date picker, you can listen for its `ngModelChange` event (if using `ngModel`) or its `dateSelected` event. The value emitted from the component is a Date object representing the user's typed/selected date. Model updates on every calendar widget selection, every valid text input entry and when the contents of the text input are deleted by the user.
 #### Selector: wily-date-picker
 #### Inputs
-- value: setter for the internal value of the component
-- disabled: whether the component should be disabled
-- dateRange: object in the form of `{ minDate: Date, maxDate: Date}` that acts as the valid selection range for the input/calendar widget. Min date must be less than max date. If min date is not provided, the min date is set to January 1st, {currentYear - 100}. If max date is not provided, the max date is set to December 31st, {current year + 50}.
-- inputId: the ID to assign to the text input
-- ariaLabel: the aria label to assign to the text input
-- inputClassList: CSS class list to apply to the text input
-- calendarButtonClassList: CSS class list to apply to the calendar widget button
+- `value`: setter for the internal value of the component
+- `disabled`: whether the component should be disabled
+- `dateRange`: object in the form of `{ minDate: Date, maxDate: Date}` that acts as the valid selection range for the input/calendar widget. Min date must be less than max date. If min date is not provided, the min date is set to January 1st, {currentYear - 100}. If max date is not provided, the max date is set to December 31st, {current year + 50}.
+- `inputId`: the ID to assign to the text input
+- `ariaLabel`: the aria label to assign to the text input
+- `inputClassList`: CSS class list to apply to the text input
+- `calendarButtonClassList`: CSS class list to apply to the calendar widget button
 #### Outputs
-- input: event emitted on text input
-- dateSelected: event emitted on valid date input/widget date selection, emits the selected date
+- `input`: event emitted on text input
+- `dateSelected`: event emitted on valid date input/widget date selection, emits the selected date
 ### CalendarComponent
 The calendar component displays a calendar widget with accessibility features such as arrow key navigation of calendar dates.
 #### Usage
 The calendar accepts a Date object through its `value` input. To read in the value of the calendar, you can listen for its `selected` event. The value emitted from the component is a Date object representing the user's selection.
 #### Selector: wily-calendar
 #### Inputs
-- value: setter for the internal value of the component
-- dateRange: object in the form of { minDate: Date, maxDate: Date} that acts as the valid selection range for the calendar. Min date must be less than max date. If min date is not provided, the min date is set to January 1st, {currentYear - 100}. If max date is not provided, the max date is set to December 31st, {current year + 50}.
+- `value`: setter for the internal value of the component
+- `dateRange`: object in the form of { minDate: Date, maxDate: Date} that acts as the valid selection range for the calendar. Min date must be less than max date. If min date is not provided, the min date is set to January 1st, {currentYear - 100}. If max date is not provided, the max date is set to December 31st, {current year + 50}.
 #### Outputs
-- selected: event emitted on calendar date selection, emits the selected date
-- closed: event emitted when the user clicks outside the widget, triggers a keyup.escape event or clicks the done button. It is the parent component's responsibility to hide the calendar, the event is merely a signal that action should be taken.
+- `selected`: event emitted on calendar date selection, emits the selected date
+- `closed`: event emitted when the user clicks outside the widget, triggers a keyup.escape event or clicks the done button. It is the parent component's responsibility to hide the calendar, the event is merely a signal that action should be taken.
 
 ## WilyDialogModule
 ### DialogComponent
@@ -53,17 +53,17 @@ The dialog component displays dynamic content within a dialog and supports neste
 The dialog component essentially wraps an `ng-content` block. It is the responsibility of the parent component to show/hide the dialog based on its `object` input and `closed` event. The dialog listens for `keyup.escape` events (if enabled) to trigger a dialog close. If you have components in the dynamic dialog content that also rely on escape events to close, those components must listen for keyups on its own focusable elements (as opposed to listening for `window.keyup`) and either stop immediate propagation, or those focusable elements must have the `data-dialog-close-override` attribute on them, or else the escape event will close both the child component and the parent dialog.
 #### Selector: wily-dialog
 #### Inputs
-- object: an input of type `any` where that input becoming truthy will show the dialog and falsy will hide
-- title: the title of the dialog. Note: always use the Angular input syntax (`[title]="'Title'"`) to avoid IE11 triggering a native tooltip of the dialog title
-- titleClass: CSS class to apply to the title section of the dialog
-- bodyClass: CSS class to apply to the body section of the dialog
-- showTitle: whether to show the title section of the dialog (default `true`)
-- allowClose: whether to show the dialog close button and enable escape to close (default `true`)
-- height: the height of dialog (can be any valid CSS measurement)
-- width: the width of dialog (can be any valid CSS measurement)
+- `object`: an input of type `any` where that input becoming truthy will show the dialog and falsy will hide
+- `title`: the title of the dialog. Note: always use the Angular input syntax (`[title]="'Title'"`) to avoid IE11 triggering a native tooltip of the dialog title
+- `titleClass`: CSS class to apply to the title section of the dialog
+- `bodyClass`: CSS class to apply to the body section of the dialog
+- `showTitle`: whether to show the title section of the dialog (default `true`)
+- `allowClose`: whether to show the dialog close button and enable escape to close (default `true`)
+- `height`: the height of dialog (can be any valid CSS measurement)
+- `width`: the width of dialog (can be any valid CSS measurement)
 #### Outputs
-- opened: event emitted on dialog open
-- closed: event emitted on dialog close
+- `opened`: event emitted on dialog open
+- `closed`: event emitted on dialog close
 
 ## WilyDropdownModule
 ### DropdownComponent
@@ -96,12 +96,12 @@ Dropdown option templating relies on Angular's `ng-template` syntax. To provide 
 Notice how, in the `ng-template`, the variable definition value (in quotes) for `colorClass` matches up with the property of the same name in the data context objects for each option. Also notice how the variable definition for `label` has no value assigned, that's because the dropdown component will automatically put an option's label into the `$implicit` property, which Angular uses to fill in the value for any referenced variables that do not have a specified value. You can of course choose to explicitly add the label to the option's data context and use that value in the label variable assignment as well.
 #### Selector: wily-dropdown
 #### Inputs
-- value: string or number representing the value of the selected option
-- options: array of `DropdownOption | DropdownOptionGroup` acting as the options to populate the dropdown
-- disabled: whether the dropdown should be disabled or not
-- placeholder: placeholder text to show in the dropdown when no option is selected
-- ariaLabel: aria label to assign to the dropdown
-- classList: CSS class list to apply to the dropdown
+- `value`: string or number representing the value of the selected option
+- `options`: array of `DropdownOption | DropdownOptionGroup` acting as the options to populate the dropdown
+- `disabled`: whether the dropdown should be disabled or not
+- `placeholder`: placeholder text to show in the dropdown when no option is selected
+- `ariaLabel`: aria label to assign to the dropdown
+- `classList`: CSS class list to apply to the dropdown
 #### Outputs
 - change: event emitted on dropdown option selection if selection has changed from the previous value, emits the selected value
 
@@ -111,22 +111,22 @@ The endpoint state component serves as a catch-all for displaying endpoint state
 #### Usage
 The endpoint state component is split into four different possible states: loading, loadingOverlay, empty and error. You specify which state the component should be in by passing in `true` to the desired state as an input. Note: only one state should be active at a time.
 #### Inputs
-- loading: whether the component should be in the loading state
-- loadingIcon: an icon class to display in the loading state
-- loadingText: main text to display in the loading state
-- loadingSubtext: subtext to display in the loading state
-- loadingOverlay: whether the component should be in the loading overlay state (whole-screen overlay)
-- loadingOverlayIcon: an icon class to display in the loading overlay state
-- loadingOverlayText: main text to display in the loading overlay state
-- loadingOverlaySubtext: subtext to display in the loading overlay state
-- empty: whether the component should be in the empty (not found) state
-- emptyIcon: an icon class to display in the empty state
-- emptyText: main text to display in the empty state
-- emptySubtext: subtext to display in the empty state
-- error: whether the component should be in the error state
-- errorIcon: an icon class to display in the error state
-- errorText: main text to display in the error state
-- errorSubtext: subtext to display in the error state
+- `loading`: whether the component should be in the loading state
+- `loadingIcon`: an icon class to display in the loading state
+- `loadingText`: main text to display in the loading state
+- `loadingSubtext`: subtext to display in the loading state
+- `loadingOverlay`: whether the component should be in the loading overlay state (whole-screen overlay)
+- `loadingOverlayIcon`: an icon class to display in the loading overlay state
+- `loadingOverlayText`: main text to display in the loading overlay state
+- `loadingOverlaySubtext`: subtext to display in the loading overlay state
+- `empty`: whether the component should be in the empty (not found) state
+- `emptyIcon`: an icon class to display in the empty state
+- `emptyText`: main text to display in the empty state
+- `emptySubtext`: subtext to display in the empty state
+- `error`: whether the component should be in the error state
+- `errorIcon`: an icon class to display in the error state
+- `errorText`: main text to display in the error state
+- `errorSubtext`: subtext to display in the error state
 
 ## WilyIconsModule
 ### IconSelectComponent
@@ -134,14 +134,14 @@ The icon select component allows a user to search for and select either a Fontaw
 ### Usage
 The icon select accepts an icon class through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the icon select, you can listen for its `ngModelChange` event (if using `ngModel`) or its `selected` event. The value emitted from the component is the selected icon class. Model updates on confirm button click.
 ### Inputs
-- value: setter for the internal value of the component
-- disabled: whether the component is disabled
-- buttonColorClass: CSS class to apply to the icon dialog show button
-- buttonSizing: the size (width/height) of the icon dialog show button in pixels
+- `value`: setter for the internal value of the component
+- `disabled`: whether the component is disabled
+- `buttonColorClass`: CSS class to apply to the icon dialog show button
+- `buttonSizing`: the size (width/height) of the icon dialog show button in pixels
 #### Outputs
-- opened: event emitted on icon dialog open
-- selected: event emitted on icon dialog confirmation, emits the selected icon in the form of `{ value: string }`
-- closed: event emitted on icon dialog close
+- `opened`: event emitted on icon dialog open
+- `selected`: event emitted on icon dialog confirmation, emits the selected icon in the form of `{ value: string }`
+- `closed`: event emitted on icon dialog close
 
 ## WilyKeyfilterModule
 ### KeyfilterDirective
@@ -150,8 +150,8 @@ Directive to apply to HTML input elements to filter out certain input.
 Supported filter types are `alpha` (English alphabet only), `numeric` (digits only) and `alphanumeric` (English alphabet and digits).
 #### Selector: wilyKeyfilter
 #### Inputs
-- wilyKeyfilter: the filter type to apply to the host input
-- allowSpaces: whether to allow spaces in input (default `false`)
+- `wilyKeyfilter`: the filter type to apply to the host input
+- `allowSpaces`: whether to allow spaces in input (default `false`)
 
 ## WilyMultiSelectModule
 ### MultiSelectComponent
@@ -184,14 +184,14 @@ Multi-select option templating relies on Angular's `ng-template` syntax. To prov
 Notice how, in the `ng-template`, the variable definition value (in quotes) for `colorClass` matches up with the property of the same name in the data context objects for each option. Also notice how the variable definition for `label` has no value assigned, that's because the multi-select component will automatically put an option's label into the `$implicit` property, which Angular uses to fill in the value for any referenced variables that do not have a specified value. You can of course choose to explicitly add the label to the option's data context and use that value in the label variable assignment as well.
 #### Selector: wily-multi-select
 #### Inputs
-- value: array of strings or numbers representing the value of the selected options
-- options: array of `MultiSelectOption | MultiSelectOptionGroup` acting as the options to populate the multi-select
-- disabled: whether the multi-select should be disabled or not
-- placeholder: placeholder text to show in the multi-select when no options are selected
-- ariaLabel: aria label to assign to the multi-select
-- classList: CSS class list to apply to the multi-select
+- `value`: array of strings or numbers representing the value of the selected options
+- `options`: array of `MultiSelectOption | MultiSelectOptionGroup` acting as the options to populate the multi-select
+- `disabled`: whether the multi-select should be disabled or not
+- `placeholder`: placeholder text to show in the multi-select when no options are selected
+- `ariaLabel`: aria label to assign to the multi-select
+- `classList`: CSS class list to apply to the multi-select
 #### Outputs
-- change: event emitted on multi-select option selection if selection has changed from the previous value, emits the selected values
+- `change`: event emitted on multi-select option selection if selection has changed from the previous value, emits the selected values
 
 ## WilyNotificationModule
 ### Notifications
@@ -206,10 +206,10 @@ The notification service is a root `Injectable` that allows components/services 
 #### Usage
 The notification service can be injected into components/services to add a notification through its `add` method, which accepts a notification object, adds it and then removes it after the configured notification life has passed. Notification life (the time before a notification is automatically removed from the view) can also be configured via the service's `setNotificationLife` method.
 #### Methods
-- add: accepts a notification object and adds it to the current notifications array
-- deleteNotification: accepts a notification ID and deletes the corresponding notification (if it exists)
-- getNotifications: get an array of the current notifications as an RxJS Observable
-- setNotificationLife: set the notification life for new notifications
+- `add`: accepts a notification object and adds it to the current notifications array
+- `deleteNotification`: accepts a notification ID and deletes the corresponding notification (if it exists)
+- `getNotifications`: get an array of the current notifications as an RxJS Observable
+- `setNotificationLife`: set the notification life for new notifications
 
 ## WilyOrdinalNumberPipeModule
 ### OrdinalNumberPipe
@@ -225,12 +225,12 @@ The paginator component is a widget that provides controls for paginating a list
 The paginator component accepts an array of page size options, the current page size, and the total size of the paginated list without pagination applied, and from those inputs calculates the page number display and enables/disables the next/previous pagination buttons. Pagination control interactions emit a `PaginationEvent`, it is up to the parent component to react to that event and update the pagination as a result.
 #### Selector: wily-paginator
 #### Inputs
-- version: which version of the paginator to user (1-4 available)
-- pageSizeOptions: an array of numbers representing the available page size options
-- pageSize: a number representing the currently selected page size
-- totalLength: the total length of the unpaginated list
+- `version`: which version of the paginator to user (1-4 available)
+- `pageSizeOptions`: an array of numbers representing the available page size options
+- `pageSize`: a number representing the currently selected page size
+- `totalLength`: the total length of the unpaginated list
 #### Outputs
-- pagination: event emitted on pagination control interactions, emits a `PaginationEvent` (`{ activePage: number, pageSize: number, totalLength: number }`)
+- `pagination`: event emitted on pagination control interactions, emits a `PaginationEvent` (`{ activePage: number, pageSize: number, totalLength: number }`)
 
 ## WilyPopoverModule
 ### PopoverComponent
@@ -239,12 +239,12 @@ The popover component displays a popover with dynamic content around a given tar
 The popover component is a wrapper around an `ng-content` block and has no content itself. The popover is positioned via its `toggle` method, which accepts an `Event` and positions itself off of the `EventTarget`. If the toggle method is called with an event, and the popover is currently closed, the popover opens and aligns to the event target. If the toggle method is called, and the popover is open or no event is passed in, the popover will close.
 #### Selector: wily-popover
 #### Inputs
-- offset: the number of pixels to offset the popover from its target
-- width: the width of the popover (any valid CSS measurement, default `auto`)
-- height: the height of the popover (any valid CSS measurement, default `auto`)
+- `offset`: the number of pixels to offset the popover from its target
+- `width`: the width of the popover (any valid CSS measurement, default `auto`)
+- `height`: the height of the popover (any valid CSS measurement, default `auto`)
 #### Outputs
-- opened: event emitted on popover open
-- closed: event emitted on popover close
+- `opened`: event emitted on popover open
+- `closed`: event emitted on popover close
 
 ## WilyProfilePicModule
 ### ProfilePicComponent
@@ -253,11 +253,11 @@ The profile pic component displays a round image with a tooltip description to a
 The profile pic component accepts an image URL and displays it.
 #### Selector: wily-profile-pic
 #### Inputs
-- size: the size of the picture
-- margin: the CSS margin
-- width: the width of the picture
-- height: the height of the picture
-- toolTip: text to pass as the content of the image tooltip
+- `size`: the size of the picture
+- `margin`: the CSS margin
+- `width`: the width of the picture
+- `height`: the height of the picture
+- `toolTip`: text to pass as the content of the image tooltip
 
 ## WilyPushContainerModule
 ### PushContainerComponent
@@ -266,19 +266,19 @@ The push container component serves as a side menu (left or right) which display
 The push container component accepts dynamic content in between its tags and displays it.
 #### Selector: wily-push-container
 #### Inputs
-- width: the number of pixels wide
-- showSidePanel: whether to be open on page load (default `false`)
-- mainContentId: the ID of the main content that will be pushed when the component opens
-- side: open from the left or right
-- topOffset: top offset to account for a nav bar
-- closeOnResize: whether to close the component on window resize (default `false`)
-- backgroundColorClass: the CSS class to apply to the background of the component
-- breakpoint: the breakpoint passed which the push container will fill the entire view
-- hideCloseButton: whether to hide the push container close button (default `false`)
-- alwaysShowClose: whether to show the close button in desktop view (default `false`)
+- `width`: the number of pixels wide
+- `showSidePanel`: whether to be open on page load (default `false`)
+- `mainContentId`: the ID of the main content that will be pushed when the component opens
+- `side`: open from the left or right
+- `topOffset`: top offset to account for a nav bar
+- `closeOnResize`: whether to close the component on window resize (default `false`)
+- `backgroundColorClass`: the CSS class to apply to the background of the component
+- `breakpoint`: the breakpoint passed which the push container will fill the entire view
+- `hideCloseButton`: whether to hide the push container close button (default `false`)
+- `alwaysShowClose`: whether to show the close button in desktop view (default `false`)
 #### Outputs
-- opened: event emitted on push container open
-- closed: event emitted on push container close
+- `opened`: event emitted on push container open
+- `closed`: event emitted on push container close
 
 ## WilyRichTextModule
 ### RichTextComponent
@@ -287,17 +287,17 @@ The rich text component is an Angular wrapper around a Quill rich text editor.
 The rich text component accepts an HTML paragraph as a string through either its value input or through one/two-way data-binding via `ngModel`. To read in the value of the editor, you can listen for its `ngModelChange` event (if using `ngModel`) or its `textChanged` event. The value emitted from the component is stringified HTML representing the value of the user's input. Model updates on editor input.
 #### Selector: wily-rich-text
 #### Inputs
-- value: setter for the internal value of the component
-- doHideShow: whether to show the rich text controls
-- height: the height of the editor
-- readonly: whether the editor is readonly
-- placeholder: the placeholder to display in the editor if no input
-- toolbarClassList: CSS class list to apply to the editor toolbar
-- editorClassList: CSS class list to apply to the editor
+- `value`: setter for the internal value of the component
+- `doHideShow`: whether to show the rich text controls
+- `height`: the height of the editor
+- `readonly`: whether the editor is readonly
+- `placeholder`: the placeholder to display in the editor if no input
+- `toolbarClassList`: CSS class list to apply to the editor toolbar
+- `editorClassList`: CSS class list to apply to the editor
 #### Outputs
-- textChanged: event emitted on text change, emits an object in the following format: `{ htmlValue: string, textValue: string, delta: any, source: any }`
-- selectionChange: event emitted on editor selection change
-- init: event emitted on editor init
+- `textChanged`: event emitted on text change, emits an object in the following format: `{ htmlValue: string, textValue: string, delta: any, source: any }`
+- `selectionChange`: event emitted on editor selection change
+- `init`: event emitted on editor init
 
 ## WilyTooltipModule
 ### TooltipDirective
@@ -306,9 +306,9 @@ The tooltip directive allows for a tooltip to be displayed around an HTML elemen
 The tooltip directive accepts text to display and sets up mouse listeners to show the tooltip on host mouse enter hide on host mouse leave.
 #### Selector: wilyTooltip
 #### Inputs
-- wilyTooltip: the tooltip text
-- tooltipPosition: `'left' | 'right' | 'top' | 'bottom'`
-- tooltipDisabled: whether the tooltip is disabled
+- `wilyTooltip`: the tooltip text
+- `tooltipPosition`: `'left' | 'right' | 'top' | 'bottom'`
+- `tooltipDisabled`: whether the tooltip is disabled
 
 ## WilyWeekPickerModule
 ### WeekPickerComponent
@@ -317,15 +317,15 @@ The week picker component allows for a user to select a week of the year via a c
 The week picker accepts input through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the week picker, you can listen for its `ngModelChange` event (if using `ngModel`) or its `weekSelected` event. The value emitted from the component is an object in the form of `{ start: Date, end: Date }` (representing the interval of the selected week). Model updates on week select.
 #### Selector: wily-week-select
 #### Inputs
-- value: setter for the internal value of the component
-- disabled: whether the component is disabled
-- dateRange: object in the form of `{ start: Date, end: Date }` that represents the valid date selection range for the calendar widget
-- inputClassList: CSS class list to apply to the week display input
-- calendarButtonClassList CSS class list to apply to the calendar widget button
-- ariaLabel: aria label to apply to the component
-- dateFormat: the Angular date pipe format to apply to the selected week preview
+- `value`: setter for the internal value of the component
+- `disabled`: whether the component is disabled
+- `dateRange`: object in the form of `{ start: Date, end: Date }` that represents the valid date selection range for the calendar widget
+- `inputClassList`: CSS class list to apply to the week display input
+- `calendarButtonClassList`: CSS class list to apply to the calendar widget button
+- `ariaLabel`: aria label to apply to the component
+- `dateFormat`: the Angular date pipe format to apply to the selected week preview
 #### Outputs
-- weekSelected: event emitted on week select, emits the selected week in the following format: `{ start: Date, end: Date }`
+- `weekSelected`: event emitted on week select, emits the selected week in the following format: `{ start: Date, end: Date }`
 
 ## Usage
 `npm install wily-angular-commons`
