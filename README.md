@@ -153,6 +153,46 @@ Supported filter types are `alpha` (English alphabet only), `numeric` (digits on
 - wilyKeyfilter: the filter type to apply to the host input
 - allowSpaces: whether to allow spaces in input (default `false`)
 
+## WilyMultiSelectModule
+### MultiSelectComponent
+The multi-select component acts as an enhanced HTML select that allows multiple selections. It supports both regular multi-select options (only the label being displayed) and templated options (options for which you can supply a ng-template to act as a template for each multi-select option). The multi-select is fully accessible as well, and supports all the accessibility options that a multi-select should (such as arrow key controls for option selection).
+#### Usage
+The multi-select accepts an array of strings or numbers through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the multi-select, you can listen for its `ngModelChange` event (if using `ngModel`) or its `change` event. The value emitted from the component is an array of strings or numbers representing the values of the user's selected options. Model updates on every option select/de-select, whether it be triggered by clicking on an option or using arrow key controls.
+#### Using Dropdown Options
+The multi-select supports both flat options or option groups, and the options for a single multi-select can be a mix of the two. A multi-select option has a value (string or number), a label, disabled indicator, and an optional data context object (the data context object is not needed if you're not planning to use templating). Whether data context is passed in or not for an option, each option internally will have a data context object which will minimally contain the option's label (inserted into the `$implicit` property if not already taken, or the `label` property if `$implicit` is already present in the object). Multi-select option groups contain a group label, and an array of multi-select options.
+#### Using Dropdown Option Templating
+Multi-select option templating relies on Angular's `ng-template` syntax. To provide an option template to the multi-select, you simply define a `ng-template` as the content of the multi-select. If you do not wish to use templating, pass nothing into the content between the multi-select tags. To display data from an option's data context within the option template, you use Angular's `ng-template` `let-var` syntax. This allows you to define variables within the option template that will then be filled by the corresponding property in an option's data context. As mentioned in the previous section, the option's label is automatically added to each option's data context, so to display the label in the template, you can just define a variable without a value, and it will be filled by the `$implicit` entry. Here's an example of how a typical use case of the multi-select with templating would look:
+
+```html
+  <wily-multi-select [options]="[
+                    { value: 'red', label: 'Red', dataContext: { 'colorClass': 'bg_red' } },
+                    { value: 'green', label: 'Green', disabled: true, dataContext: { 'colorClass': 'bg_green' } },
+                    { value: 'blue', label: 'Blue', dataContext: { 'colorClass': 'bg_blue' } },
+                    { groupLabel: 'Purple Values', options: [
+                        { value: 'darkPurple', label: 'Dark Purple', dataContext: { 'colorClass': 'bg_purple_dark_4' } },
+                        { value: 'purple', label: 'Purple', dataContext: { 'colorClass': 'bg_purple' } },
+                        { value: 'lightPurple', label: 'Light Purple', dataContext: { 'colorClass': 'bg_purple_light_4' } }
+                    ]}
+                 ]">
+    <ng-template let-colorClass="colorClass" let-label>
+      <div class="circle_14px mar_right5"
+           [ngClass]="colorClass">
+      </div> {{label}}
+    </ng-template>
+  </wily-multi-select>
+```
+Notice how, in the `ng-template`, the variable definition value (in quotes) for `colorClass` matches up with the property of the same name in the data context objects for each option. Also notice how the variable definition for `label` has no value assigned, that's because the multi-select component will automatically put an option's label into the `$implicit` property, which Angular uses to fill in the value for any referenced variables that do not have a specified value. You can of course choose to explicitly add the label to the option's data context and use that value in the label variable assignment as well.
+#### Selector: wily-multi-select
+#### Inputs
+- value: array of strings or numbers representing the value of the selected options
+- options: array of `MultiSelectOption | MultiSelectOptionGroup` acting as the options to populate the multi-select
+- disabled: whether the multi-select should be disabled or not
+- placeholder: placeholder text to show in the multi-select when no options are selected
+- ariaLabel: aria label to assign to the multi-select
+- classList: CSS class list to apply to the multi-select
+#### Outputs
+- change: event emitted on multi-select option selection if selection has changed from the previous value, emits the selected values
+
 ## Usage
 
 `npm install wily-angular-commons`
