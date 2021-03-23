@@ -193,6 +193,24 @@ Notice how, in the `ng-template`, the variable definition value (in quotes) for 
 #### Outputs
 - change: event emitted on multi-select option selection if selection has changed from the previous value, emits the selected values
 
+## WilyNotificationModule
+### Notifications
+A notification is a simple way to provide feedback to a user in respect to some action (successful resource save, some error occurred, etc).
+Notifications have an ID (system generated), severity (`'success' | 'info' | 'warn' | 'error'`), summary and detail message (optional).
+### NotificationComponent
+The notification component allows for the display of notifications in an application.
+#### Usage
+The notification component should be dropped into the app root so that the display of notifications is available throughout the entire application. Once the component has been placed, no further action is needed. It's up to other components/services to add notifications for display in the notification component.
+### NotificationService
+The notification service is a root `Injectable` that allows components/services throughout an application to add notifications to the notification pool for display.
+#### Usage
+The notification service can be injected into components/services to add a notification through its `add` method, which accepts a notification object, adds it and then removes it after the configured notification life has passed. Notification life (the time before a notification is automatically removed from the view) can also be configured via the service's `setNotificationLife` method.
+#### Methods
+- add: accepts a notification object and adds it to the current notifications array
+- deleteNotification: accepts a notification ID and deletes the corresponding notification (if it exists)
+- getNotifications: get an array of the current notifications as an RxJS Observable
+- setNotificationLife: set the notification life for new notifications
+
 ## Usage
 
 `npm install wily-angular-commons`
