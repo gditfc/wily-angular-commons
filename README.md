@@ -105,6 +105,28 @@ Notice how, in the `ng-template`, the variable definition value (in quotes) for 
 #### Outputs
 - change: event emitted on dropdown option selection if selection has changed from the previous value, emits the selected value
 
+## WilyEndpointStateModule
+### EndpointStateComponent
+The endpoint state component serves as a catch-all for displaying endpoint states (loading, not found and error).
+#### Usage
+The endpoint state component is split into four different possible states: loading, loadingOverlay, empty and error. You specify which state the component should be in by passing in `true` to the desired state as an input. Note: only one state should be active at a time.
+#### Inputs
+- loading: whether the component should be in the loading state
+- loadingIcon: an icon class to display in the loading state
+- loadingText: main text to display in the loading state
+- loadingSubtext: subtext to display in the loading state
+- loadingOverlay: whether the component should be in the loading overlay state (whole-screen overlay)
+- loadingOverlayIcon: an icon class to display in the loading overlay state
+- loadingOverlayText: main text to display in the loading overlay state
+- loadingOverlaySubtext: subtext to display in the loading overlay state
+- empty: whether the component should be in the empty (not found) state
+- emptyIcon: an icon class to display in the empty state
+- emptyText: main text to display in the empty state
+- emptySubtext: subtext to display in the empty state
+- error: whether the component should be in the error state
+- errorIcon: an icon class to display in the error state
+- errorText: main text to display in the error state
+- errorSubtext: subtext to display in the error state
 
 ## Usage
 
