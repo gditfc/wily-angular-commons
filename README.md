@@ -299,6 +299,17 @@ The rich text component accepts an HTML paragraph as a string through either its
 - selectionChange: event emitted on editor selection change
 - init: event emitted on editor init
 
+## WilyTooltipModule
+### TooltipDirective
+The tooltip directive allows for a tooltip to be displayed around an HTML element.
+#### Usage
+The tooltip directive accepts text to display and sets up mouse listeners to show the tooltip on host mouse enter hide on host mouse leave.
+#### Selector: wilyTooltip
+#### Inputs
+- wilyTooltip: the tooltip text
+- tooltipPosition: `'left' | 'right' | 'top' | 'bottom'`
+- tooltipDisabled: whether the tooltip is disabled
+
 ## Usage
 
 `npm install wily-angular-commons`
