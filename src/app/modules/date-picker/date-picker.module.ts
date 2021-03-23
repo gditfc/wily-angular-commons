@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DatePickerComponent } from './date-picker.component';
 import { OrdinalNumberPipe } from '../ordinal-number-pipe/ordinal-number.pipe';
-import { OrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-number-pipe.module';
+import { WilyOrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-number-pipe.module';
 
 @NgModule({
   declarations: [DatePickerComponent, CalendarComponent],
@@ -15,7 +15,7 @@ import { OrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-number-p
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
-    OrdinalNumberPipeModule
+    WilyOrdinalNumberPipeModule
   ],
   exports: [DatePickerComponent, CalendarComponent],
   providers: [OrdinalNumberPipe]

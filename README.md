@@ -44,7 +44,7 @@ The calendar accepts a Date object through its `value` input. To read in the val
 - dateRange: object in the form of { minDate: Date, maxDate: Date} that acts as the valid selection range for the calendar. Min date must be less than max date. If min date is not provided, the min date is set to January 1st, {currentYear - 100}. If max date is not provided, the max date is set to December 31st, {current year + 50}.
 #### Outputs
 - selected: event emitted on calendar date selection, emits the selected date
-- closed: event emitted when the user clicks outside of the widget, triggers a keyup.escape event or clicks the done button. It is the parent component's responsibility to hide the calendar, the event is merely a signal that action should be taken.
+- closed: event emitted when the user clicks outside the widget, triggers a keyup.escape event or clicks the done button. It is the parent component's responsibility to hide the calendar, the event is merely a signal that action should be taken.
 
 ## WilyDialogModule
 ### DialogComponent
@@ -140,7 +140,7 @@ The icon select accepts an icon class through either its `value` input or throug
 - buttonSizing: the size (width/height) of the icon dialog show button in pixels
 #### Outputs
 - opened: event emitted on icon dialog open
-- selected: event emitted on icon dialog confirmation, emits selected icon in the form of `{ value: string }`
+- selected: event emitted on icon dialog confirmation, emits the selected icon in the form of `{ value: string }`
 - closed: event emitted on icon dialog close
 
 ## WilyKeyfilterModule
@@ -211,8 +211,123 @@ The notification service can be injected into components/services to add a notif
 - getNotifications: get an array of the current notifications as an RxJS Observable
 - setNotificationLife: set the notification life for new notifications
 
-## Usage
+## WilyOrdinalNumberPipeModule
+### OrdinalNumberPipe
+The ordinal number pipe transforms a number into an ordinal number (1 => 1st, 2 => 2nd, 3 => 3rd, etc).
+#### Usage
+The ordinal number pipe accepts a number or a numeric string and transforms it into ordinal format.
+#### Name: ordinalNumber
 
+## WilyPaginatorModule
+### PaginatorComponent
+The paginator component is a widget that provides controls for paginating a list.
+#### Usage
+The paginator component accepts an array of page size options, the current page size, and the total size of the paginated list without pagination applied, and from those inputs calculates the page number display and enables/disables the next/previous pagination buttons. Pagination control interactions emit a `PaginationEvent`, it is up to the parent component to react to that event and update the pagination as a result.
+#### Selector: wily-paginator
+#### Inputs
+- version: which version of the paginator to user (1-4 available)
+- pageSizeOptions: an array of numbers representing the available page size options
+- pageSize: a number representing the currently selected page size
+- totalLength: the total length of the unpaginated list
+#### Outputs
+- pagination: event emitted on pagination control interactions, emits a `PaginationEvent` (`{ activePage: number, pageSize: number, totalLength: number }`)
+
+## WilyPopoverModule
+### PopoverComponent
+The popover component displays a popover with dynamic content around a given target.
+#### Usage
+The popover component is a wrapper around an `ng-content` block and has no content itself. The popover is positioned via its `toggle` method, which accepts an `Event` and positions itself off of the `EventTarget`. If the toggle method is called with an event, and the popover is currently closed, the popover opens and aligns to the event target. If the toggle method is called, and the popover is open or no event is passed in, the popover will close.
+#### Selector: wily-popover
+#### Inputs
+- offset: the number of pixels to offset the popover from its target
+- width: the width of the popover (any valid CSS measurement, default `auto`)
+- height: the height of the popover (any valid CSS measurement, default `auto`)
+#### Outputs
+- opened: event emitted on popover open
+- closed: event emitted on popover close
+
+## WilyProfilePicModule
+### ProfilePicComponent
+The profile pic component displays a round image with a tooltip description to act as a profile picture.
+#### Usage
+The profile pic component accepts an image URL and displays it.
+#### Selector: wily-profile-pic
+#### Inputs
+- size: the size of the picture
+- margin: the CSS margin
+- width: the width of the picture
+- height: the height of the picture
+- toolTip: text to pass as the content of the image tooltip
+
+## WilyPushContainerModule
+### PushContainerComponent
+The push container component serves as a side menu (left or right) which display dynamic content
+#### Usage
+The push container component accepts dynamic content in between its tags and displays it.
+#### Selector: wily-push-container
+#### Inputs
+- width: the number of pixels wide
+- showSidePanel: whether to be open on page load (default `false`)
+- mainContentId: the ID of the main content that will be pushed when the component opens
+- side: open from the left or right
+- topOffset: top offset to account for a nav bar
+- closeOnResize: whether to close the component on window resize (default `false`)
+- backgroundColorClass: the CSS class to apply to the background of the component
+- breakpoint: the breakpoint passed which the push container will fill the entire view
+- hideCloseButton: whether to hide the push container close button (default `false`)
+- alwaysShowClose: whether to show the close button in desktop view (default `false`)
+#### Outputs
+- opened: event emitted on push container open
+- closed: event emitted on push container close
+
+## WilyRichTextModule
+### RichTextComponent
+The rich text component is an Angular wrapper around a Quill rich text editor.
+#### Usage
+The rich text component accepts an HTML paragraph as a string through either its value input or through one/two-way data-binding via `ngModel`. To read in the value of the editor, you can listen for its `ngModelChange` event (if using `ngModel`) or its `textChanged` event. The value emitted from the component is stringified HTML representing the value of the user's input. Model updates on editor input.
+#### Selector: wily-rich-text
+#### Inputs
+- value: setter for the internal value of the component
+- doHideShow: whether to show the rich text controls
+- height: the height of the editor
+- readonly: whether the editor is readonly
+- placeholder: the placeholder to display in the editor if no input
+- toolbarClassList: CSS class list to apply to the editor toolbar
+- editorClassList: CSS class list to apply to the editor
+#### Outputs
+- textChanged: event emitted on text change, emits an object in the following format: `{ htmlValue: string, textValue: string, delta: any, source: any }`
+- selectionChange: event emitted on editor selection change
+- init: event emitted on editor init
+
+## WilyTooltipModule
+### TooltipDirective
+The tooltip directive allows for a tooltip to be displayed around an HTML element.
+#### Usage
+The tooltip directive accepts text to display and sets up mouse listeners to show the tooltip on host mouse enter hide on host mouse leave.
+#### Selector: wilyTooltip
+#### Inputs
+- wilyTooltip: the tooltip text
+- tooltipPosition: `'left' | 'right' | 'top' | 'bottom'`
+- tooltipDisabled: whether the tooltip is disabled
+
+## WilyWeekPickerModule
+### WeekPickerComponent
+The week picker component allows for a user to select a week of the year via a calendar widget.
+#### Usage
+The week picker accepts input through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the week picker, you can listen for its `ngModelChange` event (if using `ngModel`) or its `weekSelected` event. The value emitted from the component is an object in the form of `{ start: Date, end: Date }` (representing the interval of the selected week). Model updates on week select.
+#### Selector: wily-week-select
+#### Inputs
+- value: setter for the internal value of the component
+- disabled: whether the component is disabled
+- dateRange: object in the form of `{ start: Date, end: Date }` that represents the valid date selection range for the calendar widget
+- inputClassList: CSS class list to apply to the week display input
+- calendarButtonClassList CSS class list to apply to the calendar widget button
+- ariaLabel: aria label to apply to the component
+- dateFormat: the Angular date pipe format to apply to the selected week preview
+#### Outputs
+- weekSelected: event emitted on week select, emits the selected week in the following format: `{ start: Date, end: Date }`
+
+## Usage
 `npm install wily-angular-commons`
 
 Component listing and usage coming soon.
