@@ -69,7 +69,7 @@ The dialog component essentially wraps an `ng-content` block. It is the responsi
 ### DropdownComponent
 The dropdown component acts as an enhanced HTML select. It supports both regular dropdown options (only the label being displayed) and templated options (options for which you can supply a ng-template to act as a template for each dropdown option). The dropdown is fully accessible as well, and supports all the accessibility options that a native select would (such as arrow key controls for option selection).
 #### Usage
-The dropdown accepts a string or number through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the dropdown, you can listen for its `ngModelChange` event (if using `ngModel`) or its `change` event. The value emitted from the component is a string or number representing the value of the user's selected option. Model updates every option change, whether it be triggered by clicking on an option or using arrow key controls.
+The dropdown accepts a string or number through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the dropdown, you can listen for its `ngModelChange` event (if using `ngModel`) or its `change` event. The value emitted from the component is a string or number representing the value of the user's selected option. Model updates on every option change, whether it be triggered by clicking on an option or using arrow key controls.
 #### Using Dropdown Options
 The dropdown supports both flat options or option groups, and the options for a single dropdown can be a mix of the two. A dropdown option has a value (string or number), a label, disabled indicator, and an optional data context object (the data context object is not needed if you're not planning to use templating). Whether data context is passed in or not for an option, each option internally will have a data context object which will minimally contain the option's label (inserted into the `$implicit` property if not already taken, or the `label` property if `$implicit` is already present in the object). Dropdown option groups contain a group label, and an array of dropdown options.
 #### Using Dropdown Option Templating
@@ -127,6 +127,21 @@ The endpoint state component is split into four different possible states: loadi
 - errorIcon: an icon class to display in the error state
 - errorText: main text to display in the error state
 - errorSubtext: subtext to display in the error state
+
+## WilyIconsModule
+### IconSelectComponent
+The icon select component allows a user to search for and select either a Fontawesome or Wily (custom) icon.
+### Usage
+The icon select accepts an icon class through either its `value` input or through one/two-way data-binding via `ngModel`. To read in the value of the icon select, you can listen for its `ngModelChange` event (if using `ngModel`) or its `selected` event. The value emitted from the component is the selected icon class. Model updates on confirm button click.
+### Inputs
+- value: setter for the internal value of the component
+- disabled: whether the component is disabled
+- buttonColorClass: CSS class to apply to the icon dialog show button
+- buttonSizing: the size (width/height) of the icon dialog show button in pixels
+#### Outputs
+- opened: event emitted on icon dialog open
+- selected: event emitted on icon dialog confirmation, emits selected icon in the form of `{ value: string }`
+- closed: event emitted on icon dialog close
 
 ## Usage
 
