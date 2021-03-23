@@ -232,6 +232,20 @@ The paginator component accepts an array of page size options, the current page 
 #### Outputs
 - pagination: event emitted on pagination control interactions, emits a `PaginationEvent` (`{ activePage: number, pageSize: number, totalLength: number }`)
 
+## WilyPopoverModule
+### PopoverComponent
+The popover component displays a popover with dynamic content around a given target.
+#### Usage
+The popover component is a wrapper around an `ng-content` block and has no content itself. The popover is positioned via its `toggle` method, which accepts an `Event` and positions itself off of the `EventTarget`. If the toggle method is called with an event and the popover is currently closed, the popover opens and aligns to the event target. If the toggle method is called and the popover is open or no event is passed in, the popover will close.
+#### Selector: wily-popover
+#### Inputs
+- offset: the number of pixels to offset the popover from its target
+- width: the width of the popover (any valid CSS measurement, default `auto`)
+- height: the height of the popover (any valid CSS measurement, default `auto`)
+#### Outputs
+- opened: event emitted on popover open
+- closed: event emitted on popover close
+
 ## Usage
 
 `npm install wily-angular-commons`
