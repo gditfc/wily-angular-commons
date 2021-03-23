@@ -269,7 +269,7 @@ The push container component accepts dynamic content in between its tags and dis
 - width: the number of pixels wide
 - showSidePanel: whether to be open on page load (default `false`)
 - mainContentId: the ID of the main content that will be pushed when the component opens
-- side: open from the left or the right
+- side: open from the left or right
 - topOffset: top offset to account for a nav bar
 - closeOnResize: whether to close the component on window resize (default `false`)
 - backgroundColorClass: the CSS class to apply to the background of the component
@@ -279,6 +279,25 @@ The push container component accepts dynamic content in between its tags and dis
 #### Outputs
 - opened: event emitted on push container open
 - closed: event emitted on push container close
+
+## WilyRichTextModule
+### RichTextComponent
+The rich text component is an Angular wrapper around a Quill rich text editor.
+#### Usage
+The rich text component accepts an HTML paragraph as a string through either its value input or through one/two-way data-binding via `ngModel`. To read in the value of the editor, you can listen for its `ngModelChange` event (if using `ngModel`) or its `textChanged` event. The value emitted from the component is stringified HTML representing the value of the user's input. Model updates on editor input.
+#### Selector: wily-rich-text
+#### Inputs
+- value: setter for the internal value of the component
+- doHideShow: whether to show the rich text controls
+- height: the height of the editor
+- readonly: whether the editor is readonly
+- placeholder: the placeholder to display in the editor if no input
+- toolbarClassList: CSS class list to apply to the editor toolbar
+- editorClassList: CSS class list to apply to the editor
+#### Outputs
+- textChanged: event emitted on text change, emits object in the following format: `{ htmlValue: string, textValue: string, delta: any, source: any }`
+- selectionChange: event emitted on editor selection change
+- init: event emitted on editor init
 
 ## Usage
 
