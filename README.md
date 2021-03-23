@@ -216,6 +216,21 @@ The notification service can be injected into components/services to add a notif
 The ordinal number pipe transforms a number into an ordinal number (1 => 1st, 2 => 2nd, 3 => 3rd, etc).
 #### Usage
 The ordinal number pipe accepts a number or a numeric string and transforms it into ordinal format.
+#### Name: ordinalNumber
+
+## WilyPaginatorModule
+### PaginatorComponent
+The paginator component is a widget that provides controls for paginating a list.
+#### Usage
+The paginator component accepts an array of page size options, the current page size, and the total size of the paginated list without pagination applied, and from those inputs calculates the page number display and enables/disables the paginate next/previous buttons. Pagination control interactions emit a `PaginationEvent`, it is up to the parent component to react to that event and update the pagination as a result.
+#### Selector: wily-paginator
+#### Inputs
+- version: which version of the paginator to user (1-4 available)
+- pageSizeOptions: an array of numbers representing the available page size options
+- pageSize: a number representing the currently selected page size
+- totalLength: the total length of the unpaginated list
+#### Outputs
+- pagination: event emitted on pagination control interactions, emits a `PaginationEvent` (`{ activePage: number, pageSize: number, totalLength: number }`)
 
 ## Usage
 
