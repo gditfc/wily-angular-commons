@@ -9,4 +9,4 @@ import { OrdinalNumberPipe } from './ordinal-number.pipe';
   ],
   exports: [OrdinalNumberPipe]
 })
-export class OrdinalNumberPipeModule { }
+export class WilyOrdinalNumberPipeModule { }

@@ -211,6 +211,12 @@ The notification service can be injected into components/services to add a notif
 - getNotifications: get an array of the current notifications as an RxJS Observable
 - setNotificationLife: set the notification life for new notifications
 
+## WilyOrdinalNumberPipeModule
+### OrdinalNumberPipe
+The ordinal number pipe transforms a number into an ordinal number (1 => 1st, 2 => 2nd, 3 => 3rd, etc).
+#### Usage
+The ordinal number pipe accepts a number or a numeric string and transforms it into ordinal format.
+
 ## Usage
 
 `npm install wily-angular-commons`
