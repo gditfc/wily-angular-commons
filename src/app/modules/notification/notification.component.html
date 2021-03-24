@@ -1,0 +1,26 @@
+<!-- TODO: figure out why closing toast that is between others causes jumpy animation -->
+
+<!-- toast -->
+<div class="wily_notification_overlay">
+  <!-- spacer -->
+  <div class="col size_3 min_w0"></div>
+  <!-- container -->
+  <div class="col size_1 min_w280 pad_right5" style="max-width:400px;">
+    <div @list class="row_block width100">
+      <!-- item -->
+      <div *ngFor="let notification of notifications$ | async"
+           @items
+           [ngClass]="severityColorMap[notification.severity]"
+           class="wily_notification">
+        <div class="col mar_5"><i class="fas {{severityIconMap[notification.severity]}} text xlg"></i></div>
+        <div class="col size_1 mar_5"><div class="text sm paragraph">{{notification.summary}}<br/>{{notification.detail}}</div></div>
+        <div class="col mar_y5">
+          <button (click)="deleteNotification(notification.id)"
+                  class="access btn overlay_alt1 hov_bg square_22px brad_3">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

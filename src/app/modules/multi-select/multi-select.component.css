@@ -1,0 +1,179 @@
+/* make component (input) 100% width */
+:host {
+  width:100%;
+}
+
+/******* DROPDOWN INPUT STYLING ********/
+
+/* input container styles */
+.wily_multiselect {
+  width:100%;
+  min-width:150px;
+  position: relative;
+}
+.wily_multiselect::after {
+  content:"mm/dd/yyyy";
+  opacity:0;
+  pointer-events:none;
+}
+
+/* dropdown button style */
+.wily_multiselect_input {
+  display:flex;
+  align-items:center;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:inherit;
+  padding-top:.25em;
+  padding-bottom:.25em;
+  padding-right:2.25em;
+  width: 100%;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size:inherit;
+  outline:none;
+  border:none;
+  text-align:left;
+  user-select:none;
+  background-color:transparent;
+  color:inherit;
+  margin:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.wily_multiselect_input:not([disabled]) {
+  cursor:pointer;
+}
+.wily_multiselect_input::-ms-expand {
+  display: none;
+}
+.wily_multiselect_caret {
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  z-index: 2;
+  background: transparent;
+  pointer-events:none;
+}
+
+.wily_multiselect_selection {
+  font-size:0.75em;
+  margin-right:5px;
+  border-radius:3px;
+  padding:0.3em 0.5em;
+  background-color:rgba(100,100,128,0.1);
+  display:inline-block;
+}
+
+.wily_multiselect_placeholder {
+  opacity:0.5;
+  display:inline;
+}
+
+
+/******* LIST PANEL STYLING ********/
+
+.wily_multiselect_overlay {
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:1000;
+}
+
+/* options panel */
+.wily_multiselect_options {
+  border-radius: 3px;
+  line-height: 1.5;
+  overflow:hidden;
+  /*margin: 5px 0 0 1px;*/
+  /*padding: 0;*/
+  list-style-type: none;
+  font-weight: normal;
+  /*cursor: pointer;*/
+  z-index: 4;
+  /*position: absolute;*/
+  max-height:250px;
+  width:100%;
+  overflow-y:auto;
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* heading for groups */
+.wily_multiselect_heading {
+  font-size:12px;
+  font-weight:600;
+  opacity:0.8;
+  padding: 10px 12px 4px 12px;
+}
+
+.wily_multiselect_list {
+  padding:0;
+  margin:0;
+  outline:none;
+}
+
+.wily_multiselect_option {
+  font-size:13px;
+  padding: 7px 12px;
+  cursor:pointer;
+  border:none;
+  width:100%;
+  text-align:left;
+  display:flex;
+  align-items:center;
+  transition:0.2s background-color ease;
+  background-color:transparent;
+  color:inherit;
+}
+
+.wily_multiselect_option.unselected:focus {
+  background-color:rgba(128,128,128,0.1);
+}
+.wily_multiselect_option:not(.unselected) {
+  background-color:rgba(128,128,128,0.15);
+}
+.wily_multiselect_option:not(.unselected):focus {
+  background-color:rgba(128,128,128,0.24);
+}
+
+/*!* option hover/focus state *!*/
+/*.wily_dropdown_option.unselected:not(:focus) {*/
+/*  background:none;*/
+/*  color:inherit;*/
+/*}*/
+
+.wily_multiselect_option[disabled] {
+  cursor:default;
+}
+
+.wily_multiselect_checkbox {
+  width:20px;
+  min-width:20px;
+  height:20px;
+  min-height:20px;
+  margin-right:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  border-radius:2px;
+  transition:background-color 0.2s ease;
+}
+
+.wily_multiselect_checkbox.unselected {
+  background-color:rgba(128,128,128,0.1);
+}
+
+.wily_multiselect_checkbox.unselected:hover {
+  background-color:rgba(128,128,128,0.2);
+}

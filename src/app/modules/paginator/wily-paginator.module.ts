@@ -5,7 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {WilyPopoverModule} from '../popover/popover.module';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    OverlayPanelModule
+    WilyPopoverModule
   ],
   declarations: [
     PaginatorComponent

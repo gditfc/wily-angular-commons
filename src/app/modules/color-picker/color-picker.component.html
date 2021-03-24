@@ -1,0 +1,36 @@
+<div *ngIf="render" [style.filter]="_disabled ? 'brightness(.95)' : ''"
+     class="wcp_container"
+     [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
+  <ng-container *ngIf="colorPickerSupported else colorSwatch">
+    <input #colorPicker
+           type="color"
+           class="access wcp_color"
+           [value]="'#' + _value"
+           [disabled]="_disabled"
+           [attr.aria-label]="ariaLabel + ' , choose a color'"
+           (input)="updateModel(colorPicker.value)"
+           (change)="updateModel(colorPicker.value); colorSelected.emit(colorPicker.value)" />
+    <i class="fas fa-caret-down wcp_caret"></i>
+  </ng-container>
+  <ng-template #colorSwatch>
+    <div class="wcp_swatch">
+      <div class="width100 height100 overlay_alt2" style="border-radius:inherit;"
+           [style.background-color]="'#' + (_value || '000000')"></div>
+    </div>
+  </ng-template>
+  <div class="overlay_alt2 vr wcp_divider"></div>
+  <div class="wcp_hashtag">#</div>
+  <input #colorInput
+         type="text"
+         class="access wcp_input"
+         placeholder="000000"
+         maxlength="6"
+         [attr.aria-label]="ariaLabel + ' , enter hex color'"
+         [ngModel]="_value"
+         [disabled]="_disabled"
+         (input)="input.emit(colorInput.value)"
+         (paste)="handlePaste($event)"
+         (keydown)="handleKeyDown($event)"
+         (ngModelChange)="updateModel($event, true)"
+         (blur)="handleBlur(colorInput.value)" />
+</div>

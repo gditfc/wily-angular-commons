@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {DialogLegacyComponent} from '../../modules/dialog-legacy/dialog-legacy.component';
 import {DialogComponent} from '../../modules/dialog/dialog.component';
 
 @Injectable({
@@ -12,9 +11,22 @@ export class DialogService {
   private escapeListener: (event) => void = event => {
     if (event.key === 'Esc' || event.key === 'Escape') {
       if (this.dialogs && this.dialogs.length) {
-        const topDialog = this.dialogs.pop();
-        topDialog.close();
-        event.stopPropagation();
+        let closeOverride = null;
+        if ('getAttribute' in event.target) {
+          closeOverride = (event.target as HTMLElement).getAttribute(
+            'data-dialog-close-override'
+          );
+        }
+
+        if (closeOverride === null || closeOverride === '') {
+          const topDialog = this.dialogs[this.dialogs.length - 1];
+
+          if (topDialog.allowClose) {
+            this.dialogs.pop();
+            topDialog.close();
+            event.stopPropagation();
+          }
+        }
       }
     }
   }

@@ -1,0 +1,144 @@
+:host {
+  width:100%;
+}
+
+/************* WEEK PICKER CSS ***************/
+
+/* custom date picker styles */
+.wwp_container {
+  width:100%;
+  min-width:150px;
+  position: relative;
+}
+.wwp_container::after {
+  content:"mm/dd/yyyy";
+  opacity:0;
+  pointer-events:none;
+}
+.wwp_input {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:inherit;
+  padding-right:2.25em;
+  width: 100%;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size:inherit;
+  outline:none;
+  border:none;
+  text-align:left;
+  user-select:none;
+  background-color:transparent;
+  color:inherit;
+  margin:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.wwp_input:not([disabled]) {
+  cursor:pointer;
+}
+.wwp_input::-ms-expand {
+  display: none;
+}
+.wwp_button {
+  position: absolute;
+  height: calc(100% + 2px);
+  width:2.25em;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  border-top-left-radius:0 !important;
+  border-bottom-left-radius:0 !important;
+  font-size:inherit;
+  margin:-1px;
+  user-select:none;
+  pointer-events:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.wwp_button > svg {
+  transition:all 0.2s ease;
+}
+.wwp_container:hover .wwp_button > svg {
+  transform:scale(1.2);
+}
+
+.wwp_placeholder {
+  opacity:0.5;
+  display:inline;
+}
+
+
+/*********** CALENDAR CSS *************/
+
+/* calendar panel */
+.wwp_options {
+  border-radius: 3px;
+  line-height: 1.5;
+  overflow:hidden;
+  /*margin: 8px 0 0 1px;*/
+  /* padding: 5px; */
+  font-weight: normal;
+  z-index: 4;
+  width: 300px;
+  background: rgba(255,255,255,0);
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  /*transform-origin: top left;*/
+}
+
+/* labels for days of the week */
+.wwp_weekday {
+  font-size:12px;
+  font-weight:700;
+  min-width:30px;
+  height:32px;
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content:center;
+  opacity:0.8;
+  user-select:none;
+}
+
+/* current week */
+.wwp_week.currentWeek {
+  border-radius:3px;
+  background-color:rgba(128,128,128,0.1);
+}
+
+/* selectable week */
+.wwp_week_btn {
+  display:flex;
+  align-items:center;
+  width:100%;
+  border:none;
+  padding:0;
+  cursor:pointer;
+}
+.wwp_week_btn:disabled {
+  cursor:default;
+}
+
+.wwp_day {
+  font-size:12px;
+  font-weight:400;
+  min-width:14%;
+  height:32px;
+  display:flex;
+  flex:1;
+  border-radius:3px;
+  /*overflow:hidden;*/
+  user-select:none;
+  background-color:transparent;
+  align-items:center;
+  justify-content:center;
+}

@@ -1,4 +1,7 @@
 {
+  "angularCompilerOptions": {
+    "strictTemplates": false
+  },
   "compileOnSave": false,
   "compilerOptions": {
     "module": "es2020",

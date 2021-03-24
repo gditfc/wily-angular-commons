@@ -1,0 +1,50 @@
+<!-- date picker input -->
+<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md overlay_alt2 page_container_color'"
+     class="wily_datepicker" [style.filter]="disabled ? 'brightness(.95)' : ''">
+  <ng-container *ngIf="!disabled else disabledDatePicker">
+    <input [(ngModel)]="dateString"
+           [id]="inputId"
+           (keydown)="filterInput($event)"
+           (input)="handleInput()"
+           (blur)="onTouched(); handleBlur()"
+           type="text" placeholder="mm/dd/yyyy"
+           maxlength="10"
+           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
+           class="access wily_datepicker_input" />
+    <button (click)="openCalendar($event)"
+            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'overlay_alt2 bg_blue_alt'"
+            class="access btn wily_datepicker_button"
+            aria-label="Open the calendar" aria-haspopup="dialog">
+      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
+    </button>
+  </ng-container>
+  <ng-template #disabledDatePicker>
+    <input disabled
+           [ngModel]="dateString"
+           type="text" placeholder="mm/dd/yyyy"
+           maxlength="10"
+           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
+           class="access wily_datepicker_input" />
+    <button disabled class="access btn wily_datepicker_button"
+            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'overlay_alt2 bg_blue_alt'"
+            aria-label="Open the calendar" aria-haspopup="dialog">
+      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
+    </button>
+  </ng-template>
+</div>
+
+<!-- calendar widget -->
+<div *ngIf="render"
+     class="wily_datepicker_overlay">
+  <div #calendarDiv
+       [@openClose]="!!showCalendar ? 'open' : 'close'"
+       (@openClose.start)="onAnimationStart($event)"
+       (@openClose.done)="onAnimationDone($event)"
+       class="position_absolute">
+    <wily-calendar [value]="showCalendar?.currentValue"
+                   [dateRange]="{ minDate: validSelectionInterval?.start, maxDate: validSelectionInterval?.end }"
+                   (selected)="updateModel($event)"
+                   (closed)="handleCalendarClose()">
+    </wily-calendar>
+  </div>
+</div>

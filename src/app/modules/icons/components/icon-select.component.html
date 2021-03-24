@@ -1,65 +1,305 @@
 <!-- choose button -->
-<button class="access btn hov_glow sm"
-        [ngClass]="buttonColorClass"
-        (click)="doShowDialog()"
+<button [ngClass]="buttonColorClass ? buttonColorClass : 'page_container_color'"
+        [ngStyle]="{
+                     'width': buttonSizing,
+                     'min-width': buttonSizing,
+                     'height': buttonSizing,
+                     'min-height': buttonSizing
+                   }"
+        (click)="openDialog()"
+        [wilyTooltip]="(_internalValue | async)?.prefix + ' ' + (_internalValue | async)?.name"
+        [tooltipDisabled]="!(_internalValue | async)"
+        [disabled]="disabled"
+        class="access wis_button overlay_alt2 brad_3"
         aria-label="Choose Icon">
-  <span class="text">Choose Icon</span>
+  <ng-container *ngIf="!showDialog else placeholderIcon">
+    <div *ngIf="_internalValue | async as selectedIcon else noSelection">
+      <i class="{{selectedIcon.prefix}} {{selectedIcon.name}} wis_icon"></i>
+    </div>
+    <ng-template #noSelection>
+      <div><i class="fas fa-icons opacity_20"></i></div>
+    </ng-template>
+  </ng-container>
+  <ng-template #placeholderIcon>
+    <div><i class="fas fa-spinner fa-spin"></i></div>
+  </ng-template>
 </button>
 
+<!-- TODO: at some point, maybe implement infinite scroll to icons -->
+
 <!-- picker dialog -->
-<wily-dialog
+<wily-dialog [title]="'Select an Icon'"
   [object]="showDialog"
-  [title]="'Choose an Icon'"
-  [width]="'745px'" [height]="'500px'"
-  (closed)="closed.emit()"
-  #faDialog>
-  <div class="row column height100 page_container_color_dark_1">
-    <!-- inputs -->
-    <div class="col v_center pad_5 page_container_color">
-      <div class="col size_1 mar_3">
-        <input class="access fullwidth_input overlay_alt2 page_container_color mar_right5"
-               type="text" aria-label="Filter Icons" (keyup.enter)="filterClasses()"
-               [(ngModel)]="filter" placeholder="Filter Icons..." />
+  [width]="'850px'"
+  [height]="'500px'"
+  (closed)="closeDialog()">
+    <div class="row height100">
+
+      <!-- FILTERS -->
+      <div class="col min_w250 overlay_alt2 border_right mobile_hide">
+        <div class="row_block width100">
+          <ng-container *ngIf="_filter | async as filter">
+            <!-- all icons -->
+            <div class="mar_5 pad_5">
+              <button (click)="handleFilterSelect({ style: 'all', type: 'all' })"
+                      [ngClass]="{ 'selected': filter.type === 'all' && filter.style === 'all' }"
+                      class="access list_btn row space_between wis_filter_btn overlay_alt1"
+                      aria-label="Show All Icons">
+                <div class="v_center">
+                  <div class="circle_16px overlay_alt1 mar_right10">
+                    <div *ngIf="filter.type === 'all' && filter.style === 'all'" class="circle_8px bg_blue"></div>
+                  </div>
+                  <div class="text md">See All Icons</div>
+                </div>
+                <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+              </button>
+            </div>
+            <div class="overlay_alt2 hr mar_10"></div>
+            <!-- fontawesome icons -->
+            <div class="mar_5">
+              <div class="text md bolder" style="padding:10px 10px 5px 15px;">Font Awesome Icons</div>
+              <div class="mar_5">
+                <button (click)="handleFilterSelect({ style: 'all', type: 'fontawesome' })"
+                        [ngClass]="{ 'selected': filter.type === 'fontawesome' && filter.style === 'all' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
+                        aria-label="Filter by Font Awesome Icons">
+                  <div class="v_center">
+                    <div class="circle_16px overlay_alt1 mar_right10">
+                      <div *ngIf="filter.type === 'fontawesome' && filter.style === 'all'" class="circle_8px bg_blue"></div>
+                    </div>
+                    <div class="text md">All</div>
+                  </div>
+                  <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+                </button>
+              </div>
+              <div class="mar_5">
+                <button (click)="handleFilterSelect({ style: 'solid', type: 'fontawesome' })"
+                        [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'solid' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
+                        aria-label="Filter by Solid Font Awesome Icons">
+                  <div class="v_center">
+                    <div class="circle_16px overlay_alt1 mar_right10">
+                      <div *ngIf="filter.type === 'fontawesome' &&  filter.style === 'solid'" class="circle_8px bg_blue"></div>
+                    </div>
+                    <div class="text md">Solid</div>
+                  </div>
+                  <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+                </button>
+              </div>
+              <div class="mar_5">
+                <button (click)="handleFilterSelect({ style: 'regular', type: 'fontawesome' })"
+                        [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'regular' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
+                        aria-label="Filter by Regular Font Awesome Icons">
+                  <div class="v_center">
+                    <div class="circle_16px overlay_alt1 mar_right10">
+                      <div *ngIf="filter.type === 'fontawesome' &&  filter.style === 'regular'" class="circle_8px bg_blue"></div>
+                    </div>
+                    <div class="text md">Regular</div>
+                  </div>
+                  <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+                </button>
+              </div>
+              <div class="mar_5">
+                <button (click)="handleFilterSelect({ style: 'brands', type: 'fontawesome' })"
+                        [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'brands' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
+                        aria-label="Filter by Brand Font Awesome Icons">
+                  <div class="v_center">
+                    <div class="circle_16px overlay_alt1 mar_right10">
+                      <div *ngIf="filter.type === 'fontawesome' &&  filter.style === 'brands'" class="circle_8px bg_blue"></div>
+                    </div>
+                    <div class="text md">Brands</div>
+                  </div>
+                  <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+                </button>
+              </div>
+            </div>
+            <div class="overlay_alt2 hr mar_10"></div>
+            <!-- custom icons -->
+            <div class="mar_5">
+              <div class="text md bolder" style="padding:10px 10px 5px 15px;">Custom Icons</div>
+              <div class="mar_5">
+                <button (click)="handleFilterSelect({ style: 'all', type: 'wily' })"
+                        [ngClass]="{ 'selected': filter.type === 'wily' && filter.style === 'all' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
+                        aria-label="Filter by All Custom Icons">
+                  <div class="v_center">
+                    <div class="circle_16px overlay_alt1 mar_right10">
+                      <div *ngIf="filter.type === 'wily' && filter.style === 'all'" class="circle_8px bg_blue"></div>
+                    </div>
+                    <div class="text md">All</div>
+                  </div>
+                  <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+                </button>
+              </div>
+              <div class="mar_5">
+                <button (click)="handleFilterSelect({ style: 'solid', type: 'wily' })"
+                        [ngClass]="{ 'selected': filter.type === 'wily' && filter.style === 'solid' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
+                        aria-label="Filter by Solid Custom Icons">
+                  <div class="v_center">
+                    <div class="circle_16px overlay_alt1 mar_right10">
+                      <div *ngIf="filter.type === 'wily' && filter.style === 'solid'" class="circle_8px bg_blue"></div>
+                    </div>
+                    <div class="text md">Solid</div>
+                  </div>
+                  <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+                </button>
+              </div>
+              <div class="mar_5">
+                <button (click)="handleFilterSelect({ style: 'regular', type: 'wily' })"
+                        [ngClass]="{ 'selected': filter.type === 'wily' && filter.style === 'regular' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
+                        aria-label="Filter by Regular Custom Icons">
+                  <div class="v_center">
+                    <div class="circle_16px overlay_alt1 mar_right10">
+                      <div *ngIf="filter.type === 'wily' && filter.style === 'regular'" class="circle_8px bg_blue"></div>
+                    </div>
+                    <div class="text md">Regular</div>
+                  </div>
+                  <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+                </button>
+              </div>
+              <div class="mar_5">
+                <button (click)="handleFilterSelect({ style: 'light', type: 'wily' })"
+                        [ngClass]="{ 'selected': filter.type === 'wily' && filter.style === 'light' }"
+                        class="access list_btn row space_between wis_filter_btn overlay_alt1"
+                        aria-label="Filter by Light Custom Icons">
+                  <div class="v_center">
+                    <div class="circle_16px overlay_alt1 mar_right10">
+                      <div *ngIf="filter.type === 'wily' && filter.style === 'light'" class="circle_8px bg_blue"></div>
+                    </div>
+                    <div class="text md">Light</div>
+                  </div>
+                  <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
       </div>
-      <div class="col" style="padding-right:8px;">
-        <button class="access btn md icon_right overlay_alt2 bg_blue_alt mar_3"
-                pTooltip="Filter" aria-label="Filter" (click)="filterClasses()">
-          Submit
-          <span class="icon grow"><i class="fas fa-search"></i></span>
-        </button>
-        <button class="access btn md icon_right overlay mar_3"
-                pTooltip="Clear" aria-label="Clear" (click)="clear()">
-          Clear
-          <span class="icon grow"><i class="fas fa-undo-alt"></i></span>
-        </button>
-      </div>
-    </div>
-    <div class="col" style="background-color:rgba(0,0,0,.3); height:3px;">
-      <div class="col size_1"></div>
-      <div class="col size_1 bg_blue"></div>
-      <div class="col size_1 bg_purple"></div>
-      <div class="col size_1 bg_yellow"></div>
-      <div class="col size_1 bg_red"></div>
-      <div class="col size_8"></div>
-    </div>
-    <!-- icons list -->
-    <div class="row scroll_y">
-      <div class="row_block width100">
-        <div class="row wrap pad_5">
-          <button *ngFor="let faClass of getValues()"
-                  class="access btn brad_3 mar_3 center_center overlay_alt2"
-                  style="width:60px; height:60px;"
-                  [ngClass]="faClass === hoveredClass ? 'page_container_color' : 'page_container_color_dark_1'"
-                  (mouseover)="hoveredClass = faClass"
-                  (mouseout)="hoveredClass = null"
-                  (click)="choose(faClass.toString())"
-                  pTooltip="{{faClass}}" tooltipPosition="bottom"
-                  [style.display]="icons[faClass.toString()] ? 'flex' : 'none'"
-                  [attr.aria-label]="'Choose ' + faClass">
-            <i [ngClass]="faClass.toString()" style="font-size:32px;"></i>
-          </button>
+
+      <!-- ICONS -->
+      <div class="col size_2 column">
+        <div class="col dialog_body_color_dark_1 pad_x5">
+          <!-- paginator -->
+          <div *ngIf="totalPages$ | async as totalPages"
+               class="col v_center mar_10">
+            <button *ngIf="canPaginatePrevious$ | async else disabledPreviousButton"
+                    (click)="paginatePrevious()"
+                    class="access btn square_24px overlay_alt2 bg_blue_alt"
+                    aria-label="Previous Page">
+              <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
+            </button>
+            <ng-template #disabledPreviousButton>
+              <button disabled class="access btn square_24px overlay_alt2 bg_blue_alt"
+                      aria-label="Previous Page">
+                <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
+              </button>
+            </ng-template>
+            <div *ngIf="totalPages$ | async as totalPages"
+                 class="text sm bolder center"
+                 style="min-width:65px;">
+              {{(_activePage | async) + 1}} / {{totalPages}}
+            </div>
+            <button *ngIf="canPaginateNext$ | async else disabledNextButton"
+                    (click)="paginateNext()"
+                    class="access btn square_24px overlay_alt2 bg_blue_alt"
+                    aria-label="Next Page">
+              <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
+            </button>
+            <ng-template #disabledNextButton>
+              <button disabled class="access btn square_24px overlay_alt2 bg_blue_alt"
+                      aria-label="Next Page">
+                <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
+              </button>
+            </ng-template>
+          </div>
+          <!-- search -->
+          <div class="col size_1 wis_search mar_10">
+            <input #iconSearchInput
+                   [ngModel]="_searchText | async"
+                   (input)="_searchText.next(iconSearchInput.value)"
+                   (keyup.enter)="_searchInputEnterKeyup.next()"
+                   class="access input md overlay_alt2 page_container_color"
+                   aria-label="Search icons" placeholder="Search icons..." />
+            <button *ngIf="(canSearch$ | async) && (_searchClick | async)"
+                    (click)="clearSearch()" aria-label="Clear search"
+                    class="access btn circle_18px overlay wis_clear_btn">
+              <span class="icon grow"><i class="fas fa-times fa-sm"></i></span>
+            </button>
+            <button *ngIf="canSearch$ | async else disabledSearchButton"
+                    (click)="_searchClick.next(iconSearchInput.value); _activePage.next(0)"
+                    class="access btn square_28px overlay_alt2 bg_blue_alt brad_3 wis_search_btn"
+                    aria-label="Submit Search" type="submit">
+              <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
+            </button>
+            <ng-template #disabledSearchButton>
+              <button disabled
+                      class="access btn square_28px overlay_alt2 bg_blue_alt brad_3 wis_search_btn"
+                      aria-label="Submit Search" type="submit">
+                <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
+              </button>
+            </ng-template>
+          </div>
+        </div>
+        <div class="color_bar">
+          <div class="color_stripes">
+            <div class="bg_blue_light_3"></div>
+            <div class="bg_purple_light_3"></div>
+            <div class="bg_yellow_light_8"></div>
+            <div class="bg_red_light_3"></div>
+          </div>
+        </div>
+        <!-- icons -->
+        <div #iconScrollContainer class="col size_1 top_left scroll_y pad_5" style="scroll-behavior: smooth">
+          <ng-container *ngIf="paginatedIcons$ | async as icons else noResults">
+            <div class="row wrap top_left" style="align-items:stretch;">
+              <ng-container *ngFor="let icon of paginatedIcons$ | async">
+                <div class="col size_1 min_w75 mar_5">
+                  <button class="access wis_icon_btn" (click)="handleIconSelect(icon)" [attr.aria-label]="'Select ' + icon.name">
+                    <div [ngClass]="((_internalValue | async)?.prefix === icon.prefix) && ((_internalValue | async)?.name === icon.name) ? 'bg_blue' : 'page_container_color'"
+                         class="wis_icon_btn_preview square_50px brad_3 overlay_alt2 mar_bot5">
+                      <i class="{{icon.prefix}} {{icon.name}}"></i>
+                    </div>
+                    <div class="text sm center faded">{{icon.name}}</div>
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+          <ng-template #noResults>
+            <div class="row column min_h300 center_center">
+              <wily-endpoint-state
+                [empty]="true"
+                [emptyIcon]="'fas fa-search fa-3x mar_bot5'"
+                [emptyText]="'We couldn\'t find anything'"
+                [emptySubtext]="'Please try modifying your search criteria'">
+              </wily-endpoint-state>
+              <button (click)="clearSearch()"
+                      class="access btn sm overlay mar_top15">
+                Clear Search
+              </button>
+            </div>
+          </ng-template>
+        </div>
+        <div *ngIf="_internalValue | async as selectedIcon"
+             class="col space_between overlay_alt2 border_top pad_x5 wis_selection_bar">
+          <div class="col v_center mar_10">
+            <div class="text md faded mar_right10 mobile_hide">Selection:</div>
+            <div class="v_center" *ngIf="showIconSelectionPreview">
+              <i class="{{selectedIcon.prefix}} {{selectedIcon.name}} fa-fw mar_right5" style="font-size:16px;"></i>
+              <div class="text md bold">{{selectedIcon.prefix}} {{selectedIcon.name}}</div>
+            </div>
+          </div>
+          <div class="col v_center mar_10">
+            <button (click)="handleIconSelectConfirm()"
+                    class="access btn md icon_right overlay_alt2 bg_green_alt">
+              Confirm<span class="icon grow"><i class="fas fa-check"></i></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </wily-dialog>

@@ -1,20 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://styles.transcend.csra.io/v3.1.6/transcend.css';
+@import 'https://cdn.jsdelivr.net/gh/gditfc/wily-styles@v1.0.0/dist/wily-styles.css';
 @import 'theme.css';
 
-/*.access{*/
-/*  outline:rgba(38,184,239,0.0) 1px solid;*/
-/*  transition:all 0.2s ease-in-out;*/
-/*  text-decoration: none;*/
-/*}*/
-/*.access:focus{*/
-/*  outline:rgba(38,184,239,1.0) 1px solid;*/
-/*  outline-offset: 5px;*/
-/*  position:relative;*/
-/*  z-index:1;*/
-/*}*/
+/* REGULAR ACCESS CLASS */
+.access{
+  outline:rgba(38,184,239,0.0) 1px solid !important;
+  transition:all 0.2s ease-in-out;
+  text-decoration: none;
+}
+.access:focus{
+  outline:rgba(38,184,239,1.0) 1px solid !important;
+  outline-offset: 5px;
+  position:relative;
+  z-index:1;
+}
 
-.access {
+/* Experimental new access class */
+/* .access:focus {
   position:relative;
   overflow:visible;
 }
@@ -29,8 +31,9 @@
   background-color: transparent;
   border:2px solid #65a3c7;
 }
-
-
-.site {
-  height: 100%;
-}
+input.access:focus, select.access:focus {
+  position:relative;
+  z-index:2;
+  outline:2px solid #65a3c7;
+  outline-offset:2px;
+} */

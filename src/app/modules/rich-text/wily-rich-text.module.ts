@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {EditorModule} from 'primeng/editor';
 import {RichTextComponent} from './rich-text.component';
+import {WilyTooltipModule} from '../tooltip/tooltip.module';
 
 @NgModule({
   declarations: [
     RichTextComponent
   ],
-  imports: [
-    CommonModule,
-    EditorModule
-  ],
+    imports: [
+        CommonModule,
+        WilyTooltipModule
+    ],
   exports: [
     RichTextComponent
   ]

@@ -12,9 +12,8 @@ import {Component, Input} from '@angular/core';
          [style.width]="size"
          [style.margin]="margin"
          [style.backgroundImage]="getUrl() | safeStyle"
-         [pTooltip]="toolTip"
-         tooltipPosition="top"
-         [escape]="false">
+         [wilyTooltip]="toolTip"
+         tooltipPosition="top">
     </div>`
 })
 export class ProfilePicComponent {

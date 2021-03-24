@@ -1,54 +1,75 @@
-<p-editor #editor
-          [style]="{width: '100%', height: height, fontFamily: 'Montserrat, sans-serif'}"
-          [readonly]="readonly"
-          [placeholder]="placeholder"
-          (onTextChange)="textChanged.emit($event)">
-  <p-header>
-    <div *ngIf="doHideShow" style="float: right;cursor: pointer;color: #585858;" (click)="toolbarVisible = !toolbarVisible;" role="button" aria-label="Expand Menu">
-      <button *ngIf="toolbarVisible" aria-label="Close Toolbar">
-        <i class="fas fa-times"></i>
+<div class="wily_richtext_container brad_3">
+  <!-- editor toolbar -->
+  <div class="wily_richtext_toolbar overlay_alt2" [ngClass]="toolbarClassList" #toolbar>
+    <span class="ql-formats">
+      <div *ngIf="!editorFocused" class="ql-header-placeholder">Style</div>
+      <select aria-label="Text Style" class="access ql-header" wilyTooltip="Text Style" tooltipPosition="top">
+        <option class="h1" value="1" aria-label="Heading">Heading</option>
+        <option class="h2" value="2" aria-label="Subheading">Subheading</option>
+        <option selected aria-label="Normal">Normal</option>
+      </select>
+    </span>
+    <div class="overlay_alt2 vr mar_x5"></div>
+    <span class="ql-formats">
+      <button class="access ql-bold" aria-label="Bold" wilyTooltip="Bold" tooltipPosition="top">
+        <i class="fas fa-bold fa-fw"></i>
       </button>
-      <button *ngIf="!toolbarVisible" aria-label="Reveal Toolbar" style="margin-top:-5px; margin-bottom:-5px;">
-        <i class="fas fa-bars"></i>
+      <button class="access ql-italic" aria-label="Italic" wilyTooltip="Italic" tooltipPosition="top">
+        <i class="fas fa-italic fa-fw"></i>
       </button>
-    </div>
-    <div [style.display]="!doHideShow || toolbarVisible ? 'block' : 'none'">
-        <span class="ql-formats">
-          <select aria-label="Text Style" class="ql-header">
-            <option value="1" aria-label="Heading">Heading</option>
-            <option value="2" aria-label="Subheading">Subheading</option>
-            <option selected aria-label="Normal">Normal</option>
-          </select>
-        </span>
-      <span class="ql-formats">
-          <button class="ql-bold" aria-label="Bold"></button>
-          <button class="ql-italic" aria-label="Italic"></button>
-          <button class="ql-underline" aria-label="Underline"></button>
-        </span>
-      <span class="ql-formats">
-          <select aria-label="Color" class="ql-color"></select>
-          <select aria-label="Background" class="ql-background"></select>
-        </span>
-      <span class="ql-formats">
-          <button class="ql-list" value="ordered" aria-label="Ordered List"></button>
-          <button class="ql-list" value="bullet" aria-label="Unordered List"></button>
-          <select aria-label="Alignment" class="ql-align">
-            <option selected></option>
-            <option value="center"></option>
-            <option value="right"></option>
-            <option value="justify"></option>
-          </select>
-        </span>
-      <span class="ql-formats">
-          <button class="ql-link" aria-label="Insert Link"></button>
-          <button class="ql-image" aria-label="Insert Image"></button>
-          <button class="ql-code-block" aria-label="Insert Code Block"></button>
-        </span>
-      <span class="ql-formats">
-          <button class="ql-clean" aria-label="Remove Styles"></button>
-        </span>
-    </div>
-    <div [style.display]="doHideShow || !toolbarVisible ? 'block' : 'none'">
-    </div>
-  </p-header>
-</p-editor>
+      <button class="access ql-underline" aria-label="Underline" wilyTooltip="Underline" tooltipPosition="top">
+        <i class="fas fa-underline fa-fw"></i>
+      </button>
+    </span>
+    <div class="overlay_alt2 vr mar_x5"></div>
+<!--    <span class="ql-formats">-->
+<!--      <select aria-label="Color" class="ql-color"></select>-->
+<!--      <select aria-label="Background" class="ql-background"></select>-->
+<!--    </span>-->
+    <span class="ql-formats">
+      <div *ngIf="!editorFocused" class="ql-align-placeholder">Align</div>
+      <button class="access ql-list" value="ordered" aria-label="Ordered List"
+              wilyTooltip="Ordered List" tooltipPosition="top">
+        <i class="fas fa-list-ol fa-fw"></i>
+      </button>
+      <button class="access ql-list" value="bullet" aria-label="Unordered List"
+              wilyTooltip="Unordered List" tooltipPosition="top">
+        <i class="fas fa-list-ul fa-fw"></i>
+      </button>
+      <select aria-label="Alignment" class="access ql-align" wilyTooltip="Alignment" tooltipPosition="top">
+        <option selected>Left</option>
+        <option value="center">Center</option>
+        <option value="right">Right</option>
+        <option value="justify">Justify</option>
+      </select>
+    </span>
+    <div class="overlay_alt2 vr mar_x5"></div>
+    <span class="ql-formats">
+      <button class="access ql-link" aria-label="Insert Link" wilyTooltip="Insert Link" tooltipPosition="top">
+        <i class="fas fa-link fa-fw"></i>
+      </button>
+<!--      <button class="ql-image" aria-label="Insert Image"></button>-->
+<!--      <button class="ql-code-block" aria-label="Insert Code Block"></button>-->
+    </span>
+    <div class="overlay_alt2 vr mar_x5"></div>
+    <span class="ql-formats">
+      <button class="access ql-clean" aria-label="Remove Styles" wilyTooltip="Remove Styles" tooltipPosition="top">
+        <i class="fas fa-remove-format fa-fw"></i>
+      </button>
+    </span>
+    <div class="overlay_alt2 toolbar_wrap_separator"></div>
+  </div>
+
+  <div class="wily_richtext_editor overlay_alt2" #editor
+       [ngClass]="editorClassList" [ngStyle]="{height: height}"></div>
+</div>
+
+<!--<p-editor #editor-->
+<!--          [style]="{width: '100%', height: height, fontFamily: 'Montserrat, sans-serif'}"-->
+<!--          [readonly]="readonly"-->
+<!--          [placeholder]="placeholder"-->
+<!--          (onTextChange)="textChanged.emit($event)">-->
+<!--  <p-header>-->
+
+<!--  </p-header>-->
+<!--</p-editor>-->

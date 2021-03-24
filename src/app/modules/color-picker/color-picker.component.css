@@ -1,0 +1,99 @@
+:host {
+  width:100%;
+}
+
+.wcp_container {
+  width:100%;
+  min-width:120px;
+  position: relative;
+}
+/* fix to prevent container from collapsing */
+.wcp_container::after {
+  content:'#';
+  opacity:0;
+  pointer-events:none;
+}
+
+.wcp_color {
+  width:4em;
+  padding:3px;
+  padding-right:1.5em;
+  height:inherit;
+  cursor:pointer;
+
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  border:none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size:inherit;
+  outline:none;
+  background-color:transparent;
+  color:inherit;
+}
+
+.wcp_color:disabled {
+  cursor:not-allowed;
+}
+
+.wcp_caret {
+  position:absolute;
+  left:2.75em;
+  top:50%;
+  margin-top:-0.5em;
+  pointer-events:none;
+  opacity:0.8;
+}
+
+.wcp_swatch {
+  width:4em;
+  padding:5px;
+  height:inherit;
+  border-radius:inherit;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  border:none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline:none;
+}
+
+.wcp_divider {
+  position:absolute;
+  left:4em;
+  top:0;
+  width:1px;
+  height:100%;
+}
+
+.wcp_hashtag {
+  position:absolute;
+  left:calc(4em + 0.8em);
+}
+
+.wcp_input {
+  position:absolute;
+  top:0;
+  left:4em;
+  right:0;
+  bottom:0;
+  padding:inherit;
+  padding-left:1.8em;
+  border:none;
+  width: calc(100% - 4em);
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size:inherit;
+  outline:none;
+  background-color:transparent;
+  color:inherit;
+}

@@ -1,0 +1,139 @@
+<div #dropdown class="wily_dropdown" [style.filter]="disabled ? 'brightness(.95)' : ''"
+     style="cursor:default;"
+     [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
+  <button #dropdownButton
+          role="combobox"
+          aria-haspopup="listbox"
+          (click)="openDropdown($event)"
+          (focus)="setSelectionIndex()"
+          (keyup.escape)="onEscapeKeyUp($event)"
+          [id]="dropdownId"
+          [disabled]="disabled"
+          [attr.aria-label]="ariaLabel"
+          [attr.aria-expanded]="opened"
+          [attr.data-dialog-close-override]="true"
+          class="access page_container_color wily_dropdown_input">
+    <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">
+      <ng-container *ngIf="!!template else noCustomTemplate">
+        <div class="v_center">
+          <ng-container *ngTemplateOutlet="template; context: dataContext"></ng-container>
+        </div>
+      </ng-container>
+      <ng-template #noCustomTemplate>
+        <div>{{dataContext['$implicit'] || dataContext['label']}}</div>
+      </ng-template>
+    </ng-container>
+    <ng-template #placeholderTemplate>
+      <div class="wily_dropdown_placeholder">{{placeholder}}</div>
+    </ng-template>
+  </button>
+  <div class="wily_dropdown_caret">
+    <i class="fas fa-caret-down"></i>
+  </div>
+</div>
+
+<div [style.display]="render ? '' : 'none'"
+     [attr.aria-hidden]="render"
+     class="wily_dropdown_overlay">
+  <div #dropdownList
+       [@openClose]="opened ? 'open' : 'close'"
+       (@openClose.start)="onAnimationStart($event)"
+       (@openClose.done)="onAnimationDone($event)"
+       class="position_absolute">
+    <div class="wily_dropdown_options page_container_color">
+      <ng-container *ngIf="_options | async as options">
+        <div class="wily_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">
+          <!-- CUSTOM TEMPLATE -->
+          <ng-container *ngIf="!!template else defaultOptionTemplate">
+            <ng-container *ngFor="let option of options; index as i">
+              <!-- OPTION GROUP -->
+              <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
+                <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
+                <ng-container *ngFor="let groupOption of option.options; index as j">
+                  <button #dropdownOption
+                          (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
+                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
+                          (keyup.escape)="onEscapeKeyUp($event)"
+                          [id]="dropdownId + '-' + groupOption.value"
+                          [ngClass]="{ 'unselected' : (_internalValue | async) !== groupOption.value }"
+                          [attr.aria-selected]="(_internalValue | async) === groupOption.value"
+                          [attr.data-value]="groupOption.value"
+                          [attr.data-dialog-close-override]="true"
+                          [disabled]="groupOption.disabled"
+                          class="wily_dropdown_option" role="option" tabindex="0">
+                    <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
+                  </button>
+                </ng-container>
+              </ng-container>
+              <!-- SINGULAR OPTION -->
+              <ng-template #nonGroupOption>
+                <button #dropdownOption
+                        (click)="onDropdownOptionSelect(option.value, option.disabled)"
+                        (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                        (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                        (keyup.escape)="onEscapeKeyUp($event)"
+                        [id]="dropdownId + '-' + option.value"
+                        [ngClass]="{ 'unselected' : (_internalValue | async) !== option.value }"
+                        [attr.aria-selected]="(_internalValue | async) === option.value"
+                        [attr.data-value]="option.value"
+                        [attr.data-dialog-close-override]="true"
+                        [disabled]="option.disabled"
+                        class="wily_dropdown_option" role="option" tabindex="0">
+                  <ng-container *ngTemplateOutlet="template; context: option.dataContext"></ng-container>
+                </button>
+              </ng-template>
+            </ng-container>
+          </ng-container>
+          <!-- NO CUSTOM TEMPLATE -->
+          <ng-template #defaultOptionTemplate>
+            <ng-container *ngFor="let option of options; index as i">
+              <!-- OPTION GROUP -->
+              <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
+                <div class="wily_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
+                <ng-container *ngFor="let groupOption of option.options; index as j">
+                  <button #dropdownOption
+                          (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
+                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
+                          (keyup.escape)="onEscapeKeyUp($event)"
+                          [id]="dropdownId + '-' + groupOption.value"
+                          [ngClass]="{ 'unselected' : (_internalValue | async) !== groupOption.value }"
+                          [attr.aria-label]="groupOption.label"
+                          [attr.aria-selected]="(_internalValue | async) === groupOption.value"
+                          [attr.data-value]="groupOption.value"
+                          [attr.data-dialog-close-override]="true"
+                          [disabled]="groupOption.disabled"
+                          class="wily_dropdown_option"
+                          role="option" tabindex="0">
+                    {{groupOption.label}}
+                  </button>
+                </ng-container>
+              </ng-container>
+              <!-- SINGULAR OPTION -->
+              <ng-template #nonGroupOption>
+                <button #dropdownOption
+                        (click)="onDropdownOptionSelect(option.value, option.disabled)"
+                        (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                        (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                        (keyup.escape)="onEscapeKeyUp($event)"
+                        [id]="dropdownId + '-' + option.value"
+                        [ngClass]="{ 'unselected' : (_internalValue | async) !== option.value }"
+                        [attr.aria-selected]="(_internalValue | async) === option.value"
+                        [attr.data-value]="option.value"
+                        [attr.data-dialog-close-override]="true"
+                        [disabled]="option.disabled"
+                        class="wily_dropdown_option"
+                        role="option" tabindex="0">
+                  {{option.label}}
+                </button>
+              </ng-template>
+            </ng-container>
+          </ng-template>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-content select="template"></ng-content>
