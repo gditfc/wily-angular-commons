@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
@@ -80,6 +80,12 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    */
   @Input()
   ariaLabel: string;
+
+  /**
+   * Event emitted on slider/slider input input event
+   */
+  @Output()
+  input = new EventEmitter<number>();
 
   /**
    * The internal value of the component

@@ -5,7 +5,7 @@
          [ngModel]="_value"
          [min]="_min" [max]="_max" [step]="_step"
          [attr.aria-label]="'Select a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
-         (input)="handleInput(+slider.value)"
+         (input)="handleInput(+slider.value); input.emit(+slider.value)"
          class="access mar_right15" style="width:100%;" />
   <!-- slider value input -->
   <input #sliderInput
@@ -13,7 +13,7 @@
          [ngModel]="_value"
          [min]="_min" [max]="_max" [step]="_step"
          [attr.aria-label]="'Enter a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
-         (input)="handleInput(+sliderInput.value)"
+         (input)="handleInput(+sliderInput.value); input.emit(+sliderInput.value)"
          (blur)="handleInput(+sliderInput.value)"
          (paste)="preventPaste($event)"
          class="access input sm" style="width:auto;" />
