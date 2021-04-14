@@ -71,6 +71,15 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Set the input class list
+   * @param inputClassList the value to set
+   */
+  @Input()
+  set inputClassList(inputClassList: string) {
+    this._inputClassList = inputClassList ? inputClassList : 'access input sm';
+  }
+
+  /**
    * The unit being represented by the slider
    */
   @Input()
@@ -112,6 +121,11 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    * Whether the slider is disabled or not
    */
   _disabled: boolean;
+
+  /**
+   * The class list to apply to the number input
+   */
+  _inputClassList = 'access input sm';
 
   /**
    * The width of the colored section of the slider bar

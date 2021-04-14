@@ -23,6 +23,7 @@
   <input #sliderInput
          type="number"
          [ngModel]="_value"
+         [ngClass]="_inputClassList"
          [min]="_min" [max]="_max" [step]="_step"
          [size]="(_max + '').length"
          [disabled]="_disabled"
@@ -30,6 +31,6 @@
          (input)="handleInput(+sliderInput.value); input.emit(+sliderInput.value)"
          (blur)="handleInput(+sliderInput.value)"
          (paste)="preventPaste($event)"
-         class="access input sm" style="width:auto;" />
+         style="width:auto;" />
   <div class="text md" style="margin-left:10px;">{{unit}}</div>
 </div>
