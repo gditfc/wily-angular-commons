@@ -183,17 +183,19 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    * @param value the new value of the component
    */
   handleInput(value: number): void {
-    let valueToSet: number;
+    if (!this._disabled) {
+      let valueToSet: number;
 
-    if (isNaN(value) || value < this._min) {
-      valueToSet = this._min;
-    } else {
-      valueToSet = Math.min(this._max, value);
+      if (isNaN(value) || value < this._min) {
+        valueToSet = this._min;
+      } else {
+        valueToSet = Math.min(this._max, value);
+      }
+
+      this.value = valueToSet;
+      this.sliderInput.nativeElement.value = String(valueToSet);
+      this.onChange(valueToSet);
     }
-
-    this.value = valueToSet;
-    this.sliderInput.nativeElement.value = String(valueToSet);
-    this.onChange(valueToSet);
   }
 
   /**
