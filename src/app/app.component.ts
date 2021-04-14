@@ -96,6 +96,8 @@ export class AppComponent {
 
   colorPickerValue = '#44ff55';
 
+  sliderValue = 69;
+
   /**
    * Constructor
    */
