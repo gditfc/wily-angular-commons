@@ -1,17 +1,21 @@
 <div class="v_center">
-  <!-- TODO: make min (default 0), max (default 100), and step (optional) configurable -->
-  <!-- TODO: add input for aria label, default to current label -->
-  <!-- TODO: add string input for unit (such as %, default none) -->
-
   <!-- range slider -->
-  <input type="range" [min]="_min" [max]="_max" [step]="_step"
-         class="access mar_right15" style="width:100%;"
-         [attr.aria-label]="'Select a value' + (ariaLabel ? ' - ' + ariaLabel : '')" />
+  <input #slider
+         type="range"
+         [ngModel]="_value"
+         [min]="_min" [max]="_max" [step]="_step"
+         [attr.aria-label]="'Select a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
+         (input)="handleInput(+slider.value)"
+         class="access mar_right15" style="width:100%;" />
   <!-- slider value input -->
-  <!-- TODO: should never be empty, 0 if cleared -->
-  <input type="number" [min]="_min" [max]="_max" [step]="_step"
-         class="access input sm" style="width:auto;"
-         [attr.aria-label]="'Enter a value' + (ariaLabel ? ' - ' + ariaLabel : '')"/>
-  <!-- TODO: show unit -->
+  <input #sliderInput
+         type="number"
+         [ngModel]="_value"
+         [min]="_min" [max]="_max" [step]="_step"
+         [attr.aria-label]="'Enter a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
+         (input)="handleInput(+sliderInput.value)"
+         (blur)="handleInput(+sliderInput.value)"
+         (paste)="preventPaste($event)"
+         class="access input sm" style="width:auto;" />
   <div class="text md" style="margin-left:10px;">{{unit}}</div>
 </div>
