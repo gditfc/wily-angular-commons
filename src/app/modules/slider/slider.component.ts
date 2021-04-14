@@ -71,6 +71,15 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
+   * Set the input class list
+   * @param inputClassList the value to set
+   */
+  @Input()
+  set inputClassList(inputClassList: string) {
+    this._inputClassList = inputClassList ? inputClassList : 'access input sm';
+  }
+
+  /**
    * The unit being represented by the slider
    */
   @Input()
@@ -81,15 +90,6 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    */
   @Input()
   ariaLabel: string;
-
-  /**
-   * Set the input class list
-   * @param inputClassList the value to set
-   */
-  @Input()
-  set inputClassList(inputClassList: string) {
-    this._inputClassList = inputClassList ? inputClassList : 'access input sm';
-  }
 
   /**
    * Event emitted on slider/slider input input event
