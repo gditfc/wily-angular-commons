@@ -20,12 +20,13 @@
   <input #sliderInput
          type="number"
          [ngModel]="_value"
+         [ngClass]="_inputClassList"
          [min]="_min" [max]="_max" [step]="_step"
          [disabled]="_disabled"
          [attr.aria-label]="'Enter a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
          (input)="handleInput(+sliderInput.value); input.emit(+sliderInput.value)"
          (blur)="handleInput(+sliderInput.value)"
          (paste)="preventPaste($event)"
-         class="access input sm" style="width:auto;" />
+         style="width:auto;" />
   <div class="text md" style="margin-left:10px;">{{unit}}</div>
 </div>
