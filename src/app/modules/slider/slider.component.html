@@ -4,14 +4,14 @@
   <!-- TODO: add string input for unit (such as %, default none) -->
 
   <!-- range slider -->
-  <input type="range" min="0" max="100" step="5"
+  <input type="range" [min]="_min" [max]="_max" [step]="_step"
          class="access mar_right15" style="width:100%;"
-         aria-label="Select a value" />
+         [attr.aria-label]="'Select a value' + (ariaLabel ? ' - ' + ariaLabel : '')" />
   <!-- slider value input -->
   <!-- TODO: should never be empty, 0 if cleared -->
-  <input type="number" min="0" max="100" step="5"
+  <input type="number" [min]="_min" [max]="_max" [step]="_step"
          class="access input sm" style="width:auto;"
-         aria-label="Enter a value"/>
+         [attr.aria-label]="'Enter a value' + (ariaLabel ? ' - ' + ariaLabel : '')"/>
   <!-- TODO: show unit -->
-  <div class="text md" style="margin-left:10px;">lb</div>
+  <div class="text md" style="margin-left:10px;">{{unit}}</div>
 </div>
