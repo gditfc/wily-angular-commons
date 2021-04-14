@@ -19,6 +19,7 @@ export * from './app/modules/keyfilter/keyfilter.module';
 export * from './app/modules/notification/notification.module';
 export * from './app/modules/week-picker/week-picker.module';
 export * from './app/modules/color-picker/color-picker.module';
+export * from './app/modules/slider/slider.module';
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
@@ -40,6 +41,7 @@ export * from './app/modules/popover/popover.component';
 export * from './app/modules/notification/notification.component';
 export * from './app/modules/week-picker/week-picker.component';
 export * from './app/modules/color-picker/color-picker.component';
+export * from './app/modules/slider/slider.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
