@@ -17,6 +17,7 @@
            [disabled]="_disabled"
            [attr.aria-label]="'Select a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
            (input)="handleInput(+slider.value); input.emit(+slider.value)"
+           (change)="handleInput(+slider.value); input.emit(+slider.value)"
            class="access" style="width:100%; z-index:2;" />
   </div>
   <!-- slider value input -->

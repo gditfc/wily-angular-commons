@@ -212,9 +212,11 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
         valueToSet = Math.min(this._max, value);
       }
 
-      this.value = valueToSet;
-      this.sliderInput.nativeElement.value = String(valueToSet);
-      this.onChange(valueToSet);
+      if (this.value !== valueToSet) {
+        this.value = valueToSet;
+        this.sliderInput.nativeElement.value = String(valueToSet);
+        this.onChange(valueToSet);
+      }
     }
   }
 
