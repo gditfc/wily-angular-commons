@@ -8,6 +8,8 @@ input[type=range] {
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
   border:none;
+  padding:0;
+  margin:0;
 }
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -18,10 +20,9 @@ input[type=range]:focus {
 input[type=range]::-ms-track {
   width: 100%;
   cursor: pointer;
-
   /* Hides the slider so custom styles can be added */
   background: transparent;
-  border-color: transparent;
+  border: none;
   color: transparent;
 }
 
@@ -59,9 +60,9 @@ input[type=range]::-moz-range-thumb:active {
 /* All the same stuff for IE */
 input[type=range]::-ms-thumb {
   border: 1px solid rgba(0,0,0,0.2);
-  height: 24px;
-  width: 24px;
-  border-radius: 50px;
+  height: 8px;
+  width: 30px;
+  border-radius: 5px;
   background: #ffffff;
   cursor: grab;
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
@@ -104,7 +105,7 @@ input[type=range]::-ms-track {
   cursor: pointer;
   border-radius: 50px;
   background: transparent;
-  border-color: transparent;
+  border: none;
   /*border-width: 16px 0;*/
   color: transparent;
 }
