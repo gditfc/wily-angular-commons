@@ -125,7 +125,7 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   /**
    * The class list to apply to the number input
    */
-  _inputClassList = 'access input sm';
+  _inputClassList = 'input sm';
 
   /**
    * The width of the colored section of the slider bar

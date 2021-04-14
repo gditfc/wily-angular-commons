@@ -1,12 +1,9 @@
-<div class="row v_center">
+<div class="row wrap v_center">
   <!-- range slider -->
-  <div class="col size_1 v_center position_relative" style="margin-left:-3px; margin-right:12px;">
-    <div class="v_center position_absolute"
-         style="z-index:0; margin-left:3px; width:calc(100% - 6px); top:0; border-radius:25px; height:10px; overflow:hidden;">
-      <div class="overlay width100 position_absolute"
-           style="height:10px; z-index:0; border-radius:25px;top:0;left:0;bottom:0;right:0;"></div>
-      <div class="overlay_alt2 bg_blue position_absolute"
-           style="height:10px; z-index:1; border-radius:25px 0 0 25px;top:0;left:0;bottom:0;"
+  <div class="col size_1 min_w100 v_center position_relative" style="margin:0 12px 0 -3px;">
+    <div class="ws_track_container v_center position_absolute">
+      <div class="ws_track overlay width100 position_absolute"></div>
+      <div class="ws_track_fill overlay_alt2 bg_blue position_absolute"
            [style.width]="sliderWidth + '%'">
       </div>
     </div>
@@ -18,20 +15,23 @@
            [attr.aria-label]="'Select a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
            (input)="handleInput(+slider.value); input.emit(+slider.value)"
            (change)="handleInput(+slider.value); input.emit(+slider.value)"
-           class="access" style="width:100%; z-index:2;" />
+           class="access" style="width:100%; z-index:2; margin:10px 0;" />
   </div>
-  <!-- slider value input -->
-  <input #sliderInput
-         type="number"
-         [ngModel]="_value"
-         [ngClass]="_inputClassList"
-         [min]="_min" [max]="_max" [step]="_step"
-         [size]="(_max + '').length"
-         [disabled]="_disabled"
-         [attr.aria-label]="'Enter a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
-         (input)="handleInput(+sliderInput.value); input.emit(+sliderInput.value)"
-         (blur)="handleInput(+sliderInput.value)"
-         (paste)="preventPaste($event)"
-         style="width:auto;" />
-  <div class="text md" style="margin-left:10px;">{{unit}}</div>
+  <div class="col v_center">
+    <!-- slider value input -->
+    <input #sliderInput
+           type="number"
+           [ngModel]="_value"
+           [ngClass]="_inputClassList"
+           [min]="_min" [max]="_max" [step]="_step"
+           [size]="(_max + '').length"
+           [disabled]="_disabled"
+           [attr.aria-label]="'Enter a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
+           (input)="handleInput(+sliderInput.value); input.emit(+sliderInput.value)"
+           (blur)="handleInput(+sliderInput.value)"
+           (paste)="preventPaste($event)"
+           class="access"
+           style="width:auto;" />
+    <div class="text md" style="margin-left:10px;">{{unit}}</div>
+  </div>
 </div>
