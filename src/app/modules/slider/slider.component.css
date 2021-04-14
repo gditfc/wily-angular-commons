@@ -36,9 +36,12 @@ input[type=range]::-webkit-slider-thumb {
   width: 24px;
   border-radius: 50px;
   background: #ffffff;
-  cursor: pointer;
+  cursor: grab;
   margin-top: -8px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+input[type=range]::-webkit-slider-thumb:active {
+  cursor:grabbing;
 }
 /* All the same stuff for Firefox */
 input[type=range]::-moz-range-thumb {
@@ -47,19 +50,24 @@ input[type=range]::-moz-range-thumb {
   width: 24px;
   border-radius: 50px;
   background: #ffffff;
-  cursor: pointer;
-  margin-top: -8px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  cursor: grab;
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+input[type=range]::-moz-range-thumb:active {
+  cursor:grabbing;
 }
 /* All the same stuff for IE */
 input[type=range]::-ms-thumb {
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  border: 1px solid #000000;
-  height: 36px;
-  width: 16px;
-  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.2);
+  height: 24px;
+  width: 24px;
+  border-radius: 50px;
   background: #ffffff;
-  cursor: pointer;
+  cursor: grab;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+input[type=range]::-ms-thumb:active {
+  cursor:grabbing;
 }
 
 /* TRACK STYLES */
@@ -95,17 +103,17 @@ input[type=range]::-ms-track {
   height: 10px;
   cursor: pointer;
   border-radius: 50px;
-  /*background: transparent;*/
-  /*border-color: transparent;*/
+  background: transparent;
+  border-color: transparent;
   /*border-width: 16px 0;*/
-  /*color: transparent;*/
+  color: transparent;
 }
-/*input[type=range]::-ms-fill-lower {*/
-/*  background: #2a6495;*/
-/*  border: 0.2px solid #010101;*/
-/*  border-radius: 2.6px;*/
-/*  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
-/*}*/
+input[type=range]::-ms-fill-lower {
+  background: transparent;
+  border: none;
+  /*border-radius: 2.6px;*/
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+}
 /*input[type=range]:focus::-ms-fill-lower {*/
 /*  background: #3071a9;*/
 /*}*/
