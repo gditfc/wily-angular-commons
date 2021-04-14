@@ -1,12 +1,19 @@
-<div class="v_center">
+<div class="row v_center">
   <!-- range slider -->
-  <input #slider
-         type="range"
-         [ngModel]="_value"
-         [min]="_min" [max]="_max" [step]="_step"
-         [attr.aria-label]="'Select a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
-         (input)="handleInput(+slider.value); input.emit(+slider.value)"
-         class="access mar_right15" style="width:100%;" />
+  <div class="col size_1 v_center position_relative mar_right15">
+    <div class="overlay width100 position_absolute"
+         style="height:10px; z-index:0; border-radius:25px;"></div>
+    <!-- TODO: make width of this percentage of position of slider -->
+    <div class="overlay_alt2 bg_blue position_absolute"
+         style="height:10px; z-index:1; border-radius:25px; width:25%;"></div>
+    <input #slider
+           type="range"
+           [ngModel]="_value"
+           [min]="_min" [max]="_max" [step]="_step"
+           [attr.aria-label]="'Select a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
+           (input)="handleInput(+slider.value); input.emit(+slider.value)"
+           class="access" style="width:100%; z-index:2;" />
+  </div>
   <!-- slider value input -->
   <input #sliderInput
          type="number"
