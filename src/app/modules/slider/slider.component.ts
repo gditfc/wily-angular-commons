@@ -31,6 +31,7 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   @Input()
   set value(value: number) {
     this._value = value;
+    this.setSliderWidth();
   }
 
   /**
@@ -111,6 +112,11 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    * Whether the slider is disabled or not
    */
   _disabled: boolean;
+
+  /**
+   * The width of the colored section of the slider bar
+   */
+  sliderWidth = 0;
 
   /**
    * Function to call on change
@@ -204,5 +210,13 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    */
   preventPaste(event: ClipboardEvent): void {
     event.preventDefault();
+  }
+
+  /**
+   * Set the slider width
+   * @private
+   */
+  private setSliderWidth() {
+    this.sliderWidth = Math.min(100, this.value / this._max * 100);
   }
 }
