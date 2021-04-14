@@ -1,14 +1,17 @@
 <div class="v_center">
   <!-- TODO: make min (default 0), max (default 100), and step (optional) configurable -->
   <!-- TODO: add input for aria label, default to current label -->
-  <!-- TODO: possibly add input for unit (such as %, default none) -->
+  <!-- TODO: add string input for unit (such as %, default none) -->
 
   <!-- range slider -->
   <input type="range" min="0" max="100" step="5"
          class="access mar_right15" style="width:100%;"
          aria-label="Select a value" />
   <!-- slider value input -->
+  <!-- TODO: should never be empty, 0 if cleared -->
   <input type="number" min="0" max="100" step="5"
-         class="access input md" style="width:auto;"
+         class="access input sm" style="width:auto;"
          aria-label="Enter a value"/>
+  <!-- TODO: show unit -->
+  <div class="text md" style="margin-left:10px;">lb</div>
 </div>
