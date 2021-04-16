@@ -582,39 +582,41 @@
                 </div>
                 <div class="pad_10">
                   <div class="row">
-                    <!-- light icons -->
-                    <div class="col size_1">
-                      <div class="row_block width100">
-                        <div class="text lg center bolder mar_5 mar_bot15">Light Icons</div>
-                        <div class="row wrap">
-                          <div *ngFor="let icon of icons" class="col size_1 min_w100 column center_center mar_5">
-                            <i class="wil {{icon.class}} fa-2x fa-fw"></i>
-                            <div class="text sm center mar_top5">{{icon.class}}</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="overlay_alt2 vr mar_5"></div>
-                    <!-- regular icons -->
-                    <div class="col size_1">
-                      <div class="row_block width100">
-                        <div class="text lg center bolder mar_5 mar_bot15">Regular Icons</div>
-                        <div class="row wrap">
-                          <div *ngFor="let icon of icons" class="col size_1 min_w100 column center_center mar_5">
-                            <i class="wir {{icon.class}} fa-2x fa-fw"></i>
-                            <div class="text sm center mar_top5">{{icon.class}}</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="overlay_alt2 vr mar_5"></div>
+<!--                    &lt;!&ndash; light icons &ndash;&gt;-->
+<!--                    <div class="col size_1">-->
+<!--                      <div class="row_block width100">-->
+<!--                        <div class="text lg center bolder mar_5 mar_bot15">Light Icons</div>-->
+<!--                        <div class="row wrap">-->
+<!--                          <div *ngFor="let icon of icons" class="col size_1 min_w100 column center_center mar_5">-->
+<!--                            <i class="wil {{icon.class}} fa-2x fa-fw"></i>-->
+<!--                            <div class="text sm center mar_top5">{{icon.class}}</div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="overlay_alt2 vr mar_5"></div>-->
+<!--                    &lt;!&ndash; regular icons &ndash;&gt;-->
+<!--                    <div class="col size_1">-->
+<!--                      <div class="row_block width100">-->
+<!--                        <div class="text lg center bolder mar_5 mar_bot15">Regular Icons</div>-->
+<!--                        <div class="row wrap">-->
+<!--                          <div *ngFor="let icon of icons" class="col size_1 min_w100 column center_center mar_5">-->
+<!--                            <i class="wir {{icon.class}} fa-2x fa-fw"></i>-->
+<!--                            <div class="text sm center mar_top5">{{icon.class}}</div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="overlay_alt2 vr mar_5"></div>-->
                     <!-- solid icons -->
                     <div class="col size_1">
                       <div class="row_block width100">
-                        <div class="text lg center bolder mar_5 mar_bot15">Solid Icons</div>
+<!--                        <div class="text lg center bolder mar_5 mar_bot15">Solid Icons</div>-->
                         <div class="row wrap">
                           <div *ngFor="let icon of icons" class="col size_1 min_w100 column center_center mar_5">
-                            <i class="wis {{icon.class}} fa-2x fa-fw"></i>
+                            <div class="col size_1 center_center">
+                              <i class="wis {{icon.class}} fa-2x fa-fw"></i>
+                            </div>
                             <div class="text sm center mar_top5">{{icon.class}}</div>
                           </div>
                         </div>
