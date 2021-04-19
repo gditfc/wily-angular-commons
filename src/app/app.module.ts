@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { WilyColorPickerModule } from './modules/color-picker/color-picker.module';
 import { WilyKeyfilterModule } from './modules/keyfilter/keyfilter.module';
 import { WilyMultiSelectModule } from './modules/multi-select/multi-select.module';
+import { WilyOrdinalNumberPipeModule } from './modules/ordinal-number-pipe/ordinal-number-pipe.module';
 import { WilyProfilePicModule } from './modules/profile-pic/wily-profile-pic.module';
 import { WilyPaginatorModule } from './modules/paginator/wily-paginator.module';
 import { WilyPushContainerModule } from './modules/push-container/wily-push-container.module';
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { WilyEndpointStateModule } from './modules/endpoint-state/endpoint-state.module';
 import { WilyDialogModule } from './modules/dialog/dialog.module';
 import { WilyDatePickerModule } from './modules/date-picker/date-picker.module';
+import { WilySliderModule } from './modules/slider/slider.module';
 import { WilyWeekPickerModule } from './modules/week-picker/week-picker.module';
 import { WilyDropdownModule } from './modules/dropdown/dropdown.module';
 import { WilyTooltipModule } from './modules/tooltip/tooltip.module';
@@ -24,26 +26,28 @@ import { WilyPopoverModule } from './modules/popover/popover.module';
   declarations: [
     AppComponent
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        WilyTooltipModule,
-        WilyDialogModule,
-        WilyProfilePicModule,
-        WilyPaginatorModule,
-        WilyPushContainerModule,
-        WilyRichTextModule,
-        WilyIconsModule,
-        WilyEndpointStateModule,
-        WilyDatePickerModule,
-        WilyWeekPickerModule,
-        WilyDropdownModule,
-        WilyNotificationModule,
-        WilyPopoverModule,
-        WilyMultiSelectModule,
-        WilyKeyfilterModule,
-        WilyColorPickerModule
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    WilyTooltipModule,
+    WilyDialogModule,
+    WilyProfilePicModule,
+    WilyPaginatorModule,
+    WilyPushContainerModule,
+    WilyRichTextModule,
+    WilyIconsModule,
+    WilyEndpointStateModule,
+    WilyDatePickerModule,
+    WilyWeekPickerModule,
+    WilyDropdownModule,
+    WilyNotificationModule,
+    WilyPopoverModule,
+    WilyMultiSelectModule,
+    WilyKeyfilterModule,
+    WilyColorPickerModule,
+    WilySliderModule,
+    WilyOrdinalNumberPipeModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

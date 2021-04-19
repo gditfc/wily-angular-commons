@@ -41,7 +41,20 @@ import { NotificationService } from './services/notification.service';
       transition(':leave', [
         style({ transform: 'scale(1)', opacity: 1, height: '*' }),
         animate('0.65s cubic-bezier(.8,-0.6,0.2,1.5)',
-          style({ transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px', padding: '0px' }))
+          style({
+            transform: 'scale(0.5)',
+            opacity: 0,
+            height: '0px',
+            marginLeft: '0px',
+            marginTop: '0px',
+            marginRight: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingTop: '0px',
+            paddingRight: '0px',
+            paddingBottom: '0px'
+          })
+        )
       ]),
     ])
   ]

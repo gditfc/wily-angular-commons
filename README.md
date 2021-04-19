@@ -299,6 +299,24 @@ The rich text component accepts an HTML paragraph as a string through either its
 - `selectionChange` event emitted on editor selection change
 - `init` event emitted on editor init
 
+## WilySliderModule
+### SliderComponent
+The slider component allows for the user to select a number from a range using an HTML5 range input or through an HTML5 number input.
+#### Usage
+The slider component accepts a number through either its value input or through one/two-way data-binding via `ngModel`. To read in the value of the component, you can listen for its `ngModelChange` event (if using `ngModel`) or its `input` event. The value emitted from the component is the number selected/input by the user. Model updates on range or number input's `input` event or on the number input's `blur` event.
+#### Selector: wily-slider
+#### Inputs
+- `value` setter for the internal value of the component
+- `min` setter for the minimum value of the selectable range (default 0)
+- `max` setter for the maximum value of the selectable range (default 100)
+- `step` setter for the step size of the number range (default 1)
+- `unit` setter for the unit represented by the component value (purely for display purposes)
+- `disabled` whether the component is disabled
+- `ariaLabel` a string to append to the aria-label for the range/number input
+- `inputClassList` class-list to assign to the number input
+#### Outputs
+- `input` event emitted on range/number input's `input` event, emits the current value of the component
+
 ## WilyTooltipModule
 ### TooltipDirective
 The tooltip directive allows for a tooltip to be displayed around an HTML element.

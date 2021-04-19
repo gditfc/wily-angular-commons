@@ -15,12 +15,12 @@
           class="access page_container_color wily_dropdown_input">
     <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">
       <ng-container *ngIf="!!template else noCustomTemplate">
-        <div class="v_center">
+        <div class="v_center text_ellipsis min_w0">
           <ng-container *ngTemplateOutlet="template; context: dataContext"></ng-container>
         </div>
       </ng-container>
       <ng-template #noCustomTemplate>
-        <div>{{dataContext['$implicit'] || dataContext['label']}}</div>
+        {{dataContext['$implicit'] || dataContext['label']}}
       </ng-template>
     </ng-container>
     <ng-template #placeholderTemplate>

@@ -2,6 +2,11 @@ import { animate, AnimationEvent, style, transition, trigger } from '@angular/an
 import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 
 /**
+ * TODO: allow attachment of popover to another specified element
+ * TODO: allow configuration of attachment corner (top left, bottom left, etc)
+ */
+
+/**
  * Component to display a popover with custom content
  */
 @Component({
