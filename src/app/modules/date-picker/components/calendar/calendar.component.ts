@@ -205,11 +205,20 @@ export class CalendarComponent implements OnDestroy, OnInit {
    * The range of selectable years as an Observable
    */
   readonly validYearRange$: Observable<Array<number>> = this._validSelectionInterval.pipe(
-    map(selectionInterval => CalendarComponent.generateYearRange(
-      (selectionInterval?.start as Date)?.getFullYear() ?? null,
-      (selectionInterval?.end as Date)?.getFullYear() ?? null,
-      this.currentDate.year
-    ))
+    map(selectionInterval =>
+    {
+
+      if (this._selectedYear.getValue() < (selectionInterval?.start as Date)?.getFullYear()) {
+          this._selectedYear.next((selectionInterval?.start as Date)?.getFullYear());
+      }
+      return CalendarComponent.generateYearRange(
+        (selectionInterval?.start as Date)?.getFullYear() ?? null,
+        (selectionInterval?.end as Date)?.getFullYear() ?? null,
+        this.currentDate.year
+      );
+
+      // check if the _selectedYear is valid in the new date range, if not update to min year of range
+    })
   );
 
   /**
