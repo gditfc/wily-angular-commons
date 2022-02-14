@@ -20,6 +20,7 @@ import { WilyDropdownModule } from './modules/dropdown/dropdown.module';
 import { WilyTooltipModule } from './modules/tooltip/tooltip.module';
 import { WilyNotificationModule } from './modules/notification/notification.module';
 import { WilyPopoverModule } from './modules/popover/popover.module';
+import { WilyNewTabWarningModule } from './modules/new-tab-warning/wily-new-tab-warning.module';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { WilyPopoverModule } from './modules/popover/popover.module';
     WilyKeyfilterModule,
     WilyColorPickerModule,
     WilySliderModule,
-    WilyOrdinalNumberPipeModule
+    WilyOrdinalNumberPipeModule,
+    WilyNewTabWarningModule
   ],
   providers: [],
   bootstrap: [AppComponent]

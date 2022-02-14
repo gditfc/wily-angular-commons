@@ -20,6 +20,7 @@ export * from './app/modules/notification/notification.module';
 export * from './app/modules/week-picker/week-picker.module';
 export * from './app/modules/color-picker/color-picker.module';
 export * from './app/modules/slider/slider.module';
+export * from './app/modules/new-tab-warning/wily-new-tab-warning.module'
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
@@ -42,6 +43,7 @@ export * from './app/modules/notification/notification.component';
 export * from './app/modules/week-picker/week-picker.component';
 export * from './app/modules/color-picker/color-picker.component';
 export * from './app/modules/slider/slider.component';
+export * from './app/modules/new-tab-warning/new-tab-warning.component'
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';

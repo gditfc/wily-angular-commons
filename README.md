@@ -345,6 +345,16 @@ The week picker accepts input through either its `value` input or through one/tw
 #### Outputs
 - `weekSelected` event emitted on week select, emits the selected week in the following format: `{ start: Date, end: Date }`
 
+### NewTabWarningComponent
+The new tab warning component allows for the user to be warned before opening a new tab.
+#### Usage
+The new tab warning component accepts input through its `route` input
+#### Selector: wily-new-tab-warning
+#### Inputs:
+- `route` the route to be taken if the user chooses to continue
+#### Outputs:
+- `cancelClick` event emitted on 'cancel' button click, if the user does not wish to route to a new tab
+
 ## Usage
 `npm install wily-angular-commons`
 

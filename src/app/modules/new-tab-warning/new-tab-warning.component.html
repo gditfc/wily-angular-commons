@@ -1,0 +1,10 @@
+<div class="text md bolder paragraph mar_5">This link will open in a new window</div>
+<div class="text sm paragraph mar_5">Click OK to continue in a new window, or cancel to return.</div>
+<div class="row center_right mar_top10">
+  <button class="access btn lg icon_right overlay_alt2 bg_purple_alt mar_5" (click)="routeToNewWindow()" target="_blank">    <span class="text">OK</span>
+    <span class="icon slide_right"><i class="fas fa-chevron-right"></i></span>
+  </button>
+  <button class="access btn md overlay hov_darken mar_5" (click)="this.cancelClick.emit()">Cancel</button>
+</div>
+
+
