@@ -1,0 +1,6 @@
+<p>new-tab-warning works!</p>
+<div>This link will open in a new window</div>
+<div>Click OK to continue in a new window, or cancel to return.</div>
+<button (click)="routeToNewWindow()" target="_blank">OK</button>
+<button (click)="this.cancelClick.emit()">Cancel</button>
+
