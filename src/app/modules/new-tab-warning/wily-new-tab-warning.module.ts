@@ -6,6 +6,7 @@ import { NewTabWarningComponent } from './new-tab-warning.component';
   declarations: [NewTabWarningComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [NewTabWarningComponent]
 })
 export class WilyNewTabWarningModule { }
