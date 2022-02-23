@@ -316,20 +316,20 @@ export class PopoverComponent implements OnDestroy, OnInit {
       node.childNodes.forEach(child => elements.concat(this.getFocusableElements(child, elements)));
 
       if ('tabIndex' in node) {
-        const { tabIndex } = node as HTMLOrSVGElement;
+        const { tabIndex } = node as unknown as HTMLOrSVGElement;
 
         if (tabIndex >= 0) {
-          elements.push(node);
+          elements.push(<Element> node);
         }
       }
 
       return elements;
     } else {
       if ('tabIndex' in node) {
-        const { tabIndex } = node as HTMLOrSVGElement;
+        const { tabIndex } = node as unknown as HTMLOrSVGElement;
 
         if (tabIndex >= 0) {
-          elements.push(node);
+          elements.push(<Element> node);
         }
       }
 
