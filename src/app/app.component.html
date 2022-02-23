@@ -164,13 +164,18 @@
                   Editor
                 </div>
                 <div class="pad_15">
-                  <div class="form_label mar_bot3">Enter some formatted text below</div>
+                  <div class="form_label mar_bot3">LEGACY EDITOR: Enter some formatted text below</div>
                   <wily-rich-text
                     [placeholder]="'Some placeholder text...'"
                     [(ngModel)]="textEditorValue"
                     (ngModelChange)="console.log(textEditorValue); console.log('text editor model change')"
                     (textChanged)="handleEditorTextChange($event)">
                   </wily-rich-text>
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">V2 EDITOR: Enter some formatted text below</div>
+                  <wily-rich-text-v2>
+                  </wily-rich-text-v2>
                 </div>
               </div>
             </div>
