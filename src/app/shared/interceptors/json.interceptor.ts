@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs/index';
+import {Observable} from 'rxjs';
 
 /**
  * This interceptor will force the Content-Type header to application/json so that each http call doesn't have to.

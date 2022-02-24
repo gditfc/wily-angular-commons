@@ -1,5 +1,5 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs/index';
+import {Observable} from 'rxjs';
 import {CognitoAuthService} from '../services/cognito-auth.service';
 
 /**

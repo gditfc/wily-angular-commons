@@ -1,5 +1,5 @@
 import {Directive, ElementRef, Input, OnDestroy} from '@angular/core';
-import {BehaviorSubject} from 'rxjs/index';
+import {BehaviorSubject} from 'rxjs';
 import {CarouselOptions} from './carousel-options.model';
 
 /**
