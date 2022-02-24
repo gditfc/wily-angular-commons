@@ -455,7 +455,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * Close multi-select on escape keyup and focus on multi-select button
    * @param event the keyup KeyboardEvent
    */
-  onEscapeKeyUp(event: KeyboardEvent): void {
+  onEscapeKeyUp(event: Event): void {
     if (this.opened) {
       event.stopImmediatePropagation();
 

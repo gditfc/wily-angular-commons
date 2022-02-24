@@ -435,7 +435,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * Close dropdown on escape keyup and focus on dropdown button
    * @param event the keyup KeyboardEvent
    */
-  onEscapeKeyUp(event: KeyboardEvent): void {
+  onEscapeKeyUp(event: Event): void {
     if (this.opened) {
       event.stopImmediatePropagation();
 

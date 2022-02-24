@@ -24,6 +24,7 @@ export * from './app/modules/slider/slider.module';
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
 export * from './app/modules/keyfilter/keyfilter.directive';
+export * from './app/modules/background-carousel/background-carousel.directive';
 
 /** COMPONENTS */
 export * from './app/modules/icons/components/icon-select.component';
@@ -31,6 +32,7 @@ export * from './app/modules/paginator/paginator.component';
 export * from './app/modules/profile-pic/profile-pic.component';
 export * from './app/modules/push-container/push-container.component';
 export * from './app/modules/rich-text/rich-text.component';
+export * from './app/modules/rich-text/rich-text-v2/rich-text-v2.component';
 export * from './app/modules/endpoint-state/components/endpoint-state.component';
 export * from './app/modules/dialog/dialog.component';
 export * from './app/modules/date-picker/date-picker.component';
@@ -57,6 +59,8 @@ export * from './app/modules/notification/services/notification.service';
 
 /** PIPES */
 export * from './app/modules/ordinal-number-pipe/ordinal-number.pipe';
+export * from './app/modules/safe-pipes/safe-html.pipe';
+export * from './app/modules/safe-pipes/safe-style.pipe';
 
 /** MODELS */
 export * from './app/modules/paginator/pagination-event.model';
