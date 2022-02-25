@@ -15,18 +15,24 @@
   >
     <i class="fas fa-italic"></i>
   </button>
-  <!--
   <button
-    id="underline"
+    id="strike"
     class="btn overlay_alt2 access pad_5 mar_right5"
-    (click)="editor.chain().focus().toggleUnderline().run()"
-    [ngClass]="{ 'text-white bg-black': this.editor.isActive('underline') }"
+    (click)="editor.chain().focus().toggleStrike().run()"
+    [ngClass]="{ 'text-white bg-black': this.editor.isActive('strike') }"
   >
-    <i class="fas fa-underline"></i>
+    <i class="fas fa-strikethrough"></i>
   </button>
-  -->
+  <button
+    id="bullet-list"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().toggleBulletList().run()"
+    [ngClass]="{ 'text-white bg-black': this.editor.isActive('bullet-list') }"
+  >
+    <i class="fas fa-list"></i>
+  </button>
 </div>
-<div class="overlay_alt2 pad_10 text sm mar_top5 brad_3">
+<div class="overlay_alt2 pad_10 text sm mar_top5 brad_3 scroll_yauto" style="height:100px;">
   <tiptap-editor [editor]="editor" [(ngModel)]="value"></tiptap-editor>
 </div>
 
