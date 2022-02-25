@@ -106,7 +106,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * Class list to apply to the hex string input
    */
   @Input()
-  classList: string;
+  classList: string = null as any;
 
   /**
    * Event emitted on hex string input event. Emits the current value of the input
@@ -125,17 +125,17 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * ViewChild of the color input element
    */
   @ViewChild('colorInput')
-  colorInput: ElementRef<HTMLInputElement>;
+  colorInput: ElementRef<HTMLInputElement> = null as any;
 
   /**
    * Whether or not to render the component
    */
-  render: boolean;
+  render = false;
 
   /**
    * Whether or not the native HTML5 color picker is supported
    */
-  colorPickerSupported: boolean;
+  colorPickerSupported = false;
 
   /**
    * The value of the color picker
@@ -268,7 +268,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
         }
       }
     } else if (!value) {
-      this.value = null;
+      this.value = null as any;
       this.onChange(null);
     }
   }
@@ -286,7 +286,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
     } else if (ColorPickerComponent.FULL_HEX_REGEX.test(value)) {
       this.updateModel(value, true);
     } else {
-      this.value = null;
+      this.value = null as any;
       this.onChange(null);
     }
   }
@@ -299,7 +299,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
     event.preventDefault();
 
     if (!this._disabled) {
-      let clipboardData: DataTransfer;
+      let clipboardData: DataTransfer = null as any;
 
       if (event.clipboardData) {
         clipboardData = event.clipboardData;

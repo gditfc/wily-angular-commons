@@ -81,9 +81,9 @@ export class AppComponent {
    * Push Container component.
    */
   @ViewChild('pushContainerLeft')
-  pushContainerLeft: PushContainerComponent;
+  pushContainerLeft: PushContainerComponent = null as any;
 
-  text: string;
+  text: string = null as any;
 
   value = ['value', 'value6', 'value4'];
 

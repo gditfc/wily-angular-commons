@@ -38,13 +38,13 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
    * ViewChild of the editor div
    */
   @ViewChild('editor')
-  editor: ElementRef<HTMLDivElement>;
+  editor: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * ViewChild of the editor toolbar div
    */
   @ViewChild('toolbar')
-  toolbar: ElementRef<HTMLDivElement>;
+  toolbar: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * Set value
@@ -124,7 +124,7 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
   /**
    * Toolbar visible?
    */
-  toolbarVisible: boolean;
+  toolbarVisible = false;
 
   /**
    * Whether or not the editor has focus
@@ -135,7 +135,7 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
    * The value of the editor
    * @private
    */
-  private _value: string;
+  private _value: string = null as any;
 
   /**
    * Reference to the underlying Quill instance
@@ -152,12 +152,12 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
   /**
    * Function called on change
    */
-  onChange: (value: string) => void;
+  onChange: ((value: string) => void) | undefined;
 
   /**
    * Function called on touch
    */
-  onTouched: () => void;
+  onTouched: (() => void) | undefined;
 
   /**
    * Dependency injection site
@@ -173,6 +173,7 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
     const editorElement = this.editor.nativeElement;
     const toolbarElement = this.toolbar.nativeElement;
 
+    // @ts-ignore
     this.quill = new Quill(editorElement, {
       modules: { toolbar: toolbarElement },
       placeholder: this.placeholder,
@@ -191,12 +192,12 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
       this.quill.setContents(this.quill.clipboard.convert(this.value));
     }
 
-    this.quill.on('text-change', (delta, oldContents, source) => {
+    this.quill.on('text-change', (delta: any, oldContents: any, source: any) => {
       if (source === 'user') {
         let html = editorElement.children[0].innerHTML;
         const text = this.quill.getText().trim();
         if (html === '<p><br></p>') {
-          html = null;
+          html = null as any;
         }
 
         this.textChanged.emit({
@@ -206,12 +207,17 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
           source: source
         });
 
-        this.onChange(html);
-        this.onTouched();
+        if (this.onChange) {
+          this.onChange(html);
+        }
+
+        if (this.onTouched) {
+          this.onTouched();
+        }
       }
     });
 
-    this.quill.on('selection-change', (range, oldRange, source) => {
+    this.quill.on('selection-change', (range: any, oldRange: any, source: any) => {
       this.selectionChanged.emit({
         range: range,
         oldRange: oldRange,
@@ -288,7 +294,7 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
     if (event.key === 'Tab') {
-      this.editorFocused = document.activeElement.classList.contains('ql-editor');
+      this.editorFocused = (document.activeElement as HTMLElement).classList.contains('ql-editor');
     }
   }
 
@@ -297,7 +303,7 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
    */
   @HostListener('window:click')
   onClick(): void {
-    this.editorFocused = document.activeElement.classList.contains('ql-editor');
+    this.editorFocused = (document.activeElement as HTMLElement).classList.contains('ql-editor');
   }
 
   /**

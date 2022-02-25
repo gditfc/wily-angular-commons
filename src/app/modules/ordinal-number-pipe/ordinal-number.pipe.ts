@@ -14,7 +14,7 @@ export class OrdinalNumberPipe implements PipeTransform {
    * @param value the number to transform
    */
   transform(value: number | string): string {
-    let stringifiedNumber: string;
+    let stringifiedNumber = '';
     if (typeof value === 'string' && !isNaN(Number(value))) {
       stringifiedNumber = value;
     } else if (typeof value === 'number') {

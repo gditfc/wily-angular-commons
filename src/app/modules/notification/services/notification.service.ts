@@ -61,7 +61,7 @@ export class NotificationService {
     this._notifications.next(notifications);
 
     setTimeout(
-      () => this.deleteNotification(notification.id),
+      () => this.deleteNotification(notification.id as string),
       this.notificationLife
     );
   }

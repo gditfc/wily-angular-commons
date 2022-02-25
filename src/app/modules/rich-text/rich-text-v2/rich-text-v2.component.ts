@@ -23,14 +23,14 @@ export class RichTextV2Component implements ControlValueAccessor {
   /**
    * Function called on change
    */
-  onChange: (value: string) => void;
+  onChange: ((value: string) => void) | undefined;
 
   /**
    * Function called on touch
    */
-  onTouched: () => void;
+  onTouched: (() => void) | undefined;
 
-  private _value: string;
+  private _value: string = null as any;
 
   editor = new Editor({
     extensions: [StarterKit],
@@ -54,12 +54,16 @@ export class RichTextV2Component implements ControlValueAccessor {
 
     if (value !== this._value) {
       this._value = value;
-      this.onChange(value);
+      if (this.onChange) {
+        this.onChange(value);
+      }
     }
   }
 
   onBlur() {
-    this.onTouched();
+    if (this.onTouched) {
+      this.onTouched();
+    }
   }
 
   writeValue(value: string) {

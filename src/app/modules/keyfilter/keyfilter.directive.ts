@@ -32,7 +32,7 @@ export class KeyfilterDirective {
    * The type of filtering to apply
    */
   @Input('wilyKeyfilter')
-  filterType: 'alpha' | 'numeric' | 'alphanumeric';
+  filterType: 'alpha' | 'numeric' | 'alphanumeric' = null as any;
 
   /**
    * Whether or not to allow spaces (default false)
@@ -103,7 +103,7 @@ export class KeyfilterDirective {
   @HostListener('paste', ['$event'])
   onPaste(event: ClipboardEvent): void {
     if (this.filterType) {
-      let clipboardData: DataTransfer;
+      let clipboardData: DataTransfer = null as any;
 
       if (event.clipboardData) {
         clipboardData = event.clipboardData;
@@ -123,7 +123,7 @@ export class KeyfilterDirective {
           const charIsValid = (isSpace && this.allowSpaces) ||
             (this.filterType === 'alpha' && isAlpha) ||
             (this.filterType === 'numeric' && isNumeric) ||
-            (this.filterType === 'alphanumeric' && isAlphaNumeric)
+            (this.filterType === 'alphanumeric' && isAlphaNumeric);
 
           if (!charIsValid) {
             event.preventDefault();

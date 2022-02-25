@@ -22,7 +22,7 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    * ViewChild of the slider input
    */
   @ViewChild('sliderInput')
-  sliderInput: ElementRef<HTMLInputElement>;
+  sliderInput: ElementRef<HTMLInputElement> = null as any;
 
   /**
    * Set the value of the component
@@ -83,13 +83,13 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    * The unit being represented by the slider
    */
   @Input()
-  unit: string;
+  unit: string = null as any;
 
   /**
    * The aria-label to append to the slider/input
    */
   @Input()
-  ariaLabel: string;
+  ariaLabel: string = null as any;
 
   /**
    * Event emitted on slider/slider input input event
@@ -100,7 +100,7 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   /**
    * The internal value of the component
    */
-  _value: number;
+  _value: number = null as any;
 
   /**
    * The minimum slider value
@@ -120,7 +120,7 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   /**
    * Whether the slider is disabled or not
    */
-  _disabled: boolean;
+  _disabled = false;
 
   /**
    * The class list to apply to the number input

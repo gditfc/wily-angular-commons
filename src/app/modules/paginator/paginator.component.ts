@@ -21,19 +21,19 @@ export class PaginatorComponent implements OnChanges {
    * An array of potential page sizes.
    */
   @Input()
-  pageSizeOptions: Array<number>;
+  pageSizeOptions: Array<number> = null as any;
 
   /**
    * Current page size
    */
   @Input()
-  pageSize: number;
+  pageSize: number = null as any;
 
   /**
    * Total number of items
    */
   @Input()
-  totalLength: number;
+  totalLength: number = null as any;
 
   /**
    * Event Emitter for pagination or page size change.
@@ -54,7 +54,7 @@ export class PaginatorComponent implements OnChanges {
   /**
    * Number of pages
    */
-  numberOfPages: number;
+  numberOfPages: number = null as any;
 
   /**
    * Recalculate number of pages on input change
@@ -94,7 +94,10 @@ export class PaginatorComponent implements OnChanges {
     this.activePage = pageNumber;
 
     if (inputFocus) {
-      document.getElementById('activePage').focus();
+      const activePageElement = document.getElementById('activePage');
+      if (activePageElement) {
+        activePageElement.focus();
+      }
     }
 
     this.emitEvent();

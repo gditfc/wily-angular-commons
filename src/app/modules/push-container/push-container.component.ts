@@ -26,7 +26,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Main Content ID that will be pushed by this
    */
   @Input()
-  mainContentId: string;
+  mainContentId: string = null as any;
 
   /**
    * Side to push from (left/right)
@@ -87,7 +87,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    */
   visibility = false;
 
-  private unclickable: boolean;
+  private unclickable = false;
 
   /**
    * Private variable to detect if the breakpoint is exceeded

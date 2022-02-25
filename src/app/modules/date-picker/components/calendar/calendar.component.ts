@@ -76,32 +76,32 @@ export class CalendarComponent implements OnDestroy, OnInit {
    * ViewChild of the calendar widget parent div element
    */
   @ViewChild('calendarWidgetDiv')
-  calendarWidgetDiv: ElementRef<HTMLDivElement>;
+  calendarWidgetDiv: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * ViewChild of the month select element
    */
   @ViewChild('yearSelect')
-  yearSelect: ElementRef<HTMLSelectElement>;
+  yearSelect: ElementRef<HTMLSelectElement> = null as any;
 
   /**
    * ViewChild of the done button
    */
   @ViewChild('doneButton')
-  doneButton: ElementRef<HTMLButtonElement>;
+  doneButton: ElementRef<HTMLButtonElement> = null as any;
 
   /**
    * QueryList of the calendar date buttons for the currently selected month/year
    */
   @ViewChildren('calendarDate')
-  calendarDates: QueryList<ElementRef<HTMLButtonElement>>;
+  calendarDates: QueryList<ElementRef<HTMLButtonElement>> = null as any;
 
   /**
    * The selected date value
    */
   @Input('value')
   set setValue(value: Date) {
-    let metaDateValue: MetaDate = null;
+    let metaDateValue: MetaDate = null as any;
 
     if (!!value) {
       metaDateValue = {
@@ -167,12 +167,12 @@ export class CalendarComponent implements OnDestroy, OnInit {
   /**
    * BehaviorSubject tracking the current value
    */
-  readonly _value = new BehaviorSubject<MetaDate>(null);
+  readonly _value = new BehaviorSubject<MetaDate>(null as any);
 
   /**
    * BehaviorSubject tracking the valid selection interval
    */
-  readonly _validSelectionInterval = new BehaviorSubject<Interval>(null);
+  readonly _validSelectionInterval = new BehaviorSubject<Interval>(null as any);
 
   /**
    * BehaviorSubject tracking the currently selected month
@@ -205,8 +205,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
    * The range of selectable years as an Observable
    */
   readonly validYearRange$: Observable<Array<number>> = this._validSelectionInterval.pipe(
-    map(selectionInterval =>
-    {
+    map(selectionInterval => {
 
       if (this._selectedYear.getValue() < (selectionInterval?.start as Date)?.getFullYear()) {
           this._selectedYear.next((selectionInterval?.start as Date)?.getFullYear());
@@ -230,7 +229,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
   /**
    * The currently selected date
    */
-  selectedDate: MetaDate;
+  selectedDate: MetaDate = null as any;
 
   /**
    * Generate a 42 element array representing the input month's days with
@@ -294,7 +293,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
       return fullMonth;
     }
 
-    return null;
+    return null as any;
   }
 
   /**
@@ -303,7 +302,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
    * @param maxYear the end of the range
    * @param currentYear the current year
    */
-  private static generateYearRange(minYear, maxYear, currentYear): Array<number> {
+  private static generateYearRange(minYear: number, maxYear: number, currentYear: number): Array<number> {
     let start: number, end: number;
     if (!minYear && !!maxYear) {
       start = maxYear = 50;
@@ -371,8 +370,8 @@ export class CalendarComponent implements OnDestroy, OnInit {
             this._selectedMonth.next(value.month);
             this._selectedYear.next(value.year);
           } else {
-            this._value.next(null);
-            this.selectedDate = null;
+            this._value.next(null as any);
+            this.selectedDate = null as any;
           }
         } else {
           this._selectedMonth.next(this.currentDate.month);
@@ -481,7 +480,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
       const calendarDates = this.calendarDates.toArray();
       const foundIndex = calendarDates.findIndex(calendarDate => {
         return date === Number.parseInt(
-          calendarDate.nativeElement.getAttribute('data-date'),
+          calendarDate.nativeElement.getAttribute('data-date') as string,
           10
         );
       });
@@ -501,7 +500,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
     const calendarDates = this.calendarDates.toArray();
     const foundIndex = calendarDates.findIndex(calendarDate => {
       return date === Number.parseInt(
-        calendarDate.nativeElement.getAttribute('data-date'),
+        calendarDate.nativeElement.getAttribute('data-date') as string,
         10
       );
     });
@@ -520,7 +519,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
     const calendarDates = this.calendarDates.toArray();
     const foundIndex = calendarDates.findIndex(calendarDate => {
       return date === Number.parseInt(
-        calendarDate.nativeElement.getAttribute('data-date'),
+        calendarDate.nativeElement.getAttribute('data-date') as string,
         10
       );
     });
@@ -539,7 +538,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
     const calendarDates = this.calendarDates.toArray();
     const foundIndex = calendarDates.findIndex(calendarDate => {
       return date === Number.parseInt(
-        calendarDate.nativeElement.getAttribute('data-date'),
+        calendarDate.nativeElement.getAttribute('data-date') as string,
         10
       );
     });

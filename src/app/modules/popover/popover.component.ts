@@ -79,12 +79,12 @@ export class PopoverComponent implements OnDestroy, OnInit {
   /**
    * Whether or not the popover should render
    */
-  render: boolean;
+  render = false;
 
   /**
    * Whether or not the popover is visible
    */
-  visible: boolean;
+  visible = false;
 
   /**
    * The width of the popover
@@ -100,13 +100,13 @@ export class PopoverComponent implements OnDestroy, OnInit {
    * The element to target
    * @private
    */
-  private target: EventTarget;
+  private target: EventTarget = null as any;
 
   /**
    * The popover content container
    * @private
    */
-  private container: HTMLDivElement;
+  private container: HTMLDivElement = null as any;
 
   /**
    * Array of escape keyup unlisten functions
@@ -184,10 +184,10 @@ export class PopoverComponent implements OnDestroy, OnInit {
    */
   toggle(event?: Event): void {
     if (event) {
-      this.target = event.currentTarget ?? event.target;
+      this.target = event.currentTarget ?? event.target as EventTarget;
       event.stopImmediatePropagation();
     } else {
-      this.target = null;
+      this.target = null as any;
     }
 
     if (!this.visible && this.target) {
