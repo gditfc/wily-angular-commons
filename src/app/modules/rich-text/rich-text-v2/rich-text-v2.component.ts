@@ -1,6 +1,7 @@
 import {Component, forwardRef, ViewEncapsulation} from '@angular/core';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
+
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 export const RICH_TEXT2_VALUE_ACCESSOR: any = {
@@ -32,7 +33,13 @@ export class RichTextV2Component implements ControlValueAccessor {
   private _value: string;
 
   editor = new Editor({
-    extensions: [StarterKit]
+    extensions: [StarterKit],
+    editorProps: {
+      attributes: {
+        class: '',
+        spellcheck: 'true',
+      },
+    },
   });
 
   get value(): any {
