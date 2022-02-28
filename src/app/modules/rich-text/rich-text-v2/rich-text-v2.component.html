@@ -3,57 +3,118 @@
     id="bold"
     class="btn overlay_alt2 access pad_5 mar_right5"
     (click)="editor.chain().focus().toggleBold().run()"
-    [ngClass]="{ 'text-white bg-black': this.editor.isActive('bold') }"
+    [ngClass]="{ 'bg_blue': this.editor.isActive('bold') }"
   >
-    <i class="fas fa-bold"></i>
+    <i class="fas fa-bold fa-fw"></i>
   </button>
   <button
     id="italic"
     class="btn overlay_alt2 access pad_5 mar_right5"
     (click)="editor.chain().focus().toggleItalic().run()"
-    [ngClass]="{ 'text-white bg-black': this.editor.isActive('italic') }"
+    [ngClass]="{ 'bg_blue': this.editor.isActive('italic') }"
   >
-    <i class="fas fa-italic"></i>
+    <i class="fas fa-italic fa-fw"></i>
+  </button>
+  <button
+    id="underline"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().toggleUnderline().run()"
+    [ngClass]="{ 'bg_blue': this.editor.isActive('underline') }"
+  >
+    <i class="fas fa-underline fa-fw"></i>
   </button>
   <button
     id="strike"
     class="btn overlay_alt2 access pad_5 mar_right5"
     (click)="editor.chain().focus().toggleStrike().run()"
-    [ngClass]="{ 'text-white bg-black': this.editor.isActive('strike') }"
+    [ngClass]="{ 'bg_blue': this.editor.isActive('strike') }"
   >
-    <i class="fas fa-strikethrough"></i>
+    <i class="fas fa-strikethrough fa-fw"></i>
   </button>
   <button
     id="bullet-list"
     class="btn overlay_alt2 access pad_5 mar_right5"
     (click)="editor.chain().focus().toggleBulletList().run()"
-    [ngClass]="{ 'text-white bg-black': this.editor.isActive('bullet-list') }"
+    [ngClass]="{ 'bg_blue': this.editor.isActive('bullet-list') }"
   >
-    <i class="fas fa-list"></i>
+    <i class="fas fa-list fa-fw"></i>
   </button>
   <button
     id="ordered-list"
     class="btn overlay_alt2 access pad_5 mar_right5"
     (click)="editor.chain().focus().toggleOrderedList().run()"
-    [ngClass]="{ 'text-white bg-black': this.editor.isActive('ordered-list') }"
+    [ngClass]="{ 'bg_blue': this.editor.isActive('ordered-list') }"
   >
-    <i class="fas fa-list-ol"></i>
+    <i class="fas fa-list-ol fa-fw"></i>
   </button>
   <button
     id="heading1"
     class="btn overlay_alt2 access pad_5 mar_right5"
     (click)="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-    [ngClass]="{ 'text-white bg-black': this.editor.isActive('heading1') }"
+    [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 1 }) }"
   >
-    <i class="fas fa-header"></i>1
+    <i class="fas fa-header fa-fw"></i>1
   </button>
   <button
     id="heading2"
     class="btn overlay_alt2 access pad_5 mar_right5"
     (click)="editor.chain().focus().toggleHeading({ level: 2 }).run()"
-    [ngClass]="{ 'text-white bg-black': this.editor.isActive('heading2') }"
+    [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 2 }) }"
   >
-    <i class="fas fa-header"></i>2
+    <i class="fas fa-header fa-fw"></i>2
+  </button>
+  <!--button
+    id="left-align"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().setTextAlign('left').run()"
+    [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'left' }) }"
+  >
+    <i class="fas fa-align-left fa-fw"></i>
+  </button>
+  <button
+    id="center-align"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().setTextAlign('center').run()"
+    [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'center' }) }"
+  >
+    <i class="fas fa-align-center fa-fw"></i>2
+  </button>
+  <button
+    id="right-align"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().setTextAlign('right').run()"
+    [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'right' }) }"
+  >
+    <i class="fas fa-align-right fa-fw"></i>2
+  </button>
+  <button
+    id="justify-align"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().setTextAlign('justify').run()"
+    [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'justify' }) }"
+  >
+    <i class="fas fa-align-justify fa-fw"></i>2
+  </button-->
+  <button *ngIf="this.editor.isActive('link')"
+          id="unlink"
+          class="btn overlay_alt2 access pad_5 mar_right5 bg_blue"
+          (click)="setLink()"
+  >
+      <i class="fas fa-link-slash fa-fw"></i>
+  </button>
+  <button *ngIf="!this.editor.isActive('link')"
+          id="link"
+          class="btn overlay_alt2 access pad_5 mar_right5"
+          (click)="setLink()"
+  >
+      <i class="fas fa-link fa-fw"></i>
+  </button>
+  <button
+    id="clear-format"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().clearNodes().unsetAllMarks().run()"
+  >
+    <i class="fas fa-text-slash fa-fw"></i>
   </button>
 </div>
 <div class="overlay_alt2 pad_10 text sm mar_top5 brad_3 scroll_yauto" style="height:100px;">

@@ -1,6 +1,9 @@
 import {Component, forwardRef, ViewEncapsulation} from '@angular/core';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
+import TextAlign from '@tiptap/extension-text';
+import Link from '@tiptap/extension-link';
+import Underline from '@tiptap/extension-underline';
 
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
@@ -33,7 +36,14 @@ export class RichTextV2Component implements ControlValueAccessor {
   private _value: string = null as any;
 
   editor = new Editor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Link,
+      Underline,
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+    ],
     editorProps: {
       attributes: {
         class: '',
@@ -84,4 +94,27 @@ export class RichTextV2Component implements ControlValueAccessor {
     this.editor.setEditable(isDisabled);
   }
 
+  setLink(): void {
+    const previousUrl = this.editor.getAttributes('link').href;
+    let url = '';
+
+    if (!this.editor.isActive('link')) {
+      url = window.prompt('URL', previousUrl) as string;
+    }
+
+    // cancelled
+    if (url === null) {
+      return;
+    }
+
+    // empty
+    if (url === '') {
+      this.editor.chain().focus().extendMarkRange('link').unsetLink().run();
+
+      return;
+    }
+
+    // update link
+    this.editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
+  }
 }
