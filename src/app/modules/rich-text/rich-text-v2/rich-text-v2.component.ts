@@ -1,7 +1,7 @@
 import {Component, forwardRef, ViewEncapsulation} from '@angular/core';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
-import TextAlign from '@tiptap/extension-text';
+import TextAlign from '@tiptap/extension-text-align';
 import Link from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
 

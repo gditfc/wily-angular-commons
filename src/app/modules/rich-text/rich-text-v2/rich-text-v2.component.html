@@ -63,7 +63,7 @@
   >
     <i class="fas fa-header fa-fw"></i>2
   </button>
-  <!--button
+  <button
     id="left-align"
     class="btn overlay_alt2 access pad_5 mar_right5"
     (click)="editor.chain().focus().setTextAlign('left').run()"
@@ -77,7 +77,7 @@
     (click)="editor.chain().focus().setTextAlign('center').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'center' }) }"
   >
-    <i class="fas fa-align-center fa-fw"></i>2
+    <i class="fas fa-align-center fa-fw"></i>
   </button>
   <button
     id="right-align"
@@ -85,7 +85,7 @@
     (click)="editor.chain().focus().setTextAlign('right').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'right' }) }"
   >
-    <i class="fas fa-align-right fa-fw"></i>2
+    <i class="fas fa-align-right fa-fw"></i>
   </button>
   <button
     id="justify-align"
@@ -93,8 +93,8 @@
     (click)="editor.chain().focus().setTextAlign('justify').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'justify' }) }"
   >
-    <i class="fas fa-align-justify fa-fw"></i>2
-  </button-->
+    <i class="fas fa-align-justify fa-fw"></i>
+  </button>
   <button *ngIf="this.editor.isActive('link')"
           id="unlink"
           class="btn overlay_alt2 access pad_5 mar_right5 bg_blue"
