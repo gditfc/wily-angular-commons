@@ -31,8 +31,31 @@
   >
     <i class="fas fa-list"></i>
   </button>
+  <button
+    id="ordered-list"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().toggleOrderedList().run()"
+    [ngClass]="{ 'text-white bg-black': this.editor.isActive('ordered-list') }"
+  >
+    <i class="fas fa-list-ol"></i>
+  </button>
+  <button
+    id="heading1"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+    [ngClass]="{ 'text-white bg-black': this.editor.isActive('heading1') }"
+  >
+    <i class="fas fa-header"></i>1
+  </button>
+  <button
+    id="heading2"
+    class="btn overlay_alt2 access pad_5 mar_right5"
+    (click)="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+    [ngClass]="{ 'text-white bg-black': this.editor.isActive('heading2') }"
+  >
+    <i class="fas fa-header"></i>2
+  </button>
 </div>
 <div class="overlay_alt2 pad_10 text sm mar_top5 brad_3 scroll_yauto" style="height:100px;">
   <tiptap-editor [editor]="editor" [(ngModel)]="value"></tiptap-editor>
 </div>
-
