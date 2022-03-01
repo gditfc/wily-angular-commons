@@ -1,4 +1,4 @@
-<div class="row overlay_alt2 pad_10 brad_3">
+<div class="row overlay_alt2 pad_10 brad_3" *ngIf="!this.hideControls && this.editor.isEditable">
   <button
     id="bold"
     class="btn overlay_alt2 access pad_5 mar_right5"
@@ -117,6 +117,6 @@
     <i class="fas fa-text-slash fa-fw"></i>
   </button>
 </div>
-<div class="overlay_alt2 pad_10 text sm mar_top5 brad_3 scroll_yauto" style="height:100px;">
+<div class="overlay_alt2 pad_10 text sm mar_top5 brad_3 scroll_yauto" [style.height]="this.height">
   <tiptap-editor [editor]="editor" [(ngModel)]="value"></tiptap-editor>
 </div>

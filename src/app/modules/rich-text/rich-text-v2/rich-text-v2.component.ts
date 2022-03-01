@@ -1,9 +1,10 @@
-import {Component, forwardRef, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, forwardRef, Input, ViewEncapsulation} from '@angular/core';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
 import Link from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
+import Placeholder from '@tiptap/extension-placeholder';
 
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
@@ -21,7 +22,26 @@ export const RICH_TEXT2_VALUE_ACCESSOR: any = {
   encapsulation: ViewEncapsulation.None
 
 })
-export class RichTextV2Component implements ControlValueAccessor {
+export class RichTextV2Component implements ControlValueAccessor, AfterViewInit {
+
+  @Input()
+  placeholder = '';
+
+  @Input()
+  hideControls = false;
+
+  @Input()
+  height = '100px';
+
+  @Input()
+  get readonly(): boolean {
+    return this._editable;
+  }
+
+  set readonly(readonly: boolean) {
+    this._editable = !readonly;
+    this.editor.setEditable(this._editable);
+  }
 
   /**
    * Function called on change
@@ -34,6 +54,7 @@ export class RichTextV2Component implements ControlValueAccessor {
   onTouched: (() => void) | undefined;
 
   private _value: string = null as any;
+  private _editable = true;
 
   editor = new Editor({
     extensions: [
@@ -43,6 +64,9 @@ export class RichTextV2Component implements ControlValueAccessor {
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
+      Placeholder.configure({
+        placeholder: () => this.placeholder
+      })
     ],
     editorProps: {
       attributes: {
@@ -50,6 +74,7 @@ export class RichTextV2Component implements ControlValueAccessor {
         spellcheck: 'true',
       },
     },
+    enablePasteRules: [Link, Underline, StarterKit, Underline, TextAlign]
   });
 
   get value(): any {
@@ -68,6 +93,10 @@ export class RichTextV2Component implements ControlValueAccessor {
         this.onChange(value);
       }
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.editor.setEditable(this._editable);
   }
 
   onBlur() {
