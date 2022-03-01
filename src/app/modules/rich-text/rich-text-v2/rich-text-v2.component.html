@@ -1,7 +1,9 @@
 <div class="row overlay_alt2 pad_10 brad_3" *ngIf="!this.hideControls && this.editor.isEditable">
   <button
     id="bold"
+    aria-label="Bold"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Bold" tooltipPosition="top"
     (click)="editor.chain().focus().toggleBold().run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive('bold') }"
   >
@@ -9,7 +11,9 @@
   </button>
   <button
     id="italic"
+    aria-label="Italic"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Italic" tooltipPosition="top"
     (click)="editor.chain().focus().toggleItalic().run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive('italic') }"
   >
@@ -17,7 +21,9 @@
   </button>
   <button
     id="underline"
+    aria-label="Underline"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Underline" tooltipPosition="top"
     (click)="editor.chain().focus().toggleUnderline().run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive('underline') }"
   >
@@ -25,7 +31,9 @@
   </button>
   <button
     id="strike"
+    aria-label="Strike"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Strike" tooltipPosition="top"
     (click)="editor.chain().focus().toggleStrike().run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive('strike') }"
   >
@@ -33,7 +41,9 @@
   </button>
   <button
     id="bullet-list"
+    aria-label="Bullet List"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Bullet List" tooltipPosition="top"
     (click)="editor.chain().focus().toggleBulletList().run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive('bullet-list') }"
   >
@@ -41,7 +51,9 @@
   </button>
   <button
     id="ordered-list"
+    aria-label="Ordered List"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Ordered List" tooltipPosition="top"
     (click)="editor.chain().focus().toggleOrderedList().run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive('ordered-list') }"
   >
@@ -49,7 +61,9 @@
   </button>
   <button
     id="heading1"
+    aria-label="Heading 1"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Heading 1" tooltipPosition="top"
     (click)="editor.chain().focus().toggleHeading({ level: 1 }).run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 1 }) }"
   >
@@ -57,7 +71,9 @@
   </button>
   <button
     id="heading2"
+    aria-label="Heading 2"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Heading 2" tooltipPosition="top"
     (click)="editor.chain().focus().toggleHeading({ level: 2 }).run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 2 }) }"
   >
@@ -65,7 +81,9 @@
   </button>
   <button
     id="left-align"
+    aria-label="Left Align"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Left Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('left').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'left' }) }"
   >
@@ -73,7 +91,9 @@
   </button>
   <button
     id="center-align"
+    aria-label="Center Align"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Center Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('center').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'center' }) }"
   >
@@ -81,7 +101,9 @@
   </button>
   <button
     id="right-align"
+    aria-label="Right Align"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Right Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('right').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'right' }) }"
   >
@@ -89,7 +111,9 @@
   </button>
   <button
     id="justify-align"
+    aria-label="Justify Align"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Justify Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('justify').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'justify' }) }"
   >
@@ -97,21 +121,27 @@
   </button>
   <button *ngIf="this.editor.isActive('link')"
           id="unlink"
+          aria-label="Link"
           class="btn overlay_alt2 access pad_5 mar_right5 bg_blue"
+          wilyTooltip="Link" tooltipPosition="top"
           (click)="setLink()"
   >
       <i class="fas fa-link-slash fa-fw"></i>
   </button>
   <button *ngIf="!this.editor.isActive('link')"
           id="link"
+          aria-label="Link"
           class="btn overlay_alt2 access pad_5 mar_right5"
+          wilyTooltip="Link" tooltipPosition="top"
           (click)="setLink()"
   >
       <i class="fas fa-link fa-fw"></i>
   </button>
   <button
     id="clear-format"
+    aria-label="Clear Format"
     class="btn overlay_alt2 access pad_5 mar_right5"
+    wilyTooltip="Clear Format" tooltipPosition="top"
     (click)="editor.chain().focus().clearNodes().unsetAllMarks().run()"
   >
     <i class="fas fa-text-slash fa-fw"></i>
