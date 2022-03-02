@@ -25,7 +25,7 @@
     <button
       id="bold"
       aria-label="Bold"
-      class="btn access pad_5 mar_right5"
+      class="btn access pad_5 mar_right5 mar_left5"
       wilyTooltip="Bold" tooltipPosition="top"
       (click)="editor.chain().focus().toggleBold().run()"
       [ngClass]="{ 'bg_blue': this.editor.isActive('bold') }"
@@ -67,7 +67,7 @@
     <button
       id="bullet-list"
       aria-label="Bulleted List"
-      class="btn access pad_5 mar_right5"
+      class="btn access pad_5 mar_right5 mar_left5"
       wilyTooltip="Bulleted List" tooltipPosition="top"
       (click)="editor.chain().focus().toggleBulletList().run()"
       [ngClass]="{ 'bg_blue': this.editor.isActive('bullet-list') }"
@@ -89,7 +89,7 @@
   <button
     id="left-align"
     aria-label="Left Align"
-    class="btn access pad_5 mar_right5"
+    class="btn access pad_5 mar_right5 mar_left5"
     wilyTooltip="Left Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('left').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'left' }) }"
