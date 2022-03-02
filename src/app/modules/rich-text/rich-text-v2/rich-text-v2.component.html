@@ -1,88 +1,95 @@
-<div class="row overlay_alt2 pad_10 brad_3" *ngIf="!this.hideControls && this.editor.isEditable">
-  <button
-    id="bold"
-    aria-label="Bold"
-    class="btn overlay_alt2 access pad_5 mar_right5"
-    wilyTooltip="Bold" tooltipPosition="top"
-    (click)="editor.chain().focus().toggleBold().run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive('bold') }"
-  >
-    <i class="fas fa-bold fa-fw"></i>
-  </button>
-  <button
-    id="italic"
-    aria-label="Italic"
-    class="btn overlay_alt2 access pad_5 mar_right5"
-    wilyTooltip="Italic" tooltipPosition="top"
-    (click)="editor.chain().focus().toggleItalic().run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive('italic') }"
-  >
-    <i class="fas fa-italic fa-fw"></i>
-  </button>
-  <button
-    id="underline"
-    aria-label="Underline"
-    class="btn overlay_alt2 access pad_5 mar_right5"
-    wilyTooltip="Underline" tooltipPosition="top"
-    (click)="editor.chain().focus().toggleUnderline().run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive('underline') }"
-  >
-    <i class="fas fa-underline fa-fw"></i>
-  </button>
-  <button
-    id="strike"
-    aria-label="Strike"
-    class="btn overlay_alt2 access pad_5 mar_right5"
-    wilyTooltip="Strike" tooltipPosition="top"
-    (click)="editor.chain().focus().toggleStrike().run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive('strike') }"
-  >
-    <i class="fas fa-strikethrough fa-fw"></i>
-  </button>
-  <button
-    id="bullet-list"
-    aria-label="Bullet List"
-    class="btn overlay_alt2 access pad_5 mar_right5"
-    wilyTooltip="Bullet List" tooltipPosition="top"
-    (click)="editor.chain().focus().toggleBulletList().run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive('bullet-list') }"
-  >
-    <i class="fas fa-list fa-fw"></i>
-  </button>
-  <button
-    id="ordered-list"
-    aria-label="Ordered List"
-    class="btn overlay_alt2 access pad_5 mar_right5"
-    wilyTooltip="Ordered List" tooltipPosition="top"
-    (click)="editor.chain().focus().toggleOrderedList().run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive('ordered-list') }"
-  >
-    <i class="fas fa-list-ol fa-fw"></i>
-  </button>
-  <button
-    id="heading1"
-    aria-label="Heading 1"
-    class="btn overlay_alt2 access pad_5 mar_right5"
-    wilyTooltip="Heading 1" tooltipPosition="top"
-    (click)="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 1 }) }"
-  >
-    <i class="fas fa-header fa-fw"></i>1
-  </button>
-  <button
-    id="heading2"
-    aria-label="Heading 2"
-    class="btn overlay_alt2 access pad_5 mar_right5"
-    wilyTooltip="Heading 2" tooltipPosition="top"
-    (click)="editor.chain().focus().toggleHeading({ level: 2 }).run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 2 }) }"
-  >
-    <i class="fas fa-header fa-fw"></i>2
-  </button>
+<div class="row overlay_alt2 wrap hide_element"  style="border-width: 1px 1px 0 1px;" *ngIf="!this.hideControls && this.editor.isEditable">
+  <div class="col v_center overlay_alt2 border_right pad_5">
+    <button
+      id="heading1"
+      aria-label="Heading 1"
+      class="btn access pad_5 mar_right5 mar_left5"
+      wilyTooltip="Heading 1" tooltipPosition="top"
+      (click)="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+      [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 1 }) }"
+    >
+      <i class="fas fa-header fa-fw"></i>1
+    </button>
+    <button
+      id="heading2"
+      aria-label="Heading 2"
+      class="btn access pad_5 mar_right5"
+      wilyTooltip="Heading 2" tooltipPosition="top"
+      (click)="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+      [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 2 }) }"
+    >
+      <i class="fas fa-header fa-fw"></i>2
+    </button>
+  </div>
+  <div class="col v_center overlay_alt2 border_right pad_5">
+    <button
+      id="bold"
+      aria-label="Bold"
+      class="btn access pad_5 mar_right5"
+      wilyTooltip="Bold" tooltipPosition="top"
+      (click)="editor.chain().focus().toggleBold().run()"
+      [ngClass]="{ 'bg_blue': this.editor.isActive('bold') }"
+    >
+      <i class="fas fa-bold fa-fw"></i>
+    </button>
+    <button
+      id="italic"
+      aria-label="Italic"
+      class="btn access pad_5 mar_right5"
+      wilyTooltip="Italic" tooltipPosition="top"
+      (click)="editor.chain().focus().toggleItalic().run()"
+      [ngClass]="{ 'bg_blue': this.editor.isActive('italic') }"
+    >
+      <i class="fas fa-italic fa-fw"></i>
+    </button>
+    <button
+      id="underline"
+      aria-label="Underline"
+      class="btn access pad_5 mar_right5"
+      wilyTooltip="Underline" tooltipPosition="top"
+      (click)="editor.chain().focus().toggleUnderline().run()"
+      [ngClass]="{ 'bg_blue': this.editor.isActive('underline') }"
+    >
+      <i class="fas fa-underline fa-fw"></i>
+    </button>
+    <button
+      id="strike"
+      aria-label="Strike"
+      class="btn access pad_5 mar_right5"
+      wilyTooltip="Strike" tooltipPosition="top"
+      (click)="editor.chain().focus().toggleStrike().run()"
+      [ngClass]="{ 'bg_blue': this.editor.isActive('strike') }"
+    >
+      <i class="fas fa-strikethrough fa-fw"></i>
+    </button>
+  </div>
+  <div class="col v_center overlay_alt2 border_right pad_5">
+    <button
+      id="bullet-list"
+      aria-label="Bulleted List"
+      class="btn access pad_5 mar_right5"
+      wilyTooltip="Bulleted List" tooltipPosition="top"
+      (click)="editor.chain().focus().toggleBulletList().run()"
+      [ngClass]="{ 'bg_blue': this.editor.isActive('bullet-list') }"
+    >
+      <i class="fas fa-list fa-fw"></i>
+    </button>
+    <button
+      id="ordered-list"
+      aria-label="Ordered List"
+      class="btn access pad_5 mar_right5"
+      wilyTooltip="Ordered List" tooltipPosition="top"
+      (click)="editor.chain().focus().toggleOrderedList().run()"
+      [ngClass]="{ 'bg_blue': this.editor.isActive('ordered-list') }"
+    >
+      <i class="fas fa-list-ol fa-fw"></i>
+    </button>
+  </div>
+  <div class="col v_center overlay_alt2 border_right pad_5">
   <button
     id="left-align"
     aria-label="Left Align"
-    class="btn overlay_alt2 access pad_5 mar_right5"
+    class="btn access pad_5 mar_right5"
     wilyTooltip="Left Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('left').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'left' }) }"
@@ -92,7 +99,7 @@
   <button
     id="center-align"
     aria-label="Center Align"
-    class="btn overlay_alt2 access pad_5 mar_right5"
+    class="btn access pad_5 mar_right5"
     wilyTooltip="Center Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('center').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'center' }) }"
@@ -102,7 +109,7 @@
   <button
     id="right-align"
     aria-label="Right Align"
-    class="btn overlay_alt2 access pad_5 mar_right5"
+    class="btn access pad_5 mar_right5"
     wilyTooltip="Right Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('right').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'right' }) }"
@@ -112,17 +119,19 @@
   <button
     id="justify-align"
     aria-label="Justify Align"
-    class="btn overlay_alt2 access pad_5 mar_right5"
+    class="btn access pad_5 mar_right5"
     wilyTooltip="Justify Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('justify').run()"
     [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'justify' }) }"
   >
     <i class="fas fa-align-justify fa-fw"></i>
   </button>
+  </div>
+  <div class="col v_center overlay_alt2 border_right pad_5">
   <button *ngIf="this.editor.isActive('link')"
           id="unlink"
           aria-label="Link"
-          class="btn overlay_alt2 access pad_5 mar_right5 bg_blue"
+          class="btn access pad_5 mar_right5 mar_left5 bg_blue"
           wilyTooltip="Link" tooltipPosition="top"
           (click)="setLink()"
   >
@@ -131,22 +140,25 @@
   <button *ngIf="!this.editor.isActive('link')"
           id="link"
           aria-label="Link"
-          class="btn overlay_alt2 access pad_5 mar_right5"
+          class="btn access pad_5 mar_right5 mar_left5"
           wilyTooltip="Link" tooltipPosition="top"
           (click)="setLink()"
   >
       <i class="fas fa-link fa-fw"></i>
   </button>
+  </div>
+  <div class="col size_1 v_center overlay_alt2 border_none pad_5">
   <button
     id="clear-format"
     aria-label="Clear Format"
-    class="btn overlay_alt2 access pad_5 mar_right5"
+    class="btn access pad_5 mar_right5 mar_left5"
     wilyTooltip="Clear Format" tooltipPosition="top"
     (click)="editor.chain().focus().clearNodes().unsetAllMarks().run()"
   >
     <i class="fas fa-text-slash fa-fw"></i>
   </button>
+  </div>
 </div>
-<div class="overlay_alt2 pad_10 text sm mar_top5 brad_3 scroll_yauto" [style.height]="this.height">
+<div class="overlay_alt2 pad_10 text sm scroll_yauto" [style.height]="this.height">
   <tiptap-editor [editor]="editor" [(ngModel)]="value"></tiptap-editor>
 </div>
