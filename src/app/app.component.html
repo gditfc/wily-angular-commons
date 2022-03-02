@@ -178,8 +178,9 @@
                     placeholder="Some placeholder text..."
                     [hideControls]="false"
                     [readonly]="false"
-                    [height]="'400px'"
                     [(ngModel)]="textEditorValue2"
+                    (ngModelChange)="console.log(textEditorValue2); console.log('text editor model change')"
+                    (textChanged)="handleEditorTextChange($event)"
                   >
                   </wily-rich-text-v2>
                 </div>

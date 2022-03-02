@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, forwardRef, Input, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, forwardRef, Input, Output, ViewEncapsulation} from '@angular/core';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
@@ -42,6 +42,12 @@ export class RichTextV2Component implements ControlValueAccessor, AfterViewInit 
     this._editable = !readonly;
     this.editor.setEditable(this._editable);
   }
+
+  @Output()
+  textChanged = new EventEmitter<{
+    htmlValue: string,
+    textValue: string
+  }>();
 
   /**
    * Function called on change
@@ -97,6 +103,13 @@ export class RichTextV2Component implements ControlValueAccessor, AfterViewInit 
 
   ngAfterViewInit(): void {
     this.editor.setEditable(this._editable);
+
+    this.editor.on('update', ({editor}) => {
+      this.textChanged.emit({
+        textValue: editor.getText(),
+        htmlValue: this._value
+      });
+    });
   }
 
   onBlur() {
