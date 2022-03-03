@@ -1,153 +1,53 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  forwardRef, HostListener,
-  Input, OnDestroy,
-  Output,
-  Renderer2,
-  ViewChild
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EventEmitter } from '@angular/core';
-import * as Quill from 'quill';
+import {AfterViewInit, Component, EventEmitter, forwardRef, Input, Output, ViewEncapsulation} from '@angular/core';
+import { Editor } from '@tiptap/core';
+import StarterKit from '@tiptap/starter-kit';
+import TextAlign from '@tiptap/extension-text-align';
+import Link from '@tiptap/extension-link';
+import Underline from '@tiptap/extension-underline';
+import Placeholder from '@tiptap/extension-placeholder';
 
-/**
- * Accessor information for the Rich Text Editor
- */
-export const RICH_TEXT_VALUE_ACCESSOR: any = {
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+
+export const RICH_TEXT2_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => RichTextComponent),
   multi: true
 };
 
-/**
- * Rich Text Editor that wraps Quill. Allows us to customize.
- * TODO: Remove formatting on paste (preserve new-lines)
- */
 @Component({
   selector: 'wily-rich-text',
-  templateUrl: 'rich-text.component.html',
+  templateUrl: './rich-text.component.html',
   styleUrls: ['./rich-text.component.css'],
-  providers: [RICH_TEXT_VALUE_ACCESSOR]
+  providers: [RICH_TEXT2_VALUE_ACCESSOR],
+  encapsulation: ViewEncapsulation.None
+
 })
-export class RichTextComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
+export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
-  /**
-   * ViewChild of the editor div
-   */
-  @ViewChild('editor')
-  editor: ElementRef<HTMLDivElement> = null as any;
-
-  /**
-   * ViewChild of the editor toolbar div
-   */
-  @ViewChild('toolbar')
-  toolbar: ElementRef<HTMLDivElement> = null as any;
-
-  /**
-   * Set value
-   * @param value the value to set
-   */
-  @Input('value')
-  set value(value: string) {
-    this._value = value;
-  }
-
-  /**
-   * Get value
-   */
-  get value(): string {
-    return this._value;
-  }
-
-  /**
-   * Enable hide/show of the Rich Text controls. If false, show them all the time.
-   */
-  @Input()
-  doHideShow = false;
-
-  /**
-   * Height of the input
-   */
-  @Input()
-  height = '100px';
-
-  /**
-   * Sets the input to readonly
-   */
-  @Input()
-  readonly = false;
-
-  /**
-   * Placeholder text
-   */
   @Input()
   placeholder = '';
 
-  /**
-   * Toolbar background color
-   */
   @Input()
-  toolbarClassList = 'page_container_color';
+  hideControls = false;
 
-  /**
-   * Editor background color
-   */
   @Input()
-  editorClassList = 'page_container_color';
+  height = '100px';
 
-  /**
-   * Event emitted on editor text change
-   */
+  @Input()
+  get readonly(): boolean {
+    return this._editable;
+  }
+
+  set readonly(readonly: boolean) {
+    this._editable = !readonly;
+    this.editor.setEditable(this._editable);
+  }
+
   @Output()
   textChanged = new EventEmitter<{
     htmlValue: string,
-    textValue: string,
-    delta: any,
-    source: any
+    textValue: string
   }>();
-
-  /**
-   * Event emitted on selection change
-   */
-  @Output()
-  selectionChanged = new EventEmitter<any>();
-
-  /**
-   * Event emitted when the editor has initialized. Emits the underlying quill instance
-   */
-  @Output()
-  init = new EventEmitter<any>();
-
-  /**
-   * Toolbar visible?
-   */
-  toolbarVisible = false;
-
-  /**
-   * Whether or not the editor has focus
-   */
-  editorFocused = false;
-
-  /**
-   * The value of the editor
-   * @private
-   */
-  private _value: string = null as any;
-
-  /**
-   * Reference to the underlying Quill instance
-   * @private
-   */
-  private quill: any;
-
-  /**
-   * Array of keyup event unlisten functions
-   * @private
-   */
-  private keyupUnlisteners: Array<() => void> = [];
 
   /**
    * Function called on change
@@ -159,249 +59,104 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
    */
   onTouched: (() => void) | undefined;
 
-  /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   * @param changeDetectorRef reference to the Angular change detection service
-   */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) { }
+  private _value: string = null as any;
+  private _editable = true;
 
-  /**
-   * Allow a user to point at an image on the internet so that it's not just embedded in the text.
-   */
-  ngAfterViewInit(): void {
-    const editorElement = this.editor.nativeElement;
-    const toolbarElement = this.toolbar.nativeElement;
+  editor = new Editor({
+    extensions: [
+      StarterKit,
+      Link,
+      Underline,
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+      Placeholder.configure({
+        placeholder: () => this.placeholder
+      })
+    ],
+    editorProps: {
+      attributes: {
+        class: '',
+        spellcheck: 'true',
+      },
+    },
+    enablePasteRules: [Link, Underline, StarterKit, Underline, TextAlign]
+  });
 
-    // @ts-ignore
-    this.quill = new Quill(editorElement, {
-      modules: { toolbar: toolbarElement },
-      placeholder: this.placeholder,
-      readOnly: this.readonly,
-      theme: null,
-      formats: null,
-      bounds: null,
-      debug: null,
-      scrollingContainer: null
-    });
+  get value(): any {
+    return this._value;
+  }
 
-    // disable tabbing in editor
-    delete this.quill.getModule('keyboard').bindings['9'];
-
-    if (!!this.value) {
-      this.quill.setContents(this.quill.clipboard.convert(this.value));
+  set value(value: string) {
+    // TODO: Remove this - it does fix the onload issue that wipes the value supplied, but feels... wrong.
+    if (value === '<p></p>') {
+      return;
     }
 
-    this.quill.on('text-change', (delta: any, oldContents: any, source: any) => {
-      if (source === 'user') {
-        let html = editorElement.children[0].innerHTML;
-        const text = this.quill.getText().trim();
-        if (html === '<p><br></p>') {
-          html = null as any;
-        }
-
-        this.textChanged.emit({
-          htmlValue: html,
-          textValue: text,
-          delta: delta,
-          source: source
-        });
-
-        if (this.onChange) {
-          this.onChange(html);
-        }
-
-        if (this.onTouched) {
-          this.onTouched();
-        }
+    if (value !== this._value) {
+      this._value = value;
+      if (this.onChange) {
+        this.onChange(value);
       }
-    });
+    }
+  }
 
-    this.quill.on('selection-change', (range: any, oldRange: any, source: any) => {
-      this.selectionChanged.emit({
-        range: range,
-        oldRange: oldRange,
-        source: source
+  ngAfterViewInit(): void {
+    this.editor.setEditable(this._editable);
+
+    this.editor.on('update', ({editor}) => {
+      this.textChanged.emit({
+        textValue: editor.getText(),
+        htmlValue: this._value
       });
     });
-
-    this.init.emit({
-      editor: this.quill
-    });
-
-    this.quill.getModule('toolbar').handlers.image = () => {
-      const range = this.quill.getSelection();
-      const value = prompt('Please enter the image URL');
-      this.quill.insertEmbed(range.index, 'image', value, 'user');
-    };
-
-    this.applyAccessibilityHacks(this.quill);
   }
 
-  /**
-   * Destroy component, invoke keyup unlisten functions
-   */
-  ngOnDestroy(): void {
-    for (const unlistener of this.keyupUnlisteners) {
-      unlistener();
+  onBlur() {
+    if (this.onTouched) {
+      this.onTouched();
     }
-
-    this.keyupUnlisteners = [];
   }
 
-  /**
-   * Register change function
-   * @param fn the function to call on change
-   */
+  writeValue(value: string) {
+    if (value !== this._value) {
+      this._value = value;
+    }
+  }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  /**
-   * Register touched function
-   * @param fn the function to call on touch
-   */
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
-  /**
-   * Set disabled state
-   * @param isDisabled whether or not the control is disabled
-   */
-  setDisabledState(isDisabled: boolean): void { }
+  setDisabledState(isDisabled: boolean): void {
+    this.editor.setEditable(isDisabled);
+  }
 
-  /**
-   * Write to the editor
-   * @param value the value to write
-   */
-  writeValue(value: any): void {
-    this.value = value;
+  setLink(): void {
+    const previousUrl = this.editor.getAttributes('link').href;
+    let url = '';
 
-    if (this.quill) {
-      if (!!value) {
-        this.quill.setContents(this.quill.clipboard.convert(value));
-      } else {
-        this.quill.setText('');
-      }
+    if (!this.editor.isActive('link')) {
+      url = window.prompt('URL', previousUrl) as string;
     }
-  }
 
-  /**
-   * Listen for editor focus on tab
-   * @param event the keyup KeyboardEvent
-   */
-  @HostListener('window:keyup', ['$event'])
-  onKeyUp(event: KeyboardEvent): void {
-    if (event.key === 'Tab') {
-      this.editorFocused = (document.activeElement as HTMLElement).classList.contains('ql-editor');
-    }
-  }
-
-  /**
-   * Listen for editor focus on click
-   */
-  @HostListener('window:click')
-  onClick(): void {
-    this.editorFocused = (document.activeElement as HTMLElement).classList.contains('ql-editor');
-  }
-
-  /**
-   * Applies accessibility to a quill editor
-   * TODO: Deprecate this method once this issue is resolved (https://github.com/quilljs/quill/issues/1173)
-   * @param {object}    editor    - A Quill editor instance
-   */
-  applyAccessibilityHacks(editor: any): void {
-
-    // Get ref to the toolbar, its not available through the quill api ughh
-    const query = editor.container.parentElement.getElementsByClassName('ql-toolbar');
-    if (query.length !== 1) {
-      // No toolbars found OR multiple which is not what we expect either
+    // cancelled
+    if (url === null) {
       return;
     }
 
-    const toolBar = query[0];
+    // empty
+    if (url === '') {
+      this.editor.chain().focus().extendMarkRange('link').unsetLink().run();
 
-    // apply aria labels to base buttons
-    const buttons = toolBar.getElementsByTagName('button');
-    for (let i = 0; i < buttons.length; i++) {
-      const button = buttons[i];
-      if (!button.getAttribute('class')) {
-        continue;
-      }
-
-      const className = button.getAttribute('class').toLowerCase();
-
-      if (className.indexOf('bold') >= 0) {
-        button.setAttribute('aria-label', 'Toggle bold text');
-      } else if (className.indexOf('italic') >= 0) {
-        button.setAttribute('aria-label', 'Toggle italic text');
-      } else if (className.indexOf('underline') >= 0) {
-        button.setAttribute('aria-label', 'Toggle underline text');
-      } else if (className.indexOf('blockquote') >= 0) {
-        button.setAttribute('aria-label', 'Toggle blockquote text');
-      } else if (className.indexOf('list') >= 0 && button.value === 'ordered') {
-        button.setAttribute('aria-label', 'Toggle ordered list');
-      } else if (className.indexOf('list') >= 0 && button.value === 'bullet') {
-        button.setAttribute('aria-label', 'Toggle bulleted list');
-      }
+      return;
     }
 
-    // Make pickers work with keyboard and apply aria labels
-    // TO FIX: When you open a submenu with a key and close it with a click, the menu aria-hidden val is incorrectly left to `false`
-    const pickers = toolBar.getElementsByClassName('ql-picker');
-    for (let i = 0; i < pickers.length; i++) {
-      const picker = pickers[i];
-
-      const label = picker.getElementsByClassName('ql-picker-label')[0];
-      const optionsContainer = picker.getElementsByClassName('ql-picker-options')[0];
-      const options = optionsContainer.getElementsByClassName('ql-picker-item');
-
-      label.setAttribute('role', 'button');
-      label.setAttribute('aria-haspopup', 'true');
-      label.setAttribute('tabindex', '0');
-
-      // HACK ALERT - Specifically does these labels based on our ordering
-      if (i === 0) {
-        label.setAttribute('aria-label', 'Font Size');
-      } else if (i === 1) {
-        label.setAttribute('aria-label', 'Font Color');
-      } else if (i === 2) {
-        label.setAttribute('aria-label', 'Background Color');
-      } else if (i === 3) {
-        label.setAttribute('aria-label', 'Text Alignment');
-      }
-
-      optionsContainer.setAttribute('aria-hidden', 'true');
-      optionsContainer.setAttribute('aria-label', 'submenu');
-
-      for (let x = 0; x < options.length; x++) {
-        const item = options[x];
-        item.setAttribute('tabindex', '0');
-        item.setAttribute('role', 'button');
-
-        // Read the css 'content' values and generate aria labels
-        const size = window.getComputedStyle(item, ':before').content.replace('\"', '');
-        item.setAttribute('aria-label', size);
-
-        this.keyupUnlisteners.push(
-          this.renderer.listen(item, 'keyup', (event: KeyboardEvent) => {
-            if (event.key === 'Enter') {
-              item.click();
-              optionsContainer.setAttribute('aria-hidden', 'true');
-            }
-          })
-        );
-      }
-
-      this.keyupUnlisteners.push(
-        this.renderer.listen(label, 'keyup', (event: KeyboardEvent) => {
-          if (event.key === 'Enter') {
-            label.click();
-            optionsContainer.setAttribute('aria-hidden', 'false');
-          }
-        })
-      );
-    }
+    // update link
+    this.editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   }
 }

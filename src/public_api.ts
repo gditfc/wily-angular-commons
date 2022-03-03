@@ -32,7 +32,6 @@ export * from './app/modules/paginator/paginator.component';
 export * from './app/modules/profile-pic/profile-pic.component';
 export * from './app/modules/push-container/push-container.component';
 export * from './app/modules/rich-text/rich-text.component';
-export * from './app/modules/rich-text/rich-text-v2/rich-text-v2.component';
 export * from './app/modules/endpoint-state/components/endpoint-state.component';
 export * from './app/modules/dialog/dialog.component';
 export * from './app/modules/date-picker/date-picker.component';

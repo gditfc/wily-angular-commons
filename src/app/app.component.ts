@@ -97,8 +97,7 @@ export class AppComponent {
 
   weekPickerValue = { start: startOfWeek(new Date()), end: endOfWeek(new Date()) };
 
-  textEditorValue = '<p>This is some rich text</p>';
-  textEditorValue2 = '<p>This is some other <strong>rich</strong> <em>text</em></p>';
+  textEditorValue = '<p>This is some <strong>rich</strong> <em>text</em> here.</p>';
 
   colorPickerValue = '#44ff55';
 
