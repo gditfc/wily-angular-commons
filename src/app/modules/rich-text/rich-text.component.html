@@ -128,24 +128,16 @@
   </button>
   </div>
   <div class="col v_center overlay_alt2 border_right pad_5">
-  <button *ngIf="this.editor.isActive('link')"
-          id="unlink"
-          aria-label="Link"
-          class="btn access pad_5 mar_right5 mar_left5 bg_blue"
-          wilyTooltip="Link" tooltipPosition="top"
-          (click)="setLink()"
-  >
-      <i class="fas fa-link-slash fa-fw"></i>
-  </button>
-  <button *ngIf="!this.editor.isActive('link')"
-          id="link"
-          aria-label="Link"
-          class="btn access pad_5 mar_right5 mar_left5"
-          wilyTooltip="Link" tooltipPosition="top"
-          (click)="setLink()"
-  >
-      <i class="fas fa-link fa-fw"></i>
-  </button>
+    <button
+            id="link"
+            aria-label="Set Link"
+            class="btn access pad_5 mar_right5 mar_left5"
+            wilyTooltip="Set Link" tooltipPosition="top"
+            (click)="setLink()"
+            [ngClass]="{ 'bg_blue': this.editor.isActive('link') }"
+    >
+        <i class="fas fa-link fa-fw"></i>
+    </button>
   </div>
   <div class="col size_1 v_center overlay_alt2 border_none pad_5">
   <button

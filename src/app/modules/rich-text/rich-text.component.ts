@@ -1,14 +1,13 @@
 import {AfterViewInit, Component, EventEmitter, forwardRef, Input, Output, ViewEncapsulation} from '@angular/core';
-import { Editor } from '@tiptap/core';
+import {Editor} from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
-import TextAlign from '@tiptap/extension-text-align';
 import Link from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
 import Placeholder from '@tiptap/extension-placeholder';
-
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {TextAlign} from './text-align';
 
-export const RICH_TEXT2_VALUE_ACCESSOR: any = {
+export const RICH_TEXT_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => RichTextComponent),
   multi: true
@@ -18,7 +17,7 @@ export const RICH_TEXT2_VALUE_ACCESSOR: any = {
   selector: 'wily-rich-text',
   templateUrl: './rich-text.component.html',
   styleUrls: ['./rich-text.component.css'],
-  providers: [RICH_TEXT2_VALUE_ACCESSOR],
+  providers: [RICH_TEXT_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None
 
 })
@@ -65,10 +64,16 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   editor = new Editor({
     extensions: [
       StarterKit,
-      Link,
+      Link.configure({
+        openOnClick: false,
+        HTMLAttributes: {
+          class: 'wrt-link',
+        },
+      }),
       Underline,
       TextAlign.configure({
         types: ['heading', 'paragraph'],
+
       }),
       Placeholder.configure({
         placeholder: () => this.placeholder
@@ -80,7 +85,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         spellcheck: 'true',
       },
     },
-    enablePasteRules: [Link, Underline, StarterKit, Underline, TextAlign]
+    enablePasteRules: [Link, Underline, StarterKit, TextAlign]
   });
 
   get value(): any {
@@ -99,6 +104,14 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         this.onChange(value);
       }
     }
+  }
+
+  private static formatLegacyRichText(text: string): string {
+    text = text.replace('class="ql-align-center"', 'style="text-align:center;"');
+    text = text.replace('class="ql-align-right"', 'style="text-align:right;"');
+    text = text.replace('class="ql-align-justify"', 'style="text-align:justify;"');
+
+    return text;
   }
 
   ngAfterViewInit(): void {
@@ -120,7 +133,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
   writeValue(value: string) {
     if (value !== this._value) {
-      this._value = value;
+      this._value = RichTextComponent.formatLegacyRichText(value);
     }
   }
 
@@ -138,11 +151,9 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
   setLink(): void {
     const previousUrl = this.editor.getAttributes('link').href;
-    let url = '';
-
-    if (!this.editor.isActive('link')) {
-      url = window.prompt('URL', previousUrl) as string;
-    }
+    const url = window.prompt(
+      'Please provide a URL - if you\'d like to remove the link, simply delete all of the text in the box below',
+      previousUrl) as string;
 
     // cancelled
     if (url === null) {
@@ -159,4 +170,5 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     // update link
     this.editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   }
+
 }
