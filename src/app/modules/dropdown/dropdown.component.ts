@@ -112,37 +112,37 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * ViewChild of the dropdown
    */
   @ViewChild('dropdown')
-  dropdown: ElementRef<HTMLDivElement>;
+  dropdown: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * ViewChild of the dropdown button
    */
   @ViewChild('dropdownButton')
-  dropdownButton: ElementRef<HTMLButtonElement>;
+  dropdownButton: ElementRef<HTMLButtonElement> = null as any;
 
   /**
    * ViewChild of the dropdown list
    */
   @ViewChild('dropdownList')
-  dropdownList: ElementRef<HTMLDivElement>;
+  dropdownList: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * QueryList of dropdown option ViewChildren
    */
   @ViewChildren('dropdownOption')
-  dropdownOptions: QueryList<ElementRef<HTMLButtonElement>>;
+  dropdownOptions: QueryList<ElementRef<HTMLButtonElement>> = null as any;
 
   /**
    * ContentChild of the dropdown option template
    */
   @ContentChild(TemplateRef)
-  template: TemplateRef<HTMLElement>;
+  template: TemplateRef<HTMLElement> = null as any;
 
   /**
    * Whether or not the dropdown should be disabled
    */
   @Input()
-  disabled: boolean;
+  disabled = false;
 
   /**
    * Placeholder text to display when no option is selected
@@ -160,7 +160,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * Class list to assign to the dropdown
    */
   @Input()
-  classList: string;
+  classList: string = null as any;
 
   /**
    * Event emitted on value change, emits the new value
@@ -171,19 +171,19 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   /**
    * BehaviorSubject tracking the input dropdown options/option groups
    */
-  readonly _options = new BehaviorSubject<DropdownOptionInput>(null);
+  readonly _options = new BehaviorSubject<DropdownOptionInput>(null as any);
 
   /**
    * BehaviorSubject tracking the current value of the dropdown
    */
-  readonly _internalValue = new BehaviorSubject<number | string>(null);
+  readonly _internalValue = new BehaviorSubject<number | string>(null as any);
 
   /**
    * Observable map of option value (stringified if a number) to data context
    */
   private readonly dataContextMap$: Observable<{ [value: string]: { [key: string]: unknown } }> = this._options.pipe(
     map(options => {
-      let dataContextMap: { [value: string]: { [key: string]: unknown } } = null;
+      let dataContextMap: { [value: string]: { [key: string]: unknown } } = null as any;
 
       if (!!options?.length) {
         dataContextMap = {};
@@ -209,7 +209,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   readonly selectedDataContext$: Observable<{ [key: string]: unknown }> = this._internalValue.pipe(
     withLatestFrom(this.dataContextMap$),
     map(([value, dataContextMap]) => {
-      let dataContext: { [key: string]: unknown } = null;
+      let dataContext: { [key: string]: unknown } = null as any;
 
       if (value !== null && dataContextMap !== null) {
         const entry = dataContextMap[String(value)];
@@ -241,13 +241,13 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
   /**
    * The index of the focused option in the dropdown list
    */
-  selectionIndex: number;
+  selectionIndex: number = null as any;
 
   /**
    * The current value of the dropdown
    * @private
    */
-  private _value: string | number;
+  private _value: string | number = null as any;
 
   /**
    * Removes options that do not have both a label and a value,
@@ -302,7 +302,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     if (!!label) {
       const implicitValue = dataContext['$implicit'];
 
-      if (!!implicitValue || implicitValue >= 0) {
+      if (!!implicitValue || implicitValue as number >= 0) {
         const labelExists = !!dataContext['label'];
 
         if (!labelExists) {
@@ -435,7 +435,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * Close dropdown on escape keyup and focus on dropdown button
    * @param event the keyup KeyboardEvent
    */
-  onEscapeKeyUp(event: KeyboardEvent): void {
+  onEscapeKeyUp(event: Event): void {
     if (this.opened) {
       event.stopImmediatePropagation();
 
@@ -542,7 +542,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * @private
    */
   setSelectionIndex(): void {
-    this.selectionIndex = null;
+    this.selectionIndex = null as any;
 
     if ((!!this.value || this.value >= 0) && !!this.dropdownOptions?.length) {
       const dropdownOptionsArray = this.dropdownOptions.toArray();
@@ -550,7 +550,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         return String(this.value) === option.nativeElement.getAttribute('data-value');
       });
 
-      this.selectionIndex = foundIndex > -1 ? foundIndex : null;
+      this.selectionIndex = foundIndex > -1 ? foundIndex : null as any;
     }
   }
 
@@ -626,7 +626,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         if (this.opened) {
           previousOption.focus();
         } else {
-          this.handleDropdownOptionSelect(previousOption.getAttribute('data-value'));
+          this.handleDropdownOptionSelect(previousOption.getAttribute('data-value') as string);
         }
       }
     } else if (key === 'ArrowRight' || key === 'ArrowDown') {
@@ -636,7 +636,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         if (this.opened) {
           nextOption.focus();
         } else {
-          this.handleDropdownOptionSelect(nextOption.getAttribute('data-value'));
+          this.handleDropdownOptionSelect(nextOption.getAttribute('data-value') as string);
         }
       }
     }
@@ -662,7 +662,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     }
 
     return this.selectionIndex === null
-      ? null
+      ? null as any
       : optionsArray[this.selectionIndex].nativeElement;
   }
 
@@ -673,7 +673,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * @private
    */
   private getPreviousOption(): HTMLButtonElement {
-    let previousOption: HTMLButtonElement = null;
+    let previousOption: HTMLButtonElement = null as any;
 
     if (this.selectionIndex !== null) {
       const optionsArray = this.dropdownOptions.toArray();

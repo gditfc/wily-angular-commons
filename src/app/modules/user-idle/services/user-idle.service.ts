@@ -9,7 +9,7 @@ import {
   Subject,
   Subscription,
   timer
-} from 'rxjs/index';
+} from 'rxjs';
 import {
   bufferTime,
   distinctUntilChanged,

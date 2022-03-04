@@ -166,10 +166,13 @@
                 <div class="pad_15">
                   <div class="form_label mar_bot3">Enter some formatted text below</div>
                   <wily-rich-text
-                    [placeholder]="'Some placeholder text...'"
+                    placeholder="Some placeholder text..."
+                    [hideControls]="false"
+                    [readonly]="false"
                     [(ngModel)]="textEditorValue"
                     (ngModelChange)="console.log(textEditorValue); console.log('text editor model change')"
-                    (textChanged)="handleEditorTextChange($event)">
+                    (textChanged)="handleEditorTextChange($event)"
+                  >
                   </wily-rich-text>
                 </div>
               </div>

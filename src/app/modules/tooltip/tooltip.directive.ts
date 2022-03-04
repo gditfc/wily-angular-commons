@@ -57,19 +57,19 @@ export class TooltipDirective implements OnDestroy {
    * The DIV element housing the tooltip
    * @private
    */
-  private tooltip: HTMLDivElement;
+  private tooltip: HTMLDivElement = null as any;
 
   /**
    * The tooltip text
    * @private
    */
-  private _text: string;
+  private _text: string = null as any;
 
   /**
    * Whether or not the tooltip is disabled
    * @private
    */
-  private _disabled: boolean;
+  private _disabled = false;
 
   /**
    * Array of scroll unlisten functions
@@ -334,7 +334,7 @@ export class TooltipDirective implements OnDestroy {
   private deleteTooltip(): void {
     if (!!this.tooltip?.parentElement) {
       this.renderer.removeChild(document.body, this.tooltip);
-      this.tooltip = null;
+      this.tooltip = null as any;
     }
 
     this.removeScrollListeners();

@@ -65,7 +65,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * Color class of the button
    */
   @Input()
-  buttonColorClass: string;
+  buttonColorClass: string = null as any;
 
   /**
    * The value to set to the button's width, min-width, height and min-height
@@ -95,12 +95,12 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * The scrollable icon container
    */
   @ViewChild('iconScrollContainer')
-  iconScrollContainer: ElementRef<HTMLDivElement>;
+  iconScrollContainer: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * BehaviorSubject tracking the input value destructed into its prefix and class name
    */
-  readonly _internalValue = new BehaviorSubject<{ prefix: string, name: string }>(null);
+  readonly _internalValue = new BehaviorSubject<{ prefix: string, name: string }>(null as any);
 
   /**
    * BehaviorSubject tracking the current filter value selection for icons
@@ -185,7 +185,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
     this.icons$
   ]).pipe(
     map(([activePage, icons]) => {
-      let paginatedIcons: Array<{ prefix: string, name: string }> = null;
+      let paginatedIcons: Array<{ prefix: string, name: string }> = null as any;
 
       if (activePage >= 0 && icons.length) {
         paginatedIcons = icons.slice(
@@ -223,13 +223,13 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * The value of the icon select
    * @private
    */
-  private _value: string;
+  private _value: string = null as any;
 
   /**
    * Whether or not the icon picker is disabled
    * @private
    */
-  private _disabled: boolean;
+  private _disabled = false;
 
   /**
    * Function to call on change
@@ -330,7 +330,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
       internalValue = { prefix, name };
     }
 
-    this._internalValue.next(internalValue);
+    this._internalValue.next(internalValue as any);
     this.showDialog = null;
     this.closed.emit();
   }

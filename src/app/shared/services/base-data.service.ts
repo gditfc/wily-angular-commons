@@ -1,6 +1,6 @@
 import {catchError, map} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs/index';
+import {Observable, of, throwError} from 'rxjs';
 
 /**
  * This class provides some foundational REST endpoint call capabilities. It will do things like unpack lists into native objects and

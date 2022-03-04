@@ -94,8 +94,8 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   @Input('value')
   set value(value: Date) {
     if (!value) {
-      this._value = null;
-      this.dateString = null;
+      this._value = null as any;
+      this.dateString = null as any;
     } else if (!isEqual(value, this._value)) {
       this._value = value;
       this.dateString = this.dateString = DatePickerComponent.parseDate(value);
@@ -124,7 +124,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * The ID to set on the input
    */
   @Input()
-  inputId: string;
+  inputId: string = null as any;
 
   /**
    * Value to use as the date picker input's aria label
@@ -160,13 +160,13 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * ViewChild of the date picker div
    */
   @ViewChild('datePickerDiv')
-  datePickerDiv: ElementRef<HTMLDivElement>;
+  datePickerDiv: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * ViewChild of the calendar div
    */
   @ViewChild('calendarDiv')
-  calendarDiv: ElementRef<HTMLDivElement>;
+  calendarDiv: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * The current date
@@ -196,12 +196,12 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Whether or not the calendar should be rendered
    */
-  render: boolean;
+  render = false;
 
   /**
    * Whether or not to show the calendar
    */
-  showCalendar: { currentValue: Date } = null;
+  showCalendar: { currentValue: Date } = null as any;
 
   /**
    * The valid selection interval
@@ -216,7 +216,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * The internal control accessor value
    * @private
    */
-  private _value: Date = null;
+  private _value: Date = null as any;
 
   /**
    * The internal disabled state
@@ -227,7 +227,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Window resize unlisten function
    */
-  private resizeListener: () => void;
+  private resizeListener: (() => void) | undefined;
 
   /**
    * Parse the input Date value into a string
@@ -235,7 +235,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @private
    */
   private static parseDate(value: Date): string {
-    return !value ? null : format(value, 'MM/dd/yyyy');
+    return !value ? null as any : format(value, 'MM/dd/yyyy');
   }
 
   /**
@@ -248,10 +248,10 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     try {
       parsedDate = parse(dateString, DatePickerComponent.getDateFormat(dateString), this.referenceDate);
     } catch (e) {
-      parsedDate = null;
+      parsedDate = null as any;
     }
 
-    return isValid(parsedDate) ? parsedDate : null;
+    return isValid(parsedDate) ? parsedDate : null as any;
   }
 
   /**
@@ -265,7 +265,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     this.SHORT_DAY_DATE_FORMAT.lastIndex = 0;
     this.SHORT_DATE_FORMAT.lastIndex = 0;
 
-    let dateFormat: string = null;
+    let dateFormat: string = null as any;
     if (this.FULL_DATE_FORMAT.test(dateString)) {
       dateFormat = 'MM/dd/yyyy';
     } else if (this.SHORT_MONTH_DATE_FORMAT.test(dateString)) {
@@ -323,7 +323,9 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Destroy component, invoke window resize unlisten function
    */
   ngOnDestroy(): void {
-    this.resizeListener();
+    if (this.resizeListener) {
+      this.resizeListener();
+    }
   }
 
   /**
@@ -334,7 +336,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
       this.value = value;
     } else {
-      this.value = null;
+      this.value = null as any;
     }
 
     this.changeDetectorRef.markForCheck();
@@ -382,7 +384,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     try {
       this.updateModel(DatePickerComponent.parseDateString(this.dateString));
     } catch (e) {
-      this.updateModel(null);
+      this.updateModel(null as any);
     }
   }
 
@@ -415,7 +417,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
           this.dateSelected.emit(value);
         }
       } else {
-        this.value = null;
+        this.value = null as any;
       }
 
       if (!isEqual(this.value, valueBeforeUpdate)) {
@@ -459,7 +461,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Hide calendar overlay and remove calendar from the DOM
    */
   handleCalendarClose(): void {
-    this.showCalendar = null;
+    this.showCalendar = null as any;
   }
 
   /**

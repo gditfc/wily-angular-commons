@@ -34,13 +34,13 @@ export class ProfilePicComponent {
    * Image URL of the profile pic
    */
   @Input()
-  imageUrl: string;
+  imageUrl: string = null as any;
 
   /**
    * Tooltip to explain what the picture is
    */
   @Input()
-  toolTip: string;
+  toolTip: string = null as any;
 
   /**
    * Returns a CSS URL of the Image URL.
@@ -50,7 +50,7 @@ export class ProfilePicComponent {
       return `url(${this.imageUrl})`;
     }
 
-    return null;
+    return null as any;
   }
 
 }

@@ -59,9 +59,9 @@
             <ng-container *ngIf="selectionValueMap$ | async as selectionValueMap">
               <ng-container *ngFor="let option of options; index as i">
                 <!-- OPTION GROUP -->
-                <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
-                  <div class="wily_multiselect_heading" aria-hidden="true">{{option.groupLabel}}</div>
-                  <ng-container *ngFor="let groupOption of option.options; index as j">
+                <ng-container *ngIf="!!option['groupLabel'] && !!option['options'] else nonGroupOption">
+                  <div class="wily_multiselect_heading" aria-hidden="true">{{option['groupLabel']}}</div>
+                  <ng-container *ngFor="let groupOption of option['options']; index as j">
                     <button #multiSelectOption
                             (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled)"
                             (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i + j)"
@@ -86,23 +86,23 @@
                 <!-- SINGULAR OPTION -->
                 <ng-template #nonGroupOption>
                   <button #multiSelectOption
-                          (click)="onMultiSelectOptionSelect(option.value, option.disabled)"
+                          (click)="onMultiSelectOptionSelect(option['value'], option['disabled'])"
                           (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
                           (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
                           (keyup.escape)="onEscapeKeyUp($event)"
-                          [id]="multiSelectId + '-' + option.value"
-                          [attr.aria-selected]="(_internalValue | async) === option.value"
-                          [attr.data-value]="option.value"
+                          [id]="multiSelectId + '-' + option['value']"
+                          [attr.aria-selected]="(_internalValue | async) === option['value']"
+                          [attr.data-value]="option['value']"
                           [attr.data-dialog-close-override]="true"
-                          [disabled]="option.disabled"
-                          [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
+                          [disabled]="option['disabled']"
+                          [ngClass]="{ 'unselected': !selectionValueMap['' + option['value']] }"
                           class="wily_multiselect_option" role="option" tabindex="0">
                     <div class="wily_multiselect_checkbox overlay_alt2"
-                         [ngClass]="selectionValueMap['' + option.value] ? 'bg_blue' : 'unselected'"
+                         [ngClass]="selectionValueMap['' + option['value']] ? 'bg_blue' : 'unselected'"
                          aria-hidden="true">
-                      <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>
+                      <div *ngIf="selectionValueMap['' + option['value']]"><i class="fas fa-check"></i></div>
                     </div>
-                    <ng-container *ngTemplateOutlet="template; context: option.dataContext"></ng-container>
+                    <ng-container *ngTemplateOutlet="template; context: option['dataContext']"></ng-container>
                   </button>
                 </ng-template>
               </ng-container>
@@ -113,9 +113,9 @@
             <ng-container *ngIf="selectionValueMap$ | async as selectionValueMap">
               <ng-container *ngFor="let option of options; index as i">
                 <!-- OPTION GROUP -->
-                <ng-container *ngIf="!!option.groupLabel && !!option.options else nonGroupOption">
-                  <div class="wily_multiselect_heading" aria-hidden="true">{{option.groupLabel}}</div>
-                  <ng-container *ngFor="let groupOption of option.options; index as j">
+                <ng-container *ngIf="!!option['groupLabel'] && !!option['options'] else nonGroupOption">
+                  <div class="wily_multiselect_heading" aria-hidden="true">{{option['groupLabel']}}</div>
+                  <ng-container *ngFor="let groupOption of option['options']; index as j">
                     <button #multiSelectOption
                             (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled)"
                             (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i + j)"
@@ -142,24 +142,24 @@
                 <!-- SINGULAR OPTION -->
                 <ng-template #nonGroupOption>
                   <button #multiSelectOption
-                          (click)="onMultiSelectOptionSelect(option.value, option.disabled)"
+                          (click)="onMultiSelectOptionSelect(option['value'], option['disabled'])"
                           (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
                           (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
                           (keyup.escape)="onEscapeKeyUp($event)"
-                          [id]="multiSelectId + '-' + option.value"
-                          [attr.aria-selected]="(_internalValue | async) === option.value"
-                          [attr.data-value]="option.value"
+                          [id]="multiSelectId + '-' + option['value']"
+                          [attr.aria-selected]="(_internalValue | async) === option['value']"
+                          [attr.data-value]="option['value']"
                           [attr.data-dialog-close-override]="true"
-                          [disabled]="option.disabled"
-                          [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
+                          [disabled]="option['disabled']"
+                          [ngClass]="{ 'unselected': !selectionValueMap['' + option['value']] }"
                           class="wily_multiselect_option"
                           role="option" tabindex="0">
                     <div class="wily_multiselect_checkbox overlay_alt2"
-                         [ngClass]="selectionValueMap['' + option.value] ? 'bg_blue' : 'unselected'"
+                         [ngClass]="selectionValueMap['' + option['value']] ? 'bg_blue' : 'unselected'"
                          aria-hidden="true">
-                      <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>
+                      <div *ngIf="selectionValueMap['' + option['value']]"><i class="fas fa-check"></i></div>
                     </div>
-                    {{option.label}}
+                    {{option['label']}}
                   </button>
                 </ng-template>
               </ng-container>

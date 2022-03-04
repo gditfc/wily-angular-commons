@@ -63,7 +63,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    */
   @Input('value')
   set value(value: Array<string | number>) {
-    let valueToSet: Array<string | number> = null;
+    let valueToSet: Array<string | number> = null as any;
     if (Array.isArray(value)) {
       valueToSet = [];
       for (const valueItem of value) {
@@ -75,7 +75,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
       }
 
       const nonNullValues = valueToSet.filter(item => item !== null);
-      valueToSet = !nonNullValues.length ? null : nonNullValues;
+      valueToSet = !nonNullValues.length ? null as any : nonNullValues;
     }
 
     this._value = valueToSet;
@@ -108,37 +108,37 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * ViewChild of the multi-select
    */
   @ViewChild('multiSelect')
-  multiSelect: ElementRef<HTMLDivElement>;
+  multiSelect: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * ViewChild of the multi-select button
    */
   @ViewChild('multiSelectButton')
-  multiSelectButton: ElementRef<HTMLButtonElement>;
+  multiSelectButton: ElementRef<HTMLButtonElement> = null as any;
 
   /**
    * ViewChild of the multi-select list
    */
   @ViewChild('multiSelectList')
-  multiSelectList: ElementRef<HTMLDivElement>;
+  multiSelectList: ElementRef<HTMLDivElement> = null as any;
 
   /**
    * QueryList of multi-select option ViewChildren
    */
   @ViewChildren('multiSelectOption')
-  multiSelectOptions: QueryList<ElementRef<HTMLButtonElement>>;
+  multiSelectOptions: QueryList<ElementRef<HTMLButtonElement>> = null as any;
 
   /**
    * ContentChild of the multi-select option template
    */
   @ContentChild(TemplateRef)
-  template: TemplateRef<HTMLElement>;
+  template: TemplateRef<HTMLElement> = null as any;
 
   /**
    * Whether or not the multi-select should be disabled
    */
   @Input()
-  disabled: boolean;
+  disabled = false;
 
   /**
    * Placeholder text to display when no option is selected
@@ -156,7 +156,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * Class list to assign to the multi-select
    */
   @Input()
-  classList: string;
+  classList: string = null as any;
 
   /**
    * Event emitted on value change, emits the new value
@@ -167,19 +167,19 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   /**
    * BehaviorSubject tracking the input multi-select options/option groups
    */
-  readonly _options = new BehaviorSubject<MultiSelectOptionInput>(null);
+  readonly _options = new BehaviorSubject<MultiSelectOptionInput>(null as any);
 
   /**
    * BehaviorSubject tracking the current value of the multi-select
    */
-  readonly _internalValue = new BehaviorSubject<Array<number | string>>(null);
+  readonly _internalValue = new BehaviorSubject<Array<number | string>>(null as any);
 
   /**
    * Observable map of option value (stringified if a number) to data context
    */
   readonly dataContextMap$: Observable<{ [value: string]: { [key: string]: unknown } }> = this._options.pipe(
     map(options => {
-      let dataContextMap: { [value: string]: { [key: string]: unknown } } = null;
+      let dataContextMap: { [value: string]: { [key: string]: unknown } } = null as any;
 
       if (!!options?.length) {
         dataContextMap = {};
@@ -204,7 +204,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    */
   readonly selectionValueMap$: Observable<{ [key: string]: boolean }> = this._internalValue.pipe(
     map(values => {
-      const selectionValueMap = {};
+      const selectionValueMap = {} as any;
 
       if (!!values?.length) {
         for (const value of values) {
@@ -241,13 +241,13 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   /**
    * The index of the focused option in the multiSelect list
    */
-  selectionIndex: number;
+  selectionIndex: number = null as any;
 
   /**
    * The current value of the multiSelect
    * @private
    */
-  private _value: Array<string | number>;
+  private _value: Array<string | number> = null as any;
 
   /**
    * Removes options that do not have both a label and a value,
@@ -302,7 +302,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
     if (!!label) {
       const implicitValue = dataContext['$implicit'];
 
-      if (!!implicitValue || implicitValue >= 0) {
+      if (!!implicitValue || implicitValue as number >= 0) {
         const labelExists = !!dataContext['label'];
 
         if (!labelExists) {
@@ -455,7 +455,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * Close multi-select on escape keyup and focus on multi-select button
    * @param event the keyup KeyboardEvent
    */
-  onEscapeKeyUp(event: KeyboardEvent): void {
+  onEscapeKeyUp(event: Event): void {
     if (this.opened) {
       event.stopImmediatePropagation();
 
@@ -515,7 +515,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    */
   closeMultiSelect(): void {
     this.opened = false;
-    this.selectionIndex = null;
+    this.selectionIndex = null as any;
   }
 
   /**
@@ -525,7 +525,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
   onAnimationStart(event: AnimationEvent): void {
     if (event.toState === 'open') {
       this.resizeMultiSelectList();
-      this.selectionIndex = null;
+      this.selectionIndex = null as any;
 
       setTimeout(() => {
         const option = this.getNextOption();
@@ -668,7 +668,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
     }
 
     return this.selectionIndex === null
-      ? null
+      ? null as any
       : optionsArray[this.selectionIndex].nativeElement;
   }
 
@@ -679,7 +679,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * @private
    */
   private getPreviousOption(): HTMLButtonElement {
-    let previousOption: HTMLButtonElement = null;
+    let previousOption: HTMLButtonElement = null as any;
 
     if (this.selectionIndex !== null) {
       const optionsArray = this.multiSelectOptions.toArray();

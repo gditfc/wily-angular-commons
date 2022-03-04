@@ -30,7 +30,7 @@ export class DialogComponent {
    * Element reference to the dialog close button
    */
   @ViewChild('closeButton')
-  closeButton: ElementRef<HTMLButtonElement>;
+  closeButton: ElementRef<HTMLButtonElement> = null as any;
 
   /**
    * Observable to update the effective width of the dialog on screen resize
@@ -73,7 +73,7 @@ export class DialogComponent {
    * Title to show at the top of the dialog
    */
   @Input()
-  title: string;
+  title: string = null as any;
 
   /**
    * Class to apply to the title of the dialog

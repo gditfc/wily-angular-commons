@@ -13,7 +13,7 @@ import {WilyEndpointStateModule} from '../endpoint-state/endpoint-state.module';
 /**
  * Reference to the Font Awesome variable to add icons
  */
-const FontAwesome = window['FontAwesome'];
+const FontAwesome = window['FontAwesome' as any] as any;
 
 @NgModule({
   declarations: [
