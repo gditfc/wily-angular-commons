@@ -1,6 +1,6 @@
 {
   "name": "wily-angular-commons",
-  "version": "13.0.0-rc5",
+  "version": "13.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
