@@ -125,13 +125,13 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     });
   }
 
-  onBlur() {
+  onBlur(): void {
     if (this.onTouched) {
       this.onTouched();
     }
   }
 
-  writeValue(value: string) {
+  writeValue(value: string): void {
     if (value !== this._value) {
       this._value = RichTextComponent.formatLegacyRichText(value);
     }

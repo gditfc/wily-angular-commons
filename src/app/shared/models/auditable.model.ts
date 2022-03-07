@@ -6,20 +6,20 @@ export class Auditable {
   /**
    * Who Created it
    */
-  createdBy: string;
+  createdBy: string = null as any;
 
   /**
    * When it was created
    */
-  createdTime: Date;
+  createdTime: Date = null as any;
 
   /**
    * Who last modified it
    */
-  modifiedBy: string;
+  modifiedBy: string = null as any;
 
   /**
    * When it was last modified
    */
-  modifiedTime: Date;
+  modifiedTime: Date = null as any;
 }
