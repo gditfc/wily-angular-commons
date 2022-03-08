@@ -8,7 +8,7 @@ export class StackedBarChartData {
   /**
    * Label
    */
-  category: string;
+  category: string = null as any;
 
   /**
    * Stack Value 1 for Bar
@@ -154,29 +154,29 @@ export class StackedBarChartGraph {
   /**
    * Title
    */
-  title: string;
+  title: string = null as any;
 
   /**
    * Value Field
    */
-  valueField: string;
+  valueField: string = null as any;
 
   /**
    * Fill Colors
    */
-  fillColors: string;
+  fillColors: string = null as any;
 
   /**
    * Line Color
    */
-  lineColor: string;
+  lineColor: string = null as any;
 
   /**
    * Helper Method to set the fill and line color
    *
    * @param color
    */
-  setColor(color: string) {
+  setColor(color: string): void {
     this.fillColors = color;
     this.lineColor = color;
   }
@@ -195,12 +195,12 @@ export class StackedBarChart extends Chart {
   /**
    * Data for the Stacked Bar Chart
    */
-  dataProvider: StackedBarChartData[];
+  dataProvider: StackedBarChartData[] = null as any;
 
   /**
    * Visual Representation details for chart
    */
-  graphs: StackedBarChartGraph[];
+  graphs: StackedBarChartGraph[] = null as any;
 
   /**
    * Turn the chart

@@ -18,7 +18,7 @@ export class LocalStorageService {
       return <T> JSON.parse(obj);
     }
 
-    return null;
+    return null as any;
   }
 
   /**
@@ -27,7 +27,7 @@ export class LocalStorageService {
    * @param key
    */
   getText(key: string): string {
-    return localStorage.getItem(key);
+    return localStorage.getItem(key) as string;
   }
 
   /**

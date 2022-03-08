@@ -8,26 +8,26 @@ export class Versioning extends Auditable {
   /**
    * The version
    */
-  version: string;
+  version: string = null as any;
 
   /**
    * Associated Approval
    */
-  approvalId: number;
+  approvalId: number = null as any;
 
   /**
    * Status of the Approval
    */
-  approvalStatus: string;
+  approvalStatus: string = null as any;
 
   /**
    * Flag to determine if this item has a draft version
    */
-  hasDraft: string;
+  hasDraft: string = null as any;
 
   /**
    * Flag to determine if this item has a pending version
    */
-  hasPending: string;
+  hasPending: string = null as any;
 
 }

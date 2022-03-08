@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 export abstract class CognitoAuthService {
 
   /**
-   * Retry Count when there are errors logging in
+   * Retry Count when there are errors logging inz
    */
   private retryCount = 0;
 

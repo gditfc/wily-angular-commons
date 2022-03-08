@@ -5,5 +5,5 @@ export class DataList<T> {
   /**
    * The field that holds a List of data
    */
-  data: T[];
+  data: T[] = null as any;
 }

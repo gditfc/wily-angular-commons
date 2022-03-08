@@ -94,12 +94,12 @@ export class PieChartData {
   /**
    * Description of data
    */
-  description: string;
+  description: string = null as any;
 
   /**
    * Data value
    */
-  value: number;
+  value: number = null as any;
 }
 
 /**
@@ -140,7 +140,7 @@ export class PieChart extends Chart {
   /**
    * Label Radius
    */
-  labelRadius: number = null;
+  labelRadius: number = null as any;
 
   /**
    * Init the Defs/Filter
@@ -197,10 +197,10 @@ export class PieChart extends Chart {
   /**
    * Don't Pull Out
    */
-  pullOutRadius: number;
+  pullOutRadius: number = null as any;
 
   /**
    * An array of colors for the pie slices to use in order of appearance
    */
-  colors: string[];
+  colors: string[] = null as any;
 }
