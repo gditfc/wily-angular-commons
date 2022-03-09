@@ -61,7 +61,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * Set the value of the color picker
    * @param value the value to set
    */
-  @Input('value')
+  @Input()
   set value(value: string) {
     let hexString = value ?? '';
 
@@ -91,7 +91,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * Set disabled
    * @param disabled whether or not the control should be disabled
    */
-  @Input('disabled')
+  @Input()
   set disabled(disabled: boolean) {
     this._disabled = disabled;
   }
@@ -112,6 +112,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * Event emitted on hex string input event. Emits the current value of the input
    */
   @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
   input = new EventEmitter<string>();
 
   /**

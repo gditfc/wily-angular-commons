@@ -8,7 +8,7 @@
                    }"
         (click)="openDialog()"
         [wilyTooltip]="(_internalValue | async)?.prefix + ' ' + (_internalValue | async)?.name"
-        [tooltipDisabled]="!(_internalValue | async)"
+        [tooltipDisabled]="(_internalValue | async) === undefined"
         [disabled]="disabled"
         class="access wis_button overlay_alt2 brad_3"
         aria-label="Choose Icon">

@@ -1,5 +1,5 @@
-<div [ngClass]="{'wily_dialog_overlay' : object}">
-  <div *ngIf="object"
+<div [ngClass]="{'wily_dialog_overlay' : _object}">
+  <div *ngIf="_object"
        [@dialog] class="wily_dialog_container"
        (@dialog.done)="onAnimationDone($event)"
        [cdkTrapFocus]="true"

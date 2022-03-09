@@ -33,7 +33,7 @@ export class BackgroundCarouselDirective implements OnDestroy {
   /**
    * Gets the options for the carousel
    */
-  get options() {
+  get options(): CarouselOptions {
     return this._options.getValue();
   }
 

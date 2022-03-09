@@ -1,5 +1,5 @@
 import { animate, AnimationEvent, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, Output, Renderer2 } from '@angular/core';
 
 /**
  * TODO: allow attachment of popover to another specified element
@@ -28,7 +28,7 @@ import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output
     ])
   ]
 })
-export class PopoverComponent implements OnDestroy, OnInit {
+export class PopoverComponent implements OnDestroy {
 
   /**
    * The keyboard arrow keys
@@ -45,17 +45,18 @@ export class PopoverComponent implements OnDestroy, OnInit {
   /**
    * Set the width of the popover in pixels (defaults to auto)
    */
-  @Input('width')
-  set setWidth(width: number) {
-    this.width = !width ? 'auto' : `${width}px`;
+  @Input()
+  set width(width: number) {
+    this._width = !width ? 'auto' : `${width}px`;
   }
 
   /**
    * Set the height of the popover in pixels (defaults to auto)
    */
-  @Input('height')
-  set setHeight(height: number) {
-    this.width = !height ? 'auto' : `${height}px`;
+  @Input()
+  set height(height: number) {
+    this._height = !height ? 'auto' : `${height}px`;
+    console.log(this._height);
   }
 
   /**
@@ -89,12 +90,12 @@ export class PopoverComponent implements OnDestroy, OnInit {
   /**
    * The width of the popover
    */
-  width = 'auto';
+  _width = 'auto';
 
   /**
    * The height of the popover
    */
-  height = 'auto';
+  _height = 'auto';
 
   /**
    * The element to target
@@ -119,11 +120,6 @@ export class PopoverComponent implements OnDestroy, OnInit {
    * @param renderer the Angular renderer
    */
   constructor(private renderer: Renderer2) { }
-
-  /**
-   * Init component
-   */
-  ngOnInit(): void { }
 
   /**
    * Destroy component, clean up event listeners

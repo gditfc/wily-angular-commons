@@ -7,7 +7,7 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Notification } from './models/notification.model';
 import { NotificationService } from './services/notification.service';
@@ -59,7 +59,7 @@ import { NotificationService } from './services/notification.service';
     ])
   ]
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent {
 
   /**
    * Array of notifications as an Observable
@@ -91,11 +91,6 @@ export class NotificationComponent implements OnInit {
    * @param service the NotificationService
    */
   constructor(private service: NotificationService) { }
-
-  /**
-   * Init component
-   */
-  ngOnInit(): void { }
 
   /**
    * Delete a notification

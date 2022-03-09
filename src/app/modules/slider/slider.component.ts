@@ -95,6 +95,7 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    * Event emitted on slider/slider input input event
    */
   @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
   input = new EventEmitter<number>();
 
   /**
@@ -232,7 +233,7 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    * Set the slider width
    * @private
    */
-  private setSliderWidth() {
+  private setSliderWidth(): void {
     this.sliderWidth = Math.min(100, this.value / this._max * 100);
   }
 }

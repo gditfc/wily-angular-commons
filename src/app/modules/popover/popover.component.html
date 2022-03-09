@@ -2,7 +2,7 @@
   <div [cdkTrapFocus]="render && visible"
        [cdkTrapFocusAutoCapture]="true"
        [@openClose]="visible ? 'open' : 'close'"
-       [ngStyle]="{ 'width': width, 'height': height }"
+       [ngStyle]="{ 'width': _width, 'height': _height }"
        [ngClass]="classList"
        (@openClose.start)="onAnimationStart($event)"
        (@openClose.done)="onAnimationDone($event)"

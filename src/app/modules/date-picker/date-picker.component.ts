@@ -91,7 +91,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Value input setter
    */
-  @Input('value')
+  @Input()
   set value(value: Date) {
     if (!value) {
       this._value = null as any;
@@ -102,13 +102,13 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     }
   }
 
-  @Input('disabled')
+  @Input()
   set disabled(disabled: boolean) {
     this._disabled = coerceBooleanProperty(disabled);
   }
 
-  @Input('dateRange')
-  set setDateRange(dateRange: { minDate: Date, maxDate: Date }) {
+  @Input()
+  set dateRange(dateRange: { minDate: Date, maxDate: Date }) {
     if (dateRange?.minDate > dateRange?.maxDate) {
       throw new Error('Min date must be less than max date');
     }
@@ -148,6 +148,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Event emitted on date picker input
    */
   @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
   input = new EventEmitter<void>();
 
   /**

@@ -41,7 +41,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * Set the value of the icon select
    * @param value the value to set
    */
-  @Input('value')
+  @Input()
   set value(value: string) {
     this._value = value;
 
@@ -56,7 +56,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * Set disabled
    * @param disabled whether or not the icon picker should be disabled
    */
-  @Input('disabled')
+  @Input()
   set disabled(disabled: boolean) {
     this._disabled = disabled;
   }
@@ -300,7 +300,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * Set disabled state
    * @param isDisabled whether or not the icon picker should be disabled
    */
-  setDisabledState(isDisabled: boolean) {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     this.changeDetectorRef.markForCheck();
   }

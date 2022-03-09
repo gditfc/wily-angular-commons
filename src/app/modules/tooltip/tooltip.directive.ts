@@ -32,7 +32,7 @@ export class TooltipDirective implements OnDestroy {
       this.deleteTooltip();
     }
   }
-  get text() { return this._text; }
+  get text(): string { return this._text; }
 
   /**
    * The direction of the tooltip around the host element
@@ -44,14 +44,14 @@ export class TooltipDirective implements OnDestroy {
    * Whether or not to disable the tooltip
    * @param disabled disabled or not
    */
-  @Input('tooltipDisabled')
-  set disabled(disabled: boolean) {
+  @Input()
+  set tooltipDisabled(disabled: boolean) {
     this._disabled = disabled;
     if (disabled && !!this.tooltip?.parentElement) {
       this.deleteTooltip();
     }
   }
-  get disabled() { return this._disabled; }
+  get disabled(): boolean { return this._disabled; }
 
   /**
    * The DIV element housing the tooltip
@@ -358,7 +358,7 @@ export class TooltipDirective implements OnDestroy {
    */
   private addScrollListeners(): void {
     const overflowRegex = /(auto|scroll)/;
-    const overflowCheck = (node: any) => {
+    const overflowCheck = (node: any): boolean => {
       overflowRegex.lastIndex = 0;
       const styleDeclaration = window['getComputedStyle'](node, null);
       return overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) ||

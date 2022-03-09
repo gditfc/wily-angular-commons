@@ -24,7 +24,7 @@ declare module '@tiptap/core' {
 export const TextAlign = Extension.create<TextAlignOptions>({
   name: 'textAlign',
 
-  addOptions() {
+  addOptions(): any {
     return {
       types: [],
       alignments: ['left', 'center', 'right', 'justify'],
@@ -32,15 +32,15 @@ export const TextAlign = Extension.create<TextAlignOptions>({
     };
   },
 
-  addGlobalAttributes() {
+  addGlobalAttributes(): any[] {
     return [
       {
         types: this.options.types,
         attributes: {
           textAlign: {
             default: this.options.defaultAlignment,
-            parseHTML: element => element.style.textAlign || this.options.defaultAlignment,
-            renderHTML: attributes => {
+            parseHTML: (element: HTMLElement): string => element.style.textAlign || this.options.defaultAlignment,
+            renderHTML: (attributes: any): any => {
               if (attributes.textAlign === this.options.defaultAlignment) {
                 return {};
               }
@@ -53,9 +53,9 @@ export const TextAlign = Extension.create<TextAlignOptions>({
     ];
   },
 
-  addCommands() {
+  addCommands(): any {
     return {
-      setTextAlign: (alignment: string) => ({ commands }) => {
+      setTextAlign: (alignment: string) => ({ commands }: any): boolean => {
         if (!this.options.alignments.includes(alignment)) {
           return false;
         }
@@ -63,13 +63,13 @@ export const TextAlign = Extension.create<TextAlignOptions>({
         return this.options.types.every(type => commands.updateAttributes(type, { textAlign: alignment }));
       },
 
-      unsetTextAlign: () => ({ commands }) => {
+      unsetTextAlign: () => ({ commands }: any): boolean => {
         return this.options.types.every(type => commands.resetAttributes(type, 'textAlign'));
       },
     };
   },
 
-  addKeyboardShortcuts() {
+  addKeyboardShortcuts(): any {
     return {
       'Mod-Shift-l': () => this.editor.commands.setTextAlign('left'),
       'Mod-Shift-e': () => this.editor.commands.setTextAlign('center'),

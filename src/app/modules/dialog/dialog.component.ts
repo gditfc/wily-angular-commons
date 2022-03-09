@@ -54,19 +54,20 @@ export class DialogComponent {
   /**
    * Object to operate whether the dialog is open/closed
    */
-  object: any;
+  _object: any;
 
   /**
    * Object to operate whether the dialog is open/closed
    */
-  @Input('object') set setObject(value: any) {
-    if (this.object && !value) {
+  @Input()
+  set object(value: any) {
+    if (this._object && !value) {
       this.dialogService.unregisterDialog(this);
     }
-    if (!this.object && value) {
+    if (!this._object && value) {
       this.dialogService.registerDialog(this);
     }
-    this.object = value;
+    this._object = value;
   }
 
   /**
@@ -133,7 +134,7 @@ export class DialogComponent {
    * Null the object to close the dialog, emit the close event.
    */
   close(): void {
-    this.object = null;
+    this._object = null;
     this.dialogService.unregisterDialog(this);
   }
 
