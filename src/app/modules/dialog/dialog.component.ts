@@ -1,7 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {DialogService} from '../../shared/services/dialog.service';
-import {fromEvent, Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {fromEvent, map, startWith, Observable} from 'rxjs';
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 
 /**
@@ -54,7 +53,7 @@ export class DialogComponent {
   /**
    * Object to operate whether the dialog is open/closed
    */
-  _object: any;
+  private _object: any;
 
   /**
    * Object to operate whether the dialog is open/closed
@@ -68,6 +67,10 @@ export class DialogComponent {
       this.dialogService.registerDialog(this);
     }
     this._object = value;
+  }
+
+  get object(): any {
+    return this._object;
   }
 
   /**
