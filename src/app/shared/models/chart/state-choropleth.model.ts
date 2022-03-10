@@ -8,7 +8,7 @@ export class StateChoroplethData {
   /**
    * Map to Use
    */
-  map: string;
+  map: string = null as any;
 
   /**
    * Pull area from map
@@ -39,12 +39,12 @@ export class StateChoroplethAreaStatistic {
   /**
    * ID
    */
-  id: string;
+  id: string = null as any;
 
   /**
    * Value
    */
-  value: number;
+  value: number = null as any;
 }
 
 /**
@@ -65,12 +65,12 @@ export class StateChoroplethAreaSettings {
   /**
    * Solid Color
    */
-  colorSolid: string;
+  colorSolid: string = null as any;
 
   /**
    * Text Color
    */
-  color: string;
+  color: string = null as any;
 
   /**
    * Balloon Text Template
@@ -80,7 +80,7 @@ export class StateChoroplethAreaSettings {
   /**
    * Color on rollover
    */
-  rollOverColor: string;
+  rollOverColor: string = null as any;
 
   /**
    * Outline for rollover
@@ -90,7 +90,7 @@ export class StateChoroplethAreaSettings {
   /**
    * Color for Selected
    */
-  selectedColor: string;
+  selectedColor: string = null as any;
 }
 
 /**
@@ -101,17 +101,17 @@ export class StateChoroplethValueLegend {
   /**
    * Left Margin
    */
-  left: number;
+  left: number = null as any;
 
   /**
    * Overall Min Value for Legend
    */
-  minValue: string;
+  minValue: string = null as any;
 
   /**
    * Overall Max Value for Legend
    */
-  maxValue: string;
+  maxValue: string = null as any;
 }
 
 /**
@@ -137,7 +137,7 @@ export class StateChoropleth extends Chart {
   /**
    * The data for the map
    */
-  dataProvider: StateChoroplethData;
+  dataProvider: StateChoroplethData = null as any;
 
   /**
    * Area Settings for the map for colors, outlines, labels, etc
@@ -162,6 +162,6 @@ export class StateChoropleth extends Chart {
   /**
    * Set this to enable the legend, off by default
    */
-  valueLegend: StateChoroplethValueLegend;
+  valueLegend: StateChoroplethValueLegend = null as any;
 
 }

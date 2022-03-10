@@ -4,7 +4,6 @@ import {
   EventEmitter,
   forwardRef,
   Input,
-  OnInit,
   Output,
   ViewChild
 } from '@angular/core';
@@ -103,13 +102,13 @@ declare interface MetaWeek {
     }
   ]
 })
-export class WeekPickerComponent implements ControlValueAccessor, OnInit {
+export class WeekPickerComponent implements ControlValueAccessor {
 
   /**
    * Set the value of the week picker
    * @param value the value to set
    */
-  @Input('value')
+  @Input()
   set value(value: { start: Date, end: Date }) {
     if (value?.start && value?.end) {
       const startWeek = getWeek(value.start);
@@ -134,7 +133,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   /**
    * Set disabled
    */
-  @Input('disabled')
+  @Input()
   set disabled(disabled: boolean) {
     this._disabled = disabled;
   }
@@ -143,7 +142,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * Set the valid date boundary for the week picker
    * @param dateRange
    */
-  @Input('dateRange')
+  @Input()
   set dateRange(dateRange: { start?: Date, end?: Date }) {
     this.setSelectionInterval(dateRange);
     this.setCurrentDateSelectable();
@@ -457,11 +456,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Init component
-   */
-  ngOnInit(): void { }
-
-  /**
    * Write value
    * @param value the value to write
    */
@@ -503,7 +497,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     if (!this.disabled) {
       const selectionInterval = this._validSelectionInterval.getValue();
       if (!selectionInterval) {
-        this.setSelectionInterval(null as any);
+        this.setSelectionInterval({});
       }
 
       this.setCurrentDateSelectable();

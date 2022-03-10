@@ -35,32 +35,32 @@ export class GanttSegment {
   /**
    * The color
    */
-  color: string;
+  color: string = null as any;
 
   /**
    * The categorization
    */
-  task: string;
+  task: string = null as any;
 
   /**
    * The start date
    */
-  start: string;
+  start: string = null as any;
 
   /**
    * The label associated with the start date
    */
-  startLabel: string;
+  startLabel: string = null as any;
 
   /**
    * The end date
    */
-  end: string;
+  end: string = null as any;
 
   /**
    * The label associated with the end date
    */
-  endLabel: string;
+  endLabel: string = null as any;
 }
 
 /**
@@ -71,7 +71,7 @@ export class GanttDataProvider {
   /**
    * The category of this data segment
    */
-  category: string;
+  category: string = null as any;
 
   /**
    * The data segments for this entry of the Gantt chart
@@ -209,12 +209,12 @@ export class GanttChart extends Chart {
   /**
    * Start Date for overall graph
    */
-  startDate: string;
+  startDate: string = null as any;
 
   /**
    * End Date for overall graph
    */
-  endDate: string;
+  endDate: string = null as any;
 
   /**
    * Start Date Field

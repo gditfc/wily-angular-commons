@@ -7,14 +7,14 @@ import {Router} from '@angular/router';
 export abstract class CognitoAuthService {
 
   /**
-   * Retry Count when there are errors logging in
+   * Retry Count when there are errors logging inz
    */
   private retryCount = 0;
 
   /**
    * Promise for App Initialization
    */
-  private initPromise: Promise<any>;
+  private initPromise: Promise<any> = null as any;
 
   /**
    * Cognito Auth Data
@@ -24,7 +24,7 @@ export abstract class CognitoAuthService {
   /**
    * Cognito Auth Session
    */
-  protected session: CognitoAuthSession;
+  protected session: CognitoAuthSession = null as any;
 
   /**
    * Protected constructor
@@ -65,13 +65,13 @@ export abstract class CognitoAuthService {
   private setupCognito(): void {
     // This will be called upon invocation of this.auth.getSession()
     this.auth.userhandler = {
-      onSuccess: (result) => {
+      onSuccess: (result: any): void => {
         this.retryCount = 0;
         this.session = result;
         this.scheduleTokenRefresh();
         (<any> this.initPromise).resolve();
       },
-      onFailure: (error) => {
+      onFailure: (error: any): void => {
         console.error(error);
 
         if (this.retryCount >= 3) {
@@ -136,7 +136,7 @@ export abstract class CognitoAuthService {
       return this.session.getIdToken().getJwtToken();
     }
 
-    return null;
+    return null as any;
   }
 
   /**

@@ -7,7 +7,6 @@ import {
   EventEmitter, forwardRef,
   HostListener,
   Input,
-  OnInit,
   Output,
   QueryList,
   Renderer2,
@@ -55,7 +54,7 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
     }
   ]
 })
-export class DropdownComponent implements ControlValueAccessor, OnInit {
+export class DropdownComponent implements ControlValueAccessor {
 
   /**
    * Set the value of the dropdown
@@ -68,13 +67,13 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
 
     this.setSelectionIndex();
   }
-  get value() { return this._value; }
+  get value(): string | number { return this._value; }
 
   /**
    * The dropdown options/option groups
    */
-  @Input('options')
-  set setOptions(options: DropdownOptionInput) {
+  @Input()
+  set options(options: DropdownOptionInput) {
     this._options.next(DropdownComponent.sanitizeOptionInput(options));
     this.setSelectionIndex();
   }
@@ -166,6 +165,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * Event emitted on value change, emits the new value
    */
   @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
   change = new EventEmitter<string | number>();
 
   /**
@@ -325,11 +325,6 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
    * Function to call on touch
    */
   onTouched: () => any = () => {};
-
-  /**
-   * Init component
-   */
-  ngOnInit(): void { }
 
   /**
    * Write value

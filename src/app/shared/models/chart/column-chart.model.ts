@@ -8,27 +8,27 @@ export class ColumnChartData {
   /**
    * Description of the column
    */
-  description: string;
+  description: string = null as any;
 
   /**
    * Column value
    */
-  value: number;
+  value: number = null as any;
 
   /**
    * Color of the column
    */
-  color: string;
+  color: string = null as any;
 
   /**
    * Column order position
    */
-  position: number;
+  position: number = null as any;
 
   /**
    * Array of data for a stacked bar chart
    */
-  data: any[];
+  data: any[] = null as any;
 }
 
 /**
@@ -49,7 +49,7 @@ export class ColumnChart extends Chart {
   /**
    * The array of data to make the stacked bar chart
    */
-  dataProvider: ColumnChartData[];
+  dataProvider: ColumnChartData[] = null as any;
 
   /**
    * Duration of the render animation
@@ -113,7 +113,7 @@ export class ColumnChart extends Chart {
    *
    * @param title
    */
-  setYAxisTitle(title: string) {
+  setYAxisTitle(title: string): void {
     this.valueAxes[0].title = title;
   }
 
@@ -122,7 +122,7 @@ export class ColumnChart extends Chart {
    *
    * @param func
    */
-  setClickListener(func: any) {
+  setClickListener(func: any): void {
     this.listeners[0].method = func;
   }
 }

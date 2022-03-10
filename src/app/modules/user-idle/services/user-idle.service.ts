@@ -35,12 +35,12 @@ export class UserIdleService {
   /**
    * Observable that emits based on the configured ping millisecond count
    */
-  ping$: Observable<any>;
+  ping$: Observable<any> = null as any;
 
   /**
    * Events that can interrupts user's inactivity timer.
    */
-  protected activityEvents$: Observable<any>;
+  protected activityEvents$: Observable<any> = null as any;
 
   /**
    * Subject that tracks when the idle timer is running
@@ -64,13 +64,13 @@ export class UserIdleService {
    * Observable representing a merge of activity events (mouse move, window resize and keydown)
    * @protected
    */
-  protected idle$: Observable<any>;
+  protected idle$: Observable<any> = null as any;
 
   /**
    * Observable representing a timer that fires every second until the configured count is met
    * @protected
    */
-  protected timer$: Observable<any>;
+  protected timer$: Observable<any> = null as any;
 
   /**
    * Idle value in milliseconds.
@@ -99,24 +99,24 @@ export class UserIdleService {
   /**
    * Timeout status.
    */
-  protected isTimeout: boolean;
+  protected isTimeout = false;
 
   /**
    * Timer of user's inactivity is in progress.
    */
-  protected isInactivityTimer: boolean;
+  protected isInactivityTimer = false;
 
   /**
    * Boolean representing if the user is idle
    * @protected
    */
-  protected isIdleDetected: boolean;
+  protected isIdleDetected = false;
 
   /**
    * Subscription object to store the idle subscription
    * @protected
    */
-  protected idleSubscription: Subscription;
+  protected idleSubscription: Subscription = null as any;
 
   /**
    * Dependency injection site
@@ -132,7 +132,7 @@ export class UserIdleService {
   /**
    * Start watching for user inactivity
    */
-  startWatching() {
+  startWatching(): void {
     if (!this.activityEvents$) {
       this.activityEvents$ = merge(
         fromEvent(window, 'mousemove'),
@@ -189,7 +189,7 @@ export class UserIdleService {
   /**
    * Stop the timer and unsubscribe from the idle subscription
    */
-  stopWatching() {
+  stopWatching(): void {
     this.stopTimer();
     if (this.idleSubscription) {
       this.idleSubscription.unsubscribe();
@@ -220,7 +220,7 @@ export class UserIdleService {
   /**
    * Reset the timer
    */
-  resetTimer() {
+  resetTimer(): void {
     this.stopTimer();
     this.isTimeout = false;
   }
@@ -230,7 +230,7 @@ export class UserIdleService {
    * @param config the config to set
    * @private
    */
-  private setConfig(config: UserIdleConfig) {
+  private setConfig(config: UserIdleConfig): void {
     if (config.idle) {
       this.idleMillisec = config.idle * 1000;
     }
@@ -249,7 +249,7 @@ export class UserIdleService {
    * Stop the timer
    * @private
    */
-  private stopTimer() {
+  private stopTimer(): void {
     this.isInactivityTimer = false;
     this._timerStart.next(false);
   }
@@ -260,7 +260,7 @@ export class UserIdleService {
    * Counts every seconds and return n+1 and fire timeout for last count.
    * @param timeout Timeout in seconds.
    */
-  protected setupTimer(timeout: number) {
+  protected setupTimer(timeout: number): void {
     this._ngZone.runOutsideAngular(() => {
       this.timer$ = interval(1000).pipe(
         take(timeout),
@@ -281,7 +281,7 @@ export class UserIdleService {
    * Pings every ping-seconds only if is not timeout.
    * @param pingMillisec
    */
-  protected setupPing(pingMillisec: number) {
+  protected setupPing(pingMillisec: number): void {
     this.ping$ = interval(pingMillisec).pipe(filter(() => !this.isTimeout));
   }
 }

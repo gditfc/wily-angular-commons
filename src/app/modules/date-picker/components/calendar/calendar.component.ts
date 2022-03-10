@@ -99,8 +99,8 @@ export class CalendarComponent implements OnDestroy, OnInit {
   /**
    * The selected date value
    */
-  @Input('value')
-  set setValue(value: Date) {
+  @Input()
+  set value(value: Date) {
     let metaDateValue: MetaDate = null as any;
 
     if (!!value) {
@@ -119,8 +119,8 @@ export class CalendarComponent implements OnDestroy, OnInit {
   /**
    * The range of available dates to choose from
    */
-  @Input('dateRange')
-  set setDateRange(dateRange: { minDate: Date, maxDate: Date }) {
+  @Input()
+  set dateRange(dateRange: { minDate: Date, maxDate: Date }) {
     if (dateRange?.minDate > dateRange?.maxDate) {
       throw new Error('Min date must be less than max date');
     }
@@ -384,7 +384,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
   /**
    * Destroy component, unsubscribe from any active subscriptions
    */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
@@ -406,7 +406,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
    * @param event the click MouseEvent
    */
   @HostListener('window:click', ['$event'])
-  handleClick(event: MouseEvent) {
+  handleClick(event: MouseEvent): void {
     const {pageX, pageY} = event;
 
     // this check is to prevent the click event from firing on keypress when focused on a button
