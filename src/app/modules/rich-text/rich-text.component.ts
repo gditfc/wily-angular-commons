@@ -107,6 +107,8 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   }
 
   private static formatLegacyRichText(text: string): string {
+    if (!text) { return text; }
+
     text = text.replace('class="ql-align-center"', 'style="text-align:center;"');
     text = text.replace('class="ql-align-right"', 'style="text-align:right;"');
     text = text.replace('class="ql-align-justify"', 'style="text-align:justify;"');
