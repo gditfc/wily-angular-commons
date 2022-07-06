@@ -138,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "wily-angular-commons"
+  "defaultProject": "wily-angular-commons",
+  "cli": {
+    "analytics": false
+  }
 }
