@@ -422,7 +422,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
       }
 
       if (!isEqual(this.value, valueBeforeUpdate)) {
-        this.onChange(value);
+        this.onChange(this.value);
       }
     }
   }
