@@ -11,7 +11,7 @@ import {Component, Input} from '@angular/core';
          [style.height]="size"
          [style.width]="size"
          [style.margin]="margin"
-         [style.backgroundImage]="getUrl() | safeStyle"
+         [style.backgroundImage]="getUrl()"
          [wilyTooltip]="toolTip"
          tooltipPosition="top">
     </div>`

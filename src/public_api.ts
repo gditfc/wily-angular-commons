@@ -4,7 +4,6 @@ export * from './app/modules/paginator/wily-paginator.module';
 export * from './app/modules/profile-pic/wily-profile-pic.module';
 export * from './app/modules/push-container/wily-push-container.module';
 export * from './app/modules/rich-text/wily-rich-text.module';
-export * from './app/modules/safe-pipes/wily-safe-pipes.module';
 export * from './app/modules/icons/wily-icons.module';
 export * from './app/modules/endpoint-state/endpoint-state.module';
 export * from './app/modules/dialog/dialog.module';
@@ -32,6 +31,7 @@ export * from './app/modules/paginator/paginator.component';
 export * from './app/modules/profile-pic/profile-pic.component';
 export * from './app/modules/push-container/push-container.component';
 export * from './app/modules/rich-text/rich-text.component';
+export * from './app/modules/rich-text/rich-text-safe-render.component';
 export * from './app/modules/endpoint-state/components/endpoint-state.component';
 export * from './app/modules/dialog/dialog.component';
 export * from './app/modules/date-picker/date-picker.component';
@@ -58,8 +58,6 @@ export * from './app/modules/notification/services/notification.service';
 
 /** PIPES */
 export * from './app/modules/ordinal-number-pipe/ordinal-number.pipe';
-export * from './app/modules/safe-pipes/safe-html.pipe';
-export * from './app/modules/safe-pipes/safe-style.pipe';
 
 /** MODELS */
 export * from './app/modules/paginator/pagination-event.model';

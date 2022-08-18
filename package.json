@@ -1,6 +1,6 @@
 {
-  "name": "wily-angular-commons",
-  "version": "14.0.1",
+  "name": "@gditfc/wily-ng",
+  "version": "14.1.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -45,6 +45,7 @@
     "@angular/router": "^14.0.4",
     "@compodoc/compodoc": "^1.1.19",
     "@fortawesome/fontawesome-free": "^6.1.1",
+    "@tinkoff/ng-dompurify": "^3.0.0",
     "@tiptap/extension-link": "^2.0.0-beta.43",
     "@tiptap/extension-placeholder": "^2.0.0-beta.53",
     "@tiptap/extension-text-align": "^2.0.0-beta.31",
@@ -61,6 +62,7 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^3.23.3",
     "date-fns": "^2.28.0",
+    "dompurify": "^2.3.8",
     "eslint": "^8.19.0",
     "intl": "^1.2.5",
     "jasmine-core": "~4.2.0",
